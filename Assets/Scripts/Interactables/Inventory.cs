@@ -7,11 +7,9 @@ public class Inventory : MonoBehaviour
 {
     private List<Weapon> weaponList = new List<Weapon>();
 
-    [SerializeField] private UIInventory uiInventory;
-
     public static Action OnWeaponReceive;
     public static Action OnWeaponSend;
-
+    [SerializeField] private int capacity;
 
     public void AddWeapon() // when new weapon is created
     {
@@ -43,14 +41,20 @@ public class Inventory : MonoBehaviour
         OnWeaponReceive?.Invoke();
     }
 
-    public void SendWeapon(Transform target) // moves weapon from list to another list
+    public void SendWeapon(Inventory target) // moves weapon from list to another list
     {
         if (weaponList.Count > 0)
         {
-            target.GetComponent<Inventory>().GetInventory().ReceiveWeapon(weaponList[0]);
+            target.GetInventory().ReceiveWeapon(weaponList[0]);
 
             RemoveWeapon(weaponList[0]);
             OnWeaponSend?.Invoke();
         }
+    }
+
+    public void SetOutsideTimes() // sets times for outside - how long it should be outside and when it left
+    {
+        weaponList[0].timeAddedToOutside = Time.time;
+        weaponList[0].timeToSpendOutside = UnityEngine.Random.Range(3, 7);
     }
 }

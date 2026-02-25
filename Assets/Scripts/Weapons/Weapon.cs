@@ -14,7 +14,9 @@ public class Weapon
     public int baseDamage;
     public int bonusDamage;
     public int maxDurability;
-    public int currentDurability;    
+    public int currentDurability;
+    public float timeAddedToOutside;
+    public float timeToSpendOutside; // how long a weapon should be outside, decided when leaving Armory
 
     public Sprite GetWeaponSprite()
     {
