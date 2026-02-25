@@ -11,14 +11,6 @@ public class Inventory : MonoBehaviour
     public static Action OnWeaponSend;
     [SerializeField] private int capacity;
 
-    public void AddWeapon() // when new weapon is created
-    {
-        Weapon newWeapon = (new Weapon { weaponType = Weapon.WeaponType.BaseballBat });     
-        weaponList.Add(newWeapon);
-        newWeapon.SetValues();
-        OnWeaponReceive?.Invoke();
-    }
-
     public void RemoveWeapon(Weapon weapon)
     {
         weaponList.Remove(weapon);
@@ -56,5 +48,5 @@ public class Inventory : MonoBehaviour
     {
         weaponList[0].timeAddedToOutside = Time.time;
         weaponList[0].timeToSpendOutside = UnityEngine.Random.Range(3, 7);
-    }
+    }    
 }

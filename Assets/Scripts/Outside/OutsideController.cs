@@ -1,9 +1,12 @@
 using UnityEngine;
+using System;
 
 public class OutsideController : MonoBehaviour
 {
     [SerializeField] private Inventory inventory;
     float timer = 0f;
+
+    public static Action OnSurvivorReturned;
 
     private void Update()
     {
@@ -25,5 +28,6 @@ public class OutsideController : MonoBehaviour
     private void ReturnWeaponFromOutside()
     {
         inventory.SendWeapon(InventoriesController.Instance.lootTableInventory);
+        OnSurvivorReturned?.Invoke();
     }    
 }

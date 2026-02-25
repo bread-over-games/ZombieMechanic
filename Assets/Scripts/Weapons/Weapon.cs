@@ -17,6 +17,7 @@ public class Weapon
     public int currentDurability;
     public float timeAddedToOutside;
     public float timeToSpendOutside; // how long a weapon should be outside, decided when leaving Armory
+    public int weaponDecayRate = 5; // how much the weapon will decay after being outside
 
     public Sprite GetWeaponSprite()
     {
@@ -65,5 +66,15 @@ public class Weapon
         bonusDamage = existingWeapon.bonusDamage;
         maxDurability = existingWeapon.maxDurability;
         currentDurability = existingWeapon.currentDurability;
+    }
+
+    public void DecayWeapon()
+    {
+        currentDurability -= weaponDecayRate;
+    }
+
+    public void RepairWeapon(int repairAmount)
+    {
+        currentDurability += repairAmount;
     }
 }

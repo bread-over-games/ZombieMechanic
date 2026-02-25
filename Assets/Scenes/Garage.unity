@@ -563,6 +563,7 @@ GameObject:
   - component: {fileID: 978451872}
   - component: {fileID: 978451874}
   - component: {fileID: 978451873}
+  - component: {fileID: 978451875}
   m_Layer: 0
   m_Name: OutsideController
   m_TagString: Untagged
@@ -611,6 +612,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventory: {fileID: 978451873}
+--- !u!114 &978451875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 978451871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 921298055db781347ae7f16541e06a60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  generateWeaponChance: 0
 --- !u!1 &1090948918
 GameObject:
   m_ObjectHideFlags: 0
