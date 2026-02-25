@@ -33,10 +33,10 @@ public class Workbench : MonoBehaviour, IInteractable
     {        
         if (ResourceController.Instance.CanRepair())
         {
-            ResourceController.Instance.ChangeSalvageAmount(-1);
-            Debug.Log("Repairing...");
-            currentWeapon.weapon.currentDurability += 1;
-            Debug.Log(currentWeapon.weapon.baseDamage);
+            ResourceController.Instance.ChangeSalvageAmount(-1);            
+            inventory.GetWeaponList()[0].RepairWeapon(1);       
+            
+            // refresh inventory UI
         }        
     }
 

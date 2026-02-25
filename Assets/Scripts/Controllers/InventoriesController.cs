@@ -8,10 +8,11 @@ public class InventoriesController : MonoBehaviour
 {
     public static InventoriesController Instance { get; private set; }
 
-    public List<Transform> storageInventories = new List<Transform>();
-    public Transform armoryInventory;
-    public Transform lootTableInventory;
-    public Transform workbenchInventory;
+    public List<Inventory> storageInventories = new List<Inventory>();
+    public Inventory armoryInventory;
+    public Inventory lootTableInventory;
+    public Inventory workbenchInventory;
+    public Inventory outsideInventory;
 
     void Awake()
     {

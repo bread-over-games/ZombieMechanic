@@ -14,13 +14,7 @@ public class LootTable : MonoBehaviour, IInteractable
     [SerializeField] private Transform itemPivot;
     private WeaponWorld currentWeapon;
     private int salvageAmount = 100;
-    [SerializeField] private Inventory inventory;
-
-
-    private void Start()
-    {
-        inventory.AddWeapon();
-    }
+    [SerializeField] private Inventory inventory;    
 
     public void Update()
     {
