@@ -6,6 +6,8 @@ public class Workbench : MonoBehaviour, IInteractable
     [SerializeField] private Transform weaponPivot;
     private WeaponWorld currentWeapon;
     [SerializeField] private Inventory inventory;
+    [SerializeField] private string interactableName;
+    public Interactable.InteractableType interactableType;
 
     public void Update()
     {
@@ -54,5 +56,15 @@ public class Workbench : MonoBehaviour, IInteractable
     public Inventory GetInventory()
     { 
         return inventory;
+    }
+
+    public string GetName()
+    {
+        return interactableName;
+    }
+
+    public Interactable.InteractableType GetInteractableType()
+    {
+        return interactableType;
     }
 }

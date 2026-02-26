@@ -14,7 +14,9 @@ public class LootTable : MonoBehaviour, IInteractable
     [SerializeField] private Transform itemPivot;
     private WeaponWorld currentWeapon;
     private int salvageAmount = 100;
-    [SerializeField] private Inventory inventory;    
+    [SerializeField] private Inventory inventory;
+    [SerializeField] private string interactableName;
+    public Interactable.InteractableType interactableType;
 
     public void Update()
     {
@@ -83,5 +85,15 @@ public class LootTable : MonoBehaviour, IInteractable
     public Inventory GetInventory()
     {
         return inventory;
+    }
+
+    public string GetName()
+    {
+        return interactableName;
+    }
+
+    public Interactable.InteractableType GetInteractableType()
+    {
+        return interactableType;
     }
 }
