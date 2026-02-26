@@ -8,9 +8,10 @@ public class PlayerInteraction : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {        
-        if (other.TryGetComponent<IInteractable>(out var interactable))
+        if (other.TryGetComponent<IInteractable>(out IInteractable interactable))
         {            
             currentInteractable = interactable;
+            InteractableApproached();
         }
     }
 
@@ -45,6 +46,11 @@ public class PlayerInteraction : MonoBehaviour
         {
             PrimaryInteractEnded();
         }
+    }
+
+    private void InteractableApproached()
+    {
+        UIController.Instance.interactableInvSingleItem.SetInventory(currentInteractable.GetInventory());
     }
 
     private void PrimaryInteractStarted()

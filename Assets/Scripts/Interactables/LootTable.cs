@@ -79,4 +79,9 @@ public class LootTable : MonoBehaviour, IInteractable
     {
 
     }
+
+    public Inventory GetInventory()
+    {
+        return inventory;
+    }
 }

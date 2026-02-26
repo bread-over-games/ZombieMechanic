@@ -7,4 +7,5 @@ public interface IInteractable
     void StartInteractionSecondary();
     void EndInteractionSecondary();
     bool IsInteractionPossible();
+    Inventory GetInventory();
 }

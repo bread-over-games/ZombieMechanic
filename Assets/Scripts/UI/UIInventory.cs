@@ -20,13 +20,23 @@ public class UIInventory : MonoBehaviour
         Inventory.OnWeaponSend -= RefreshWeaponItems;
     }
 
+    public void SetInventory(Inventory currentInventory)
+    {
+        inventory = currentInventory; 
+    }
+
     private void RefreshWeaponItems()
     {
+        if (inventory == null)
+        {
+            return;
+        }
+
         foreach (Transform child in weaponSlotContainer)
         {
             if (child == weaponSlotTemplate) continue;
             Destroy(child.gameObject);
-        }
+        }       
 
         if (inventory.GetWeaponList().Count == 0)
         {

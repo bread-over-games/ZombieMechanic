@@ -7,10 +7,6 @@ public class Workbench : MonoBehaviour, IInteractable
     private WeaponWorld currentWeapon;
     [SerializeField] private Inventory inventory;
 
-    public void Start()
-    {  
-    }
-
     public void Update()
     {
         if (isRepairing)
@@ -53,5 +49,10 @@ public class Workbench : MonoBehaviour, IInteractable
     public void EndInteractionSecondary()
     {
 
+    }
+
+    public Inventory GetInventory()
+    { 
+        return inventory;
     }
 }

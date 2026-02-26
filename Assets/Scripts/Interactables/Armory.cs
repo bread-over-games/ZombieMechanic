@@ -31,4 +31,9 @@ public class Armory : MonoBehaviour, IInteractable
     {
         return true;
     }
+
+    public Inventory GetInventory()
+    {
+        return inventory;
+    }
 }

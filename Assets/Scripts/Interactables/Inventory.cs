@@ -21,11 +21,6 @@ public class Inventory : MonoBehaviour
         return weaponList;
     }
 
-    public Inventory GetInventory()
-    {
-        return this;
-    }
-
     public void ReceiveWeapon(Weapon weapon)
     {
         weaponList.Add(weapon);
@@ -37,7 +32,7 @@ public class Inventory : MonoBehaviour
     {
         if (weaponList.Count > 0)
         {
-            target.GetInventory().ReceiveWeapon(weaponList[0]);
+            target.ReceiveWeapon(weaponList[0]);
 
             RemoveWeapon(weaponList[0]);
             OnWeaponSend?.Invoke();
