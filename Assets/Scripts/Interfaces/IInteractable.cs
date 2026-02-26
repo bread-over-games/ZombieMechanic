@@ -7,4 +7,8 @@ public interface IInteractable
     void StartInteractionSecondary();
     void EndInteractionSecondary();
     bool IsInteractionPossible();
+    Inventory GetInventory();
+    string GetName();
+    Interactable.InteractableType GetInteractableType();
+    
 }

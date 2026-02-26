@@ -1,16 +1,23 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System;
+using System.Collections;
+using System.Collections.Generic;
 
 public class PlayerInteraction : MonoBehaviour
 {
     private IInteractable currentInteractable;
     private bool interactionStarted = false;
 
+    public static Action OnInteractableApproached;
+    public static Action OnInteractableLeft;
+
     private void OnTriggerEnter(Collider other)
     {        
-        if (other.TryGetComponent<IInteractable>(out var interactable))
+        if (other.TryGetComponent<IInteractable>(out IInteractable interactable))
         {            
             currentInteractable = interactable;
+            InteractableApproached();
         }
     }
 
@@ -18,9 +25,10 @@ public class PlayerInteraction : MonoBehaviour
     {
         if (currentInteractable != null && interactionStarted && currentInteractable.IsInteractionPossible())
         {                
-            PrimaryInteractEnded();
+            PrimaryInteractEnded();            
         }
 
+        OnInteractableLeft?.Invoke();
         currentInteractable = null;
     }
 
@@ -45,6 +53,12 @@ public class PlayerInteraction : MonoBehaviour
         {
             PrimaryInteractEnded();
         }
+    }
+
+    private void InteractableApproached()
+    {
+        UIController.Instance.interactableInvSingleItem.SetInventory(currentInteractable.GetInventory());
+        OnInteractableApproached?.Invoke();        
     }
 
     private void PrimaryInteractStarted()
