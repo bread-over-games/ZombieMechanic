@@ -4,7 +4,6 @@ public class Workbench : MonoBehaviour, IInteractable
 {
     [HideInInspector] public bool isRepairing = false;
     [SerializeField] private Transform weaponPivot;
-    private WeaponWorld currentWeapon;
     [SerializeField] private Inventory inventory;
     [SerializeField] private string interactableName;
 
@@ -30,11 +29,19 @@ public class Workbench : MonoBehaviour, IInteractable
     {        
         if (ResourceController.Instance.CanRepair())
         {
-            ResourceController.Instance.ChangeSalvageAmount(-1);            
-            inventory.GetWeaponList()[0].RepairWeapon(1);       
-            
-            // refresh inventory UI
+            Weapon currentWeapon = inventory.GetWeaponList()[0];
+
+            if (currentWeapon.currentDurability < currentWeapon.maxDurability)
+            {
+                ResourceController.Instance.ChangeSalvageAmount(-2);
+                currentWeapon.RepairWeapon(1);
+            }            
         }        
+    }
+
+    private void DoSalvage() // scraps weapon for salvage
+    {
+
     }
 
     public bool IsInteractionPossible()
