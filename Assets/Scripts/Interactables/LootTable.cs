@@ -10,21 +10,15 @@ using System.Collections.Generic;
 
 public class LootTable : MonoBehaviour, IInteractable
 {
-    [HideInInspector] public bool isLooting = false;
-    [SerializeField] private Transform itemPivot;
-    private WeaponWorld currentWeapon;
+    [SerializeField] private Transform itemPivot;    
     private int salvageAmount = 100;
     [SerializeField] private Inventory inventory;
     [SerializeField] private string interactableName;
-    private Coroutine lootingCoroutine;
 
-    public void Update()
-    {
-        if (isLooting)
-        {
-            DoLoot();
-        }
-    }
+    [SerializeField] private float lootingInterval; // tick of looting, how often can player get salvage from loot
+    [SerializeField] private int lootingValue; // how much salvage is looted per tick
+
+    private Coroutine lootingCoroutine;
 
     public void ChangeSalvage(int amount)
     {
@@ -39,30 +33,31 @@ public class LootTable : MonoBehaviour, IInteractable
 
     public void StartInteractionPrimary()
     {
-        isLooting = true;
+        lootingCoroutine = StartCoroutine(DoLoot());
     }
 
     public void EndInteractionPrimary()
     {
-        isLooting = false;
+        if (lootingCoroutine != null)
+        {
+            StopCoroutine(lootingCoroutine);
+            lootingCoroutine = null;
+        }
     }
 
-    private void DoLoot()
+    IEnumerator DoLoot()
     {
-        if (salvageAmount <= 0)
+        while (salvageAmount > 0)
         {
-            salvageAmount = 0;
-            return;
+            yield return new WaitForSeconds(lootingInterval);
+            ChangeSalvage(-lootingValue);
+            ResourceController.Instance.ChangeSalvageAmount(lootingValue);
         }
-
-        Debug.Log("Looting...");
-        ChangeSalvage(-1);
-        ResourceController.Instance.ChangeSalvageAmount(1);
     }
 
     public bool IsInteractionPossible()
     {     
-        if (salvageAmount > 0)
+        if (salvageAmount > 0 || inventory.GetWeaponList()[0] != null)
         {
             return true;
         }

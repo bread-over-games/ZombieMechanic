@@ -24,8 +24,7 @@ public class Workbench : MonoBehaviour, IInteractable
         {
             StopCoroutine(repairCoroutine);
             repairCoroutine = null;
-        }
-        
+        }        
     }
 
     private void TryRepair()
@@ -52,7 +51,6 @@ public class Workbench : MonoBehaviour, IInteractable
 
             if (!ResourceController.Instance.CanRepair(repairSalvageCost))
             {
-                Debug.Log("Not enough salvage");
                 break;
             }
 
