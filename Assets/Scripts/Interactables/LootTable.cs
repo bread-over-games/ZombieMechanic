@@ -16,6 +16,7 @@ public class LootTable : MonoBehaviour, IInteractable
     private int salvageAmount = 100;
     [SerializeField] private Inventory inventory;
     [SerializeField] private string interactableName;
+    private Coroutine lootingCoroutine;
 
     public void Update()
     {

@@ -29,6 +29,7 @@ public class UIInventory : MonoBehaviour
         Inventory.OnInventoryChange += RefreshInventoryUI;        
         PlayerInteraction.OnInteractableApproached += ToggleSingleItemInventoryWindow;
         PlayerInteraction.OnInteractableLeft += ToggleSingleItemInventoryWindow;
+        Weapon.OnWeaponRepair += RefreshInventoryValues;
     }
 
     private void OnDisable()
@@ -36,6 +37,7 @@ public class UIInventory : MonoBehaviour
         Inventory.OnInventoryChange -= RefreshInventoryUI;        
         PlayerInteraction.OnInteractableApproached -= ToggleSingleItemInventoryWindow;
         PlayerInteraction.OnInteractableLeft -= ToggleSingleItemInventoryWindow;
+        Weapon.OnWeaponRepair -= RefreshInventoryValues;
     }
 
     private void ToggleSingleItemInventoryWindow()
@@ -104,6 +106,13 @@ public class UIInventory : MonoBehaviour
         currentWeaponInfo.SetActive(true);
 
         weaponImage.sprite = inventory.GetWeaponList()[0].GetWeaponSprite();
+        RefreshInventoryValues();
+    }
+
+    private void RefreshInventoryValues()
+    {
+        if (inventory == null) return;
+
         damageText.text = inventory.GetWeaponList()[0].baseDamage.ToString() + "+" + inventory.GetWeaponList()[0].bonusDamage.ToString();
         durabilityText.text = inventory.GetWeaponList()[0].currentDurability.ToString() + "/" + inventory.GetWeaponList()[0].maxDurability.ToString();
     }

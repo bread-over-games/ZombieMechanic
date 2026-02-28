@@ -1,41 +1,61 @@
 using UnityEngine;
-
+using System;
+using System.Collections;
 public class Workbench : MonoBehaviour, IInteractable
 {
-    [HideInInspector] public bool isRepairing = false;
+    [SerializeField] private float repairInterval;
+    [SerializeField] private int repairSalvageCost;
+    [SerializeField] private int repairValue;
     [SerializeField] private Transform weaponPivot;
     [SerializeField] private Inventory inventory;
     [SerializeField] private string interactableName;
 
-    public void Update()
-    {
-        if (isRepairing)
-        {
-            DoRepair();            
-        }
-    }
+    private Weapon currentWeapon;
+    private Coroutine repairCoroutine;
 
     public void StartInteractionPrimary()
     {
-        isRepairing = true;
+        TryRepair();
     }
 
     public void EndInteractionPrimary()
     {
-        isRepairing = false;
+        if (repairCoroutine != null)
+        {
+            StopCoroutine(repairCoroutine);
+            repairCoroutine = null;
+        }
+        
     }
 
-    private void DoRepair()
+    private void TryRepair()
     {        
-        if (ResourceController.Instance.CanRepair())
+        if (ResourceController.Instance.CanRepair(repairSalvageCost))
         {
-            Weapon currentWeapon = inventory.GetWeaponList()[0];
+            currentWeapon = inventory.GetWeaponList()[0];
 
             if (currentWeapon.currentDurability < currentWeapon.maxDurability)
             {
-                ResourceController.Instance.ChangeSalvageAmount(-2);
-                currentWeapon.RepairWeapon(1);
+                repairCoroutine = StartCoroutine(DoRepair());
             }            
+        }        
+    }
+
+    IEnumerator DoRepair()
+    {
+        while (currentWeapon.currentDurability < currentWeapon.maxDurability)
+        {
+            yield return new WaitForSeconds(repairInterval);
+            ResourceController.Instance.ChangeSalvageAmount(-repairSalvageCost);
+            currentWeapon.RepairWeapon(repairValue);
+            Debug.Log(currentWeapon.currentDurability);
+
+            if (!ResourceController.Instance.CanRepair(repairSalvageCost))
+            {
+                Debug.Log("Not enough salvage");
+                break;
+            }
+
         }        
     }
 

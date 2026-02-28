@@ -11,6 +11,7 @@ public class Weapon
         Crowbar
     }
 
+    public static Action OnWeaponRepair; // called when weapon is repaired
     public static Action<Inventory> OnWeaponDestroyed;
 
     public WeaponType weaponType;
@@ -92,7 +93,8 @@ public class Weapon
     }
 
     public void RepairWeapon(int repairAmount)
-    {
+    {        
         currentDurability += repairAmount;
+        OnWeaponRepair?.Invoke();
     }
 }
