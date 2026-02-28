@@ -13,6 +13,19 @@ public class Workbench : MonoBehaviour, IInteractable
     private Weapon currentWeapon;
     private Coroutine repairCoroutine;
 
+    private void OnEnable()
+    {
+        Inventory.OnObjectReceive += AssignCurrentWeapon;
+    }
+
+    private void AssignCurrentWeapon(Inventory.InventoryOfType invOfType, Object obj)
+    {
+        if (invOfType == Inventory.InventoryOfType.Workbench && obj is Weapon weapon)
+        {
+            currentWeapon = weapon; 
+        }
+    }
+
     public void StartInteractionPrimary()
     {
         TryRepair();
@@ -31,7 +44,7 @@ public class Workbench : MonoBehaviour, IInteractable
     {        
         if (ResourceController.Instance.CanRepair(repairSalvageCost))
         {
-            currentWeapon = inventory.GetWeaponList()[0];
+            //currentWeapon = inventory.GetObjectList()[0];
 
             if (currentWeapon.currentDurability < currentWeapon.maxDurability)
             {
@@ -47,7 +60,6 @@ public class Workbench : MonoBehaviour, IInteractable
             yield return new WaitForSeconds(repairInterval);
             ResourceController.Instance.ChangeSalvageAmount(-repairSalvageCost);
             currentWeapon.RepairWeapon(repairValue);
-            Debug.Log(currentWeapon.currentDurability);
 
             if (!ResourceController.Instance.CanRepair(repairSalvageCost))
             {

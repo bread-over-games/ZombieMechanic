@@ -10,6 +10,6 @@ public class WeaponWorld : MonoBehaviour
 {
     public static GameObject SpawnWeaponWorld(Vector3 position, Weapon weapon, Transform parent) // spawns weapon into world
     {        
-        return Instantiate(weapon.GetWeaponGameObject(), position, parent.rotation, parent);
+        return Instantiate(weapon.GetObjectGameObject(), position, parent.rotation, parent);
     }
 }

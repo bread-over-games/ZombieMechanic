@@ -76,7 +76,7 @@ public class UIInventory : MonoBehaviour
         armoryEmptyMessage.SetActive(false);
         currentWeaponInfo.SetActive(false);
 
-        if (inventory.GetWeaponList().Count > 0)
+        if (inventory.GetObjectList().Count > 0)
         {
             DisplayInventory();
         } else
@@ -105,7 +105,7 @@ public class UIInventory : MonoBehaviour
     {
         currentWeaponInfo.SetActive(true);
 
-        weaponImage.sprite = inventory.GetWeaponList()[0].GetWeaponSprite();
+        weaponImage.sprite = inventory.GetObjectList()[0].GetObjectSprite();
         RefreshInventoryValues();
     }
 
@@ -113,7 +113,20 @@ public class UIInventory : MonoBehaviour
     {
         if (inventory == null) return;
 
-        damageText.text = inventory.GetWeaponList()[0].baseDamage.ToString() + "+" + inventory.GetWeaponList()[0].bonusDamage.ToString();
-        durabilityText.text = inventory.GetWeaponList()[0].currentDurability.ToString() + "/" + inventory.GetWeaponList()[0].maxDurability.ToString();
+        switch (inventory.GetObjectList()[0])
+        {
+            case Weapon weapon:
+                damageText.text = weapon.baseDamage.ToString() + "+" + weapon.bonusDamage.ToString();
+                durabilityText.text = weapon.currentDurability.ToString() + "/" + weapon.maxDurability.ToString();
+                break;
+                /*case Scrap scrap:
+                    scrap.LoadValues(scrap);
+                    break;
+                case Medicine medicine:
+                    medicine.LoadValues(medicine);
+                    break;*/
+        }
+
+        
     }
 }

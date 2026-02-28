@@ -3,7 +3,7 @@
 using UnityEngine;
 using System;
 
-public class Weapon 
+public class Weapon : Object
 {
     public enum WeaponType
     {
@@ -23,7 +23,7 @@ public class Weapon
     public float timeToSpendOutside; // how long a weapon should be outside, decided when leaving Armory
     public int weaponDecayRate = 5; // how much the weapon will decay after being outside
 
-    public Sprite GetWeaponSprite()
+    public override Sprite GetObjectSprite()
     {
         switch (weaponType)
         {
@@ -33,7 +33,7 @@ public class Weapon
         }
     }
 
-    public GameObject GetWeaponGameObject()
+    public override GameObject GetObjectGameObject()
     {
         switch (weaponType)
         {
@@ -43,7 +43,7 @@ public class Weapon
         }
     }
 
-    public void SetValues() // when creating new weapon
+    public override void SetValues() // when creating new weapon
     {
         switch (weaponType)
         {
@@ -64,7 +64,7 @@ public class Weapon
         }
     }  
     
-    public void LoadValues(Weapon existingWeapon) // when weapon already exists
+    public override void LoadValues(Weapon existingWeapon) // when weapon already exists
     {
         baseDamage = existingWeapon.baseDamage;
         bonusDamage = existingWeapon.bonusDamage;
@@ -78,16 +78,16 @@ public class Weapon
 
         if (currentDurability <= 0)
         {
-            DestroyWeapon(currentlyInInventory);
+            DestroyObject(currentlyInInventory);
             return true;
         }
 
         return false;
     }
 
-    public void DestroyWeapon(Inventory currentlyInInventory)
+    public override void DestroyObject(Inventory currentlyInInventory)
     {
-        currentlyInInventory.RemoveWeapon(this);
+        currentlyInInventory.RemoveObject(this);
         OnWeaponDestroyed?.Invoke(currentlyInInventory);
         Debug.Log("Weapon was destroyed in " + currentlyInInventory.ToString());
     }

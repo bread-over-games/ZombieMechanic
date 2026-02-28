@@ -23,7 +23,7 @@ public class WeaponGenerator : MonoBehaviour
     {
         Weapon newWeapon = (new Weapon { weaponType = Weapon.WeaponType.BaseballBat });
         newWeapon.SetValues();
-        InventoriesController.Instance.lootTableInventory.ReceiveWeapon(newWeapon);
+        InventoriesController.Instance.lootTableInventory.ReceiveObject(newWeapon);
     }
 
     private void GenerateWeapon() // generates completely new weapon
@@ -32,7 +32,7 @@ public class WeaponGenerator : MonoBehaviour
         {
             Weapon newWeapon = (new Weapon { weaponType = Weapon.WeaponType.BaseballBat });
             newWeapon.SetValues();
-            InventoriesController.Instance.lootTableInventory.ReceiveWeapon(newWeapon);
+            InventoriesController.Instance.lootTableInventory.ReceiveObject(newWeapon);
         }        
     }
 }

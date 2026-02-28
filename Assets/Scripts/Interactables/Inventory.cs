@@ -16,21 +16,21 @@ public class Inventory : MonoBehaviour
 
     [SerializeField] private InventoryOfType inventoryOfType;
 
-    private List<Weapon> weaponList = new List<Weapon>();
+    private List<Object> objectList = new List<Object>();
 
-    public static Action<InventoryOfType> OnWeaponReceive; // whben Inventory receives wepaon
-    public static Action OnWeaponSend; // when inventory sends weapon
+    public static Action<InventoryOfType, Object> OnObjectReceive; // whben Inventory receives wepaon
+    public static Action OnObjectSend; // when inventory sends weapon
     public static Action OnInventoryChange; // when something changes in inventory
     [SerializeField] private int capacity;
 
-    public void RemoveWeapon(Weapon weapon)
+    public void RemoveObject(Object obj)
     {
-        weaponList.Remove(weapon);
+        objectList.Remove(obj);
     }
 
-    public List<Weapon> GetWeaponList()
+    public List<Object> GetObjectList()
     {
-        return weaponList;
+        return objectList;
     }
 
     public InventoryOfType GetInventoryOfType()
@@ -38,52 +38,47 @@ public class Inventory : MonoBehaviour
         return inventoryOfType;
     }
 
-    public void ReceiveWeapon(Weapon weapon)
+    public void ReceiveObject(Object obj)
     {
-        weaponList.Add(weapon);
-        weapon.LoadValues(weapon);        
-        OnWeaponReceive?.Invoke(gameObject.GetComponent<Inventory>().GetInventoryOfType()); 
+        objectList.Add(obj);
+        switch (obj)
+        {
+            case Weapon weapon:
+                weapon.LoadValues(weapon);
+                OnObjectReceive?.Invoke(gameObject.GetComponent<Inventory>().GetInventoryOfType(), weapon);
+                break;
+            /*case Scrap scrap:
+                scrap.LoadValues(scrap);
+                break;
+            case Medicine medicine:
+                medicine.LoadValues(medicine);
+                break;*/
+        }
+
         OnInventoryChange?.Invoke();
     }
 
-    //public void ReceiveObject(Object object)
-    //{
-    //    objectList.Add(object);
-    //    switch (object)
-    //    {
-    //        case Weapon weapon:
-    //            weapon.LoadValues(weapon);
-    //            break;
-    //        case Scrap scrap:
-    //            scrap.LoadValues(scrap);
-    //            break;
-    //        case Medicine medicine:
-    //            medicine.LoadValues(medicine);
-    //            break;
-    //    }
-
-    //    OnObjectReceive?.Invoke(gameObject.GetComponent<Inventory>().GetInventoryOfType());
-    //    OnInventoryChange?.Invoke();
-    //}
-
     public void SendWeapon(Inventory target) // moves weapon from list to another list
     {
-        if (weaponList.Count > 0)
+        if (objectList.Count > 0)
         {
-            target.ReceiveWeapon(weaponList[0]);
+            target.ReceiveObject(objectList[0]);
 
-            RemoveWeapon(weaponList[0]);
-            OnWeaponSend?.Invoke();
+            RemoveObject(objectList[0]);
+            OnObjectSend?.Invoke();
             OnInventoryChange?.Invoke();
         }
     }
 
     public void SetOutsideTimes() // sets times for outside - how long it should be outside and when it left
     {
-        if (weaponList.Count > 0)
+        if (objectList.Count > 0)
         {
-            weaponList[0].timeAddedToOutside = Time.time;
-            weaponList[0].timeToSpendOutside = UnityEngine.Random.Range(3, 7);
+            if (objectList[0] is Weapon weapon)
+            {
+                weapon.timeAddedToOutside = Time.time;
+                weapon.timeToSpendOutside = UnityEngine.Random.Range(3, 7);
+            }            
         }       
     }   
 }

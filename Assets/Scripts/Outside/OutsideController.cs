@@ -15,22 +15,28 @@ public class OutsideController : MonoBehaviour
 
     private void CheckWeaponOutsideTimer() // checks how long a weapon has been outside
     {
-        for (int i = inventory.GetWeaponList().Count - 1; i >= 0; i--)
+        for (int i = inventory.GetObjectList().Count - 1; i >= 0; i--)
         {
-            float howLongOutside = Time.time - inventory.GetWeaponList()[i].timeAddedToOutside;
-            if (howLongOutside > inventory.GetWeaponList()[i].timeToSpendOutside)
+            if (inventory.GetObjectList()[i] is Weapon weapon)
             {
-                ReturnWeaponFromOutside();
+                float howLongOutside = Time.time - weapon.timeAddedToOutside;
+                if (howLongOutside > weapon.timeToSpendOutside)
+                {
+                    ReturnWeaponFromOutside();
+                }
             }
         }
     }
 
     private void ReturnWeaponFromOutside()
     {
-        if (!inventory.GetWeaponList()[0].DecayWeapon(inventory)) // decays weapon, checks if it is destroyed or not
+        if (inventory.GetObjectList()[0] is Weapon weapon)
         {
-            inventory.SendWeapon(InventoriesController.Instance.lootTableInventory);
-            OnSurvivorReturned?.Invoke();
+            if (!weapon.DecayWeapon(inventory)) // decays weapon, checks if it is destroyed or not
+            {
+                inventory.SendWeapon(InventoriesController.Instance.lootTableInventory);
+                OnSurvivorReturned?.Invoke();
+            }
         }
     }    
 }
