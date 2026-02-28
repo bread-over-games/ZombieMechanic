@@ -15,9 +15,9 @@ public class ResourceController : MonoBehaviour
         }
     }
 
-    public bool CanRepair()
+    public bool CanRepair(int requiredSalvage)
     {
-        if (salvageAmount > 0)
+        if (salvageAmount >= requiredSalvage)
         {
             return true;
         }
@@ -25,6 +25,11 @@ public class ResourceController : MonoBehaviour
         {
             return false;
         }
+    }
+
+    public int GetSalvageAmount()
+    {
+        return salvageAmount;
     }
 
     public void ChangeSalvageAmount(int amount)

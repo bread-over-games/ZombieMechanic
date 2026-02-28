@@ -42,9 +42,29 @@ public class Inventory : MonoBehaviour
     {
         weaponList.Add(weapon);
         weapon.LoadValues(weapon);        
-        OnWeaponReceive?.Invoke(gameObject.GetComponent<Inventory>().GetInventoryOfType()); // doesnt work for outside inventory
+        OnWeaponReceive?.Invoke(gameObject.GetComponent<Inventory>().GetInventoryOfType()); 
         OnInventoryChange?.Invoke();
     }
+
+    //public void ReceiveObject(Object object)
+    //{
+    //    objectList.Add(object);
+    //    switch (object)
+    //    {
+    //        case Weapon weapon:
+    //            weapon.LoadValues(weapon);
+    //            break;
+    //        case Scrap scrap:
+    //            scrap.LoadValues(scrap);
+    //            break;
+    //        case Medicine medicine:
+    //            medicine.LoadValues(medicine);
+    //            break;
+    //    }
+
+    //    OnObjectReceive?.Invoke(gameObject.GetComponent<Inventory>().GetInventoryOfType());
+    //    OnInventoryChange?.Invoke();
+    //}
 
     public void SendWeapon(Inventory target) // moves weapon from list to another list
     {

@@ -1,6 +1,7 @@
 /// this is the instance of a concrete weapon
 
 using UnityEngine;
+using System;
 
 public class Weapon 
 {
@@ -9,6 +10,9 @@ public class Weapon
         BaseballBat,
         Crowbar
     }
+
+    public static Action OnWeaponRepair; // called when weapon is repaired
+    public static Action<Inventory> OnWeaponDestroyed;
 
     public WeaponType weaponType;
     public int baseDamage;
@@ -46,16 +50,16 @@ public class Weapon
             default:
             case WeaponType.BaseballBat:
                 baseDamage = WeaponAssets.Instance.baseballBatSO.baseDamage;
-                bonusDamage = Random.Range(0, WeaponAssets.Instance.baseballBatSO.baseDamage);
+                bonusDamage = UnityEngine.Random.Range(0, WeaponAssets.Instance.baseballBatSO.baseDamage);
                 maxDurability = WeaponAssets.Instance.baseballBatSO.maxDurability;
-                currentDurability = Random.Range(1, WeaponAssets.Instance.baseballBatSO.maxDurability);
+                currentDurability = UnityEngine.Random.Range(1, WeaponAssets.Instance.baseballBatSO.maxDurability);
 
                 break;
             case WeaponType.Crowbar:
                 baseDamage = WeaponAssets.Instance.crowbarSO.baseDamage;
-                bonusDamage = Random.Range(0, WeaponAssets.Instance.crowbarSO.baseDamage);
+                bonusDamage = UnityEngine.Random.Range(0, WeaponAssets.Instance.crowbarSO.baseDamage);
                 maxDurability = WeaponAssets.Instance.crowbarSO.maxDurability;
-                currentDurability = Random.Range(1, WeaponAssets.Instance.crowbarSO.maxDurability);
+                currentDurability = UnityEngine.Random.Range(1, WeaponAssets.Instance.crowbarSO.maxDurability);
                 break;                
         }
     }  
@@ -68,23 +72,29 @@ public class Weapon
         currentDurability = existingWeapon.currentDurability;
     }
 
-    public void DecayWeapon()
+    public bool DecayWeapon(Inventory currentlyInInventory)
     {
         currentDurability -= weaponDecayRate;
 
         if (currentDurability <= 0)
         {
-            DestroyWeapon();
+            DestroyWeapon(currentlyInInventory);
+            return true;
         }
+
+        return false;
     }
 
-    public void DestroyWeapon()
+    public void DestroyWeapon(Inventory currentlyInInventory)
     {
-        // destroyes weapon
+        currentlyInInventory.RemoveWeapon(this);
+        OnWeaponDestroyed?.Invoke(currentlyInInventory);
+        Debug.Log("Weapon was destroyed in " + currentlyInInventory.ToString());
     }
 
     public void RepairWeapon(int repairAmount)
-    {
+    {        
         currentDurability += repairAmount;
+        OnWeaponRepair?.Invoke();
     }
 }
