@@ -1705,6 +1705,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86e0b5bc2564d4f4488cee8b688c4fd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inventoryOfType: 4
   capacity: 0
 --- !u!114 &978451874
 MonoBehaviour:

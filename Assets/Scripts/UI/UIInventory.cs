@@ -26,16 +26,14 @@ public class UIInventory : MonoBehaviour
 
     private void OnEnable()
     {
-        Inventory.OnWeaponReceive += RefreshInventoryUI;
-        Inventory.OnWeaponSend += RefreshInventoryUI;
+        Inventory.OnInventoryChange += RefreshInventoryUI;        
         PlayerInteraction.OnInteractableApproached += ToggleSingleItemInventoryWindow;
         PlayerInteraction.OnInteractableLeft += ToggleSingleItemInventoryWindow;
     }
 
     private void OnDisable()
     {
-        Inventory.OnWeaponReceive -= RefreshInventoryUI;
-        Inventory.OnWeaponSend -= RefreshInventoryUI;
+        Inventory.OnInventoryChange -= RefreshInventoryUI;        
         PlayerInteraction.OnInteractableApproached -= ToggleSingleItemInventoryWindow;
         PlayerInteraction.OnInteractableLeft -= ToggleSingleItemInventoryWindow;
     }
@@ -87,15 +85,15 @@ public class UIInventory : MonoBehaviour
 
     private void DisplayEmptyMessage() 
     {        
-        switch (inventory.gameObject.GetComponent<IInteractable>().GetInteractableType())
+        switch (inventory.GetInventoryOfType())
         {
-            case Interactable.InteractableType.Workbench:
+            case Inventory.InventoryOfType.Workbench:
                 workbenchEmptyMessage.SetActive(true);
                 break;
-            case Interactable.InteractableType.LootTable:
+            case Inventory.InventoryOfType.LootTable:
                 loottableEmptyMessage.SetActive(true);
                 break;
-            case Interactable.InteractableType.Armory:
+            case Inventory.InventoryOfType.Armory:
                 armoryEmptyMessage.SetActive(true);
                 break;
         }

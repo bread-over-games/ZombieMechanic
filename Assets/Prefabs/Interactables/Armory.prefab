@@ -130,6 +130,7 @@ GameObject:
   - component: {fileID: -172810140440403933}
   - component: {fileID: 4812371839778889147}
   - component: {fileID: 4979007895259383675}
+  - component: {fileID: -6343217438119974841}
   m_Layer: 0
   m_Name: Armory
   m_TagString: Untagged
@@ -168,7 +169,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inventory: {fileID: 4812371839778889147}
   interactableName: Armory
-  interactableType: 2
 --- !u!114 &4812371839778889147
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -181,6 +181,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86e0b5bc2564d4f4488cee8b688c4fd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inventoryOfType: 2
   capacity: 0
 --- !u!65 &4979007895259383675
 BoxCollider:
@@ -203,6 +204,20 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2, y: 1, z: 1}
   m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!114 &-6343217438119974841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1057878193549765633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e63a5bab908a0440b4a8d8e0a136352, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventory: {fileID: 4812371839778889147}
+  weaponSpawnPivot: {fileID: 1569533145499603248}
 --- !u!1 &7500976400717424276
 GameObject:
   m_ObjectHideFlags: 0
@@ -213,7 +228,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1569533145499603248}
   m_Layer: 0
-  m_Name: ItemPivot
+  m_Name: ObjectPivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -2,10 +2,9 @@ using UnityEngine;
 
 public class Armory : MonoBehaviour, IInteractable
 {
-
     [SerializeField] private Inventory inventory;
     [SerializeField] private string interactableName;
-    public Interactable.InteractableType interactableType;
+
 
     public void StartInteractionPrimary()
     {
@@ -20,7 +19,6 @@ public class Armory : MonoBehaviour, IInteractable
     public void StartInteractionSecondary()
     {
         inventory.SetOutsideTimes();
-        inventory.GetWeaponList()[0].DecayWeapon();
         inventory.SendWeapon(InventoriesController.Instance.outsideInventory);        
     }
 
@@ -42,10 +40,5 @@ public class Armory : MonoBehaviour, IInteractable
     public string GetName()
     {
         return interactableName;
-    }
-
-    public Interactable.InteractableType GetInteractableType()
-    {
-        return interactableType;
     }
 }

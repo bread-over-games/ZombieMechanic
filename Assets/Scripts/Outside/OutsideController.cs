@@ -27,6 +27,7 @@ public class OutsideController : MonoBehaviour
 
     private void ReturnWeaponFromOutside()
     {
+        inventory.GetWeaponList()[0].DecayWeapon();
         inventory.SendWeapon(InventoriesController.Instance.lootTableInventory);
         OnSurvivorReturned?.Invoke();
     }    

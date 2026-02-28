@@ -7,7 +7,6 @@ public class Workbench : MonoBehaviour, IInteractable
     private WeaponWorld currentWeapon;
     [SerializeField] private Inventory inventory;
     [SerializeField] private string interactableName;
-    public Interactable.InteractableType interactableType;
 
     public void Update()
     {
@@ -61,10 +60,5 @@ public class Workbench : MonoBehaviour, IInteractable
     public string GetName()
     {
         return interactableName;
-    }
-
-    public Interactable.InteractableType GetInteractableType()
-    {
-        return interactableType;
     }
 }

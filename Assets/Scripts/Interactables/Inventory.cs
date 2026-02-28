@@ -5,10 +5,22 @@ using System.Collections.Generic;
 
 public class Inventory : MonoBehaviour
 {
+    public enum InventoryOfType
+    {
+        Workbench,
+        LootTable,
+        Armory,
+        Storage,
+        Outside
+    }
+
+    [SerializeField] private InventoryOfType inventoryOfType;
+
     private List<Weapon> weaponList = new List<Weapon>();
 
-    public static Action OnWeaponReceive;
-    public static Action OnWeaponSend;
+    public static Action<InventoryOfType> OnWeaponReceive; // whben Inventory receives wepaon
+    public static Action OnWeaponSend; // when inventory sends weapon
+    public static Action OnInventoryChange; // when something changes in inventory
     [SerializeField] private int capacity;
 
     public void RemoveWeapon(Weapon weapon)
@@ -21,11 +33,17 @@ public class Inventory : MonoBehaviour
         return weaponList;
     }
 
+    public InventoryOfType GetInventoryOfType()
+    {
+        return inventoryOfType;
+    }
+
     public void ReceiveWeapon(Weapon weapon)
     {
         weaponList.Add(weapon);
-        weapon.LoadValues(weapon);
-        OnWeaponReceive?.Invoke();
+        weapon.LoadValues(weapon);        
+        OnWeaponReceive?.Invoke(gameObject.GetComponent<Inventory>().GetInventoryOfType()); // doesnt work for outside inventory
+        OnInventoryChange?.Invoke();
     }
 
     public void SendWeapon(Inventory target) // moves weapon from list to another list
@@ -36,12 +54,16 @@ public class Inventory : MonoBehaviour
 
             RemoveWeapon(weaponList[0]);
             OnWeaponSend?.Invoke();
+            OnInventoryChange?.Invoke();
         }
     }
 
     public void SetOutsideTimes() // sets times for outside - how long it should be outside and when it left
     {
-        weaponList[0].timeAddedToOutside = Time.time;
-        weaponList[0].timeToSpendOutside = UnityEngine.Random.Range(3, 7);
-    }    
+        if (weaponList.Count > 0)
+        {
+            weaponList[0].timeAddedToOutside = Time.time;
+            weaponList[0].timeToSpendOutside = UnityEngine.Random.Range(3, 7);
+        }       
+    }   
 }

@@ -71,6 +71,16 @@ public class Weapon
     public void DecayWeapon()
     {
         currentDurability -= weaponDecayRate;
+
+        if (currentDurability <= 0)
+        {
+            DestroyWeapon();
+        }
+    }
+
+    public void DestroyWeapon()
+    {
+        // destroyes weapon
     }
 
     public void RepairWeapon(int repairAmount)

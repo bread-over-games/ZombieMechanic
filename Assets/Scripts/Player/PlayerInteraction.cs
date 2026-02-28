@@ -75,7 +75,7 @@ public class PlayerInteraction : MonoBehaviour
 
     public void OnInteractSecondary(InputAction.CallbackContext context)
     {
-        if (!currentInteractable.IsInteractionPossible())
+        if (currentInteractable == null)
         {
             return;
         }
