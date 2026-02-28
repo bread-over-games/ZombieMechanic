@@ -129,6 +129,7 @@ GameObject:
   - component: {fileID: 7562334392158037229}
   - component: {fileID: 1318387853336018860}
   - component: {fileID: -3263844004975946700}
+  - component: {fileID: 6483554558387062026}
   - component: {fileID: 7845430357691138588}
   m_Layer: 0
   m_Name: LootTable
@@ -170,7 +171,6 @@ MonoBehaviour:
   itemPivot: {fileID: 1838859999185170084}
   inventory: {fileID: -3263844004975946700}
   interactableName: Loot Table
-  interactableType: 1
 --- !u!114 &-3263844004975946700
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -183,7 +183,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86e0b5bc2564d4f4488cee8b688c4fd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inventoryOfType: 1
   capacity: 0
+--- !u!114 &6483554558387062026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5766341910752092550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e63a5bab908a0440b4a8d8e0a136352, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventory: {fileID: -3263844004975946700}
+  weaponSpawnPivot: {fileID: 1838859999185170084}
 --- !u!65 &7845430357691138588
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -215,7 +230,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1838859999185170084}
   m_Layer: 0
-  m_Name: ItemPivot
+  m_Name: ObjectSpawnPivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

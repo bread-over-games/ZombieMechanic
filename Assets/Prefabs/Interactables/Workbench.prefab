@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 814154517742206159}
   - component: {fileID: 7826269399740871647}
   - component: {fileID: 5261058445298813840}
+  - component: {fileID: 2784355277398447042}
   - component: {fileID: 410255975851228246}
   m_Layer: 0
   m_Name: Workbench
@@ -64,7 +65,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86e0b5bc2564d4f4488cee8b688c4fd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inventoryOfType: 0
   capacity: 0
+--- !u!114 &2784355277398447042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1257459901385619569}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e63a5bab908a0440b4a8d8e0a136352, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventory: {fileID: 5261058445298813840}
+  weaponSpawnPivot: {fileID: 1594533800313293158}
 --- !u!65 &410255975851228246
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -214,7 +230,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1594533800313293158}
   m_Layer: 0
-  m_Name: ItemPivot
+  m_Name: ObjectSpawnPivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
