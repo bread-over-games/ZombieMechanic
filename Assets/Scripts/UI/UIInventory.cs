@@ -4,17 +4,24 @@ using TMPro;
 
 public class UIInventory : MonoBehaviour
 {
-    private Inventory inventory;
-    [SerializeField] private Transform weaponSlotContainer;
-    [SerializeField] private Transform weaponSlotTemplate;
-        
-    [SerializeField] private Image weaponImage;
-    [SerializeField] private TMP_Text damageText;
-    [SerializeField] private TMP_Text durabilityText;
+    private Inventory inventory;        
+    [SerializeField] private GameObject singleItemInventoryWindow;
     [SerializeField] private TMP_Text interactableName;
 
-    [SerializeField] private GameObject singleItemInventoryWindow;
+    [Header("Weapons")]
     [SerializeField] private GameObject currentWeaponInfo;
+    [SerializeField] private Image weaponImage;
+    [SerializeField] private TMP_Text weaponNameText;
+    [SerializeField] private TMP_Text damageText;
+    [SerializeField] private TMP_Text durabilityText;    
+
+    [Header("Scraps")]
+    [SerializeField] private GameObject currentScrapInfo;
+    [SerializeField] private Image scrapImage;
+    [SerializeField] private TMP_Text sparePartsNameText;
+    [SerializeField] private TMP_Text sparePartsText;
+
+    [Header("Empty inventory messages")]
     [SerializeField] private GameObject workbenchEmptyMessage;
     [SerializeField] private GameObject armoryEmptyMessage;
     [SerializeField] private GameObject loottableEmptyMessage;
@@ -74,9 +81,11 @@ public class UIInventory : MonoBehaviour
         workbenchEmptyMessage.SetActive(false);
         loottableEmptyMessage.SetActive(false);
         armoryEmptyMessage.SetActive(false);
+        
         currentWeaponInfo.SetActive(false);
+        currentScrapInfo.SetActive(false);
 
-        if (inventory.GetWeaponList().Count > 0)
+        if (inventory.GetObjectList().Count > 0)
         {
             DisplayInventory();
         } else
@@ -103,9 +112,18 @@ public class UIInventory : MonoBehaviour
 
     private void DisplayInventory()
     {
-        currentWeaponInfo.SetActive(true);
+        switch (inventory.GetObjectList()[0])
+        {
+            case Weapon weapon:
+                currentWeaponInfo.SetActive(true);
+                weaponImage.sprite = inventory.GetObjectList()[0].GetObjectSprite();
+                break;
+            case Scrap scrap:
+                currentScrapInfo.SetActive(true); 
+                scrapImage.sprite = inventory.GetObjectList()[0].GetObjectSprite();
+                break;
+        }
 
-        weaponImage.sprite = inventory.GetWeaponList()[0].GetWeaponSprite();
         RefreshInventoryValues();
     }
 
@@ -113,7 +131,20 @@ public class UIInventory : MonoBehaviour
     {
         if (inventory == null) return;
 
-        damageText.text = inventory.GetWeaponList()[0].baseDamage.ToString() + "+" + inventory.GetWeaponList()[0].bonusDamage.ToString();
-        durabilityText.text = inventory.GetWeaponList()[0].currentDurability.ToString() + "/" + inventory.GetWeaponList()[0].maxDurability.ToString();
+        switch (inventory.GetObjectList()[0])
+        {
+            case Weapon weapon:
+                damageText.text = weapon.baseDamage.ToString() + "+" + weapon.bonusDamage.ToString();
+                durabilityText.text = weapon.currentDurability.ToString() + "/" + weapon.maxDurability.ToString();
+                weaponNameText.text = weapon.weaponName.ToString();
+                break;
+            case Scrap scrap:
+                sparePartsNameText.text = scrap.scrapName.ToString();
+                sparePartsText.text = scrap.salvageAmount.ToString();
+                break;
+                /*case Medicine medicine:
+                    medicine.LoadValues(medicine);
+                    break;*/
+        }        
     }
 }

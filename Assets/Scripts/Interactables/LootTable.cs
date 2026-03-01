@@ -57,7 +57,7 @@ public class LootTable : MonoBehaviour, IInteractable
 
     public bool IsInteractionPossible()
     {     
-        if (salvageAmount > 0 || inventory.GetWeaponList()[0] != null)
+        if (salvageAmount > 0 || inventory.GetObjectList()[0] != null)
         {
             return true;
         }

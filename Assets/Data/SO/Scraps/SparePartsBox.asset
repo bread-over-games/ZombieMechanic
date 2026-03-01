@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef31f4d535553c043908d85eaecd2f84, type: 3}
+  m_Name: SparePartsBox
+  m_EditorClassIdentifier: 
+  scrapName: Box of spare parts
+  salvageAmount: 20
+  scrapVisualPrefab: {fileID: 3917449410938878803, guid: e501ad829ee755949ad68e9610b0145e, type: 3}
+  scrapVisual: {fileID: 870873637, guid: c6b44410f9a68364f85c05220e98dc2b, type: 3}
