@@ -5,6 +5,7 @@ public class Scrap : Object
 {
     public static Action<Inventory> OnScrapDestroyed;
     public int salvageAmount;
+    public string scrapName;
     public enum ScrapType
     {
         SparePartsBox
@@ -34,6 +35,7 @@ public class Scrap : Object
         {
             case ScrapType.SparePartsBox:
                 salvageAmount = ScrapAssets.Instance.sparePartsBoxSO.salvageAmount;
+                scrapName = ScrapAssets.Instance.sparePartsBoxSO.scrapName;
                 break;
         }
     }
@@ -42,6 +44,7 @@ public class Scrap : Object
         if (existingObject is Scrap existingScrap)
         {
             salvageAmount = existingScrap.salvageAmount;
+            scrapName = existingScrap.scrapName;
         }
     }
 

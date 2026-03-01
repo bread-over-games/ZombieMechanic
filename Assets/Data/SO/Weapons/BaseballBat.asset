@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponVisual: {fileID: -607027984, guid: 7517ebccd29cac2488e960b762193dac, type: 3}
   weaponVisualPrefab: {fileID: 5046860870866042067, guid: f3a025ea6d35a4643b4a1a1c9667682a, type: 3}
+  weaponName: Baseball Bat
   baseDamage: 10
   maxDurability: 70

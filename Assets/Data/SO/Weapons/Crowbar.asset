@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponVisual: {fileID: -850380429, guid: 9034e94d241460b4eb83c8f14c0b7bed, type: 3}
   weaponVisualPrefab: {fileID: 5046860870866042067, guid: f671d31eebefbf940b6f4f87910bc007, type: 3}
+  weaponName: Crowbar
   baseDamage: 8
   maxDurability: 100
