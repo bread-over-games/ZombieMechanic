@@ -34,8 +34,9 @@ public class OutsideController : MonoBehaviour
         {
             if (!weapon.DecayWeapon(inventory)) // decays weapon, checks if it is destroyed or not
             {
-                inventory.SendWeapon(InventoriesController.Instance.lootTableInventory);
+                inventory.SendObject(InventoriesController.Instance.lootTableInventory);
                 OnSurvivorReturned?.Invoke();
+                Debug.Log("Survivor returned");
             }
         }
     }    

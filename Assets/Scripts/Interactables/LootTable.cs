@@ -9,31 +9,36 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class LootTable : MonoBehaviour, IInteractable
-{
+{    
     [SerializeField] private Transform itemPivot;    
-    private int salvageAmount = 100;
     [SerializeField] private Inventory inventory;
     [SerializeField] private string interactableName;
 
     [SerializeField] private float lootingInterval; // tick of looting, how often can player get salvage from loot
     [SerializeField] private int lootingValue; // how much salvage is looted per tick
 
+    private Scrap currentScrap;
+    private Weapon currentWeapon;
     private Coroutine lootingCoroutine;
-
-    public void ChangeSalvage(int amount)
-    {
-        salvageAmount += amount;
-
-        if (salvageAmount <= 0)
-        {
-            salvageAmount = 0;
-            EndInteractionPrimary();
-        }
-    }
 
     public void StartInteractionPrimary()
     {
-        lootingCoroutine = StartCoroutine(DoLoot());
+        if (inventory.GetObjectList().Count == 0)
+        {
+            return; 
+        }
+        switch (inventory.GetObjectList()[0])
+        {
+            case Weapon weapon:
+                currentWeapon = weapon;
+                inventory.SendObject(InventoriesController.Instance.workbenchInventory);                
+                break;
+            case Scrap scrap:
+                currentScrap = scrap;
+                lootingCoroutine = StartCoroutine(DoLoot());                
+                break;
+        }
+        
     }
 
     public void EndInteractionPrimary()
@@ -46,30 +51,36 @@ public class LootTable : MonoBehaviour, IInteractable
     }
 
     IEnumerator DoLoot()
-    {
-        while (salvageAmount > 0)
+    {        
+        while (currentScrap.salvageAmount > 0)
         {
             yield return new WaitForSeconds(lootingInterval);
-            ChangeSalvage(-lootingValue);
+            currentScrap.LootSalvage(lootingValue, inventory);
             ResourceController.Instance.ChangeSalvageAmount(lootingValue);
+
+            if (!currentScrap.CanLootSalvage())
+            {
+                EndInteractionPrimary();
+                break;
+            }
         }
     }
 
     public bool IsInteractionPossible()
     {     
-        if (salvageAmount > 0 || inventory.GetObjectList()[0] != null)
-        {
+        if (inventory.GetObjectList().Count > 0)
+        {            
             return true;
         }
         else
-        {
+        {         
             return false;
         }
     }
 
     public void StartInteractionSecondary()
     {
-        inventory.SendWeapon(InventoriesController.Instance.workbenchInventory);
+        
     }
 
     public void EndInteractionSecondary()

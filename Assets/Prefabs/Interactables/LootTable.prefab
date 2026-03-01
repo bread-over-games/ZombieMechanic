@@ -170,7 +170,7 @@ MonoBehaviour:
   itemPivot: {fileID: 1838859999185170084}
   inventory: {fileID: -3263844004975946700}
   interactableName: Loot Table
-  lootingInterval: 0.5
+  lootingInterval: 0.2
   lootingValue: 1
 --- !u!114 &-3263844004975946700
 MonoBehaviour:

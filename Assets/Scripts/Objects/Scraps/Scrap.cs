@@ -4,8 +4,10 @@ using System;
 public class Scrap : Object
 {
     public static Action<Inventory> OnScrapDestroyed;
+    public static Action OnScrapLooted;
     public int salvageAmount;
     public string scrapName;
+
     public enum ScrapType
     {
         SparePartsBox
@@ -48,10 +50,32 @@ public class Scrap : Object
         }
     }
 
+    public void LootSalvage(int amount, Inventory currentlyInInventory)
+    {
+        salvageAmount -= amount;
+        OnScrapLooted?.Invoke();
+
+        if (salvageAmount <= 0)
+        {
+            DestroyObject(currentlyInInventory);
+        }
+    }
+
+    public bool CanLootSalvage()
+    {
+        if (salvageAmount > 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     public override void DestroyObject(Inventory currentlyInInventory) // should be destroyed when salvage amount raches zero
     {
         currentlyInInventory.RemoveObject(this);
-        OnScrapDestroyed?.Invoke(currentlyInInventory);
-        Debug.Log("Weapon was destroyed in " + currentlyInInventory.ToString());
+        OnScrapDestroyed?.Invoke(currentlyInInventory);        
     }
 }

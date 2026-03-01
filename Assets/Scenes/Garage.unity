@@ -1926,7 +1926,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 921298055db781347ae7f16541e06a60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  generateWeaponChance: 0
+  generateWeaponChance: 20
   generateScrapChance: 100
   generateMedicineChance: 0
 --- !u!1 &1044934305
