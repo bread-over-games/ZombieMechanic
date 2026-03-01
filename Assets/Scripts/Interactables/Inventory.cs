@@ -19,13 +19,14 @@ public class Inventory : MonoBehaviour
     private List<Object> objectList = new List<Object>();
 
     public static Action<InventoryOfType, Object> OnObjectReceive; // whben Inventory receives wepaon
-    public static Action OnObjectSend; // when inventory sends weapon
+    public static Action<InventoryOfType> OnObjectSend; // when inventory sends weapon
     public static Action OnInventoryChange; // when something changes in inventory
     [SerializeField] private int capacity;
 
     public void RemoveObject(Object obj)
     {
         objectList.Remove(obj);
+        OnInventoryChange?.Invoke();
     }
 
     public List<Object> GetObjectList()
@@ -45,11 +46,13 @@ public class Inventory : MonoBehaviour
         {
             case Weapon weapon:
                 weapon.LoadValues(weapon);
-                OnObjectReceive?.Invoke(gameObject.GetComponent<Inventory>().GetInventoryOfType(), weapon);
+                OnObjectReceive?.Invoke(inventoryOfType, weapon);
+                Debug.Log(inventoryOfType.ToString() + " " + objectList.Count);
                 break;
             case Scrap scrap:
                 scrap.LoadValues(scrap);
-                OnObjectReceive?.Invoke(gameObject.GetComponent<Inventory>().GetInventoryOfType(), scrap);
+                OnObjectReceive?.Invoke(inventoryOfType, scrap);
+                Debug.Log(inventoryOfType.ToString() + " " + objectList.Count);
                 break;
             /*case Medicine medicine:
                 medicine.LoadValues(medicine);
@@ -59,16 +62,19 @@ public class Inventory : MonoBehaviour
         OnInventoryChange?.Invoke();
     }
 
-    public void SendWeapon(Inventory target) // moves weapon from list to another list
+    public void SendObject(Inventory target) // moves weapon from list to another list
     {
         if (objectList.Count > 0)
         {
-            target.ReceiveObject(objectList[0]);
-
+            Object objToSend = objectList[0];
             RemoveObject(objectList[0]);
-            OnObjectSend?.Invoke();
+            OnObjectSend?.Invoke(inventoryOfType);
+
+            Debug.Log(inventoryOfType.ToString() + " " + objectList.Count);
+
+            target.ReceiveObject(objToSend);
             OnInventoryChange?.Invoke();
-        }
+        } 
     }
 
     public void SetOutsideTimes() // sets times for outside - how long it should be outside and when it left

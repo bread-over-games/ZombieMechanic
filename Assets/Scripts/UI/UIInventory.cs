@@ -37,6 +37,7 @@ public class UIInventory : MonoBehaviour
         PlayerInteraction.OnInteractableApproached += ToggleSingleItemInventoryWindow;
         PlayerInteraction.OnInteractableLeft += ToggleSingleItemInventoryWindow;
         Weapon.OnWeaponRepair += RefreshInventoryValues;
+        Scrap.OnScrapLooted += RefreshInventoryValues;
     }
 
     private void OnDisable()
@@ -45,6 +46,7 @@ public class UIInventory : MonoBehaviour
         PlayerInteraction.OnInteractableApproached -= ToggleSingleItemInventoryWindow;
         PlayerInteraction.OnInteractableLeft -= ToggleSingleItemInventoryWindow;
         Weapon.OnWeaponRepair -= RefreshInventoryValues;
+        Scrap.OnScrapLooted -= RefreshInventoryValues;
     }
 
     private void ToggleSingleItemInventoryWindow()

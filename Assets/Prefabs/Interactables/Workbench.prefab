@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd69273c226ab0b4a8dbeea2bb14311b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  repairInterval: 0.5
+  repairInterval: 0.2
   repairSalvageCost: 2
   repairValue: 1
   weaponPivot: {fileID: 1594533800313293158}

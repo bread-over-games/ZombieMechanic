@@ -1,7 +1,7 @@
 /// Displays or destroys given object in the world
 
 using UnityEngine;
-using static UnityEditor.Progress;
+
 
 public class ObjectDisplay : MonoBehaviour
 {
@@ -12,62 +12,71 @@ public class ObjectDisplay : MonoBehaviour
     private void OnEnable()
     {
         Inventory.OnObjectReceive += DisplayCurrentObject;
-        Inventory.OnObjectSend += TryDisplayNextObject;
+        Inventory.OnObjectSend += DestroyCurrentObject;
+        Scrap.OnScrapDestroyed += DestroyMyObject;
     }
 
     public void StartInteractionPrimary()
     {
         Inventory.OnObjectReceive -= DisplayCurrentObject;
-        Inventory.OnObjectSend -= TryDisplayNextObject;
+        Inventory.OnObjectSend -= DestroyCurrentObject;
+        Scrap.OnScrapDestroyed -= DestroyMyObject;
     }
 
     private void DisplayCurrentObject(Inventory.InventoryOfType inventoryOfType, Object obj)
     {
-        DestroyCurrentObject();
-        if (inventoryOfType == inventory.GetInventoryOfType() && inventory.GetObjectList().Count > 0)
+        if (inventoryOfType != inventory.GetInventoryOfType())
         {
-            switch (inventory.GetObjectList()[0])
-            {
-                case Weapon weapon:
-                    currentObject = WeaponWorld.SpawnWeaponWorld(weaponSpawnPivot.position, weapon, weaponSpawnPivot);
-                    break;
-                case Scrap scrap:
-                    currentObject = ScrapWorld.SpawnScrapWorld(weaponSpawnPivot.position, scrap, weaponSpawnPivot);
-                    break;
+            return;
+        }
+
+        if (inventory.GetObjectList().Count > 0 && currentObject == null)
+        {
+            DoObjectDisplay();
+        }
+    }
+
+    private void DoObjectDisplay()
+    {
+        Debug.Log("Object displayed");
+        switch (inventory.GetObjectList()[0])
+        {
+            case Weapon weapon:
+                currentObject = WeaponWorld.SpawnWeaponWorld(weaponSpawnPivot.position, weapon, weaponSpawnPivot);
+                break;
+            case Scrap scrap:
+                currentObject = ScrapWorld.SpawnScrapWorld(weaponSpawnPivot.position, scrap, weaponSpawnPivot);
+                break;
                 /*    case Medicine medicine:
                         medicine.LoadValues(medicine);
                         break;*/
-            }
         }
     }
 
-    private void TryDisplayNextObject()
+    public void DestroyCurrentObject(Inventory.InventoryOfType invOfType)
     {
-        DestroyCurrentObject();
-
-        if (inventory.GetObjectList().Count > 0)
-        {
-            switch (inventory.GetObjectList()[0])
-            {
-                case Weapon weapon:
-                    currentObject = WeaponWorld.SpawnWeaponWorld(weaponSpawnPivot.position, weapon, weaponSpawnPivot);
-                    break;
-                case Scrap scrap:
-                    currentObject = ScrapWorld.SpawnScrapWorld(weaponSpawnPivot.position, scrap, weaponSpawnPivot);
-                    break;
-                    /*    case Medicine medicine:
-                            medicine.LoadValues(medicine);
-                            break;*/
-            }
+        if (inventory.GetInventoryOfType() != invOfType)
+        { 
+            return;
         }
-    }
 
-    private void DestroyCurrentObject()
-    {
         if (inventory.GetObjectList().Count >= 0 && currentObject != null)
         {            
             Destroy(currentObject);
-            currentObject = null;
+            currentObject = null;  
+            
+            if (inventory.GetObjectList().Count > 0)
+            {
+                DoObjectDisplay();
+            }
+        }        
+    }
+
+    private void DestroyMyObject(Inventory invOfType) // determines if it should destroy object on this interactable
+    {
+        if (inventory.GetInventoryOfType() == invOfType.GetInventoryOfType())
+        {
+            DestroyCurrentObject(invOfType.GetInventoryOfType());
         }
     }
 }

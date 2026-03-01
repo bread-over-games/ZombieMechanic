@@ -79,7 +79,7 @@ public class Workbench : MonoBehaviour, IInteractable
 
     public void StartInteractionSecondary()
     {
-        inventory.SendWeapon(InventoriesController.Instance.armoryInventory);
+        inventory.SendObject(InventoriesController.Instance.armoryInventory);
     }
 
     public void EndInteractionSecondary()
