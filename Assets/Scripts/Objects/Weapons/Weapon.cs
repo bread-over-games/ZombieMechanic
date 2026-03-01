@@ -28,8 +28,8 @@ public class Weapon : Object
         switch (weaponType)
         {
             default:
-                case WeaponType.BaseballBat: return WeaponAssets.Instance.baseballBatVisual;
-                case WeaponType.Crowbar: return WeaponAssets.Instance.crowbarVisual;
+                case WeaponType.BaseballBat: return WeaponAssets.Instance.baseballBatSO.weaponVisual;
+                case WeaponType.Crowbar: return WeaponAssets.Instance.crowbarSO.weaponVisual;
         }
     }
 
@@ -38,8 +38,8 @@ public class Weapon : Object
         switch (weaponType)
         {
             default:
-            case WeaponType.BaseballBat: return WeaponAssets.Instance.baseballBatVisualPrefab;
-            case WeaponType.Crowbar: return WeaponAssets.Instance.crowbarVisualPrefab;
+            case WeaponType.BaseballBat: return WeaponAssets.Instance.baseballBatSO.weaponVisualPrefab;
+            case WeaponType.Crowbar: return WeaponAssets.Instance.crowbarSO.weaponVisualPrefab;
         }
     }
 
@@ -64,12 +64,15 @@ public class Weapon : Object
         }
     }  
     
-    public override void LoadValues(Weapon existingWeapon) // when weapon already exists
+    public override void LoadValues(Object existingObject) // when weapon already exists
     {
-        baseDamage = existingWeapon.baseDamage;
-        bonusDamage = existingWeapon.bonusDamage;
-        maxDurability = existingWeapon.maxDurability;
-        currentDurability = existingWeapon.currentDurability;
+        if (existingObject is Weapon existingWeapon)
+        {
+            baseDamage = existingWeapon.baseDamage;
+            bonusDamage = existingWeapon.bonusDamage;
+            maxDurability = existingWeapon.maxDurability;
+            currentDurability = existingWeapon.currentDurability;
+        }        
     }
 
     public bool DecayWeapon(Inventory currentlyInInventory)

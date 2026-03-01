@@ -1,6 +1,7 @@
 /// Displays or destroys given object in the world
 
 using UnityEngine;
+using static UnityEditor.Progress;
 
 public class ObjectDisplay : MonoBehaviour
 {
@@ -11,17 +12,18 @@ public class ObjectDisplay : MonoBehaviour
     private void OnEnable()
     {
         Inventory.OnObjectReceive += DisplayCurrentObject;
-        Inventory.OnObjectSend += DestroyCurrentWeapon;
+        Inventory.OnObjectSend += TryDisplayNextObject;
     }
 
     public void StartInteractionPrimary()
     {
         Inventory.OnObjectReceive -= DisplayCurrentObject;
-        Inventory.OnObjectSend -= DestroyCurrentWeapon;
+        Inventory.OnObjectSend -= TryDisplayNextObject;
     }
 
     private void DisplayCurrentObject(Inventory.InventoryOfType inventoryOfType, Object obj)
     {
+        DestroyCurrentObject();
         if (inventoryOfType == inventory.GetInventoryOfType() && inventory.GetObjectList().Count > 0)
         {
             switch (inventory.GetObjectList()[0])
@@ -29,21 +31,43 @@ public class ObjectDisplay : MonoBehaviour
                 case Weapon weapon:
                     currentObject = WeaponWorld.SpawnWeaponWorld(weaponSpawnPivot.position, weapon, weaponSpawnPivot);
                     break;
-                    /*case Scrap scrap:
-                        scrap.LoadValues(scrap);
-                        break;
-                    case Medicine medicine:
+                case Scrap scrap:
+                    currentObject = ScrapWorld.SpawnScrapWorld(weaponSpawnPivot.position, scrap, weaponSpawnPivot);
+                    break;
+                /*    case Medicine medicine:
                         medicine.LoadValues(medicine);
                         break;*/
-            }            
+            }
         }
     }
 
-    private void DestroyCurrentWeapon()
+    private void TryDisplayNextObject()
     {
-        if (inventory.GetObjectList().Count == 0 && currentObject != null)
+        DestroyCurrentObject();
+
+        if (inventory.GetObjectList().Count > 0)
         {
+            switch (inventory.GetObjectList()[0])
+            {
+                case Weapon weapon:
+                    currentObject = WeaponWorld.SpawnWeaponWorld(weaponSpawnPivot.position, weapon, weaponSpawnPivot);
+                    break;
+                case Scrap scrap:
+                    currentObject = ScrapWorld.SpawnScrapWorld(weaponSpawnPivot.position, scrap, weaponSpawnPivot);
+                    break;
+                    /*    case Medicine medicine:
+                            medicine.LoadValues(medicine);
+                            break;*/
+            }
+        }
+    }
+
+    private void DestroyCurrentObject()
+    {
+        if (inventory.GetObjectList().Count >= 0 && currentObject != null)
+        {            
             Destroy(currentObject);
+            currentObject = null;
         }
     }
 }

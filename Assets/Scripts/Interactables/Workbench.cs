@@ -44,8 +44,6 @@ public class Workbench : MonoBehaviour, IInteractable
     {        
         if (ResourceController.Instance.CanRepair(repairSalvageCost))
         {
-            //currentWeapon = inventory.GetObjectList()[0];
-
             if (currentWeapon.currentDurability < currentWeapon.maxDurability)
             {
                 repairCoroutine = StartCoroutine(DoRepair());

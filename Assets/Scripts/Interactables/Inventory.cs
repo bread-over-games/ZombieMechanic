@@ -47,10 +47,11 @@ public class Inventory : MonoBehaviour
                 weapon.LoadValues(weapon);
                 OnObjectReceive?.Invoke(gameObject.GetComponent<Inventory>().GetInventoryOfType(), weapon);
                 break;
-            /*case Scrap scrap:
+            case Scrap scrap:
                 scrap.LoadValues(scrap);
+                OnObjectReceive?.Invoke(gameObject.GetComponent<Inventory>().GetInventoryOfType(), scrap);
                 break;
-            case Medicine medicine:
+            /*case Medicine medicine:
                 medicine.LoadValues(medicine);
                 break;*/
         }
