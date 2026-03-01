@@ -38,7 +38,6 @@ public class ObjectDisplay : MonoBehaviour
 
     private void DoObjectDisplay()
     {
-        Debug.Log("Object displayed");
         switch (inventory.GetObjectList()[0])
         {
             case Weapon weapon:

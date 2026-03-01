@@ -47,12 +47,10 @@ public class Inventory : MonoBehaviour
             case Weapon weapon:
                 weapon.LoadValues(weapon);
                 OnObjectReceive?.Invoke(inventoryOfType, weapon);
-                Debug.Log(inventoryOfType.ToString() + " " + objectList.Count);
                 break;
             case Scrap scrap:
                 scrap.LoadValues(scrap);
                 OnObjectReceive?.Invoke(inventoryOfType, scrap);
-                Debug.Log(inventoryOfType.ToString() + " " + objectList.Count);
                 break;
             /*case Medicine medicine:
                 medicine.LoadValues(medicine);
@@ -69,8 +67,6 @@ public class Inventory : MonoBehaviour
             Object objToSend = objectList[0];
             RemoveObject(objectList[0]);
             OnObjectSend?.Invoke(inventoryOfType);
-
-            Debug.Log(inventoryOfType.ToString() + " " + objectList.Count);
 
             target.ReceiveObject(objToSend);
             OnInventoryChange?.Invoke();
