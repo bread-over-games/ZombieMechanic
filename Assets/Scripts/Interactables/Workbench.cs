@@ -28,16 +28,15 @@ public class Workbench : MonoBehaviour, IInteractable
 
     public void StartInteractionPrimary()
     {
-        TryRepair();
+        if (InventoriesController.Instance.playerInventory.GetObjectList().Count == 0)
+        {
+            inventory.SendObject(InventoriesController.Instance.playerInventory);
+        }        
     }
 
     public void EndInteractionPrimary()
     {
-        if (repairCoroutine != null)
-        {
-            StopCoroutine(repairCoroutine);
-            repairCoroutine = null;
-        }        
+ 
     }
 
     private void TryRepair()
@@ -79,12 +78,16 @@ public class Workbench : MonoBehaviour, IInteractable
 
     public void StartInteractionSecondary()
     {
-        inventory.SendObject(InventoriesController.Instance.armoryInventory);
+        TryRepair();
     }
 
     public void EndInteractionSecondary()
     {
-
+        if (repairCoroutine != null)
+        {
+            StopCoroutine(repairCoroutine);
+            repairCoroutine = null;
+        }
     }
 
     public Inventory GetInventory()

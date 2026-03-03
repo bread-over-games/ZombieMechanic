@@ -13,6 +13,7 @@ public class InventoriesController : MonoBehaviour
     public Inventory lootTableInventory;
     public Inventory workbenchInventory;
     public Inventory outsideInventory;
+    public Inventory playerInventory;
 
     void Awake()
     {

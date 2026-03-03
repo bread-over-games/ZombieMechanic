@@ -11,7 +11,8 @@ public class Inventory : MonoBehaviour
         LootTable,
         Armory,
         Storage,
-        Outside
+        Outside,
+        Player
     }
 
     [SerializeField] private InventoryOfType inventoryOfType;
@@ -84,4 +85,10 @@ public class Inventory : MonoBehaviour
             }            
         }       
     }   
+
+    public int GetCapacity()
+    {
+        return capacity;
+    }
+
 }
