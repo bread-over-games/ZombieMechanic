@@ -13,7 +13,8 @@ public class Inventory : MonoBehaviour
         Storage,
         Outside,
         Player,
-        Table
+        Table,
+        SalvageTable
     }
 
     [SerializeField] private InventoryOfType inventoryOfType;

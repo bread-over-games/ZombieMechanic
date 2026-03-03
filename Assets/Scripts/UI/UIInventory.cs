@@ -37,6 +37,7 @@ public class UIInventory : MonoBehaviour
         PlayerInteraction.OnInteractableApproached += ToggleSingleItemInventoryWindow;
         PlayerInteraction.OnInteractableLeft += ToggleSingleItemInventoryWindow;
         Weapon.OnWeaponRepair += RefreshInventoryValues;
+        Weapon.OnWeaponDamage += RefreshInventoryValues;
         Scrap.OnScrapLooted += RefreshInventoryValues;
     }
 
@@ -46,6 +47,7 @@ public class UIInventory : MonoBehaviour
         PlayerInteraction.OnInteractableApproached -= ToggleSingleItemInventoryWindow;
         PlayerInteraction.OnInteractableLeft -= ToggleSingleItemInventoryWindow;
         Weapon.OnWeaponRepair -= RefreshInventoryValues;
+        Weapon.OnWeaponDamage -= RefreshInventoryValues;
         Scrap.OnScrapLooted -= RefreshInventoryValues;
     }
 

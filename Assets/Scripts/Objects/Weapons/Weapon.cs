@@ -12,6 +12,7 @@ public class Weapon : Object
     }
 
     public static Action OnWeaponRepair; // called when weapon is repaired
+    public static Action OnWeaponDamage;
     public static Action<Inventory> OnWeaponDestroyed;
 
     public WeaponType weaponType;
@@ -22,7 +23,6 @@ public class Weapon : Object
     public int currentDurability;
     public float timeAddedToOutside;
     public float timeToSpendOutside; // how long a weapon should be outside, decided when leaving Armory
-    public int weaponDecayRate = 5; // how much the weapon will decay after being outside
 
     public override Sprite GetObjectSprite()
     {
@@ -79,9 +79,10 @@ public class Weapon : Object
         }        
     }
 
-    public bool DecayWeapon(Inventory currentlyInInventory)
+    public bool DamageWeapon(Inventory currentlyInInventory, int decayAmount) // returns true when weapon is destroyed
     {
-        currentDurability -= weaponDecayRate;
+        currentDurability -= decayAmount;
+        OnWeaponDamage?.Invoke();
 
         if (currentDurability <= 0)
         {

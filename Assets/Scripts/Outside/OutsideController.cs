@@ -4,6 +4,7 @@ using System;
 public class OutsideController : MonoBehaviour
 {
     [SerializeField] private Inventory inventory;
+    int weaponDecayAmount = 5;
     float timer = 0f;
 
     public static Action OnSurvivorReturned;
@@ -32,7 +33,7 @@ public class OutsideController : MonoBehaviour
     {
         if (inventory.GetObjectList()[0] is Weapon weapon)
         {
-            if (!weapon.DecayWeapon(inventory)) // decays weapon, checks if it is destroyed or not
+            if (!weapon.DamageWeapon(inventory, weaponDecayAmount)) // decays weapon, checks if it is destroyed or not
             {
                 inventory.SendObject(InventoriesController.Instance.lootTableInventory);
                 OnSurvivorReturned?.Invoke();
