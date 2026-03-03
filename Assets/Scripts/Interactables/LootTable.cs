@@ -8,12 +8,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-public class LootTable : MonoBehaviour, IInteractable
+public class LootTable : Bench, IInteractable
 {    
-    [SerializeField] private Transform itemPivot;    
-    [SerializeField] private Inventory inventory;
-    [SerializeField] private string interactableName;
-
     [SerializeField] private float lootingInterval; // tick of looting, how often can player get salvage from loot
     [SerializeField] private int lootingValue; // how much salvage is looted per tick
 
@@ -21,39 +17,6 @@ public class LootTable : MonoBehaviour, IInteractable
     private Weapon currentWeapon;
     private Coroutine lootingCoroutine;
 
-    public void StartInteractionPrimary()
-    {
-        if (inventory.GetObjectList().Count == 0)
-        {
-            return; 
-        }
-
-        if (InventoriesController.Instance.playerInventory.GetObjectList().Count > 0)
-        {
-            return;
-        }
-
-        switch (inventory.GetObjectList()[0])
-        {
-            case Weapon weapon:
-                currentWeapon = weapon;
-                inventory.SendObject(InventoriesController.Instance.playerInventory);                
-                break;
-            case Scrap scrap:
-                currentScrap = scrap;
-                lootingCoroutine = StartCoroutine(DoLoot());                
-                break;
-        }        
-    }
-
-    public void EndInteractionPrimary()
-    {
-        if (lootingCoroutine != null)
-        {
-            StopCoroutine(lootingCoroutine);
-            lootingCoroutine = null;
-        }
-    }
 
     IEnumerator DoLoot()
     {        
@@ -71,35 +34,30 @@ public class LootTable : MonoBehaviour, IInteractable
         }
     }
 
-    public bool IsInteractionPossible()
-    {     
-        if (inventory.GetObjectList().Count > 0)
-        {            
-            return true;
+    public override void StartInteractionSecondary()
+    {
+        if (inventory.GetObjectList().Count == 0)
+        {
+            return;
         }
-        else
-        {         
-            return false;
+
+        switch (inventory.GetObjectList()[0])
+        {
+            case Weapon weapon:
+                return;
+            case Scrap scrap:
+                currentScrap = scrap;
+                lootingCoroutine = StartCoroutine(DoLoot());
+                break;
         }
     }
 
-    public void StartInteractionSecondary()
+    public override void EndInteractionSecondary()
     {
-        
-    }
-
-    public void EndInteractionSecondary()
-    {
-
-    }
-
-    public Inventory GetInventory()
-    {
-        return inventory;
-    }
-
-    public string GetName()
-    {
-        return interactableName;
+        if (lootingCoroutine != null)
+        {
+            StopCoroutine(lootingCoroutine);
+            lootingCoroutine = null;
+        }
     }
 }

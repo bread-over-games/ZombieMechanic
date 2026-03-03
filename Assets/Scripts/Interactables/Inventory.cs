@@ -12,7 +12,8 @@ public class Inventory : MonoBehaviour
         Armory,
         Storage,
         Outside,
-        Player
+        Player,
+        Table
     }
 
     [SerializeField] private InventoryOfType inventoryOfType;
