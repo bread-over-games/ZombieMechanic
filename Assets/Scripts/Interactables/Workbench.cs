@@ -1,14 +1,11 @@
 using UnityEngine;
 using System;
 using System.Collections;
-public class Workbench : MonoBehaviour, IInteractable
+public class Workbench : Bench, IInteractable
 {
     [SerializeField] private float repairInterval;
     [SerializeField] private int repairSalvageCost;
-    [SerializeField] private int repairValue;
-    [SerializeField] private Transform weaponPivot;
-    [SerializeField] private Inventory inventory;
-    [SerializeField] private string interactableName;
+    [SerializeField] private int repairValue;    
 
     private Weapon currentWeapon;
     private Coroutine repairCoroutine;
@@ -24,19 +21,6 @@ public class Workbench : MonoBehaviour, IInteractable
         {
             currentWeapon = weapon; 
         }
-    }
-
-    public void StartInteractionPrimary()
-    {
-        if (InventoriesController.Instance.playerInventory.GetObjectList().Count == 0)
-        {
-            inventory.SendObject(InventoriesController.Instance.playerInventory);
-        }        
-    }
-
-    public void EndInteractionPrimary()
-    {
- 
     }
 
     private void TryRepair()
@@ -66,37 +50,17 @@ public class Workbench : MonoBehaviour, IInteractable
         }        
     }
 
-    private void DoSalvage() // scraps weapon for salvage
-    {
-
-    }
-
-    public bool IsInteractionPossible()
-    {
-        return true;
-    }
-
-    public void StartInteractionSecondary()
+    public override void StartInteractionSecondary()
     {
         TryRepair();
     }
 
-    public void EndInteractionSecondary()
+    public override void EndInteractionSecondary()
     {
         if (repairCoroutine != null)
         {
             StopCoroutine(repairCoroutine);
             repairCoroutine = null;
         }
-    }
-
-    public Inventory GetInventory()
-    { 
-        return inventory;
-    }
-
-    public string GetName()
-    {
-        return interactableName;
     }
 }
