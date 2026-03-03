@@ -68,7 +68,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventoryOfType: 0
-  capacity: 0
+  capacity: 1
 --- !u!114 &2784355277398447042
 MonoBehaviour:
   m_ObjectHideFlags: 0

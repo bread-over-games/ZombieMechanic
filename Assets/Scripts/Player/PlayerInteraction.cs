@@ -12,6 +12,8 @@ public class PlayerInteraction : MonoBehaviour
     public static Action OnInteractableApproached;
     public static Action OnInteractableLeft;
 
+    [SerializeField] private Inventory playerInventory;
+
     private void OnTriggerEnter(Collider other)
     {        
         if (other.TryGetComponent<IInteractable>(out IInteractable interactable))
@@ -63,6 +65,13 @@ public class PlayerInteraction : MonoBehaviour
 
     private void PrimaryInteractStarted()
     {
+        if (playerInventory.GetObjectList().Count > 0 && currentInteractable.GetInventory().GetObjectList().Count < currentInteractable.GetInventory().GetCapacity()) // player is carrying something
+        {
+            // deposit item
+            playerInventory.SendObject(currentInteractable.GetInventory());
+            return;
+        }
+
         interactionStarted = true;
         currentInteractable.StartInteractionPrimary();
     }

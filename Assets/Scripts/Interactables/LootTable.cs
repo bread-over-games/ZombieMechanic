@@ -27,18 +27,23 @@ public class LootTable : MonoBehaviour, IInteractable
         {
             return; 
         }
+
+        if (InventoriesController.Instance.playerInventory.GetObjectList().Count > 0)
+        {
+            return;
+        }
+
         switch (inventory.GetObjectList()[0])
         {
             case Weapon weapon:
                 currentWeapon = weapon;
-                inventory.SendObject(InventoriesController.Instance.workbenchInventory);                
+                inventory.SendObject(InventoriesController.Instance.playerInventory);                
                 break;
             case Scrap scrap:
                 currentScrap = scrap;
                 lootingCoroutine = StartCoroutine(DoLoot());                
                 break;
-        }
-        
+        }        
     }
 
     public void EndInteractionPrimary()

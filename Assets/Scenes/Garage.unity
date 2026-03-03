@@ -2152,6 +2152,7 @@ MonoBehaviour:
   lootTableInventory: {fileID: 701610941}
   workbenchInventory: {fileID: 2092494003}
   outsideInventory: {fileID: 978451873}
+  playerInventory: {fileID: 7005449844092851444}
 --- !u!1 &1100420012
 GameObject:
   m_ObjectHideFlags: 0
@@ -4317,6 +4318,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d46f831bb44379b43a0bb699e25c347f, type: 3}
+--- !u!114 &7005449844092851444 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5303107533594216243, guid: d46f831bb44379b43a0bb699e25c347f, type: 3}
+  m_PrefabInstance: {fileID: 7005449844092851443}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86e0b5bc2564d4f4488cee8b688c4fd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

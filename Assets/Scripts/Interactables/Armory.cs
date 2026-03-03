@@ -8,7 +8,10 @@ public class Armory : MonoBehaviour, IInteractable
 
     public void StartInteractionPrimary()
     {
-
+        if (InventoriesController.Instance.playerInventory.GetObjectList().Count == 0)
+        {
+            inventory.SendObject(InventoriesController.Instance.playerInventory);
+        }
     }
 
     public void EndInteractionPrimary()
