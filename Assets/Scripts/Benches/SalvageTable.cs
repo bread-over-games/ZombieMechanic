@@ -13,6 +13,12 @@ public class SalvageTable : Bench
     public Weapon currentWeapon;
     private Coroutine lootingCoroutine;
 
+    public void Awake()
+    {
+        acceptedTypes.Add(typeof(Weapon));
+        acceptedTypes.Add(typeof(Scrap));
+    }
+
     IEnumerator DoSalvage()
     {
         switch (inventory.GetObjectList()[0])

@@ -76,6 +76,13 @@ public class Inventory : MonoBehaviour
         } 
     }
 
+    public void SendObjectOnMission()
+    {
+        RemoveObject(objectList[0]);
+        OnObjectSend?.Invoke(inventoryOfType);
+        OnInventoryChange?.Invoke();
+    }
+
     public void SetOutsideTimes() // sets times for outside - how long it should be outside and when it left
     {
         if (objectList.Count > 0)

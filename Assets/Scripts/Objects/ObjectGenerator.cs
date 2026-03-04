@@ -13,12 +13,12 @@ public class ObjectGenerator : MonoBehaviour
 
     private void OnEnable()
     {
-        OutsideController.OnSurvivorReturned += GenerateObject;
+        MissionController.OnMissionCompleted += GenerateLoot;
     }
 
     private void OnDisable()
     {
-        OutsideController.OnSurvivorReturned -= GenerateObject;
+        MissionController.OnMissionCompleted -= GenerateLoot;
     }
 
     private void GenerateFirstWeapon() // generates first weapon for tutorial purpose
@@ -35,7 +35,7 @@ public class ObjectGenerator : MonoBehaviour
         InventoriesController.Instance.lootTableInventory.ReceiveObject(newScrap);
     }
 
-    private void GenerateObject() // generates completely new object
+    private void GenerateLoot(Mission mission) // generates completely new object
     {
         if (Random.Range(0, 100) < generateWeaponChance)
         {
