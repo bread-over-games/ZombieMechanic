@@ -83,6 +83,7 @@ public class Weapon : Object
     {
         currentDurability -= decayAmount;
         OnWeaponDamage?.Invoke();
+        Debug.Log(currentDurability);
 
         if (currentDurability <= 0)
         {

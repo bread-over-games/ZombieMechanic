@@ -133,7 +133,7 @@ public class UIInventory : MonoBehaviour
 
     private void RefreshInventoryValues()
     {
-        if (inventory == null) return;
+        if (inventory == null || inventory.GetObjectList().Count == 0) return;
 
         switch (inventory.GetObjectList()[0])
         {
