@@ -13,6 +13,12 @@ public class SalvageTable : Bench
     public Weapon currentWeapon;
     private Coroutine lootingCoroutine;
 
+    public void Awake()
+    {
+        acceptedTypes.Add(typeof(Weapon));
+        acceptedTypes.Add(typeof(Scrap));
+    }
+
     IEnumerator DoSalvage()
     {
         switch (inventory.GetObjectList()[0])
@@ -20,11 +26,13 @@ public class SalvageTable : Bench
             case Weapon weapon:
                 currentWeapon = weapon;
 
-                while (!weapon.DamageWeapon(inventory, 2))
+                while (!currentWeapon.DamageWeapon(2))
                 {
                     yield return new WaitForSeconds(salvagingInterval);
                     ResourceController.Instance.ChangeSalvageAmount(salvagingValue);
                 }
+
+                currentWeapon.DestroyObject();
 
                 break;
             case Scrap scrap:

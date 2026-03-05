@@ -10,9 +10,19 @@ public class Workbench : Bench, IInteractable
     private Weapon currentWeapon;
     private Coroutine repairCoroutine;
 
+    public void Awake()
+    {
+        acceptedTypes.Add(typeof(Weapon));
+    }
+
     private void OnEnable()
     {
         Inventory.OnObjectReceive += AssignCurrentWeapon;
+    }
+
+    private void OnDisable()
+    {
+        Inventory.OnObjectReceive -= AssignCurrentWeapon;
     }
 
     private void AssignCurrentWeapon(Inventory.InventoryOfType invOfType, Object obj)

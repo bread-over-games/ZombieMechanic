@@ -73,9 +73,9 @@ public class Scrap : Object
         }
     }
 
-    public override void DestroyObject(Inventory currentlyInInventory) // should be destroyed when salvage amount raches zero
+    public override void DestroyObject() // should be destroyed when salvage amount raches zero
     {
-        currentlyInInventory.RemoveObject(this);
-        OnScrapDestroyed?.Invoke(currentlyInInventory);        
+        inInventory.RemoveObject(this);
+        OnScrapDestroyed?.Invoke(inInventory);        
     }
 }

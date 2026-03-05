@@ -8,5 +8,7 @@ public interface IInteractable
     void EndInteractionSecondary();
     bool IsInteractionPossible();
     Inventory GetInventory();
-    string GetName();    
+    string GetName();
+
+    bool CanAcceptObject(Object objectToPlace);
 }
