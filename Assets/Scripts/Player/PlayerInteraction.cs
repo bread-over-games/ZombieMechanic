@@ -65,7 +65,8 @@ public class PlayerInteraction : MonoBehaviour
 
     private void PrimaryInteractStarted()
     {
-        if (playerInventory.GetObjectList().Count > 0 && currentInteractable.GetInventory().GetObjectList().Count < currentInteractable.GetInventory().GetCapacity()) // there is a space in the target inventory
+        Inventory currentInventory = currentInteractable.GetInventory();
+        if (playerInventory.GetObjectList().Count > 0 && currentInventory.GetObjectList().Count < currentInventory.GetCapacity()) // there is a space in the target inventory
         {
             if (currentInteractable.CanAcceptObject(playerInventory.GetObjectList()[0]))
             {

@@ -36,7 +36,6 @@ public class MissionController : MonoBehaviour
     {
         OnMissionCompleted?.Invoke(mission);
         activeMissions.RemoveAt(index); // deletes mission when it's done
-        // 
     }
 
     public void SendMission (Weapon weaponInArmory, Armory survivorArmory)

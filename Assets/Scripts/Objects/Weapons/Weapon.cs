@@ -9,7 +9,7 @@ public class Weapon : Object
     {
         BaseballBat,
         Crowbar
-    }
+    }    
 
     public static Action OnWeaponRepair; // called when weapon is repaired
     public static Action OnWeaponDamage;
@@ -79,7 +79,7 @@ public class Weapon : Object
         }        
     }
 
-    public bool DamageWeapon(Inventory currentlyInInventory, int decayAmount) // returns true when weapon is destroyed
+    public bool DamageWeapon(int decayAmount) // returns true when weapon is destroyed
     {
         currentDurability -= decayAmount;
         OnWeaponDamage?.Invoke();
@@ -87,18 +87,17 @@ public class Weapon : Object
 
         if (currentDurability <= 0)
         {
-            DestroyObject(currentlyInInventory);
             return true;
         }
 
         return false;
     }
 
-    public override void DestroyObject(Inventory currentlyInInventory)
+    public override void DestroyObject()
     {
-        currentlyInInventory.RemoveObject(this);
-        OnWeaponDestroyed?.Invoke(currentlyInInventory);
-        Debug.Log("Weapon was destroyed in " + currentlyInInventory.ToString());
+        inInventory.RemoveObject(this);
+        OnWeaponDestroyed?.Invoke(inInventory);
+        Debug.Log("Weapon was destroyed in " + inInventory.ToString());
     }
 
     public void RepairWeapon(int repairAmount)

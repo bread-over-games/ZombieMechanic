@@ -34,23 +34,23 @@ public class Mission
 
     private void ReturnSurvivorLoadout()
     {
-        InventoriesController.Instance.armoryInventory.ReceiveObject(equippedWeapon);
+        if (equippedWeapon.currentDurability <= 0)
+        {
+            equippedWeapon = null;
+        }
+        else
+        {
+            InventoriesController.Instance.armoryInventory.ReceiveObject(equippedWeapon);
+        }
     }
 
 
     private void ApplyWearToLoadout()
     {
-       /* {
-            if (inventory.GetObjectList()[0] is Weapon weapon)
-            {
-                if (!weapon.DamageWeapon(inventory, weaponDecayAmount)) // decays weapon, checks if it is destroyed or not
-                {
-                    inventory.SendObject(InventoriesController.Instance.lootTableInventory);
-                    OnSurvivorReturned?.Invoke();
-                    Debug.Log("Survivor returned");
-                }
-            }
-        }*/
+        if (equippedWeapon.DamageWeapon(5))
+        {
+            Debug.Log(equippedWeapon.weaponName + " destroyed on a mission");            
+        }
     }
 
     public void Tick(float deltaTime)

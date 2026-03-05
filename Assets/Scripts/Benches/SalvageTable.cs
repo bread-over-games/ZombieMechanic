@@ -26,11 +26,13 @@ public class SalvageTable : Bench
             case Weapon weapon:
                 currentWeapon = weapon;
 
-                while (!weapon.DamageWeapon(inventory, 2))
+                while (!currentWeapon.DamageWeapon(2))
                 {
                     yield return new WaitForSeconds(salvagingInterval);
                     ResourceController.Instance.ChangeSalvageAmount(salvagingValue);
                 }
+
+                currentWeapon.DestroyObject();
 
                 break;
             case Scrap scrap:

@@ -45,6 +45,7 @@ public class Inventory : MonoBehaviour
     public void ReceiveObject(Object obj)
     {
         objectList.Add(obj);
+        obj.AssignOwnerInventory(this);
         switch (obj)
         {
             case Weapon weapon:
@@ -78,22 +79,11 @@ public class Inventory : MonoBehaviour
 
     public void SendObjectOnMission()
     {
-        RemoveObject(objectList[0]);
+        objectList[0].ClearOwnerInventory();
+        RemoveObject(objectList[0]);        
         OnObjectSend?.Invoke(inventoryOfType);
         OnInventoryChange?.Invoke();
     }
-
-    public void SetOutsideTimes() // sets times for outside - how long it should be outside and when it left
-    {
-        if (objectList.Count > 0)
-        {
-            if (objectList[0] is Weapon weapon)
-            {
-                weapon.timeAddedToOutside = Time.time;
-                weapon.timeToSpendOutside = UnityEngine.Random.Range(3, 7);
-            }            
-        }       
-    }   
 
     public int GetCapacity()
     {
