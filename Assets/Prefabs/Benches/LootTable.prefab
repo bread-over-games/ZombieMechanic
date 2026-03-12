@@ -81,6 +81,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4f0dac40668cef408892c12c29585d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  benchType: 1
   inventory: {fileID: -3263844004975946700}
   interactableName: Loot Table
 --- !u!114 &-3263844004975946700

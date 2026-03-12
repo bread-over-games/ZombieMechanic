@@ -2,6 +2,7 @@ using UnityEngine;
 
 public interface IInteractable
 {
+    Bench.BenchType GetBenchType();
     void StartInteractionPrimary();
     void EndInteractionPrimary();
     void StartInteractionSecondary();

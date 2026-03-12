@@ -23,7 +23,6 @@ public class UIInventory : MonoBehaviour
 
     [Header("Empty inventory messages")]
     [SerializeField] private GameObject workbenchEmptyMessage;
-    [SerializeField] private GameObject armoryEmptyMessage;
     [SerializeField] private GameObject loottableEmptyMessage;
 
     private void Start()
@@ -51,8 +50,13 @@ public class UIInventory : MonoBehaviour
         Scrap.OnScrapLooted -= RefreshInventoryValues;
     }
 
-    private void ToggleSingleItemInventoryWindow()
+    private void ToggleSingleItemInventoryWindow(Bench.BenchType benchType)
     {
+        if (benchType == Bench.BenchType.Armory)
+        {
+            return;
+        }
+
         if (singleItemInventoryWindow.activeSelf)
         {
             singleItemInventoryWindow.SetActive(false);
@@ -84,7 +88,6 @@ public class UIInventory : MonoBehaviour
         interactableName.text = inventory.gameObject.GetComponent<IInteractable>().GetName();
         workbenchEmptyMessage.SetActive(false);
         loottableEmptyMessage.SetActive(false);
-        armoryEmptyMessage.SetActive(false);
         
         currentWeaponInfo.SetActive(false);
         currentScrapInfo.SetActive(false);
@@ -107,9 +110,6 @@ public class UIInventory : MonoBehaviour
                 break;
             case Inventory.InventoryOfType.LootTable:
                 loottableEmptyMessage.SetActive(true);
-                break;
-            case Inventory.InventoryOfType.Armory:
-                armoryEmptyMessage.SetActive(true);
                 break;
         }
     }

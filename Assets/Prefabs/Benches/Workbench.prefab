@@ -135,6 +135,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd69273c226ab0b4a8dbeea2bb14311b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  benchType: 4
   inventory: {fileID: 5261058445298813840}
   interactableName: Workbench
   repairInterval: 0.2

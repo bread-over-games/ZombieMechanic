@@ -9,8 +9,8 @@ public class PlayerInteraction : MonoBehaviour
     private IInteractable currentInteractable;
     private bool interactionStarted = false;
 
-    public static Action OnInteractableApproached;
-    public static Action OnInteractableLeft;
+    public static Action<Bench.BenchType> OnInteractableApproached;
+    public static Action<Bench.BenchType> OnInteractableLeft;
 
     [SerializeField] private Inventory playerInventory;
 
@@ -30,7 +30,7 @@ public class PlayerInteraction : MonoBehaviour
             PrimaryInteractEnded();            
         }
 
-        OnInteractableLeft?.Invoke();
+        OnInteractableLeft?.Invoke(currentInteractable.GetBenchType());
         currentInteractable = null;
     }
 
@@ -59,8 +59,17 @@ public class PlayerInteraction : MonoBehaviour
 
     private void InteractableApproached()
     {
-        UIController.Instance.interactableInvSingleItem.SetInventory(currentInteractable.GetInventory());
-        OnInteractableApproached?.Invoke();        
+        switch (currentInteractable.GetBenchType())
+        {
+            case Bench.BenchType.Armory:
+                UIController.Instance.armoryUI.SetInventory(currentInteractable.GetInventory());
+                break;
+            default:
+                UIController.Instance.interactableInvSingleItem.SetInventory(currentInteractable.GetInventory());
+                break;
+        }
+        
+        OnInteractableApproached?.Invoke(currentInteractable.GetBenchType());        
     }
 
     private void PrimaryInteractStarted()
