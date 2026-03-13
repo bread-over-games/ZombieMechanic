@@ -24,7 +24,7 @@ public class Inventory : MonoBehaviour
     public static Action<InventoryOfType, Object> OnObjectReceive; // whben Inventory receives wepaon
     public static Action<InventoryOfType, Object> OnObjectSend; // when inventory sends weapon
     public static Action OnInventoryChange; // when something changes in inventory
-    [SerializeField] private int capacity;
+    [SerializeField] public int capacity;
 
     public void RemoveObject(Object obj)
     {

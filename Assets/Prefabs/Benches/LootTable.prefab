@@ -32,6 +32,37 @@ Transform:
   - {fileID: 48990955772697178}
   m_Father: {fileID: 7562334392158037229}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4429247411562341342
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2163384740595248331}
+  m_Layer: 0
+  m_Name: BackpackSpawnPivot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2163384740595248331
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4429247411562341342}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.49999917, z: -0, w: 0.8660259}
+  m_LocalPosition: {x: 0, y: 0.946, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7562334392158037229}
+  m_LocalEulerAnglesHint: {x: 0, y: 60, z: 0}
 --- !u!1 &5766341910752092550
 GameObject:
   m_ObjectHideFlags: 0
@@ -67,6 +98,7 @@ Transform:
   m_Children:
   - {fileID: 5341440531344664619}
   - {fileID: 1838859999185170084}
+  - {fileID: 2163384740595248331}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1318387853336018860
@@ -84,6 +116,7 @@ MonoBehaviour:
   benchType: 1
   inventory: {fileID: -3263844004975946700}
   interactableName: Loot Table
+  currentObject: {fileID: 0}
 --- !u!114 &-3263844004975946700
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -112,6 +145,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inventory: {fileID: -3263844004975946700}
   weaponSpawnPivot: {fileID: 1838859999185170084}
+  backpackSpawnPivot: {fileID: 2163384740595248331}
+  armorSpawnPivot: {fileID: 0}
 --- !u!65 &7845430357691138588
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -143,7 +178,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1838859999185170084}
   m_Layer: 0
-  m_Name: ObjectSpawnPivot
+  m_Name: WeaponSpawnPivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

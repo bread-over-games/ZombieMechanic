@@ -46,6 +46,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inventory: {fileID: 5303107533594216243}
   weaponSpawnPivot: {fileID: 2155308607333986306}
+  backpackSpawnPivot: {fileID: 2155308607333986306}
+  armorSpawnPivot: {fileID: 0}
 --- !u!1 &1960706057328998882
 GameObject:
   m_ObjectHideFlags: 0
