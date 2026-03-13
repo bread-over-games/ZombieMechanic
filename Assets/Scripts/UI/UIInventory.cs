@@ -13,7 +13,19 @@ public class UIInventory : MonoBehaviour
     [SerializeField] private Image weaponImage;
     [SerializeField] private TMP_Text weaponNameText;
     [SerializeField] private TMP_Text damageText;
-    [SerializeField] private TMP_Text durabilityText;    
+    [SerializeField] private TMP_Text durabilityText;
+
+    [Header("Backpacks")]
+    [SerializeField] private GameObject currentBackpackInfo;
+    [SerializeField] private Image backpackImage;
+    [SerializeField] private TMP_Text backpackNameText;    
+    [SerializeField] private TMP_Text backpackDurabilityText;
+
+    [Header("Armors")]
+    [SerializeField] private GameObject currentArmorInfo;
+    [SerializeField] private Image armorImage;
+    [SerializeField] private TMP_Text armorNameText;
+    [SerializeField] private TMP_Text armorDurabilityText;
 
     [Header("Scraps")]
     [SerializeField] private GameObject currentScrapInfo;
@@ -35,8 +47,8 @@ public class UIInventory : MonoBehaviour
         Inventory.OnInventoryChange += RefreshInventoryUI;        
         PlayerInteraction.OnInteractableApproached += ToggleSingleItemInventoryWindow;
         PlayerInteraction.OnInteractableLeft += ToggleSingleItemInventoryWindow;
-        Weapon.OnWeaponRepair += RefreshInventoryValues;
-        Weapon.OnWeaponDamage += RefreshInventoryValues;
+        Object.OnObjectRepair += RefreshInventoryValues;
+        Object.OnObjectDamage += RefreshInventoryValues;
         Scrap.OnScrapLooted += RefreshInventoryValues;
     }
 
@@ -45,8 +57,8 @@ public class UIInventory : MonoBehaviour
         Inventory.OnInventoryChange -= RefreshInventoryUI;        
         PlayerInteraction.OnInteractableApproached -= ToggleSingleItemInventoryWindow;
         PlayerInteraction.OnInteractableLeft -= ToggleSingleItemInventoryWindow;
-        Weapon.OnWeaponRepair -= RefreshInventoryValues;
-        Weapon.OnWeaponDamage -= RefreshInventoryValues;
+        Object.OnObjectRepair -= RefreshInventoryValues;
+        Object.OnObjectDamage -= RefreshInventoryValues;
         Scrap.OnScrapLooted -= RefreshInventoryValues;
     }
 
@@ -90,6 +102,8 @@ public class UIInventory : MonoBehaviour
         loottableEmptyMessage.SetActive(false);
         
         currentWeaponInfo.SetActive(false);
+        currentArmorInfo.SetActive(false);  
+        currentBackpackInfo.SetActive(false);
         currentScrapInfo.SetActive(false);
 
         if (inventory.GetObjectList().Count > 0)
@@ -122,6 +136,14 @@ public class UIInventory : MonoBehaviour
                 currentWeaponInfo.SetActive(true);
                 weaponImage.sprite = inventory.GetObjectList()[0].GetObjectSprite();
                 break;
+            case Backpack backpack:
+                currentBackpackInfo.SetActive(true);
+                backpackImage.sprite = inventory.GetObjectList()[0].GetObjectSprite();
+                break;
+            case Armor armor:
+                currentArmorInfo.SetActive(true);
+                armorImage.sprite = inventory.GetObjectList()[0].GetObjectSprite();
+                break;
             case Scrap scrap:
                 currentScrapInfo.SetActive(true); 
                 scrapImage.sprite = inventory.GetObjectList()[0].GetObjectSprite();
@@ -141,6 +163,14 @@ public class UIInventory : MonoBehaviour
                 damageText.text = weapon.baseDamage.ToString() + "+" + weapon.bonusDamage.ToString();
                 durabilityText.text = weapon.currentDurability.ToString() + "/" + weapon.maxDurability.ToString();
                 weaponNameText.text = weapon.weaponName.ToString();
+                break;
+            case Backpack backpack:
+                backpackDurabilityText.text = backpack.currentDurability.ToString() + "/" + backpack.maxDurability.ToString();
+                backpackNameText.text = backpack.backpackName.ToString();
+                break;
+            case Armor armor:
+                armorDurabilityText.text = armor.currentDurability.ToString() + "/" + armor.maxDurability.ToString();
+                //weaponNameText.text = armor.armorName.ToString();
                 break;
             case Scrap scrap:
                 sparePartsNameText.text = scrap.scrapName.ToString();

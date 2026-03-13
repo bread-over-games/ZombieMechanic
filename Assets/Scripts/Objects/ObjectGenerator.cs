@@ -9,7 +9,7 @@ public class ObjectGenerator : MonoBehaviour
 
     private void Start()
     {
-        //GenerateFirstWeapon();
+        GenerateFirstWeapon();
         GenerateFirsBackpack();
     }
 

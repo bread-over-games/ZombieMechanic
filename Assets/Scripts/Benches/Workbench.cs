@@ -7,7 +7,6 @@ public class Workbench : Bench, IInteractable
     [SerializeField] private int repairSalvageCost;
     [SerializeField] private int repairValue;    
 
-    private Weapon currentWeapon; // refactor to Object
     private Coroutine repairCoroutine;
 
     public void Awake()
@@ -19,19 +18,19 @@ public class Workbench : Bench, IInteractable
 
     private void OnEnable()
     {
-        Inventory.OnObjectReceive += AssignCurrentWeapon;
+        Inventory.OnObjectReceive += AssignCurrentObject;
     }
 
     private void OnDisable()
     {
-        Inventory.OnObjectReceive -= AssignCurrentWeapon;
+        Inventory.OnObjectReceive -= AssignCurrentObject;
     }
 
-    private void AssignCurrentWeapon(Inventory.InventoryOfType invOfType, Object obj)
+    private void AssignCurrentObject(Inventory.InventoryOfType invOfType, Object obj)
     {
-        if (invOfType == Inventory.InventoryOfType.Workbench && obj is Weapon weapon)
+        if (invOfType == Inventory.InventoryOfType.Workbench)
         {
-            currentWeapon = weapon; 
+            currentObject = obj; 
         }
     }
 
@@ -39,7 +38,7 @@ public class Workbench : Bench, IInteractable
     {        
         if (ResourceController.Instance.CanRepair(repairSalvageCost))
         {
-            if (currentWeapon.currentDurability < currentWeapon.maxDurability)
+            if (currentObject.currentDurability < currentObject.maxDurability)
             {
                 repairCoroutine = StartCoroutine(DoRepair());
             }            
@@ -48,11 +47,11 @@ public class Workbench : Bench, IInteractable
 
     IEnumerator DoRepair()
     {
-        while (currentWeapon.currentDurability < currentWeapon.maxDurability)
+        while (currentObject.currentDurability < currentObject.maxDurability)
         {
             yield return new WaitForSeconds(repairInterval);
             ResourceController.Instance.ChangeSalvageAmount(-repairSalvageCost);
-            currentWeapon.RepairWeapon(repairValue);
+            currentObject.RepairObject(repairValue);
 
             if (!ResourceController.Instance.CanRepair(repairSalvageCost))
             {

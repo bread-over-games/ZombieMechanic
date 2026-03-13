@@ -14,7 +14,7 @@ public class ObjectDisplay : MonoBehaviour
         Inventory.OnObjectReceive += DisplayCurrentObject;
         Inventory.OnObjectSend += DestroyCurrentObject;
         Scrap.OnScrapDestroyed += DestroyMyObject;
-        Weapon.OnWeaponDestroyed += DestroyMyObject;
+        Object.OnObjectDestroyed += DestroyMyObject;
     }
 
     public void StartInteractionPrimary()
@@ -22,7 +22,7 @@ public class ObjectDisplay : MonoBehaviour
         Inventory.OnObjectReceive -= DisplayCurrentObject;
         Inventory.OnObjectSend -= DestroyCurrentObject;
         Scrap.OnScrapDestroyed -= DestroyMyObject;
-        Weapon.OnWeaponDestroyed -= DestroyMyObject;
+        Object.OnObjectDestroyed -= DestroyMyObject;
     }
 
     private void DisplayCurrentObject(Inventory.InventoryOfType inventoryOfType, Object obj)

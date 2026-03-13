@@ -17,10 +17,8 @@ public class MissionController : MonoBehaviour
     }
 
     private void Update()
-    {
-        // Tick all active missions
-        // Iterate backwards so we can safely remove during the loop
-        for (int i = activeMissions.Count - 1; i >= 0; i--)
+    {        
+        for (int i = activeMissions.Count - 1; i >= 0; i--) // tick all active missions
         {
             Mission mission = activeMissions[i];
             mission.Tick(Time.deltaTime);

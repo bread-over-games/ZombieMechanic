@@ -48,7 +48,7 @@ public class Mission
 
     private void ApplyWearToLoadout()
     {
-        if (equippedWeapon.DamageWeapon(5))
+        if (equippedWeapon.DamageObject(5))
         {
             Debug.Log(equippedWeapon.weaponName + " destroyed on a mission");            
         }

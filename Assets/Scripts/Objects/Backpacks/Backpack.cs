@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using static Weapon;
 
 public class Backpack : Object
 {
@@ -9,14 +8,8 @@ public class Backpack : Object
         SmallBackpack
     }
 
-    public static Action OnBackpackRepair; // called when weapon is repaired
-    public static Action OnBackpackDamage;
-    public static Action<Inventory> OnBackpackDestroyed;
-
     public BackpackType backpackType;
     public string backpackName;
-    public int maxDurability;
-    public int currentDurability;
 
     public override Sprite GetObjectSprite()
     {
@@ -57,10 +50,10 @@ public class Backpack : Object
         }
     }
 
-    public bool DamageBackpack(int decayAmount) // returns true when weapon is destroyed
+    public override bool DamageObject(int decayAmount) // returns true when weapon is destroyed
     {
         currentDurability -= decayAmount;
-        OnBackpackDamage?.Invoke();        
+        OnObjectDamage?.Invoke();        
 
         if (currentDurability <= 0)
         {
@@ -73,13 +66,13 @@ public class Backpack : Object
     public override void DestroyObject()
     {
         inInventory.RemoveObject(this);
-        OnBackpackDestroyed?.Invoke(inInventory);
+        OnObjectDestroyed?.Invoke(inInventory);
         Debug.Log("Backpack was destroyed in " + inInventory.ToString());
     }
 
-    public void RepairBackpack(int repairAmount)
+    public override void RepairObject(int repairAmount)
     {
         currentDurability += repairAmount;
-        OnBackpackRepair?.Invoke();
+        OnObjectRepair?.Invoke();
     }
 }

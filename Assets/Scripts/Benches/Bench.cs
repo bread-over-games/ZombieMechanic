@@ -20,7 +20,7 @@ public class Bench : MonoBehaviour, IInteractable
     [SerializeField] private string interactableName;
     protected List<System.Type> acceptedTypes = new List<System.Type>();
 
-    private Weapon currentObject;
+    public Object currentObject;
 
     public void StartInteractionPrimary()
     {
