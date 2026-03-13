@@ -7,12 +7,14 @@ public class Workbench : Bench, IInteractable
     [SerializeField] private int repairSalvageCost;
     [SerializeField] private int repairValue;    
 
-    private Weapon currentWeapon;
+    private Weapon currentWeapon; // refactor to Object
     private Coroutine repairCoroutine;
 
     public void Awake()
     {
         acceptedTypes.Add(typeof(Weapon));
+        acceptedTypes.Add(typeof(Backpack));
+        acceptedTypes.Add(typeof(Armor));
     }
 
     private void OnEnable()

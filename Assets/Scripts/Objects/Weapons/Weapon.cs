@@ -21,8 +21,6 @@ public class Weapon : Object
     public int bonusDamage;
     public int maxDurability;
     public int currentDurability;
-    public float timeAddedToOutside;
-    public float timeToSpendOutside; // how long a weapon should be outside, decided when leaving Armory
 
     public override Sprite GetObjectSprite()
     {
@@ -83,7 +81,6 @@ public class Weapon : Object
     {
         currentDurability -= decayAmount;
         OnWeaponDamage?.Invoke();
-        Debug.Log(currentDurability);
 
         if (currentDurability <= 0)
         {

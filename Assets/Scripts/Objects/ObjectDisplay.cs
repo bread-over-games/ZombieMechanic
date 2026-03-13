@@ -45,6 +45,9 @@ public class ObjectDisplay : MonoBehaviour
             case Weapon weapon:
                 currentObject = WeaponWorld.SpawnWeaponWorld(weaponSpawnPivot.position, weapon, weaponSpawnPivot);
                 break;
+            case Backpack backpack:
+                currentObject = BackpackWorld.SpawnBackpackWorld(weaponSpawnPivot.position, backpack, weaponSpawnPivot);
+                break;
             case Scrap scrap:
                 currentObject = ScrapWorld.SpawnScrapWorld(weaponSpawnPivot.position, scrap, weaponSpawnPivot);
                 break;

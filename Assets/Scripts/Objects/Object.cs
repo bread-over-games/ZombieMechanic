@@ -19,6 +19,4 @@ public abstract class Object : MonoBehaviour
     public abstract void SetValues(); //when creating new object
     public abstract void LoadValues(Object existingObject); // when object already exists
     public abstract void DestroyObject();
-
-
 }

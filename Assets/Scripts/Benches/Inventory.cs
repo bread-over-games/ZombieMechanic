@@ -52,6 +52,10 @@ public class Inventory : MonoBehaviour
                 weapon.LoadValues(weapon);
                 OnObjectReceive?.Invoke(inventoryOfType, weapon);
                 break;
+            case Backpack backpack:
+                backpack.LoadValues(backpack);
+                OnObjectReceive?.Invoke(inventoryOfType, backpack);
+                break;
             case Scrap scrap:
                 scrap.LoadValues(scrap);
                 OnObjectReceive?.Invoke(inventoryOfType, scrap);
@@ -75,7 +79,7 @@ public class Inventory : MonoBehaviour
         } 
     }
 
-    public void SendObjectOnMission()
+    public void SendObjectOnMission() // this needs huge refactor
     {
         Object objToSend = objectList[0];
         objectList[0].ClearOwnerInventory();

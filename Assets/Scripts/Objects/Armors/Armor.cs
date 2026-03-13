@@ -8,7 +8,7 @@ public class Armor : Object
     }
     public override GameObject GetObjectGameObject()
     {
-        return null; 
+        return null;
     }
 
     public override void SetValues() //when creating new object

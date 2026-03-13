@@ -105,6 +105,7 @@ public class UIArmory : MonoBehaviour
         if (armory.storedWeapon is Weapon weapon)
         {
             currentWeaponInfo.SetActive(true);
+            weaponImage.sprite = weapon.GetObjectSprite();
             RefreshInventoryValues();
         }
         else
@@ -115,6 +116,7 @@ public class UIArmory : MonoBehaviour
         if (armory.storedBackpack is Backpack backpack)
         {
             currentBackpackInfo.SetActive(true);
+            backpackImage.sprite = backpack.GetObjectSprite();
             RefreshInventoryValues();
         }
         else
@@ -140,7 +142,8 @@ public class UIArmory : MonoBehaviour
 
         if (armory.storedBackpack is Backpack backpack)
         {
-
+            backpackDurabilityText.text = backpack.currentDurability.ToString() + "/" + backpack.maxDurability.ToString();  
+            backpackNameText.text = backpack.backpackName.ToString();
         }
     }
 }

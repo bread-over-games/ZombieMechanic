@@ -32,7 +32,7 @@ public class Armory : Bench, IInteractable
             return;
         }
         
-        MissionController.Instance.SendMission(storedWeapon, this);
+        MissionController.Instance.SendMission(storedWeapon, storedBackpack, storedArmor, this);
         inventory.SendObjectOnMission();
     }
 
