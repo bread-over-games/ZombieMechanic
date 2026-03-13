@@ -54,7 +54,7 @@ public class ObjectDisplay : MonoBehaviour
         }
     }
 
-    public void DestroyCurrentObject(Inventory.InventoryOfType invOfType)
+    public void DestroyCurrentObject(Inventory.InventoryOfType invOfType, Object obj)
     {
         if (inventory.GetInventoryOfType() != invOfType)
         { 
@@ -77,7 +77,7 @@ public class ObjectDisplay : MonoBehaviour
     {
         if (inventory.GetInventoryOfType() == invOfType.GetInventoryOfType())
         {
-            DestroyCurrentObject(invOfType.GetInventoryOfType());
+            DestroyCurrentObject(invOfType.GetInventoryOfType(), null);
         }
     }
 }

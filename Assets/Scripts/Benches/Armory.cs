@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class Armory : Bench, IInteractable
 {
-    public Weapon storedWeapon;
     public Armor storedArmor;
     public Backpack storedBackpack;
+    public Weapon storedWeapon;
 
     public void Awake()
     {
@@ -16,11 +16,13 @@ public class Armory : Bench, IInteractable
     private void OnEnable()
     {
         Inventory.OnObjectReceive += AssignCurrentObject;
-    }
+        Inventory.OnObjectSend += RemoveCurrentObject;
+    }    
 
     private void OnDisable()
     {
         Inventory.OnObjectReceive -= AssignCurrentObject;
+        Inventory.OnObjectSend += RemoveCurrentObject;
     }
 
     public override void StartInteractionSecondary() // sending on mission
@@ -59,6 +61,29 @@ public class Armory : Bench, IInteractable
         if (obj is Backpack backpack)
         {
             storedBackpack = backpack;
+        }
+    }
+
+    private void RemoveCurrentObject(Inventory.InventoryOfType invOfType, Object obj)
+    {
+        if (invOfType != Inventory.InventoryOfType.Armory)
+        {
+            return;
+        }
+
+        if (obj is Weapon weapon)
+        {
+            storedWeapon = null;
+        }
+
+        if (obj is Armor armor)
+        {
+            storedArmor = null;
+        }
+
+        if (obj is Backpack backpack)
+        {
+            storedBackpack = null;
         }
     }
 }

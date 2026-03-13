@@ -93,32 +93,54 @@ public class UIArmory : MonoBehaviour
         currentArmorInfo.SetActive(false);
         currentBackpackInfo.SetActive(false);
 
-        if (armory.storedArmor == null)
-        {
-            armorEmptyMessage.SetActive(true);
-        } else
+        if (armory.storedArmor is Armor armor)
         {
             currentArmorInfo.SetActive(true);
+            RefreshInventoryValues();
+        } else
+        {
+            armorEmptyMessage.SetActive(true);
         }
 
-        if (armory.storedWeapon == null)
+        if (armory.storedWeapon is Weapon weapon)
+        {
+            currentWeaponInfo.SetActive(true);
+            RefreshInventoryValues();
+        }
+        else
         {
             weaponEmptyMessage.SetActive(true);
         }
-        else
-        {
-            currentWeaponInfo.SetActive(true);
-        }
 
-        if (armory.storedBackpack == null)
-        {
-            backpackEmptyMessage.SetActive(true);
-        }
-        else
+        if (armory.storedBackpack is Backpack backpack)
         {
             currentBackpackInfo.SetActive(true);
+            RefreshInventoryValues();
         }
+        else
+        {
+            backpackEmptyMessage.SetActive(true);
+        }        
     }
 
+    private void RefreshInventoryValues()
+    {
+        if (inventory == null || inventory.GetObjectList().Count == 0) return;
 
+        if (armory.storedArmor is Armor armor)
+        {
+            
+        }
+
+        if (armory.storedWeapon is Weapon weapon)
+        {
+            weaponDurabilityText.text = weapon.currentDurability.ToString() + "/" + weapon.maxDurability.ToString();
+            weaponNameText.text = weapon.weaponName.ToString();
+        }
+
+        if (armory.storedBackpack is Backpack backpack)
+        {
+
+        }
+    }
 }

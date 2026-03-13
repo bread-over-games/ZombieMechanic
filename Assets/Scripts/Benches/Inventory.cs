@@ -22,7 +22,7 @@ public class Inventory : MonoBehaviour
     private List<Object> objectList = new List<Object>();
 
     public static Action<InventoryOfType, Object> OnObjectReceive; // whben Inventory receives wepaon
-    public static Action<InventoryOfType> OnObjectSend; // when inventory sends weapon
+    public static Action<InventoryOfType, Object> OnObjectSend; // when inventory sends weapon
     public static Action OnInventoryChange; // when something changes in inventory
     [SerializeField] private int capacity;
 
@@ -59,8 +59,7 @@ public class Inventory : MonoBehaviour
             /*case Medicine medicine:
                 medicine.LoadValues(medicine);
                 break;*/
-        }
-
+        }        
         OnInventoryChange?.Invoke();
     }
 
@@ -69,19 +68,19 @@ public class Inventory : MonoBehaviour
         if (objectList.Count > 0)
         {
             Object objToSend = objectList[0];
-            RemoveObject(objectList[0]);
-            OnObjectSend?.Invoke(inventoryOfType);
+            objectList.Remove(objectList[0]);
+            OnObjectSend?.Invoke(inventoryOfType, objToSend);
 
             target.ReceiveObject(objToSend);
-            OnInventoryChange?.Invoke();
         } 
     }
 
     public void SendObjectOnMission()
     {
+        Object objToSend = objectList[0];
         objectList[0].ClearOwnerInventory();
         RemoveObject(objectList[0]);        
-        OnObjectSend?.Invoke(inventoryOfType);
+        OnObjectSend?.Invoke(inventoryOfType, objToSend);
         OnInventoryChange?.Invoke();
     }
 
