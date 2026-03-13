@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92dd8056b76f58b429e15a71bcb42a3a, type: 3}
+  m_Name: SmallBackpack
+  m_EditorClassIdentifier: 
+  backpackVisual: {fileID: 1256411281, guid: cd7885a9a289e194c99eb0d5959d6b04, type: 3}
+  backpackVisualPrefab: {fileID: 8733942901714294039, guid: ddd500db9ccdcfd46863525b190f9529, type: 3}
+  backpackName: Small backpack
+  maxDurability: 30

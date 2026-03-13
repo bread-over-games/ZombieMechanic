@@ -11,18 +11,10 @@ public class Weapon : Object
         Crowbar
     }    
 
-    public static Action OnWeaponRepair; // called when weapon is repaired
-    public static Action OnWeaponDamage;
-    public static Action<Inventory> OnWeaponDestroyed;
-
     public WeaponType weaponType;
     public string weaponName;
     public int baseDamage;
     public int bonusDamage;
-    public int maxDurability;
-    public int currentDurability;
-    public float timeAddedToOutside;
-    public float timeToSpendOutside; // how long a weapon should be outside, decided when leaving Armory
 
     public override Sprite GetObjectSprite()
     {
@@ -79,11 +71,10 @@ public class Weapon : Object
         }        
     }
 
-    public bool DamageWeapon(int decayAmount) // returns true when weapon is destroyed
+    public override bool DamageObject(int decayAmount) // returns true when weapon is destroyed
     {
         currentDurability -= decayAmount;
-        OnWeaponDamage?.Invoke();
-        Debug.Log(currentDurability);
+        OnObjectDamage?.Invoke();
 
         if (currentDurability <= 0)
         {
@@ -96,13 +87,13 @@ public class Weapon : Object
     public override void DestroyObject()
     {
         inInventory.RemoveObject(this);
-        OnWeaponDestroyed?.Invoke(inInventory);
+        OnObjectDestroyed?.Invoke(inInventory);
         Debug.Log("Weapon was destroyed in " + inInventory.ToString());
     }
 
-    public void RepairWeapon(int repairAmount)
+    public override void RepairObject(int repairAmount)
     {        
         currentDurability += repairAmount;
-        OnWeaponRepair?.Invoke();
+        OnObjectRepair?.Invoke();
     }
 }

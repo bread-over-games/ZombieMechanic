@@ -17,10 +17,8 @@ public class MissionController : MonoBehaviour
     }
 
     private void Update()
-    {
-        // Tick all active missions
-        // Iterate backwards so we can safely remove during the loop
-        for (int i = activeMissions.Count - 1; i >= 0; i--)
+    {        
+        for (int i = activeMissions.Count - 1; i >= 0; i--) // tick all active missions
         {
             Mission mission = activeMissions[i];
             mission.Tick(Time.deltaTime);
@@ -38,9 +36,9 @@ public class MissionController : MonoBehaviour
         activeMissions.RemoveAt(index); // deletes mission when it's done
     }
 
-    public void SendMission (Weapon weaponInArmory, Armory survivorArmory)
+    public void SendMission (Weapon weaponInArmory, Backpack backpackInArmory, Armor armorInArmory, Armory survivorArmory)
     {
-        Mission mission = new Mission(weaponInArmory);
+        Mission mission = new Mission(weaponInArmory, backpackInArmory, armorInArmory);
 
         activeMissions.Add(mission); 
     }

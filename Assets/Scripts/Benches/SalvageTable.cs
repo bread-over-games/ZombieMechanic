@@ -10,29 +10,47 @@ public class SalvageTable : Bench
     [SerializeField] private int salvagingValue; // how much salvage is looted per tick
 
     private Scrap currentScrap;
-    public Weapon currentWeapon;
     private Coroutine lootingCoroutine;
+
+    private void OnEnable()
+    {
+        Inventory.OnObjectReceive += AssignCurrentObject;
+    }
+
+    private void OnDisable()
+    {
+        Inventory.OnObjectReceive -= AssignCurrentObject;
+    }
 
     public void Awake()
     {
         acceptedTypes.Add(typeof(Weapon));
+        acceptedTypes.Add(typeof(Backpack));
+        acceptedTypes.Add(typeof(Armor));
         acceptedTypes.Add(typeof(Scrap));
+    }
+
+    private void AssignCurrentObject(Inventory.InventoryOfType invOfType, Object obj)
+    {
+        if (invOfType == Inventory.InventoryOfType.SalvageTable)
+        {
+            currentObject = obj;
+        }
     }
 
     IEnumerator DoSalvage()
     {
         switch (inventory.GetObjectList()[0])
         {
-            case Weapon weapon:
-                currentWeapon = weapon;
+            default:
 
-                while (!currentWeapon.DamageWeapon(2))
+                while (!currentObject.DamageObject(2))
                 {
                     yield return new WaitForSeconds(salvagingInterval);
                     ResourceController.Instance.ChangeSalvageAmount(salvagingValue);
                 }
 
-                currentWeapon.DestroyObject();
+                currentObject.DestroyObject();
 
                 break;
             case Scrap scrap:

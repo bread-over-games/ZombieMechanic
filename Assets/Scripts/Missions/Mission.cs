@@ -7,21 +7,22 @@ public class Mission
     public Survivor survivor; // current survivor on the mission    
     public bool isComplete = false;
     public Weapon equippedWeapon;
-    //public Armory equippedArmor;
-    //public Backpack equippedBackpack;
+    public Armor equippedArmor;
+    public Backpack equippedBackpack;
 
     public float missionDuration;
     public float elapsedTime;
 
-    public Mission(/*Survivor missionSurvivor, */Weapon weaponToEquip)
+    public Mission(/*Survivor missionSurvivor, */Weapon weaponToEquip, Backpack backpackToEquip, Armor armorToEquip)
     {
         // survivor = missionSurvivor;
         equippedWeapon = weaponToEquip;
+        equippedBackpack = backpackToEquip;
+        equippedArmor = armorToEquip;   
+
         elapsedTime = 0f;
 
         missionDuration = 10f; // for now, no calculation
-
-        Debug.Log("Mission created with weapon " + equippedWeapon.weaponName);
     }
 
     public void ResolveMission()
@@ -47,7 +48,7 @@ public class Mission
 
     private void ApplyWearToLoadout()
     {
-        if (equippedWeapon.DamageWeapon(5))
+        if (equippedWeapon.DamageObject(5))
         {
             Debug.Log(equippedWeapon.weaponName + " destroyed on a mission");            
         }

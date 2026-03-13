@@ -14,7 +14,7 @@ public class ObjectDisplay : MonoBehaviour
         Inventory.OnObjectReceive += DisplayCurrentObject;
         Inventory.OnObjectSend += DestroyCurrentObject;
         Scrap.OnScrapDestroyed += DestroyMyObject;
-        Weapon.OnWeaponDestroyed += DestroyMyObject;
+        Object.OnObjectDestroyed += DestroyMyObject;
     }
 
     public void StartInteractionPrimary()
@@ -22,7 +22,7 @@ public class ObjectDisplay : MonoBehaviour
         Inventory.OnObjectReceive -= DisplayCurrentObject;
         Inventory.OnObjectSend -= DestroyCurrentObject;
         Scrap.OnScrapDestroyed -= DestroyMyObject;
-        Weapon.OnWeaponDestroyed -= DestroyMyObject;
+        Object.OnObjectDestroyed -= DestroyMyObject;
     }
 
     private void DisplayCurrentObject(Inventory.InventoryOfType inventoryOfType, Object obj)
@@ -45,6 +45,9 @@ public class ObjectDisplay : MonoBehaviour
             case Weapon weapon:
                 currentObject = WeaponWorld.SpawnWeaponWorld(weaponSpawnPivot.position, weapon, weaponSpawnPivot);
                 break;
+            case Backpack backpack:
+                currentObject = BackpackWorld.SpawnBackpackWorld(weaponSpawnPivot.position, backpack, weaponSpawnPivot);
+                break;
             case Scrap scrap:
                 currentObject = ScrapWorld.SpawnScrapWorld(weaponSpawnPivot.position, scrap, weaponSpawnPivot);
                 break;
@@ -54,7 +57,7 @@ public class ObjectDisplay : MonoBehaviour
         }
     }
 
-    public void DestroyCurrentObject(Inventory.InventoryOfType invOfType)
+    public void DestroyCurrentObject(Inventory.InventoryOfType invOfType, Object obj)
     {
         if (inventory.GetInventoryOfType() != invOfType)
         { 
@@ -77,7 +80,7 @@ public class ObjectDisplay : MonoBehaviour
     {
         if (inventory.GetInventoryOfType() == invOfType.GetInventoryOfType())
         {
-            DestroyCurrentObject(invOfType.GetInventoryOfType());
+            DestroyCurrentObject(invOfType.GetInventoryOfType(), null);
         }
     }
 }

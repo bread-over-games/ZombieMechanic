@@ -5,11 +5,22 @@ using System.Collections.Generic;
 
 public class Bench : MonoBehaviour, IInteractable
 {
+    public enum BenchType
+    { 
+        Armory,
+        LootTable,
+        SalvageTable,
+        Table,
+        Workbench    
+    }
+
+    public BenchType benchType;
+
     [SerializeField] protected Inventory inventory;
     [SerializeField] private string interactableName;
     protected List<System.Type> acceptedTypes = new List<System.Type>();
 
-    private Weapon currentObject;
+    public Object currentObject;
 
     public void StartInteractionPrimary()
     {
@@ -17,6 +28,11 @@ public class Bench : MonoBehaviour, IInteractable
         {
             inventory.SendObject(InventoriesController.Instance.playerInventory);
         }
+    }
+
+    public BenchType GetBenchType()
+    {
+        return benchType;
     }
 
     public bool CanAcceptObject(Object objectToPlace)

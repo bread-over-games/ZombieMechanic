@@ -112,6 +112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de3d3073168ce0146a0406085df720af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  benchType: 3
   inventory: {fileID: 6063372649953347126}
   interactableName: Toolbox
 --- !u!114 &6063372649953347126

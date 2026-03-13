@@ -13,7 +13,19 @@ public class UIInventory : MonoBehaviour
     [SerializeField] private Image weaponImage;
     [SerializeField] private TMP_Text weaponNameText;
     [SerializeField] private TMP_Text damageText;
-    [SerializeField] private TMP_Text durabilityText;    
+    [SerializeField] private TMP_Text durabilityText;
+
+    [Header("Backpacks")]
+    [SerializeField] private GameObject currentBackpackInfo;
+    [SerializeField] private Image backpackImage;
+    [SerializeField] private TMP_Text backpackNameText;    
+    [SerializeField] private TMP_Text backpackDurabilityText;
+
+    [Header("Armors")]
+    [SerializeField] private GameObject currentArmorInfo;
+    [SerializeField] private Image armorImage;
+    [SerializeField] private TMP_Text armorNameText;
+    [SerializeField] private TMP_Text armorDurabilityText;
 
     [Header("Scraps")]
     [SerializeField] private GameObject currentScrapInfo;
@@ -23,7 +35,6 @@ public class UIInventory : MonoBehaviour
 
     [Header("Empty inventory messages")]
     [SerializeField] private GameObject workbenchEmptyMessage;
-    [SerializeField] private GameObject armoryEmptyMessage;
     [SerializeField] private GameObject loottableEmptyMessage;
 
     private void Start()
@@ -36,8 +47,8 @@ public class UIInventory : MonoBehaviour
         Inventory.OnInventoryChange += RefreshInventoryUI;        
         PlayerInteraction.OnInteractableApproached += ToggleSingleItemInventoryWindow;
         PlayerInteraction.OnInteractableLeft += ToggleSingleItemInventoryWindow;
-        Weapon.OnWeaponRepair += RefreshInventoryValues;
-        Weapon.OnWeaponDamage += RefreshInventoryValues;
+        Object.OnObjectRepair += RefreshInventoryValues;
+        Object.OnObjectDamage += RefreshInventoryValues;
         Scrap.OnScrapLooted += RefreshInventoryValues;
     }
 
@@ -46,13 +57,18 @@ public class UIInventory : MonoBehaviour
         Inventory.OnInventoryChange -= RefreshInventoryUI;        
         PlayerInteraction.OnInteractableApproached -= ToggleSingleItemInventoryWindow;
         PlayerInteraction.OnInteractableLeft -= ToggleSingleItemInventoryWindow;
-        Weapon.OnWeaponRepair -= RefreshInventoryValues;
-        Weapon.OnWeaponDamage -= RefreshInventoryValues;
+        Object.OnObjectRepair -= RefreshInventoryValues;
+        Object.OnObjectDamage -= RefreshInventoryValues;
         Scrap.OnScrapLooted -= RefreshInventoryValues;
     }
 
-    private void ToggleSingleItemInventoryWindow()
+    private void ToggleSingleItemInventoryWindow(Bench.BenchType benchType)
     {
+        if (benchType == Bench.BenchType.Armory)
+        {
+            return;
+        }
+
         if (singleItemInventoryWindow.activeSelf)
         {
             singleItemInventoryWindow.SetActive(false);
@@ -84,9 +100,10 @@ public class UIInventory : MonoBehaviour
         interactableName.text = inventory.gameObject.GetComponent<IInteractable>().GetName();
         workbenchEmptyMessage.SetActive(false);
         loottableEmptyMessage.SetActive(false);
-        armoryEmptyMessage.SetActive(false);
         
         currentWeaponInfo.SetActive(false);
+        currentArmorInfo.SetActive(false);  
+        currentBackpackInfo.SetActive(false);
         currentScrapInfo.SetActive(false);
 
         if (inventory.GetObjectList().Count > 0)
@@ -108,9 +125,6 @@ public class UIInventory : MonoBehaviour
             case Inventory.InventoryOfType.LootTable:
                 loottableEmptyMessage.SetActive(true);
                 break;
-            case Inventory.InventoryOfType.Armory:
-                armoryEmptyMessage.SetActive(true);
-                break;
         }
     }
 
@@ -121,6 +135,14 @@ public class UIInventory : MonoBehaviour
             case Weapon weapon:
                 currentWeaponInfo.SetActive(true);
                 weaponImage.sprite = inventory.GetObjectList()[0].GetObjectSprite();
+                break;
+            case Backpack backpack:
+                currentBackpackInfo.SetActive(true);
+                backpackImage.sprite = inventory.GetObjectList()[0].GetObjectSprite();
+                break;
+            case Armor armor:
+                currentArmorInfo.SetActive(true);
+                armorImage.sprite = inventory.GetObjectList()[0].GetObjectSprite();
                 break;
             case Scrap scrap:
                 currentScrapInfo.SetActive(true); 
@@ -141,6 +163,14 @@ public class UIInventory : MonoBehaviour
                 damageText.text = weapon.baseDamage.ToString() + "+" + weapon.bonusDamage.ToString();
                 durabilityText.text = weapon.currentDurability.ToString() + "/" + weapon.maxDurability.ToString();
                 weaponNameText.text = weapon.weaponName.ToString();
+                break;
+            case Backpack backpack:
+                backpackDurabilityText.text = backpack.currentDurability.ToString() + "/" + backpack.maxDurability.ToString();
+                backpackNameText.text = backpack.backpackName.ToString();
+                break;
+            case Armor armor:
+                armorDurabilityText.text = armor.currentDurability.ToString() + "/" + armor.maxDurability.ToString();
+                //weaponNameText.text = armor.armorName.ToString();
                 break;
             case Scrap scrap:
                 sparePartsNameText.text = scrap.scrapName.ToString();
