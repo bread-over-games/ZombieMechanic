@@ -56,6 +56,10 @@ public class Inventory : MonoBehaviour
                 backpack.LoadValues(backpack);
                 OnObjectReceive?.Invoke(inventoryOfType, backpack);
                 break;
+            case Armor armor:
+                armor.LoadValues(armor);
+                OnObjectReceive?.Invoke(inventoryOfType, armor);
+                break;
             case Scrap scrap:
                 scrap.LoadValues(scrap);
                 OnObjectReceive?.Invoke(inventoryOfType, scrap);
@@ -81,10 +85,13 @@ public class Inventory : MonoBehaviour
 
     public void SendObjectOnMission(Object objectToSendOnMission)
     {
-        objectToSendOnMission.ClearOwnerInventory();
-        RemoveObject(objectToSendOnMission);
-        OnObjectSend?.Invoke(inventoryOfType, objectToSendOnMission);
-        OnInventoryChange?.Invoke();
+        if (objectToSendOnMission is Object obj)
+        {
+            objectToSendOnMission.ClearOwnerInventory();
+            RemoveObject(objectToSendOnMission);
+            OnObjectSend?.Invoke(inventoryOfType, objectToSendOnMission);
+            OnInventoryChange?.Invoke();
+        }        
     }
 
     public int GetCapacity()

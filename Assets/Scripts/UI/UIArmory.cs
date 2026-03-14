@@ -96,6 +96,7 @@ public class UIArmory : MonoBehaviour
         if (armory.storedArmor is Armor armor)
         {
             currentArmorInfo.SetActive(true);
+            armorImage.sprite = armor.GetObjectSprite();
             RefreshInventoryValues();
         } else
         {
@@ -131,7 +132,8 @@ public class UIArmory : MonoBehaviour
 
         if (armory.storedArmor is Armor armor)
         {
-            
+            armorDurabilityText.text = armor.currentDurability.ToString() + "/" + armor.maxDurability.ToString();
+            armorNameText.text = armor.armorName.ToString();
         }
 
         if (armory.storedWeapon is Weapon weapon)

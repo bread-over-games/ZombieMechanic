@@ -46,7 +46,7 @@ public class ObjectDisplay : MonoBehaviour
     }
 
     private void DisplayCurrentObject(Inventory.InventoryOfType inventoryOfType, Object obj)
-    {
+    {        
         if (inventoryOfType != inventory.GetInventoryOfType())
         {
             return;
@@ -83,6 +83,7 @@ public class ObjectDisplay : MonoBehaviour
 
     private void DoObjectDisplay()
     {
+       
         switch (inventory.GetObjectList()[0])
         {
             case Weapon weapon:
