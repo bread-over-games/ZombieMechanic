@@ -5,12 +5,14 @@ public class ObjectGenerator : MonoBehaviour
     [SerializeField] private int generateWeaponChance; // a chance that weapon will be generated
     [SerializeField] private int generateScrapChance;
     [SerializeField] private int generateBackpackChance;
+    [SerializeField] private int generateArmorChance;
     [SerializeField] private int generateMedicineChance;
 
     private void Start()
     {
         GenerateFirstWeapon();
         GenerateFirsBackpack();
+        GenerateFirsArmor();
     }
 
     private void OnEnable()
@@ -35,6 +37,13 @@ public class ObjectGenerator : MonoBehaviour
         Backpack newBackpack = (new Backpack { backpackType = Backpack.BackpackType.SmallBackpack });
         newBackpack.SetValues();
         InventoriesController.Instance.lootTableInventory.ReceiveObject(newBackpack);
+    }
+
+    private void GenerateFirsArmor() // generates first backpack for tutorial purpose
+    {
+        Armor newArmor = (new Armor { armorType = Armor.ArmorType.BalisticVest });
+        newArmor.SetValues();
+        InventoriesController.Instance.lootTableInventory.ReceiveObject(newArmor);
     }
 
     private void GenerateFirstScrap() // generates first scrap for tutorial purpose
@@ -68,6 +77,14 @@ public class ObjectGenerator : MonoBehaviour
             newBackpack.SetValues();
             Debug.Log(newBackpack.backpackType.ToString());
             InventoriesController.Instance.lootTableInventory.ReceiveObject(newBackpack);
+        }
+
+        if (Random.Range(0, 100) < generateArmorChance)
+        {
+            Armor newArmor = (new Armor { armorType = Armor.ArmorType.BalisticVest });
+            newArmor.SetValues();
+            Debug.Log(newArmor.armorType.ToString());
+            InventoriesController.Instance.lootTableInventory.ReceiveObject(newArmor);
         }
     }
 }

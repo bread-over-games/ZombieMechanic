@@ -88,7 +88,6 @@ public class Weapon : Object
     {
         inInventory.RemoveObject(this);
         OnObjectDestroyed?.Invoke(inInventory);
-        Debug.Log("Weapon was destroyed in " + inInventory.ToString());
     }
 
     public override void RepairObject(int repairAmount)

@@ -68,9 +68,9 @@ public class ObjectDisplay : MonoBehaviour
                 case Backpack backpack:
                     currentObjects.Add(BackpackWorld.SpawnBackpackWorld(backpackSpawnPivot.position, backpack, backpackSpawnPivot));
                     break;
-                /*case Armor armor:
-                    currentObject = ArmorWorld.SpawnBackpackWorld(armorSpawnPivot.position, armor, armorSpawnPivot);
-                    break;*/
+                case Armor armor:
+                    currentObjects.Add(ArmorWorld.SpawnArmorWorld(armorSpawnPivot.position, armor, armorSpawnPivot));
+                    break;
                 case Scrap scrap:
                     currentObjects.Add(ScrapWorld.SpawnScrapWorld(weaponSpawnPivot.position, scrap, weaponSpawnPivot));
                     break;
@@ -91,9 +91,9 @@ public class ObjectDisplay : MonoBehaviour
             case Backpack backpack:
                 currentObjects.Add(BackpackWorld.SpawnBackpackWorld(weaponSpawnPivot.position, backpack, weaponSpawnPivot));
                 break;
-            /*case Armor armor:
-                currentObject = ArmorWorld.SpawnBackpackWorld(armorSpawnPivot.position, armor, armorSpawnPivot);
-                break;*/
+            case Armor armor:
+                currentObjects.Add(ArmorWorld.SpawnArmorWorld(weaponSpawnPivot.position, armor, weaponSpawnPivot));                
+                break;
             case Scrap scrap:
                 currentObjects.Add(ScrapWorld.SpawnScrapWorld(weaponSpawnPivot.position, scrap, weaponSpawnPivot));
                 break;
