@@ -19,7 +19,6 @@ public class ObjectDisplay : MonoBehaviour
     {
         Inventory.OnObjectReceive += DisplayCurrentObject;
         Inventory.OnObjectSend += DestroyCurrentObject;
-        Scrap.OnScrapDestroyed += DestroyMyObject;
         Object.OnObjectDestroyed += DestroyMyObject;
     }
 
@@ -27,7 +26,6 @@ public class ObjectDisplay : MonoBehaviour
     {
         Inventory.OnObjectReceive -= DisplayCurrentObject;
         Inventory.OnObjectSend -= DestroyCurrentObject;
-        Scrap.OnScrapDestroyed -= DestroyMyObject;
         Object.OnObjectDestroyed -= DestroyMyObject;
     }
 

@@ -53,6 +53,16 @@ public class Mission
         {
             Debug.Log(equippedWeapon.weaponName + " destroyed on a mission");            
         }
+
+        if (equippedBackpack.DamageObject(5))
+        {
+            Debug.Log(equippedBackpack.backpackName + " destroyed on a mission");
+        }
+
+        /*if (equippedArmor.DamageObject(5))
+        {
+            Debug.Log(equippedArmor.armorName + " destroyed on a mission");
+        }*/
     }
 
     public void Tick(float deltaTime)

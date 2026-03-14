@@ -3,9 +3,6 @@ using System;
 
 public class Scrap : Object
 {
-    public static Action<Inventory> OnScrapDestroyed;
-    public static Action OnScrapLooted;
-    public int salvageAmount;
     public string scrapName;
 
     public enum ScrapType
@@ -36,7 +33,7 @@ public class Scrap : Object
         switch (scrapType)
         {
             case ScrapType.SparePartsBox:
-                salvageAmount = ScrapAssets.Instance.sparePartsBoxSO.salvageAmount;
+                currentDurability = ScrapAssets.Instance.sparePartsBoxSO.salvageAmount;
                 scrapName = ScrapAssets.Instance.sparePartsBoxSO.scrapName;
                 break;
         }
@@ -45,38 +42,16 @@ public class Scrap : Object
     {
         if (existingObject is Scrap existingScrap)
         {
-            salvageAmount = existingScrap.salvageAmount;
+            currentDurability = existingScrap.currentDurability;
             scrapName = existingScrap.scrapName;
         }
     }
 
-    public void LootSalvage(int amount, Inventory currentlyInInventory)
-    {
-        salvageAmount -= amount;
-        OnScrapLooted?.Invoke();
-
-        if (salvageAmount <= 0)
-        {
-            Destroy(currentlyInInventory);
-        }
-    }
-
-    public bool CanLootSalvage()
-    {
-        if (salvageAmount > 0)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
 
     public override void DestroyObject() // should be destroyed when salvage amount raches zero
     {
         inInventory.RemoveObject(this);
-        OnScrapDestroyed?.Invoke(inInventory);        
+        OnObjectDestroyed?.Invoke(inInventory);        
     }
 
     public override void RepairObject(int repairAmount)
@@ -86,7 +61,7 @@ public class Scrap : Object
     public override bool DamageObject(int decayAmount) // returns true when weapon is destroyed
     {
         currentDurability -= decayAmount;
-        //OnBackpackDamage?.Invoke();
+        OnObjectDamage?.Invoke();
 
         if (currentDurability <= 0)
         {
