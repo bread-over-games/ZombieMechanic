@@ -24,7 +24,7 @@ public class Inventory : MonoBehaviour
     public static Action<InventoryOfType, Object> OnObjectReceive; // whben Inventory receives wepaon
     public static Action<InventoryOfType, Object> OnObjectSend; // when inventory sends weapon
     public static Action OnInventoryChange; // when something changes in inventory
-    [SerializeField] private int capacity;
+    [SerializeField] public int capacity;
 
     public void RemoveObject(Object obj)
     {
@@ -56,6 +56,10 @@ public class Inventory : MonoBehaviour
                 backpack.LoadValues(backpack);
                 OnObjectReceive?.Invoke(inventoryOfType, backpack);
                 break;
+            case Armor armor:
+                armor.LoadValues(armor);
+                OnObjectReceive?.Invoke(inventoryOfType, armor);
+                break;
             case Scrap scrap:
                 scrap.LoadValues(scrap);
                 OnObjectReceive?.Invoke(inventoryOfType, scrap);
@@ -79,13 +83,15 @@ public class Inventory : MonoBehaviour
         } 
     }
 
-    public void SendObjectOnMission() // this needs huge refactor
+    public void SendObjectOnMission(Object objectToSendOnMission)
     {
-        Object objToSend = objectList[0];
-        objectList[0].ClearOwnerInventory();
-        RemoveObject(objectList[0]);        
-        OnObjectSend?.Invoke(inventoryOfType, objToSend);
-        OnInventoryChange?.Invoke();
+        if (objectToSendOnMission is Object obj)
+        {
+            objectToSendOnMission.ClearOwnerInventory();
+            RemoveObject(objectToSendOnMission);
+            OnObjectSend?.Invoke(inventoryOfType, objectToSendOnMission);
+            OnInventoryChange?.Invoke();
+        }        
     }
 
     public int GetCapacity()

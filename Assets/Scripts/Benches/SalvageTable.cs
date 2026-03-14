@@ -53,23 +53,6 @@ public class SalvageTable : Bench
                 currentObject.DestroyObject();
 
                 break;
-            case Scrap scrap:
-                currentScrap = scrap;
-
-                while (currentScrap.salvageAmount > 0)
-                {
-                    yield return new WaitForSeconds(salvagingInterval);
-                    currentScrap.LootSalvage(salvagingValue, inventory);
-                    ResourceController.Instance.ChangeSalvageAmount(salvagingValue);
-
-                    if (!currentScrap.CanLootSalvage())
-                    {
-                        EndInteractionSecondary();
-                        break;
-                    }
-                }
-
-                break;
         }        
     }
 

@@ -49,7 +49,6 @@ public class UIInventory : MonoBehaviour
         PlayerInteraction.OnInteractableLeft += ToggleSingleItemInventoryWindow;
         Object.OnObjectRepair += RefreshInventoryValues;
         Object.OnObjectDamage += RefreshInventoryValues;
-        Scrap.OnScrapLooted += RefreshInventoryValues;
     }
 
     private void OnDisable()
@@ -59,7 +58,6 @@ public class UIInventory : MonoBehaviour
         PlayerInteraction.OnInteractableLeft -= ToggleSingleItemInventoryWindow;
         Object.OnObjectRepair -= RefreshInventoryValues;
         Object.OnObjectDamage -= RefreshInventoryValues;
-        Scrap.OnScrapLooted -= RefreshInventoryValues;
     }
 
     private void ToggleSingleItemInventoryWindow(Bench.BenchType benchType)
@@ -174,7 +172,7 @@ public class UIInventory : MonoBehaviour
                 break;
             case Scrap scrap:
                 sparePartsNameText.text = scrap.scrapName.ToString();
-                sparePartsText.text = scrap.salvageAmount.ToString();
+                sparePartsText.text = scrap.currentDurability.ToString();
                 break;
                 /*case Medicine medicine:
                     medicine.LoadValues(medicine);

@@ -35,22 +35,57 @@ public class Mission
 
     private void ReturnSurvivorLoadout()
     {
-        if (equippedWeapon.currentDurability <= 0)
+        if (equippedWeapon is Weapon weapon && equippedWeapon.currentDurability <= 0)
         {
             equippedWeapon = null;
         }
         else
         {
             InventoriesController.Instance.armoryInventory.ReceiveObject(equippedWeapon);
+
+        }
+
+        if (equippedArmor is Armor armor)
+        {
+            if (equippedArmor.currentDurability <= 0)
+            {
+                equippedArmor = null;
+            }
+            else
+            {
+                InventoriesController.Instance.armoryInventory.ReceiveObject(equippedArmor);
+            }
+        }
+
+        if (equippedBackpack is Backpack backpack)
+        {
+            if (equippedBackpack.currentDurability <= 0)
+            {
+                equippedBackpack = null;
+            }
+            else
+            {
+                InventoriesController.Instance.armoryInventory.ReceiveObject(equippedBackpack);
+            }
         }
     }
 
 
     private void ApplyWearToLoadout()
     {
-        if (equippedWeapon.DamageObject(5))
+        if (equippedWeapon is Weapon weapon && equippedWeapon.DamageObject(5))
         {
             Debug.Log(equippedWeapon.weaponName + " destroyed on a mission");            
+        }
+
+        if (equippedBackpack is Backpack backpack && equippedBackpack.DamageObject(5))
+        {
+            Debug.Log(equippedBackpack.backpackName + " destroyed on a mission");
+        }
+
+        if (equippedArmor is Armor armor && equippedArmor.DamageObject(5))
+        {
+            Debug.Log(equippedArmor.armorName + " destroyed on a mission");
         }
     }
 

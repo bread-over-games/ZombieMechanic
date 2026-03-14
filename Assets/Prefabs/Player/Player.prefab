@@ -44,8 +44,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e63a5bab908a0440b4a8d8e0a136352, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  displaySlots: 1
   inventory: {fileID: 5303107533594216243}
   weaponSpawnPivot: {fileID: 2155308607333986306}
+  backpackSpawnPivot: {fileID: 2155308607333986306}
+  armorSpawnPivot: {fileID: 2155308607333986306}
 --- !u!1 &1960706057328998882
 GameObject:
   m_ObjectHideFlags: 0
