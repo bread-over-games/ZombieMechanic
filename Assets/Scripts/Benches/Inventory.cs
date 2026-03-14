@@ -79,12 +79,11 @@ public class Inventory : MonoBehaviour
         } 
     }
 
-    public void SendObjectOnMission() // this needs huge refactor
+    public void SendObjectOnMission(Object objectToSendOnMission)
     {
-        Object objToSend = objectList[0];
-        objectList[0].ClearOwnerInventory();
-        RemoveObject(objectList[0]);        
-        OnObjectSend?.Invoke(inventoryOfType, objToSend);
+        objectToSendOnMission.ClearOwnerInventory();
+        RemoveObject(objectToSendOnMission);
+        OnObjectSend?.Invoke(inventoryOfType, objectToSendOnMission);
         OnInventoryChange?.Invoke();
     }
 

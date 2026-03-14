@@ -42,6 +42,7 @@ public class Mission
         else
         {
             InventoriesController.Instance.armoryInventory.ReceiveObject(equippedWeapon);
+            InventoriesController.Instance.armoryInventory.ReceiveObject(equippedBackpack);
         }
     }
 

@@ -31,9 +31,13 @@ public class Armory : Bench, IInteractable
         { 
             return;
         }
-        
+
+
         MissionController.Instance.SendMission(storedWeapon, storedBackpack, storedArmor, this);
-        inventory.SendObjectOnMission();
+        
+        
+        inventory.SendObjectOnMission(storedWeapon);
+        inventory.SendObjectOnMission(storedBackpack);
     }
 
     public override void EndInteractionSecondary()
