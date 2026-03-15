@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 
+[System.Serializable]
 public class Backpack : Object
 {
     public enum BackpackType
@@ -9,7 +10,6 @@ public class Backpack : Object
     }
 
     public BackpackType backpackType;
-    public string backpackName;
 
     public override Sprite GetObjectSprite()
     {
@@ -36,7 +36,7 @@ public class Backpack : Object
             case BackpackType.SmallBackpack:
                 maxDurability = BackpackAssets.Instance.smallBackpackSO.maxDurability;
                 currentDurability = UnityEngine.Random.Range(1, BackpackAssets.Instance.smallBackpackSO.maxDurability);
-                backpackName = BackpackAssets.Instance.smallBackpackSO.backpackName;
+                objectName = BackpackAssets.Instance.smallBackpackSO.backpackName;
                 break;
         }
     }
@@ -46,7 +46,7 @@ public class Backpack : Object
         {            
             maxDurability = existingBackpack.maxDurability;
             currentDurability = existingBackpack.currentDurability;
-            backpackName = existingBackpack.backpackName;
+            objectName = existingBackpack.objectName;
         }
     }
 
@@ -67,7 +67,6 @@ public class Backpack : Object
     {
         inInventory.RemoveObject(this);
         OnObjectDestroyed?.Invoke(inInventory);
-        Debug.Log("Backpack was destroyed in " + inInventory.ToString());
     }
 
     public override void RepairObject(int repairAmount)

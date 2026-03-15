@@ -1,6 +1,6 @@
 using UnityEngine;
-using static Weapon;
 
+[System.Serializable]
 public class Armor : Object
 {
     public enum ArmorType
@@ -9,7 +9,6 @@ public class Armor : Object
     }
 
     public ArmorType armorType;
-    public string armorName;
 
     public override Sprite GetObjectSprite()
     {
@@ -36,7 +35,7 @@ public class Armor : Object
             case ArmorType.BalisticVest:               
                 maxDurability = ArmorAssets.Instance.balisticVestSO.maxDurability;
                 currentDurability = UnityEngine.Random.Range(1, ArmorAssets.Instance.balisticVestSO.maxDurability);
-                armorName = ArmorAssets.Instance.balisticVestSO.armorName;
+                objectName = ArmorAssets.Instance.balisticVestSO.armorName;
 
                 break;
         }
@@ -48,7 +47,7 @@ public class Armor : Object
 
             maxDurability = existingArmor.maxDurability;
             currentDurability = existingArmor.currentDurability;
-            armorName = existingArmor.armorName;
+            objectName = existingArmor.objectName;
         }
     }
 

@@ -1,12 +1,17 @@
 using UnityEngine;
+using System;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.EventSystems;
 
 public class UIArmory : MonoBehaviour
 {
     private Inventory inventory;
     [SerializeField] private Armory armory;
     [SerializeField] private GameObject armoryWindow;
+    [SerializeField] private GameObject firstSelected;
+    public ButtonSelector.ArmorySlot currentSlotSelected;
+    public static Action<ButtonSelector.ArmorySlot> OnCurrentArmorySlotSelected;
 
     [Header("Weapon")]
     [SerializeField] private GameObject currentWeaponInfo;
@@ -59,11 +64,13 @@ public class UIArmory : MonoBehaviour
         if (armoryWindow.activeSelf)
         {
             armoryWindow.SetActive(false);
+            EventSystem.current.SetSelectedGameObject(null);
             DropInventory();
         }
         else
         {
             armoryWindow.SetActive(true);
+            EventSystem.current.SetSelectedGameObject(firstSelected);
             RefreshInventoryUI();
         }
     }
@@ -133,19 +140,30 @@ public class UIArmory : MonoBehaviour
         if (armory.storedArmor is Armor armor)
         {
             armorDurabilityText.text = armor.currentDurability.ToString() + "/" + armor.maxDurability.ToString();
-            armorNameText.text = armor.armorName.ToString();
+            armorNameText.text = armor.objectName.ToString();
         }
 
         if (armory.storedWeapon is Weapon weapon)
         {
             weaponDurabilityText.text = weapon.currentDurability.ToString() + "/" + weapon.maxDurability.ToString();
-            weaponNameText.text = weapon.weaponName.ToString();
+            weaponNameText.text = weapon.objectName.ToString();
         }
 
         if (armory.storedBackpack is Backpack backpack)
         {
             backpackDurabilityText.text = backpack.currentDurability.ToString() + "/" + backpack.maxDurability.ToString();  
-            backpackNameText.text = backpack.backpackName.ToString();
+            backpackNameText.text = backpack.objectName.ToString();
         }
+    }
+
+    public void OnButtonSelected(ButtonSelector.ArmorySlot armorySlot)
+    {        
+        currentSlotSelected = armorySlot;
+        OnCurrentArmorySlotSelected?.Invoke(currentSlotSelected);
+    }
+
+    public void OnButtonDeselected(ButtonSelector.ArmorySlot armorySlot)
+    {
+        
     }
 }

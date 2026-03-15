@@ -1,28 +1,60 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Armory : Bench, IInteractable
 {
-    public Armor storedArmor;
-    public Backpack storedBackpack;
-    public Weapon storedWeapon;
+    [SerializeReference] public Armor storedArmor = null;
+    [SerializeReference] public Backpack storedBackpack = null;
+    [SerializeReference] public Weapon storedWeapon = null;
+
+    private ButtonSelector.ArmorySlot currentSlotSelection;
 
     public void Awake()
     {
         acceptedTypes.Add(typeof(Weapon));
         acceptedTypes.Add(typeof(Armor));
-        acceptedTypes.Add(typeof(Backpack));
+        acceptedTypes.Add(typeof(Backpack));        
     }
 
     private void OnEnable()
     {
         Inventory.OnObjectReceive += AssignCurrentObject;
         Inventory.OnObjectSend += RemoveCurrentObject;
+        UIArmory.OnCurrentArmorySlotSelected += AssignCurrentSlotSelection;        
     }    
 
     private void OnDisable()
     {
         Inventory.OnObjectReceive -= AssignCurrentObject;
-        Inventory.OnObjectSend += RemoveCurrentObject;
+        Inventory.OnObjectSend -= RemoveCurrentObject;
+        UIArmory.OnCurrentArmorySlotSelected -= AssignCurrentSlotSelection;
+    }
+
+    private void AssignCurrentSlotSelection(ButtonSelector.ArmorySlot selectedSlot)
+    {
+        currentSlotSelection = selectedSlot;
+    }
+
+    public override void StartInteractionPrimary()
+    {
+        if (InventoriesController.Instance.playerInventory.GetObjectList().Count == 0)
+        {
+            if (inventory.GetObjectList().Count > 0)
+            {
+                switch (currentSlotSelection)
+                {
+                    case ButtonSelector.ArmorySlot.Weapon:                        
+                        inventory.SendObject(InventoriesController.Instance.playerInventory, storedWeapon);                        
+                        break;
+                    case ButtonSelector.ArmorySlot.Armor:
+                        inventory.SendObject(InventoriesController.Instance.playerInventory, storedArmor);
+                        break;
+                    case ButtonSelector.ArmorySlot.Backpack:                       
+                        inventory.SendObject(InventoriesController.Instance.playerInventory, storedBackpack);                        
+                        break;
+                }                
+            }
+        }
     }
 
     public override void StartInteractionSecondary() // sending on mission

@@ -22,11 +22,14 @@ public class Bench : MonoBehaviour, IInteractable
 
     public Object currentObject;
 
-    public void StartInteractionPrimary()
+    public virtual void StartInteractionPrimary()
     {
         if (InventoriesController.Instance.playerInventory.GetObjectList().Count == 0)
         {
-            inventory.SendObject(InventoriesController.Instance.playerInventory);
+            if (inventory.GetObjectList().Count > 0)
+            {
+                inventory.SendObject(InventoriesController.Instance.playerInventory, inventory.GetObjectList()[0]);
+            }            
         }
     }
 
