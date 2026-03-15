@@ -4,11 +4,12 @@ using UnityEngine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using static Inventory;
 
 
 public class ObjectDisplay : MonoBehaviour
 {
-    [SerializeField]private int displaySlots = 1;
+    [SerializeField] private int displaySlots = 1;
     private List<GameObject> currentObjects = new List<GameObject>();
     [SerializeField] private Inventory inventory;
     [SerializeField] private Transform weaponSpawnPivot;
@@ -29,35 +30,39 @@ public class ObjectDisplay : MonoBehaviour
         Object.OnObjectDestroyed -= DestroyMyObject;
     }
 
-    private void TryDisplayCurrentObjects()
-    {
-        if (inventory.GetObjectList().Count > 0 && currentObjects.Count == 0)
-        {
-            if (displaySlots == 1)
-            {
-                DoObjectDisplay();
-            }
-        }
-
-        if (displaySlots > 1)
-        {
-            DoMultipleObjectsDisplay();
-        }
-    }
-
     private void DisplayCurrentObject(Inventory.InventoryOfType inventoryOfType, Object obj)
-    {        
+    {
         if (inventoryOfType != inventory.GetInventoryOfType())
         {
             return;
-        }
+        }        
 
         TryDisplayCurrentObjects();
+    }
+
+    private void TryDisplayCurrentObjects()
+    {
+        {
+            if (inventory.GetObjectList().Count == 0)
+            {
+                return;
+            }
+
+            if (displaySlots == 1 && currentObjects.Count == 0)
+            {
+                DoObjectDisplay();
+            }
+            else if (displaySlots > 1)
+            {
+                DoMultipleObjectsDisplay();
+            }
+        }
     }
 
     private void DoMultipleObjectsDisplay()
     {
         ClearCurrentObjects();
+
         for (int i = 0; i < inventory.GetObjectList().Count; i++)
         {
             switch (inventory.GetObjectList()[i])
@@ -83,7 +88,6 @@ public class ObjectDisplay : MonoBehaviour
 
     private void DoObjectDisplay()
     {
-       
         switch (inventory.GetObjectList()[0])
         {
             case Weapon weapon:
@@ -105,7 +109,7 @@ public class ObjectDisplay : MonoBehaviour
     }
 
     private void ClearCurrentObjects()
-    {
+    {        
         foreach (GameObject currentObject in currentObjects)
         {
             if (currentObject != null)
@@ -118,11 +122,11 @@ public class ObjectDisplay : MonoBehaviour
     }
 
     public void DestroyCurrentObject(Inventory.InventoryOfType invOfType, Object obj)
-    {
+    {       
         if (inventory.GetInventoryOfType() != invOfType)
         { 
             return;
-        }
+        }        
 
         ClearCurrentObjects();
 

@@ -75,11 +75,11 @@ public class PlayerInteraction : MonoBehaviour
     private void PrimaryInteractStarted()
     {
         Inventory currentInventory = currentInteractable.GetInventory();
-        if (playerInventory.GetObjectList().Count > 0 && currentInventory.GetObjectList().Count < currentInventory.GetCapacity()) // there is a space in the target inventory
+        if (playerInventory.GetObjectList().Count > 0 && currentInventory.GetObjectList().Count < currentInventory.GetCapacity()) // player has item and there is a space in the target inventory
         {
-            if (currentInteractable.CanAcceptObject(playerInventory.GetObjectList()[0]))
+            if (currentInteractable.CanAcceptObject(playerInventory.GetObjectList()[0])) // interactable can accept object of given type
             {
-                playerInventory.SendObject(currentInteractable.GetInventory()); // deposit item
+                playerInventory.SendObject(currentInteractable.GetInventory(), playerInventory.GetObjectList()[0]); // deposit item
                 return;
             }
         }

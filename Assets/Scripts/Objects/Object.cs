@@ -1,11 +1,13 @@
 using System;
 using UnityEngine;
 
-public abstract class Object : MonoBehaviour
+[System.Serializable]
+public abstract class Object 
 {
     protected Inventory inInventory; // in which inventory the object is
     public int maxDurability;
     public int currentDurability;
+    public string objectName;
 
     public static Action OnObjectRepair; // called when weapon is repaired
     public static Action OnObjectDamage;

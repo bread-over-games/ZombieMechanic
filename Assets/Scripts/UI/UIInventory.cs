@@ -160,15 +160,15 @@ public class UIInventory : MonoBehaviour
             case Weapon weapon:
                 damageText.text = weapon.baseDamage.ToString() + "+" + weapon.bonusDamage.ToString();
                 durabilityText.text = weapon.currentDurability.ToString() + "/" + weapon.maxDurability.ToString();
-                weaponNameText.text = weapon.weaponName.ToString();
+                weaponNameText.text = weapon.objectName.ToString();
                 break;
             case Backpack backpack:
                 backpackDurabilityText.text = backpack.currentDurability.ToString() + "/" + backpack.maxDurability.ToString();
-                backpackNameText.text = backpack.backpackName.ToString();
+                backpackNameText.text = backpack.objectName.ToString();
                 break;
             case Armor armor:
                 armorDurabilityText.text = armor.currentDurability.ToString() + "/" + armor.maxDurability.ToString();
-                //weaponNameText.text = armor.armorName.ToString();
+                armorNameText.text = armor.objectName.ToString();
                 break;
             case Scrap scrap:
                 sparePartsNameText.text = scrap.scrapName.ToString();

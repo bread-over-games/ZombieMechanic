@@ -3,6 +3,7 @@
 using UnityEngine;
 using System;
 
+[System.Serializable]
 public class Weapon : Object
 {
     public enum WeaponType
@@ -12,7 +13,6 @@ public class Weapon : Object
     }    
 
     public WeaponType weaponType;
-    public string weaponName;
     public int baseDamage;
     public int bonusDamage;
 
@@ -46,7 +46,7 @@ public class Weapon : Object
                 bonusDamage = UnityEngine.Random.Range(0, WeaponAssets.Instance.baseballBatSO.baseDamage);
                 maxDurability = WeaponAssets.Instance.baseballBatSO.maxDurability;
                 currentDurability = UnityEngine.Random.Range(1, WeaponAssets.Instance.baseballBatSO.maxDurability);
-                weaponName = WeaponAssets.Instance.baseballBatSO.weaponName;
+                objectName = WeaponAssets.Instance.baseballBatSO.weaponName;
 
                 break;
             case WeaponType.Crowbar:
@@ -54,7 +54,7 @@ public class Weapon : Object
                 bonusDamage = UnityEngine.Random.Range(0, WeaponAssets.Instance.crowbarSO.baseDamage);
                 maxDurability = WeaponAssets.Instance.crowbarSO.maxDurability;
                 currentDurability = UnityEngine.Random.Range(1, WeaponAssets.Instance.crowbarSO.maxDurability);
-                weaponName = WeaponAssets.Instance.crowbarSO.weaponName;
+                objectName = WeaponAssets.Instance.crowbarSO.weaponName;
                 break;                
         }
     }  
@@ -67,7 +67,7 @@ public class Weapon : Object
             bonusDamage = existingWeapon.bonusDamage;
             maxDurability = existingWeapon.maxDurability;
             currentDurability = existingWeapon.currentDurability;
-            weaponName = existingWeapon.weaponName;
+            objectName = existingWeapon.objectName;
         }        
     }
 

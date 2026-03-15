@@ -6,9 +6,9 @@ public class Mission
 {
     public Survivor survivor; // current survivor on the mission    
     public bool isComplete = false;
-    public Weapon equippedWeapon;
-    public Armor equippedArmor;
-    public Backpack equippedBackpack;
+    [SerializeReference] public Weapon equippedWeapon;
+    [SerializeReference] public Armor equippedArmor;
+    [SerializeReference] public Backpack equippedBackpack;
 
     public float missionDuration;
     public float elapsedTime;
@@ -75,17 +75,17 @@ public class Mission
     {
         if (equippedWeapon is Weapon weapon && equippedWeapon.DamageObject(5))
         {
-            Debug.Log(equippedWeapon.weaponName + " destroyed on a mission");            
+            Debug.Log(equippedWeapon.objectName + " destroyed on a mission");            
         }
 
         if (equippedBackpack is Backpack backpack && equippedBackpack.DamageObject(5))
         {
-            Debug.Log(equippedBackpack.backpackName + " destroyed on a mission");
+            Debug.Log(equippedBackpack.objectName + " destroyed on a mission");
         }
 
         if (equippedArmor is Armor armor && equippedArmor.DamageObject(5))
         {
-            Debug.Log(equippedArmor.armorName + " destroyed on a mission");
+            Debug.Log(equippedArmor.objectName + " destroyed on a mission");
         }
     }
 
