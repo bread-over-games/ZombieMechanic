@@ -30,12 +30,17 @@ public class ObjectDisplay : MonoBehaviour
         Object.OnObjectDestroyed -= DestroyMyObject;
     }
 
-    private void DisplayCurrentObject(Inventory.InventoryOfType inventoryOfType, Object obj)
+    private void DisplayCurrentObject(Inventory.InventoryOfType inventoryOfType, Object obj, Inventory myInventory)
     {
         if (inventoryOfType != inventory.GetInventoryOfType())
         {
             return;
-        }        
+        }
+
+        if (myInventory != inventory)
+        {
+            return;
+        }
 
         TryDisplayCurrentObjects();
     }

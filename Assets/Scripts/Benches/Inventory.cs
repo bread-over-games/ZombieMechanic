@@ -21,7 +21,7 @@ public class Inventory : MonoBehaviour
 
     [SerializeReference] private List<Object> objectList = new List<Object>();
 
-    public static Action<InventoryOfType, Object> OnObjectReceive; // whben Inventory receives wepaon
+    public static Action<InventoryOfType, Object, Inventory> OnObjectReceive; // whben Inventory receives wepaon
     public static Action<InventoryOfType, Object> OnObjectSend; // when inventory sends weapon
     public static Action OnInventoryChange; // when something changes in inventory
     [SerializeField] public int capacity;
@@ -50,19 +50,19 @@ public class Inventory : MonoBehaviour
         {
             case Weapon weapon:
                 weapon.LoadValues(weapon);
-                OnObjectReceive?.Invoke(inventoryOfType, weapon);
+                OnObjectReceive?.Invoke(inventoryOfType, weapon, this);
                 break;
             case Backpack backpack:
                 backpack.LoadValues(backpack);
-                OnObjectReceive?.Invoke(inventoryOfType, backpack);
+                OnObjectReceive?.Invoke(inventoryOfType, backpack, this);
                 break;
             case Armor armor:
                 armor.LoadValues(armor);
-                OnObjectReceive?.Invoke(inventoryOfType, armor);
+                OnObjectReceive?.Invoke(inventoryOfType, armor, this);
                 break;
             case Scrap scrap:
                 scrap.LoadValues(scrap);
-                OnObjectReceive?.Invoke(inventoryOfType, scrap);
+                OnObjectReceive?.Invoke(inventoryOfType, scrap, this);
                 break;
             /*case Medicine medicine:
                 medicine.LoadValues(medicine);

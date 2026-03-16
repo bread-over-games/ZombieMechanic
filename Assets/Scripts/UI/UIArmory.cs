@@ -66,6 +66,7 @@ public class UIArmory : MonoBehaviour
             armoryWindow.SetActive(false);
             EventSystem.current.SetSelectedGameObject(null);
             DropInventory();
+            DropArmory();
         }
         else
         {
@@ -80,9 +81,19 @@ public class UIArmory : MonoBehaviour
         inventory = currentInventory;
     }
 
+    public void SetArmory(Armory currentArmory)
+    {
+        armory = currentArmory;
+    }
+
     private void DropInventory()
     {
         inventory = null;
+    }
+
+    private void DropArmory()
+    {
+        armory = null;
     }
 
     private void RefreshInventoryUI()

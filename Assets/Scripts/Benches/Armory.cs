@@ -64,7 +64,6 @@ public class Armory : Bench, IInteractable
             return;
         }
 
-
         MissionController.Instance.SendMission(storedWeapon, storedBackpack, storedArmor, this);
 
         inventory.SendObjectOnMission(storedArmor);
@@ -77,12 +76,17 @@ public class Armory : Bench, IInteractable
 
     }
 
-    private void AssignCurrentObject(Inventory.InventoryOfType invOfType, Object obj) // when putting Object into Armory
+    private void AssignCurrentObject(Inventory.InventoryOfType invOfType, Object obj, Inventory myInventory) // when putting Object into Armory
     {
         if (invOfType != Inventory.InventoryOfType.Armory)
         {
             return;
-        }        
+        }  
+        
+        if (myInventory != inventory)
+        {
+            return;
+        }
 
         if (obj is Weapon weapon)
         {

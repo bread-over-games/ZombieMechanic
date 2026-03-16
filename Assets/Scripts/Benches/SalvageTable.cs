@@ -29,11 +29,14 @@ public class SalvageTable : Bench
         acceptedTypes.Add(typeof(Scrap));
     }
 
-    private void AssignCurrentObject(Inventory.InventoryOfType invOfType, Object obj)
+    private void AssignCurrentObject(Inventory.InventoryOfType invOfType, Object obj, Inventory myInventory)
     {
         if (invOfType == Inventory.InventoryOfType.SalvageTable)
         {
-            currentObject = obj;
+            if (myInventory == inventory)
+            {
+                currentObject = obj;
+            }
         }
     }
 
