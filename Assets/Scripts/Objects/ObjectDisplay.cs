@@ -10,7 +10,7 @@ using static Inventory;
 public class ObjectDisplay : MonoBehaviour
 {
     [SerializeField] private int displaySlots = 1;
-    private List<GameObject> currentObjects = new List<GameObject>();
+    [SerializeReference] private List<GameObject> currentObjects = new List<GameObject>();
     [SerializeField] private Inventory inventory;
     [SerializeField] private Transform weaponSpawnPivot;
     [SerializeField] private Transform backpackSpawnPivot;
@@ -30,13 +30,8 @@ public class ObjectDisplay : MonoBehaviour
         Object.OnObjectDestroyed -= DestroyMyObject;
     }
 
-    private void DisplayCurrentObject(Inventory.InventoryOfType inventoryOfType, Object obj, Inventory myInventory)
+    private void DisplayCurrentObject(Object obj, Inventory myInventory)
     {
-        if (inventoryOfType != inventory.GetInventoryOfType())
-        {
-            return;
-        }
-
         if (myInventory != inventory)
         {
             return;
@@ -126,9 +121,9 @@ public class ObjectDisplay : MonoBehaviour
         currentObjects.Clear();
     }
 
-    public void DestroyCurrentObject(Inventory.InventoryOfType invOfType, Object obj)
+    public void DestroyCurrentObject(Object obj, Inventory myInventory)
     {       
-        if (inventory.GetInventoryOfType() != invOfType)
+        if (inventory != myInventory)
         { 
             return;
         }        
@@ -138,11 +133,11 @@ public class ObjectDisplay : MonoBehaviour
         TryDisplayCurrentObjects();
     }
 
-    private void DestroyMyObject(Inventory invOfType) // determines if it should destroy object on this interactable
+    private void DestroyMyObject(Inventory myInventory) // determines if it should destroy object on this interactable
     {
-        if (inventory.GetInventoryOfType() == invOfType.GetInventoryOfType())
+        if (inventory == myInventory)
         {
-            DestroyCurrentObject(invOfType.GetInventoryOfType(), null);
+            DestroyCurrentObject(null, myInventory);
         }
     }
 }

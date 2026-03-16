@@ -64,11 +64,12 @@ public class Armory : Bench, IInteractable
             return;
         }
 
-        MissionController.Instance.SendMission(storedWeapon, storedBackpack, storedArmor, this);
+        MissionController.Instance.SendMission(storedWeapon, storedBackpack, storedArmor, inventory);
 
         inventory.SendObjectOnMission(storedArmor);
         inventory.SendObjectOnMission(storedWeapon);
         inventory.SendObjectOnMission(storedBackpack);
+        Debug.Log("Sent on mission!");
     }
 
     public override void EndInteractionSecondary()
@@ -76,13 +77,8 @@ public class Armory : Bench, IInteractable
 
     }
 
-    private void AssignCurrentObject(Inventory.InventoryOfType invOfType, Object obj, Inventory myInventory) // when putting Object into Armory
-    {
-        if (invOfType != Inventory.InventoryOfType.Armory)
-        {
-            return;
-        }  
-        
+    private void AssignCurrentObject(Object obj, Inventory myInventory) // when putting Object into Armory
+    {        
         if (myInventory != inventory)
         {
             return;
@@ -104,9 +100,9 @@ public class Armory : Bench, IInteractable
         }
     }
 
-    private void RemoveCurrentObject(Inventory.InventoryOfType invOfType, Object obj) // when taking Object out of Armory
+    private void RemoveCurrentObject(Object obj, Inventory myInventory) // when taking Object out of Armory
     {
-        if (invOfType != Inventory.InventoryOfType.Armory)
+        if (inventory != myInventory)
         {
             return;
         }

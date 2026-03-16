@@ -26,15 +26,12 @@ public class Workbench : Bench, IInteractable
         Inventory.OnObjectReceive -= AssignCurrentObject;
     }
 
-    private void AssignCurrentObject(Inventory.InventoryOfType invOfType, Object obj, Inventory myInventory)
+    private void AssignCurrentObject(Object obj, Inventory myInventory)
     {
-        if (invOfType == Inventory.InventoryOfType.Workbench)
+        if (myInventory == inventory)
         {
-            if (myInventory == inventory)
-            {
                 currentObject = obj;
-            }            
-        }
+        }           
     }
 
     private void TryRepair()

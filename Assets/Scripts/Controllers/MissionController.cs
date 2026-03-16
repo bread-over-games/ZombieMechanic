@@ -6,7 +6,7 @@ public class MissionController : MonoBehaviour
 {
     public static MissionController Instance { get; private set; }
 
-    private List<Mission> activeMissions = new List<Mission>();
+    [SerializeReference] private List<Mission> activeMissions = new List<Mission>();
 
     public static Action<Mission> OnMissionStarted;
     public static Action<Mission> OnMissionCompleted;
@@ -36,9 +36,9 @@ public class MissionController : MonoBehaviour
         activeMissions.RemoveAt(index); // deletes mission when it's done
     }
 
-    public void SendMission (Weapon weaponInArmory, Backpack backpackInArmory, Armor armorInArmory, Armory survivorArmory)
+    public void SendMission (Weapon weaponInArmory, Backpack backpackInArmory, Armor armorInArmory, Inventory missionInventory)
     {
-        Mission mission = new Mission(weaponInArmory, backpackInArmory, armorInArmory);
+        Mission mission = new Mission(weaponInArmory, backpackInArmory, armorInArmory, missionInventory);
 
         activeMissions.Add(mission); 
     }
