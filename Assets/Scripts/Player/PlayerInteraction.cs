@@ -63,6 +63,12 @@ public class PlayerInteraction : MonoBehaviour
         {
             case Bench.BenchType.Armory:
                 UIController.Instance.armoryUI.SetInventory(currentInteractable.GetInventory());
+
+                if (currentInteractable is Armory armory) 
+                {
+                    UIController.Instance.armoryUI.SetArmory(armory);
+                }
+               
                 break;
             default:
                 UIController.Instance.interactableInvSingleItem.SetInventory(currentInteractable.GetInventory());

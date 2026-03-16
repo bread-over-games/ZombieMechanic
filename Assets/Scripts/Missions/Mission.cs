@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
-
+[System.Serializable]
 public class Mission
 {
     public Survivor survivor; // current survivor on the mission    
@@ -9,16 +9,18 @@ public class Mission
     [SerializeReference] public Weapon equippedWeapon;
     [SerializeReference] public Armor equippedArmor;
     [SerializeReference] public Backpack equippedBackpack;
+    [SerializeReference] public Inventory missionInventory;
 
     public float missionDuration;
     public float elapsedTime;
 
-    public Mission(/*Survivor missionSurvivor, */Weapon weaponToEquip, Backpack backpackToEquip, Armor armorToEquip)
+    public Mission(/*Survivor missionSurvivor, */Weapon weaponToEquip, Backpack backpackToEquip, Armor armorToEquip, Inventory inventoryOfMission)
     {
         // survivor = missionSurvivor;
         equippedWeapon = weaponToEquip;
         equippedBackpack = backpackToEquip;
         equippedArmor = armorToEquip;   
+        missionInventory = inventoryOfMission;
 
         elapsedTime = 0f;
 
@@ -41,7 +43,7 @@ public class Mission
         }
         else
         {
-            InventoriesController.Instance.armoryInventory.ReceiveObject(equippedWeapon);
+            missionInventory.ReceiveObject(equippedWeapon);
 
         }
 
@@ -53,7 +55,7 @@ public class Mission
             }
             else
             {
-                InventoriesController.Instance.armoryInventory.ReceiveObject(equippedArmor);
+                missionInventory.ReceiveObject(equippedArmor);
             }
         }
 
@@ -65,7 +67,7 @@ public class Mission
             }
             else
             {
-                InventoriesController.Instance.armoryInventory.ReceiveObject(equippedBackpack);
+                missionInventory.ReceiveObject(equippedBackpack);
             }
         }
     }
