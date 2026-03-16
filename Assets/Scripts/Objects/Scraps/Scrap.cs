@@ -63,7 +63,7 @@ public class Scrap : Object
         currentDurability -= decayAmount;
         OnObjectDamage?.Invoke();
 
-        if (currentDurability <= 0)
+        if (currentDurability < 0)
         {
             return true;
         }
