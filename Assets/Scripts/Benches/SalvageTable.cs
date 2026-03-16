@@ -9,7 +9,6 @@ public class SalvageTable : Bench
     [SerializeField] private float salvagingInterval; // tick of looting, how often can player get salvage from loot
     [SerializeField] private int salvagingValue; // how much salvage is looted per tick
 
-    private Scrap currentScrap;
     private Coroutine lootingCoroutine;
 
     private void OnEnable()
@@ -47,9 +46,9 @@ public class SalvageTable : Bench
                 while (!currentObject.DamageObject(2))
                 {
                     yield return new WaitForSeconds(salvagingInterval);
-                    ResourceController.Instance.ChangeSalvageAmount(salvagingValue);
+                    ResourceController.Instance.ChangeSparePartsAmount(salvagingValue);
                 }
-
+                //ResourceController.Instance.ChangeSparePartsAmount(salvagingValue); // to´give last amount of salvage
                 currentObject.DestroyObject();
 
                 break;

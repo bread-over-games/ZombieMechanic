@@ -1,9 +1,12 @@
 using UnityEngine;
+using System;
 
 public class ResourceController : MonoBehaviour
 {
-    private int salvageAmount; // used for repairing
+    private int sparePartsAmount; // used for repairing
     private int upgradePartsAmount; // used for upgrading
+
+    public static Action OnSparePartsAmountChange;
 
     public static ResourceController Instance { get; private set; }
     
@@ -17,7 +20,7 @@ public class ResourceController : MonoBehaviour
 
     public bool CanRepair(int requiredSalvage)
     {
-        if (salvageAmount >= requiredSalvage)
+        if (sparePartsAmount >= requiredSalvage)
         {
             return true;
         }
@@ -27,18 +30,20 @@ public class ResourceController : MonoBehaviour
         }
     }
 
-    public int GetSalvageAmount()
+    public int GetSparePartsAmount()
     {
-        return salvageAmount;
+        return sparePartsAmount;
     }
 
-    public void ChangeSalvageAmount(int amount)
+    public void ChangeSparePartsAmount(int amount)
     {
-        salvageAmount += amount;
+        sparePartsAmount += amount;
 
-        if (salvageAmount <= 0)
+        if (sparePartsAmount <= 0)
         {
-            salvageAmount = 0;
+            sparePartsAmount = 0;
         }
+
+        OnSparePartsAmountChange?.Invoke();
     }
 }
