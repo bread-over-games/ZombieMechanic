@@ -47,7 +47,7 @@ public class SalvageTable : Bench
                 while (!currentObject.DamageObject(2))
                 {
                     yield return new WaitForSeconds(salvagingInterval);
-                    ResourceController.Instance.ChangeSalvageAmount(salvagingValue);
+                    ResourceController.Instance.ChangeSparePartsAmount(salvagingValue);
                 }
 
                 currentObject.DestroyObject();

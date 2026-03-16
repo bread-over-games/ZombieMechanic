@@ -50,7 +50,7 @@ public class Workbench : Bench, IInteractable
         while (currentObject.currentDurability < currentObject.maxDurability)
         {
             yield return new WaitForSeconds(repairInterval);
-            ResourceController.Instance.ChangeSalvageAmount(-repairSalvageCost);
+            ResourceController.Instance.ChangeSparePartsAmount(-repairSalvageCost);
             currentObject.RepairObject(repairValue);
 
             if (!ResourceController.Instance.CanRepair(repairSalvageCost))
