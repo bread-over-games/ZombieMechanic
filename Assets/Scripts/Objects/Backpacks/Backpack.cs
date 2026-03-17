@@ -10,6 +10,7 @@ public class Backpack : Object
     }
 
     public BackpackType backpackType;
+    public int backpackSize;
 
     public override Sprite GetObjectSprite()
     {
@@ -28,14 +29,15 @@ public class Backpack : Object
         }
     }
 
-    public override void SetValues() //when creating new object
+    public override void SetValues(float qualityMultiplier) //when creating new object
     {
         switch (backpackType)
         {
             default:
             case BackpackType.SmallBackpack:
                 maxDurability = BackpackAssets.Instance.smallBackpackSO.maxDurability;
-                currentDurability = UnityEngine.Random.Range(1, BackpackAssets.Instance.smallBackpackSO.maxDurability);
+                currentDurability = UnityEngine.Random.Range((int)((BackpackAssets.Instance.smallBackpackSO.maxDurability / 100f) * qualityMultiplier), BackpackAssets.Instance.smallBackpackSO.maxDurability);
+                backpackSize = BackpackAssets.Instance.smallBackpackSO.backpackSize;
                 objectName = BackpackAssets.Instance.smallBackpackSO.backpackName;
                 break;
         }

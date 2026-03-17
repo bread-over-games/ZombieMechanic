@@ -12,11 +12,13 @@ public class UIInfoHeader : MonoBehaviour
     private void OnEnable()
     {
         ResourceController.OnSparePartsAmountChange += UpdateAmounts;
+        ZombiesController.OnZombiesKilledChanged += UpdateZombiesAmount;
     }
 
     private void OnDisable()
     {
         ResourceController.OnSparePartsAmountChange -= UpdateAmounts;
+        ZombiesController.OnZombiesKilledChanged -= UpdateZombiesAmount;
     }
 
     private void Start()
@@ -27,5 +29,10 @@ public class UIInfoHeader : MonoBehaviour
     private void UpdateAmounts()
     {
         sparePartsAmount.text = ResourceController.Instance.GetSparePartsAmount().ToString();
+    }
+
+    private void UpdateZombiesAmount()
+    {
+        zombiesKilledAmount.text = ZombiesController.Instance.zombiesKilledTotal.ToString() + "/" + ZombiesController.Instance.zombiesKillVictoryGoal.ToString();
     }
 }

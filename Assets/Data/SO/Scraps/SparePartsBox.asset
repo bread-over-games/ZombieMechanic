@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: SparePartsBox
   m_EditorClassIdentifier: 
   scrapName: Box of spare parts
-  salvageAmount: 20
+  maxDurability: 20
   scrapVisualPrefab: {fileID: 3917449410938878803, guid: e501ad829ee755949ad68e9610b0145e, type: 3}
   scrapVisual: {fileID: 870873637, guid: c6b44410f9a68364f85c05220e98dc2b, type: 3}

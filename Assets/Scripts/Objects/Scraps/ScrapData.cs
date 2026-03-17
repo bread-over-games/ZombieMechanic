@@ -6,7 +6,7 @@ using UnityEngine;
 public class ScrapData : ScriptableObject
 {
     public string scrapName;
-    public int salvageAmount;
+    public int maxDurability;
     public GameObject scrapVisualPrefab;
     public Sprite scrapVisual;
 }
