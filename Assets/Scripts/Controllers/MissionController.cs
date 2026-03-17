@@ -8,6 +8,21 @@ public class MissionController : MonoBehaviour
 
     [SerializeReference] private List<Mission> activeMissions = new List<Mission>();
 
+    [Header("Mission duration settings")]
+    public float missionMaximumLength; // placeholder, will be later calculated based on strongest equip. This value is used in formula to calculate loot durability
+    public float missionLengthMultiplier;
+    public float missionLengthWeaponWeight;
+    public float missionLengthArmorWeight;
+    public float missionLengthBackpackWeight;
+
+    [Header("Mission loadout wear")]
+    public float loadoutWearWeaponWeight;
+    public float loadoutWearArmorWeight;
+    public float loadoutWearBackpackWeight;
+
+    [Header("Mission loot quality outcome")]
+    public float minimalLootQuality;
+
     public static Action<Mission> OnMissionStarted;
     public static Action<Mission> OnMissionCompleted;
 

@@ -25,7 +25,7 @@ public abstract class Object
 
     public abstract Sprite GetObjectSprite();
     public abstract GameObject GetObjectGameObject();
-    public abstract void SetValues(); //when creating new object
+    public abstract void SetValues(float qualityMultiplier); //when creating new object
     public abstract void LoadValues(Object existingObject); // when object already exists
     public abstract void DestroyObject();
     public abstract void RepairObject(int repairAmount);

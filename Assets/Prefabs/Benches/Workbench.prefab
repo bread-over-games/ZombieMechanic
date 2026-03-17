@@ -139,7 +139,7 @@ MonoBehaviour:
   inventory: {fileID: 5261058445298813840}
   interactableName: Workbench
   repairInterval: 0.2
-  repairSalvageCost: 2
+  repairSalvageCost: 1
   repairValue: 1
 --- !u!114 &5261058445298813840
 MonoBehaviour:
@@ -154,7 +154,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventoryOfType: 0
+  objectList: []
   capacity: 1
+  references:
+    version: 2
+    RefIds: []
 --- !u!114 &2784355277398447042
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -167,8 +171,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e63a5bab908a0440b4a8d8e0a136352, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  displaySlots: 1
+  currentObjects: []
   inventory: {fileID: 5261058445298813840}
   weaponSpawnPivot: {fileID: 1594533800313293158}
+  backpackSpawnPivot: {fileID: 0}
+  armorSpawnPivot: {fileID: 0}
 --- !u!65 &410255975851228246
 BoxCollider:
   m_ObjectHideFlags: 0

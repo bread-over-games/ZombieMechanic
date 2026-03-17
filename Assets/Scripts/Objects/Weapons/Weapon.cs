@@ -36,7 +36,7 @@ public class Weapon : Object
         }
     }
 
-    public override void SetValues() // when creating new weapon
+    public override void SetValues(float qualityMultiplier) // when creating new weapon
     {
         switch (weaponType)
         {
@@ -45,7 +45,7 @@ public class Weapon : Object
                 baseDamage = WeaponAssets.Instance.baseballBatSO.baseDamage;
                 bonusDamage = UnityEngine.Random.Range(0, WeaponAssets.Instance.baseballBatSO.baseDamage);
                 maxDurability = WeaponAssets.Instance.baseballBatSO.maxDurability;
-                currentDurability = UnityEngine.Random.Range(1, WeaponAssets.Instance.baseballBatSO.maxDurability);
+                currentDurability = UnityEngine.Random.Range((int)((WeaponAssets.Instance.baseballBatSO.maxDurability / 100f) * qualityMultiplier), WeaponAssets.Instance.baseballBatSO.maxDurability);
                 objectName = WeaponAssets.Instance.baseballBatSO.weaponName;
 
                 break;
@@ -53,7 +53,7 @@ public class Weapon : Object
                 baseDamage = WeaponAssets.Instance.crowbarSO.baseDamage;
                 bonusDamage = UnityEngine.Random.Range(0, WeaponAssets.Instance.crowbarSO.baseDamage);
                 maxDurability = WeaponAssets.Instance.crowbarSO.maxDurability;
-                currentDurability = UnityEngine.Random.Range(1, WeaponAssets.Instance.crowbarSO.maxDurability);
+                currentDurability = UnityEngine.Random.Range((int)((WeaponAssets.Instance.crowbarSO.maxDurability / 100f) * qualityMultiplier), WeaponAssets.Instance.crowbarSO.maxDurability);
                 objectName = WeaponAssets.Instance.crowbarSO.weaponName;
                 break;                
         }
@@ -71,12 +71,12 @@ public class Weapon : Object
         }        
     }
 
-    public override bool DamageObject(int decayAmount) // returns true when weapon is destroyed
+    public override bool DamageObject(int damageAmount) // returns true when weapon is destroyed
     {
-        currentDurability -= decayAmount;
+        currentDurability -= damageAmount;
         OnObjectDamage?.Invoke();
 
-        if (currentDurability < 0)
+        if (currentDurability <= 0)
         {
             return true;
         }

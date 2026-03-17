@@ -28,12 +28,14 @@ public class Scrap : Object
             case ScrapType.SparePartsBox: return ScrapAssets.Instance.sparePartsBoxSO.scrapVisualPrefab;
         }
     }
-    public override void SetValues() //when creating new object
+    public override void SetValues(float qualityMultiplier) //when creating new object
     {
         switch (scrapType)
         {
             case ScrapType.SparePartsBox:
-                currentDurability = ScrapAssets.Instance.sparePartsBoxSO.salvageAmount;
+
+                maxDurability = ScrapAssets.Instance.sparePartsBoxSO.maxDurability;
+                currentDurability = UnityEngine.Random.Range((int)((ScrapAssets.Instance.sparePartsBoxSO.maxDurability / 100f) * qualityMultiplier), ScrapAssets.Instance.sparePartsBoxSO.maxDurability);
                 scrapName = ScrapAssets.Instance.sparePartsBoxSO.scrapName;
                 break;
         }
@@ -42,11 +44,11 @@ public class Scrap : Object
     {
         if (existingObject is Scrap existingScrap)
         {
+            maxDurability = existingScrap.maxDurability;    
             currentDurability = existingScrap.currentDurability;
             scrapName = existingScrap.scrapName;
         }
     }
-
 
     public override void DestroyObject() // should be destroyed when salvage amount raches zero
     {

@@ -30,8 +30,8 @@ public class UIInventory : MonoBehaviour
     [Header("Scraps")]
     [SerializeField] private GameObject currentScrapInfo;
     [SerializeField] private Image scrapImage;
-    [SerializeField] private TMP_Text sparePartsNameText;
-    [SerializeField] private TMP_Text sparePartsText;
+    [SerializeField] private TMP_Text scrapNameText;
+    [SerializeField] private TMP_Text scrapDurabilityText;
 
     [Header("Empty inventory messages")]
     [SerializeField] private GameObject workbenchEmptyMessage;
@@ -171,8 +171,8 @@ public class UIInventory : MonoBehaviour
                 armorNameText.text = armor.objectName.ToString();
                 break;
             case Scrap scrap:
-                sparePartsNameText.text = scrap.scrapName.ToString();
-                sparePartsText.text = scrap.currentDurability.ToString();
+                scrapNameText.text = scrap.scrapName.ToString();
+                scrapDurabilityText.text = scrap.currentDurability.ToString() + "/" + scrap.maxDurability.ToString();
                 break;
                 /*case Medicine medicine:
                     medicine.LoadValues(medicine);
