@@ -14,6 +14,7 @@ public class Mission
     private float missionDuration;
     private float elapsedTime;
     private float lootQualityMultiplier; // based on run length and affects the quality of equipment the survivors bring back, in percents
+    private int zombiesKilled;
 
     public Mission(/*Survivor missionSurvivor, */Weapon weaponToEquip, Backpack backpackToEquip, Armor armorToEquip, Inventory inventoryOfMission)
     {
@@ -26,6 +27,12 @@ public class Mission
         elapsedTime = 0f;
 
         CalculateMissionDuration();
+    }
+
+    private void CalculateZombiesKilled()
+    {
+        zombiesKilled = (int)(missionDuration * missionDuration / 35f); // basic formula, will be improved with weapon damage. Divisor - the lower the value the higher the kill count
+        ZombiesController.Instance.AddKilledZombies(zombiesKilled);
     }
 
     private void CalculateMissionDuration()
@@ -55,6 +62,7 @@ public class Mission
 
     public void ResolveMission()
     {
+        CalculateZombiesKilled();
         ApplyWearToLoadout();
         ReturnSurvivorLoadout();
         GenerateLootQuality();
