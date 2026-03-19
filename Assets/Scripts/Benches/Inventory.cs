@@ -14,7 +14,8 @@ public class Inventory : MonoBehaviour
         Outside,
         Player,
         Table,
-        SalvageTable
+        SalvageTable,
+        MedicalCabinet
     }
 
     [SerializeField] private InventoryOfType inventoryOfType;
@@ -64,6 +65,12 @@ public class Inventory : MonoBehaviour
                 scrap.LoadValues(scrap);
                 OnObjectReceive?.Invoke(scrap, this);
                 break;
+            case Antibiotics antibiotics:
+                antibiotics.LoadValues(antibiotics);
+                OnObjectReceive?.Invoke(antibiotics, this);
+                break;
+
+
             /*case Medicine medicine:
                 medicine.LoadValues(medicine);
                 break;*/

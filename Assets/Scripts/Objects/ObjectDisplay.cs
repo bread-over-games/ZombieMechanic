@@ -79,6 +79,9 @@ public class ObjectDisplay : MonoBehaviour
                 case Scrap scrap:
                     currentObjects.Add(ScrapWorld.SpawnScrapWorld(weaponSpawnPivot.position, scrap, weaponSpawnPivot));
                     break;
+                case Antibiotics antibiotics:
+                    currentObjects.Add(AntibioticsWorld.SpawnAntibioticsWorld(weaponSpawnPivot.position, antibiotics, weaponSpawnPivot));
+                    break;
                     /*    case Medicine medicine:
                             medicine.LoadValues(medicine);
                             break;*/
@@ -101,6 +104,9 @@ public class ObjectDisplay : MonoBehaviour
                 break;
             case Scrap scrap:
                 currentObjects.Add(ScrapWorld.SpawnScrapWorld(weaponSpawnPivot.position, scrap, weaponSpawnPivot));
+                break;
+            case Antibiotics antibiotics:
+                currentObjects.Add(AntibioticsWorld.SpawnAntibioticsWorld(weaponSpawnPivot.position, antibiotics, weaponSpawnPivot));
                 break;
                 /*    case Medicine medicine:
                         medicine.LoadValues(medicine);
