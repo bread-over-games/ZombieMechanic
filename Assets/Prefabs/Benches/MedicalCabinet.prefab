@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5218923026431875798}
   - component: {fileID: 8466018655303985515}
   - component: {fileID: 5124182726727076555}
+  - component: {fileID: -2822845031268065542}
   m_Layer: 0
   m_Name: MedicalCabinet
   m_TagString: Untagged
@@ -47,7 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   benchType: 5
-  inventory: {fileID: 0}
+  inventory: {fileID: -2822845031268065542}
   interactableName: MedicalCabinet
 --- !u!65 &5124182726727076555
 BoxCollider:
@@ -70,6 +71,24 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.64787745, y: 1.7201061, z: 1}
   m_Center: {x: -0.09549081, y: 0.85541224, z: 0}
+--- !u!114 &-2822845031268065542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6748923337191037147}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86e0b5bc2564d4f4488cee8b688c4fd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventoryOfType: 8
+  objectList: []
+  capacity: 1
+  references:
+    version: 2
+    RefIds: []
 --- !u!1 &8527163054602884303
 GameObject:
   m_ObjectHideFlags: 0

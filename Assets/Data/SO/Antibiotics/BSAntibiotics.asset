@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 720c5f598b04e894d900575e0b7bb664, type: 3}
+  m_Name: BSAntibiotics
+  m_EditorClassIdentifier: 
+  antibioticsVisual: {fileID: -1910602607, guid: 1dc62fca54a272142a26c9494ee680d1, type: 3}
+  antibioticsVisualPrefab: {fileID: 4198996785675536476, guid: 2ea52a43472312f40befb6e9d942be00, type: 3}
+  antibioticsName: Antibiotics - Broad Spectrum
+  maxAmount: 3

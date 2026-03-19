@@ -20,7 +20,8 @@ public class ObjectGenerator : MonoBehaviour
 
     private void Start()
     {
-        GenerateFirstWeapon();
+        //GenerateFirstWeapon();
+        GenerateFirstAntibiotics();
     }
 
     private void GenerateFirstWeapon() // generates first weapon for tutorial purpose
@@ -33,22 +34,29 @@ public class ObjectGenerator : MonoBehaviour
     private void GenerateFirsBackpack() // generates first backpack for tutorial purpose
     {
         Backpack newBackpack = (new Backpack { backpackType = Backpack.BackpackType.SmallBackpack });
-        newBackpack.SetValues(40);
+        newBackpack.SetValues(40f);
         InventoriesController.Instance.lootTableInventory.ReceiveObject(newBackpack);
     }
 
     private void GenerateFirsArmor() // generates first backpack for tutorial purpose
     {
         Armor newArmor = (new Armor { armorType = Armor.ArmorType.BalisticVest });
-        newArmor.SetValues(40);
+        newArmor.SetValues(40f);
         InventoriesController.Instance.lootTableInventory.ReceiveObject(newArmor);
     }
 
     private void GenerateFirstScrap() // generates first scrap for tutorial purpose
     {
         Scrap newScrap = (new Scrap { scrapType = Scrap.ScrapType.SparePartsBox });
-        newScrap.SetValues(40);
+        newScrap.SetValues(40f);
         InventoriesController.Instance.lootTableInventory.ReceiveObject(newScrap);
+    }
+
+    private void GenerateFirstAntibiotics()
+    {
+        Antibiotics newAntibiotics = (new Antibiotics { antibioType = Antibiotics.AntibioticsType.BSAntibiotics });
+        newAntibiotics.SetValues(40f);
+        InventoriesController.Instance.lootTableInventory.ReceiveObject(newAntibiotics);
     }
 
     public void GenerateLoot(Mission mission, float lootQuality) // generates completely new object

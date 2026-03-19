@@ -3,23 +3,41 @@ using System;
 
 public class MedicalCabinet : Bench, IInteractable
 {
-
     public static Action OnAntibioticsUsed;
 
-    public override void StartInteractionPrimary()
+    public void Awake()
     {
-        InsertAntibiotics();
+        acceptedTypes.Add(typeof(Antibiotics));
     }
+
+    private void OnEnable()
+    {
+        Inventory.OnObjectReceive += InsertAntibiotics;
+    }
+
+    private void OnDisable()
+    {
+        Inventory.OnObjectReceive -= InsertAntibiotics;
+    }
+
 
     public override void StartInteractionSecondary()
     {
-        // takes medicine from cabinet and use it if any is in inventory
         UseAntibiotics();
     }
 
-    private void InsertAntibiotics()
+    private void InsertAntibiotics(Object obj, Inventory myInventory)
     {
+        if (myInventory != inventory)
+        {
+            return;
+        }
 
+        if (obj is Antibiotics antibiotics)
+        {
+            ResourceController.Instance.ChangeAntibioticsAmount(antibiotics.currentDurability);
+            antibiotics.DestroyObject();
+        }
     }
 
     private void UseAntibiotics()
