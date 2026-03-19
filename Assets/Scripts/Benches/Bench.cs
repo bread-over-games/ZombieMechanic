@@ -11,7 +11,8 @@ public class Bench : MonoBehaviour, IInteractable
         LootTable,
         SalvageTable,
         Table,
-        Workbench    
+        Workbench,
+        MedicalCabinet
     }
 
     public BenchType benchType;

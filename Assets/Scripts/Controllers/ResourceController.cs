@@ -4,9 +4,13 @@ using System;
 public class ResourceController : MonoBehaviour
 {
     private int sparePartsAmount; // used for repairing
-    private int upgradePartsAmount; // used for upgrading
+    private int antibioticsAmount;
 
     public static Action OnSparePartsAmountChange;
+    public static Action OnNoSpareParts;
+
+    public static Action OnAntibioticsAmountChange;
+    public static Action OnNoAntibiotics;
 
     public static ResourceController Instance { get; private set; }
     
@@ -16,6 +20,14 @@ public class ResourceController : MonoBehaviour
         {
             Instance = this;
         }
+
+        GiveStarterAntibiotics();
+    }
+
+    private void GiveStarterAntibiotics()
+    {
+        antibioticsAmount = 5;
+        OnAntibioticsAmountChange?.Invoke();
     }
 
     public bool CanRepair(int requiredSalvage)
@@ -35,6 +47,11 @@ public class ResourceController : MonoBehaviour
         return sparePartsAmount;
     }
 
+    public int GetAntibioticsAmount()
+    {
+        return antibioticsAmount; 
+    }
+
     public void ChangeSparePartsAmount(int amount)
     {
         sparePartsAmount += amount;
@@ -42,8 +59,23 @@ public class ResourceController : MonoBehaviour
         if (sparePartsAmount <= 0)
         {
             sparePartsAmount = 0;
+            OnNoSpareParts?.Invoke();
         }
 
         OnSparePartsAmountChange?.Invoke();
+    }
+
+    public void ChangeAntibioticsAmount(int amount)
+    {
+        antibioticsAmount += amount;
+
+        if (antibioticsAmount <= 0)
+        {
+            antibioticsAmount = 0;
+            Debug.Log("Not enough antibiotics!");
+            OnNoAntibiotics?.Invoke();
+        }
+
+        OnAntibioticsAmountChange?.Invoke();
     }
 }

@@ -12,6 +12,16 @@ public class Infection : MonoBehaviour
     public static Action<float> OnInfectionLevelChange;
     public static Action OnInfectionReachedMaxLevel;
 
+    private void OnEnable()
+    {
+        MedicalCabinet.OnAntibioticsUsed += DecreaseInfection;
+    }
+
+    private void OnDisable()
+    {
+        MedicalCabinet.OnAntibioticsUsed -= DecreaseInfection;
+    }
+
     private void Start()
     {
         StartCoroutine(IncreaseInfection());
@@ -23,15 +33,26 @@ public class Infection : MonoBehaviour
         {
             yield return new WaitForSeconds(infectionInterval);
             currentInfectionLevel++;
-            OnInfectionLevelChange?.Invoke(currentInfectionLevel);
-            Debug.Log($"Infection level: {currentInfectionLevel}");
+            OnInfectionLevelChange?.Invoke(currentInfectionLevel);            
 
-            if (currentInfectionLevel >= maxInfectionLevel )
+            if (currentInfectionLevel >= maxInfectionLevel)
             {
                 Debug.Log("Dead from infection");
                 OnInfectionReachedMaxLevel?.Invoke();
                 break;
             }
         }
-    }    
+    }
+    
+    private void DecreaseInfection()
+    {
+        currentInfectionLevel -= 20; // replace with antibiotics strength
+
+        if (currentInfectionLevel <= 0)
+        {
+            currentInfectionLevel = 0;  
+        }
+
+        OnInfectionLevelChange?.Invoke(currentInfectionLevel);
+    }
 }
