@@ -116,7 +116,6 @@ MonoBehaviour:
   benchType: 1
   inventory: {fileID: -3263844004975946700}
   interactableName: Loot Table
-  currentObject: {fileID: 0}
 --- !u!114 &-3263844004975946700
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -130,7 +129,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventoryOfType: 1
+  objectList: []
   capacity: 1
+  references:
+    version: 2
+    RefIds: []
 --- !u!114 &6483554558387062026
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -143,6 +146,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e63a5bab908a0440b4a8d8e0a136352, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  displaySlots: 1
+  currentObjects: []
   inventory: {fileID: -3263844004975946700}
   weaponSpawnPivot: {fileID: 1838859999185170084}
   backpackSpawnPivot: {fileID: 2163384740595248331}
@@ -258,6 +263,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 0af3fc2155155ff448b41ce15f51cd09, type: 3}
       propertyPath: m_Name
       value: LootTable
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 0af3fc2155155ff448b41ce15f51cd09, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
