@@ -59,8 +59,9 @@ public class Armory : Bench, IInteractable
 
     public override void StartInteractionSecondary() // sending on mission
     {
-        if (inventory.GetObjectList().Count == 0)
-        { 
+        if (storedWeapon == null)
+        {
+            Debug.Log("No weapon, cant go to mission");
             return;
         }
 
