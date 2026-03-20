@@ -33,6 +33,15 @@ public class UIArmory : MonoBehaviour
     [SerializeField] private TMP_Text armorDurabilityText;
     [SerializeField] private TMP_Text armorLootQualityText;
 
+    [Header("Mission Estimates")]
+    [SerializeField] private GameObject missionEstimates;
+    [SerializeField] private TMP_Text durationText;
+    [SerializeField] private TMP_Text lootQualityText;
+    [SerializeField] private TMP_Text lootAmountText;
+    [SerializeField] private TMP_Text gearWearText;
+    [SerializeField] private TMP_Text zombieKillsText;
+
+
     [Header("Empty messages")]
     [SerializeField] private GameObject weaponEmptyMessage;
     [SerializeField] private GameObject backpackEmptyMessage;
@@ -41,6 +50,7 @@ public class UIArmory : MonoBehaviour
     private void OnEnable()
     {
         Inventory.OnInventoryChange += RefreshInventoryUI;
+        Inventory.OnInventoryChange += RefreshEstimatesUI;
         PlayerInteraction.OnInteractableApproached += ShowArmoryWindow;
         PlayerInteraction.OnInteractableLeft += HideArmoryWindow;
     }
@@ -48,6 +58,7 @@ public class UIArmory : MonoBehaviour
     private void OnDisable()
     {
         Inventory.OnInventoryChange -= RefreshInventoryUI;
+        Inventory.OnInventoryChange -= RefreshEstimatesUI;
         PlayerInteraction.OnInteractableApproached -= ShowArmoryWindow;
         PlayerInteraction.OnInteractableLeft -= HideArmoryWindow;
     }
@@ -95,6 +106,22 @@ public class UIArmory : MonoBehaviour
     private void DropArmory()
     {
         armory = null;
+    }
+
+    private void RefreshEstimatesUI()
+    {
+        if (inventory == null)
+        {
+            return;
+        }
+
+        MissionEstimate missionEstimates = MissionCalculator.EstimateMission(armory.storedWeapon, armory.storedBackpack, armory.storedArmor);
+
+        durationText.text = missionEstimates.estimatedDuration.ToString() + "s +-";
+        lootQualityText.text = missionEstimates.estimatedLootQualityMinimal.ToString("F0") + "% - " + missionEstimates.estimatedLootQualityMaximal.ToString("F0") + "%";
+        lootAmountText.text = missionEstimates.estimatedLootAmount.ToString();
+        zombieKillsText.text = missionEstimates.estimatedZombiesKills.ToString() + "+-";
+        gearWearText.text = missionEstimates.estimatedGearWear.ToString() + "+- per item";
     }
 
     private void RefreshInventoryUI()
