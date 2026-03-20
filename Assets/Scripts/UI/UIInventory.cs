@@ -45,8 +45,8 @@ public class UIInventory : MonoBehaviour
     private void OnEnable()
     {
         Inventory.OnInventoryChange += RefreshInventoryUI;        
-        PlayerInteraction.OnInteractableApproached += ToggleSingleItemInventoryWindow;
-        PlayerInteraction.OnInteractableLeft += ToggleSingleItemInventoryWindow;
+        PlayerInteraction.OnInteractableApproached += ShowSingleItemInventoryWindow;
+        PlayerInteraction.OnInteractableLeft += HideSingleItemInventoryWindow;
         Object.OnObjectRepair += RefreshInventoryValues;
         Object.OnObjectDamage += RefreshInventoryValues;
     }
@@ -54,10 +54,32 @@ public class UIInventory : MonoBehaviour
     private void OnDisable()
     {
         Inventory.OnInventoryChange -= RefreshInventoryUI;        
-        PlayerInteraction.OnInteractableApproached -= ToggleSingleItemInventoryWindow;
-        PlayerInteraction.OnInteractableLeft -= ToggleSingleItemInventoryWindow;
+        PlayerInteraction.OnInteractableApproached -= ShowSingleItemInventoryWindow;
+        PlayerInteraction.OnInteractableLeft -= HideSingleItemInventoryWindow;
         Object.OnObjectRepair -= RefreshInventoryValues;
         Object.OnObjectDamage -= RefreshInventoryValues;
+    }
+
+    private void ShowSingleItemInventoryWindow(Bench.BenchType benchType)
+    {
+        if (benchType == Bench.BenchType.Armory)
+        {
+            return;
+        }
+
+        singleItemInventoryWindow.SetActive(true);
+        RefreshInventoryUI();
+    }
+
+    private void HideSingleItemInventoryWindow(Bench.BenchType benchType)
+    {
+        if (benchType == Bench.BenchType.Armory)
+        {
+            return;
+        }
+
+        singleItemInventoryWindow.SetActive(false);
+        DropInventory();
     }
 
     private void ToggleSingleItemInventoryWindow(Bench.BenchType benchType)

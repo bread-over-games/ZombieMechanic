@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 49203483307207677}
   - component: {fileID: 3478672861857369624}
   - component: {fileID: 785494894470943443}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,7 +99,7 @@ GameObject:
   - component: {fileID: 5261058445298813840}
   - component: {fileID: 2784355277398447042}
   - component: {fileID: 410255975851228246}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Workbench
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -207,7 +207,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3231943736549649275}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Graphics
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -240,7 +240,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1594533800313293158}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ObjectSpawnPivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -325,6 +325,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 65356427185fb974cbc013da1e8e7bf9, type: 3}
       propertyPath: m_Name
       value: Workbench
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 65356427185fb974cbc013da1e8e7bf9, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 65356427185fb974cbc013da1e8e7bf9, type: 3}
       propertyPath: m_StaticEditorFlags

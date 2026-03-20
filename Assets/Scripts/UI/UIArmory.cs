@@ -43,37 +43,40 @@ public class UIArmory : MonoBehaviour
     private void OnEnable()
     {
         Inventory.OnInventoryChange += RefreshInventoryUI;
-        PlayerInteraction.OnInteractableApproached += ToggleArmoryWindow;
-        PlayerInteraction.OnInteractableLeft += ToggleArmoryWindow;
+        PlayerInteraction.OnInteractableApproached += ShowArmoryWindow;
+        PlayerInteraction.OnInteractableLeft += HideArmoryWindow;
     }
 
     private void OnDisable()
     {
         Inventory.OnInventoryChange -= RefreshInventoryUI;
-        PlayerInteraction.OnInteractableApproached -= ToggleArmoryWindow;
-        PlayerInteraction.OnInteractableLeft -= ToggleArmoryWindow;
+        PlayerInteraction.OnInteractableApproached -= ShowArmoryWindow;
+        PlayerInteraction.OnInteractableLeft -= HideArmoryWindow;
     }
 
-    private void ToggleArmoryWindow(Bench.BenchType benchType)
+    private void ShowArmoryWindow(Bench.BenchType benchType)
     {
         if (benchType != Bench.BenchType.Armory)
         {
             return;
         }
 
-        if (armoryWindow.activeSelf)
+        armoryWindow.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(firstSelected);
+        RefreshInventoryUI();
+    }
+
+    private void HideArmoryWindow(Bench.BenchType benchType)
+    {
+        if (benchType != Bench.BenchType.Armory)
         {
-            armoryWindow.SetActive(false);
-            EventSystem.current.SetSelectedGameObject(null);
-            DropInventory();
-            DropArmory();
+            return;
         }
-        else
-        {
-            armoryWindow.SetActive(true);
-            EventSystem.current.SetSelectedGameObject(firstSelected);
-            RefreshInventoryUI();
-        }
+
+        armoryWindow.SetActive(false);
+        EventSystem.current.SetSelectedGameObject(null);
+        DropInventory();
+        DropArmory();
     }
 
     public void SetInventory(Inventory currentInventory)

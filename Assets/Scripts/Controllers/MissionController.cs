@@ -51,9 +51,9 @@ public class MissionController : MonoBehaviour
         activeMissions.RemoveAt(index); // deletes mission when it's done
     }
 
-    public void SendMission (Weapon weaponInArmory, Backpack backpackInArmory, Armor armorInArmory, Inventory missionInventory)
+    public void SendMission (Weapon weaponInArmory, Backpack backpackInArmory, Armor armorInArmory, Inventory missionInventory, Armory missionArmory)
     {
-        Mission mission = new Mission(weaponInArmory, backpackInArmory, armorInArmory, missionInventory);
+        Mission mission = new Mission(weaponInArmory, backpackInArmory, armorInArmory, missionInventory, missionArmory);
 
         activeMissions.Add(mission); 
     }

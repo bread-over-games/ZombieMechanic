@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2037944587180573152}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Graphics
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 4812371839778889147}
   - component: {fileID: 4979007895259383675}
   - component: {fileID: -6343217438119974841}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Armory
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -163,7 +163,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1976446627374945539}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ArmorPivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -194,7 +194,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1569533145499603248}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: WeaponPivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -225,7 +225,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1523023177450310677}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BackpackPivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -297,43 +297,47 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -1475270653969734947, guid: 8730571fdf759a4419f81a3e08934caf, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.13052894
+      value: 0.5298514
       objectReference: {fileID: 0}
     - target: {fileID: -1475270653969734947, guid: 8730571fdf759a4419f81a3e08934caf, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.000000004927324
+      value: 0.000000011033649
       objectReference: {fileID: 0}
     - target: {fileID: -1475270653969734947, guid: 8730571fdf759a4419f81a3e08934caf, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.9914446
+      value: 0.84809047
       objectReference: {fileID: 0}
     - target: {fileID: -1475270653969734947, guid: 8730571fdf759a4419f81a3e08934caf, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.000000037426002
+      value: 0.00000003610045
       objectReference: {fileID: 0}
     - target: {fileID: -1475270653969734947, guid: 8730571fdf759a4419f81a3e08934caf, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 165
+      value: 116.009
       objectReference: {fileID: 0}
     - target: {fileID: -1269984462101873970, guid: 8730571fdf759a4419f81a3e08934caf, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.9964995
+      value: 0.540307
       objectReference: {fileID: 0}
     - target: {fileID: -1269984462101873970, guid: 8730571fdf759a4419f81a3e08934caf, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.000000037616868
+      value: -0.00000002540336
       objectReference: {fileID: 0}
     - target: {fileID: -1269984462101873970, guid: 8730571fdf759a4419f81a3e08934caf, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.083599165
+      value: -0.84146804
       objectReference: {fileID: 0}
     - target: {fileID: -1269984462101873970, guid: 8730571fdf759a4419f81a3e08934caf, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0000000031557872
+      value: 0.00000002792234
       objectReference: {fileID: 0}
     - target: {fileID: -1269984462101873970, guid: 8730571fdf759a4419f81a3e08934caf, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -9.591
+      value: -114.591
+      objectReference: {fileID: 0}
+    - target: {fileID: 598327318505532220, guid: 8730571fdf759a4419f81a3e08934caf, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 598327318505532220, guid: 8730571fdf759a4419f81a3e08934caf, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -344,12 +348,24 @@ PrefabInstance:
       value: Armory
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 8730571fdf759a4419f81a3e08934caf, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 8730571fdf759a4419f81a3e08934caf, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 2648310471847409781, guid: 8730571fdf759a4419f81a3e08934caf, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2648310471847409781, guid: 8730571fdf759a4419f81a3e08934caf, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 7518105650838359109, guid: 8730571fdf759a4419f81a3e08934caf, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7518105650838359109, guid: 8730571fdf759a4419f81a3e08934caf, type: 3}
       propertyPath: m_StaticEditorFlags

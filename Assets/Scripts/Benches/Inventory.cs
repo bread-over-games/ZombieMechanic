@@ -69,11 +69,6 @@ public class Inventory : MonoBehaviour
                 antibiotics.LoadValues(antibiotics);
                 OnObjectReceive?.Invoke(antibiotics, this);
                 break;
-
-
-            /*case Medicine medicine:
-                medicine.LoadValues(medicine);
-                break;*/
         }   
         OnInventoryChange?.Invoke();
     }
