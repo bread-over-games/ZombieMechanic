@@ -18,7 +18,6 @@ public class UIArmory : MonoBehaviour
     [SerializeField] private Image weaponImage;
     [SerializeField] private TMP_Text weaponNameText;
     [SerializeField] private TMP_Text weaponDurabilityText;
-    [SerializeField] private TMP_Text survivalChanceText;
 
     [Header("Backpack")]
     [SerializeField] private GameObject currentBackpackInfo;
@@ -32,8 +31,7 @@ public class UIArmory : MonoBehaviour
     [SerializeField] private Image armorImage;
     [SerializeField] private TMP_Text armorNameText;
     [SerializeField] private TMP_Text armorDurabilityText;
-    [SerializeField] private TMP_Text armorRunLengthText;
-    [SerializeField] private TMP_Text armorItemQualityText;
+    [SerializeField] private TMP_Text armorLootQualityText;
 
     [Header("Empty messages")]
     [SerializeField] private GameObject weaponEmptyMessage;
