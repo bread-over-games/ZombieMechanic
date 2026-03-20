@@ -20,8 +20,8 @@ public class ObjectGenerator : MonoBehaviour
 
     private void Start()
     {
-        //GenerateFirstWeapon();
-        GenerateFirstAntibiotics();
+        GenerateFirstWeapon();
+        GenerateFirsBackpack();
     }
 
     private void GenerateFirstWeapon() // generates first weapon for tutorial purpose
