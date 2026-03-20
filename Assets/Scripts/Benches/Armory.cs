@@ -3,6 +3,8 @@ using UnityEngine.EventSystems;
 
 public class Armory : Bench, IInteractable
 {
+    private bool isAvailableForMission = true;
+
     [SerializeReference] public Armor storedArmor = null;
     [SerializeReference] public Backpack storedBackpack = null;
     [SerializeReference] public Weapon storedWeapon = null;
@@ -30,9 +32,26 @@ public class Armory : Bench, IInteractable
         UIArmory.OnCurrentArmorySlotSelected -= AssignCurrentSlotSelection;
     }
 
+    public void MakeArmoryAvailableForMission()
+    {
+        isAvailableForMission = true; 
+    }
+
     private void AssignCurrentSlotSelection(ButtonSelector.ArmorySlot selectedSlot)
     {
         currentSlotSelection = selectedSlot;
+    }
+
+    public override bool IsInteractionPossible()
+    {
+        if (isAvailableForMission)
+        {
+            return true;
+        }
+        else
+        {            
+            return false;
+        }
     }
 
     public override void StartInteractionPrimary()
@@ -43,14 +62,17 @@ public class Armory : Bench, IInteractable
             {
                 switch (currentSlotSelection)
                 {
-                    case ButtonSelector.ArmorySlot.Weapon:                        
-                        inventory.SendObject(InventoriesController.Instance.playerInventory, storedWeapon);                        
+                    case ButtonSelector.ArmorySlot.Weapon: 
+                        if (storedWeapon != null)
+                            inventory.SendObject(InventoriesController.Instance.playerInventory, storedWeapon);                        
                         break;
                     case ButtonSelector.ArmorySlot.Armor:
-                        inventory.SendObject(InventoriesController.Instance.playerInventory, storedArmor);
+                        if (storedArmor != null)
+                            inventory.SendObject(InventoriesController.Instance.playerInventory, storedArmor);
                         break;
-                    case ButtonSelector.ArmorySlot.Backpack:                       
-                        inventory.SendObject(InventoriesController.Instance.playerInventory, storedBackpack);                        
+                    case ButtonSelector.ArmorySlot.Backpack:
+                        if (storedBackpack != null)
+                            inventory.SendObject(InventoriesController.Instance.playerInventory, storedBackpack);                        
                         break;
                 }                
             }
@@ -59,18 +81,25 @@ public class Armory : Bench, IInteractable
 
     public override void StartInteractionSecondary() // sending on mission
     {
+        if (!isAvailableForMission)
+        {
+            return;
+        }
+
         if (storedWeapon == null)
         {
             Debug.Log("No weapon, cant go to mission");
             return;
         }
 
-        MissionController.Instance.SendMission(storedWeapon, storedBackpack, storedArmor, inventory);
+        MissionController.Instance.SendMission(storedWeapon, storedBackpack, storedArmor, inventory, this);
 
         inventory.SendObjectOnMission(storedArmor);
         inventory.SendObjectOnMission(storedWeapon);
         inventory.SendObjectOnMission(storedBackpack);
         Debug.Log("Sent on mission!");
+
+        isAvailableForMission = false;
     }
 
     public override void EndInteractionSecondary()

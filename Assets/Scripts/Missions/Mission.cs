@@ -11,18 +11,21 @@ public class Mission
     [SerializeReference] public Backpack equippedBackpack;
     [SerializeReference] public Inventory missionInventory;
 
+    private Armory armoryOwner;
+
     private float missionDuration;
     private float elapsedTime;
     private float lootQualityMultiplier; // based on run length and affects the quality of equipment the survivors bring back, in percents
     private int zombiesKilled;
 
-    public Mission(/*Survivor missionSurvivor, */Weapon weaponToEquip, Backpack backpackToEquip, Armor armorToEquip, Inventory inventoryOfMission)
+    public Mission(/*Survivor missionSurvivor, */Weapon weaponToEquip, Backpack backpackToEquip, Armor armorToEquip, Inventory inventoryOfMission, Armory missionOwner)
     {
         // survivor = missionSurvivor;
         equippedWeapon = weaponToEquip;
         equippedBackpack = backpackToEquip;
         equippedArmor = armorToEquip;   
         missionInventory = inventoryOfMission;
+        armoryOwner = missionOwner;
 
         elapsedTime = 0f;
 
@@ -76,6 +79,7 @@ public class Mission
         GenerateLootQuality();
         GenerateLoot();
         isComplete = true;
+        armoryOwner.MakeArmoryAvailableForMission();
         //Debug.Log(survivor.survivorName + " has returned from the mission!");
     }
 
@@ -141,7 +145,7 @@ public class Mission
             {
                 missionInventory.ReceiveObject(equippedBackpack);
             }
-        }
+        }        
     }
 
     private void ApplyWearToLoadout()
