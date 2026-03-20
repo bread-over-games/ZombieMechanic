@@ -11,10 +11,10 @@ public class Mission
     [SerializeReference] public Backpack equippedBackpack;
     [SerializeReference] public Inventory missionInventory;
 
-    private Armory armoryOwner;
+    public Armory armoryOwner;
 
-    private float missionDuration;
-    private float elapsedTime;
+    public float missionDuration;
+    public float elapsedTime;
     private float lootQualityMultiplier; // based on run length and affects the quality of equipment the survivors bring back, in percents
     private int zombiesKilled;
 
