@@ -12,6 +12,8 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private Rigidbody rb;
     private Vector2 moveInput;
+    private Vector3 surfaceNormal = Vector3.up;
+    private bool isColliding = false;
 
     private void Awake()
     {
@@ -25,16 +27,49 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        isColliding = false;      // reset every physics frame
+        surfaceNormal = Vector3.up;
         Move();
         Rotate();
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        foreach (ContactPoint contact in collision.contacts)
+        {
+            if (contact.normal.y < 0.9f)
+            {
+                surfaceNormal = contact.normal;
+                isColliding = true;
+                return;
+            }
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        surfaceNormal = Vector3.up;
     }
 
     private void Move()
     {
         Vector3 moveDirection = new Vector3(moveInput.x, 0f, moveInput.y);
-        Vector3 velocity = moveDirection * moveSpeed;
 
-        rb.linearVelocity = new Vector3(velocity.x, rb.linearVelocity.y, velocity.z);        
+        if (moveInput.sqrMagnitude < 0.01f)
+        {
+            rb.linearVelocity = new Vector3(0f, rb.linearVelocity.y, 0f);
+            return;
+        }
+
+        Vector3 finalDirection = moveDirection;
+
+        if (isColliding)
+        {
+            Vector3 projected = Vector3.ProjectOnPlane(moveDirection, surfaceNormal);
+            finalDirection = projected.sqrMagnitude > 0.01f ? projected.normalized : Vector3.zero;
+        }
+
+        rb.linearVelocity = new Vector3(finalDirection.x * moveSpeed, rb.linearVelocity.y, finalDirection.z * moveSpeed);
     }
 
     private void Rotate()
