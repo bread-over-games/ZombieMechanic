@@ -56,5 +56,6 @@ public class MissionController : MonoBehaviour
         Mission mission = new Mission(weaponInArmory, backpackInArmory, armorInArmory, missionInventory, missionArmory);
 
         activeMissions.Add(mission); 
+        OnMissionStarted?.Invoke(mission);  
     }
 }
