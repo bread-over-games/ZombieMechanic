@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2037944587180573152}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Graphics
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 4812371839778889147}
   - component: {fileID: 4979007895259383675}
   - component: {fileID: -6343217438119974841}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Armory
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -163,7 +163,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1976446627374945539}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ArmorPivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -194,7 +194,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1569533145499603248}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: WeaponPivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -225,7 +225,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1523023177450310677}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BackpackPivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -336,6 +336,10 @@ PrefabInstance:
       value: -9.591
       objectReference: {fileID: 0}
     - target: {fileID: 598327318505532220, guid: 8730571fdf759a4419f81a3e08934caf, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 598327318505532220, guid: 8730571fdf759a4419f81a3e08934caf, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
@@ -344,12 +348,24 @@ PrefabInstance:
       value: Armory
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 8730571fdf759a4419f81a3e08934caf, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 8730571fdf759a4419f81a3e08934caf, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 2648310471847409781, guid: 8730571fdf759a4419f81a3e08934caf, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2648310471847409781, guid: 8730571fdf759a4419f81a3e08934caf, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 7518105650838359109, guid: 8730571fdf759a4419f81a3e08934caf, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7518105650838359109, guid: 8730571fdf759a4419f81a3e08934caf, type: 3}
       propertyPath: m_StaticEditorFlags

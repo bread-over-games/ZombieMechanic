@@ -14,24 +14,42 @@ public class PlayerInteraction : MonoBehaviour
 
     [SerializeField] private Inventory playerInventory;
 
-    private void OnTriggerEnter(Collider other)
-    {        
-        if (other.TryGetComponent<IInteractable>(out IInteractable interactable))
-        {            
-            currentInteractable = interactable;
-            InteractableApproached();
-        }
+    [Header("Raycast Settings")]
+    [SerializeField] private Transform rayOrigin;  
+    [SerializeField] private float maxDistance;
+    [SerializeField] private LayerMask interactableLayer;
+
+    private void Update()
+    {
+        CheckForInteractable();
     }
 
-    private void OnTriggerExit(Collider other)
+    private void CheckForInteractable()
     {
-        if (currentInteractable != null && interactionStarted && currentInteractable.IsInteractionPossible())
-        {                
-            PrimaryInteractEnded();            
+        IInteractable detected = null;
+
+        if (Physics.Raycast(rayOrigin.position, rayOrigin.forward, out RaycastHit hit, maxDistance, interactableLayer))
+        {
+            hit.collider.TryGetComponent<IInteractable>(out detected);
         }
 
-        OnInteractableLeft?.Invoke(currentInteractable.GetBenchType());
-        currentInteractable = null;
+        if (detected == currentInteractable) return;
+
+        if (currentInteractable != null)
+        {
+            if (interactionStarted && currentInteractable.IsInteractionPossible())
+                PrimaryInteractEnded();
+
+            OnInteractableLeft?.Invoke(currentInteractable.GetBenchType());
+            currentInteractable = null;
+        }
+
+        if (detected != null)
+        {
+            currentInteractable = detected;
+            InteractableApproached();
+            OnInteractableApproached?.Invoke(currentInteractable.GetBenchType());
+        }
     }
 
     public void OnInteractPrimary(InputAction.CallbackContext context)
