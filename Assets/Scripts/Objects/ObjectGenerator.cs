@@ -8,7 +8,7 @@ public class ObjectGenerator : MonoBehaviour
     [SerializeField] private int generateScrapChance;
     [SerializeField] private int generateBackpackChance;
     [SerializeField] private int generateArmorChance;
-    [SerializeField] private int generateMedicineChance;
+    [SerializeField] private int generateAntibioticsChance;
 
     void Awake()
     {
@@ -21,47 +21,46 @@ public class ObjectGenerator : MonoBehaviour
     private void Start()
     {
         GenerateFirstWeapon();
-        GenerateFirsBackpack();
     }
 
     private void GenerateFirstWeapon() // generates first weapon for tutorial purpose
     {
         Weapon newWeapon = (new Weapon { weaponType = Weapon.WeaponType.BaseballBat });
-        newWeapon.SetValues(40f);
+        newWeapon.SetValues(50f,70f);
         InventoriesController.Instance.lootTableInventory.ReceiveObject(newWeapon);
     }
 
     private void GenerateFirsBackpack() // generates first backpack for tutorial purpose
     {
         Backpack newBackpack = (new Backpack { backpackType = Backpack.BackpackType.SmallBackpack });
-        newBackpack.SetValues(40f);
+        newBackpack.SetValues(30f, 50f);
         InventoriesController.Instance.lootTableInventory.ReceiveObject(newBackpack);
     }
 
     private void GenerateFirsArmor() // generates first backpack for tutorial purpose
     {
         Armor newArmor = (new Armor { armorType = Armor.ArmorType.BalisticVest });
-        newArmor.SetValues(40f);
+        newArmor.SetValues(30f, 50f);
         InventoriesController.Instance.lootTableInventory.ReceiveObject(newArmor);
     }
 
     private void GenerateFirstScrap() // generates first scrap for tutorial purpose
     {
         Scrap newScrap = (new Scrap { scrapType = Scrap.ScrapType.SparePartsBox });
-        newScrap.SetValues(40f);
+        newScrap.SetValues(30f, 50f);
         InventoriesController.Instance.lootTableInventory.ReceiveObject(newScrap);
     }
 
     private void GenerateFirstAntibiotics()
     {
         Antibiotics newAntibiotics = (new Antibiotics { antibioType = Antibiotics.AntibioticsType.BSAntibiotics });
-        newAntibiotics.SetValues(40f);
+        newAntibiotics.SetValues(30f, 50f);
         InventoriesController.Instance.lootTableInventory.ReceiveObject(newAntibiotics);
     }
 
-    public void GenerateLoot(Mission mission, float lootQuality) // generates completely new object
+    public void GenerateLoot(Mission mission, float minimalLootQuality, float maximalLootQuality) // generates completely new object
     {
-        float total = generateWeaponChance + generateScrapChance + generateBackpackChance + generateArmorChance;
+        float total = generateWeaponChance + generateScrapChance + generateBackpackChance + generateArmorChance + generateAntibioticsChance;
         float roll = Random.Range(0f, total);
 
         Object loot = null;
@@ -82,10 +81,14 @@ public class ObjectGenerator : MonoBehaviour
         {
             loot = new Armor { armorType = Armor.ArmorType.BalisticVest };
         }
+        else if ((roll -= generateAntibioticsChance) < 0)
+        {
+            loot = new Antibiotics { antibioType = Antibiotics.AntibioticsType.BSAntibiotics };
+        }
 
         if (loot == null) return;
 
-        loot.SetValues(lootQuality);
+        loot.SetValues(minimalLootQuality, maximalLootQuality);
         InventoriesController.Instance.lootTableInventory.ReceiveObject(loot);
     }
 }

@@ -17,6 +17,23 @@ public static class MissionCalculator
         };
     }
 
+    public static MissionResult MissionResults(Weapon weaponToEquip, Backpack backpackToEquip, Armor armorToEquip)
+    {
+        int missionDuration = (int)CalculateMissionDuration(weaponToEquip, backpackToEquip, armorToEquip);
+
+        return new MissionResult
+        {
+            duration = missionDuration,
+            lootQualityMinimal = CalculateLootQualityMinimal(missionDuration),
+            lootQualityMaximal = CalculateLootQualityMaximal(CalculateLootQualityMinimal(missionDuration)),
+            zombiesKilled = CalculateZombiesKills(missionDuration),
+            weaponWear = CalculateWeaponWear(missionDuration),
+            armorWear = CalculateArmorWear(missionDuration),
+            backpackWear = CalculateBackpackWear(missionDuration),
+            lootAmount = CalculateLootAmount(backpackToEquip)
+        };
+    }
+
     private static int EstimateGearWear(int missionDuration)
     {
         float weaponWear = (missionDuration / 100f) * MissionController.Instance.loadoutWearWeaponWeight;
@@ -25,6 +42,24 @@ public static class MissionCalculator
 
         int gearWear = (int)((weaponWear + backpackWear + armorWear)/3f);
         return gearWear;
+    }
+
+    private static int CalculateWeaponWear(int missionDuration)
+    {
+        int weaponWear = (int)((missionDuration / 100f) * MissionController.Instance.loadoutWearWeaponWeight);
+        return weaponWear;
+    }
+
+    private static int CalculateArmorWear(int missionDuration)
+    {
+        int armorWear = (int)((missionDuration / 100f) * MissionController.Instance.loadoutWearArmorWeight);
+        return armorWear;
+    }
+
+    private static int CalculateBackpackWear(int missionDuration)
+    {
+        int backpackWear = (int)((missionDuration / 100f) * MissionController.Instance.loadoutWearBackpackWeight);
+        return backpackWear;
     }
 
     private static int CalculateLootAmount(Backpack backpackToEquip)
@@ -54,7 +89,7 @@ public static class MissionCalculator
 
     private static float CalculateLootQualityMaximal(float minimalQuality)
     {
-        float maximalLootQuality = minimalQuality * 2f;
+        float maximalLootQuality = minimalQuality * 3f;
 
         if (maximalLootQuality > 100)
         {

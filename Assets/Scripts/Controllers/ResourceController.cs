@@ -26,7 +26,7 @@ public class ResourceController : MonoBehaviour
 
     private void GiveStarterAntibiotics()
     {
-        antibioticsAmount = 5;
+        antibioticsAmount = 2;
         OnAntibioticsAmountChange?.Invoke();
     }
 
