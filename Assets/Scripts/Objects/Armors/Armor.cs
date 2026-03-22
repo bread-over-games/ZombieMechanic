@@ -27,14 +27,14 @@ public class Armor : Object
         }
     }
 
-    public override void SetValues(float qualityMultiplier) //when creating new object
+    public override void SetValues(float minimalLootQuality, float maximalLootQuality) //when creating new object
     {        
         switch (armorType)
         {
             default:
             case ArmorType.BalisticVest:               
                 maxDurability = ArmorAssets.Instance.balisticVestSO.maxDurability;
-                currentDurability = UnityEngine.Random.Range((int)((ArmorAssets.Instance.balisticVestSO.maxDurability / 100) * qualityMultiplier), ArmorAssets.Instance.balisticVestSO.maxDurability);
+                currentDurability = Random.Range((int)((maxDurability / 100f) * minimalLootQuality), (int)((maxDurability / 100f) * maximalLootQuality));
                 objectName = ArmorAssets.Instance.balisticVestSO.armorName;
 
                 break;

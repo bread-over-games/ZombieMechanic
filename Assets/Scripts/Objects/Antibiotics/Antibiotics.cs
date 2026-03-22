@@ -28,14 +28,18 @@ public class Antibiotics : Object
         }
     }
 
-    public override void SetValues(float qualityMultiplier) //when creating new object
+    public override void SetValues(float minimalLootQuality, float maximalLootQuality) //when creating new object
     {
         switch (antibioType)
         {
             default:
             case AntibioticsType.BSAntibiotics:
                 maxDurability = AntibioticsAssets.Instance.bsAntibioticsSO.maxAmount;
-                currentDurability = Random.Range((int)((maxDurability / 100f) * qualityMultiplier), maxDurability);
+                currentDurability = Random.Range((int)((maxDurability / 100f) * minimalLootQuality), (int)((maxDurability / 100f) * maximalLootQuality));
+                if (currentDurability < 1 )
+                {
+                    currentDurability = 1;
+                }
                 objectName = AntibioticsAssets.Instance.bsAntibioticsSO.antibioticsName;
                 break;
         }

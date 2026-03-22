@@ -28,14 +28,13 @@ public class Scrap : Object
             case ScrapType.SparePartsBox: return ScrapAssets.Instance.sparePartsBoxSO.scrapVisualPrefab;
         }
     }
-    public override void SetValues(float qualityMultiplier) //when creating new object
+    public override void SetValues(float minimalLootQuality, float maximalLootQuality) //when creating new object
     {
         switch (scrapType)
         {
             case ScrapType.SparePartsBox:
-
                 maxDurability = ScrapAssets.Instance.sparePartsBoxSO.maxDurability;
-                currentDurability = UnityEngine.Random.Range((int)((ScrapAssets.Instance.sparePartsBoxSO.maxDurability / 100f) * qualityMultiplier), ScrapAssets.Instance.sparePartsBoxSO.maxDurability);
+                currentDurability = UnityEngine.Random.Range((int)((maxDurability / 100f) * minimalLootQuality), (int)((maxDurability / 100f) * maximalLootQuality));
                 scrapName = ScrapAssets.Instance.sparePartsBoxSO.scrapName;
                 break;
         }

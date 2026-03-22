@@ -13,10 +13,16 @@ public class Mission
 
     public Armory armoryOwner;
 
+    [HideInInspector] public float elapsedTime;
+
     public float missionDuration;
-    public float elapsedTime;
-    private float lootQualityMultiplier; // based on run length and affects the quality of equipment the survivors bring back, in percents
+    private float lootQualityMinimal;
+    private float lootQualityMaximal;
     private int zombiesKilled;
+    public int weaponWear;
+    public int armorWear;
+    public int backpackWear;
+    public int lootAmount;
 
     public Mission(/*Survivor missionSurvivor, */Weapon weaponToEquip, Backpack backpackToEquip, Armor armorToEquip, Inventory inventoryOfMission, Armory missionOwner)
     {
@@ -29,83 +35,36 @@ public class Mission
 
         elapsedTime = 0f;
 
-        CalculateMissionDuration();
-    }
-
-    private void CalculateZombiesKilled()
-    {
-        zombiesKilled = (int)(missionDuration * missionDuration / 35f); // basic formula, will be improved with weapon damage. Divisor - the lower the value the higher the kill count
-        ZombiesController.Instance.AddKilledZombies(zombiesKilled);
-    }
-
-    private void CalculateMissionDuration()
-    {
-        float weaponTimeValue;
-        float armorTimeValue;
-        float backpackTimeValue;
-
-        if (equippedWeapon == null)
-        {
-            weaponTimeValue = 2f;
-        } else
-        {
-            weaponTimeValue = ((float)equippedWeapon.currentDurability / 100) * MissionController.Instance.missionLengthWeaponWeight;
-        }
-
-        if (equippedArmor == null)
-        {
-            armorTimeValue = 2f;
-        } else
-        {
-            armorTimeValue = ((float)equippedArmor.currentDurability / 100) * MissionController.Instance.missionLengthArmorWeight;
-        }
-
-        if (equippedBackpack == null)
-        {
-            backpackTimeValue = 2f;
-        } else
-        {
-            backpackTimeValue = ((float)equippedBackpack.currentDurability / 100) * MissionController.Instance.missionLengthBackpackWeight;
-        }
-
-        missionDuration = (weaponTimeValue + armorTimeValue + backpackTimeValue) * MissionController.Instance.missionLengthMultiplier;
+        MissionResult missionResult = MissionCalculator.MissionResults(equippedWeapon, equippedBackpack, equippedArmor);
+        missionDuration = missionResult.duration;
+        lootQualityMinimal = missionResult.lootQualityMinimal;
+        lootQualityMaximal = missionResult.lootQualityMaximal;
+        zombiesKilled = missionResult.zombiesKilled;
+        lootAmount = missionResult.lootAmount;
+        weaponWear = missionResult.weaponWear;
+        armorWear = missionResult.armorWear;
+        backpackWear = missionResult.backpackWear;
     }
 
     public void ResolveMission()
     {
-        CalculateZombiesKilled();
+        ZombiesController.Instance.AddKilledZombies(zombiesKilled);
         ApplyWearToLoadout();
         ReturnSurvivorLoadout();
-        GenerateLootQuality();
+
         GenerateLoot();
         isComplete = true;
         armoryOwner.MakeArmoryAvailableForMission();
         //Debug.Log(survivor.survivorName + " has returned from the mission!");
     }
 
-    private void GenerateLootQuality()
-    {
-        lootQualityMultiplier = (missionDuration / MissionController.Instance.missionMaximumLength) * 100;
-        if (lootQualityMultiplier < MissionController.Instance.minimalLootQuality)
-        {
-            lootQualityMultiplier = MissionController.Instance.minimalLootQuality;
-        }
-    }
 
     private void GenerateLoot()
     {
-        if (equippedBackpack == null) 
+        for (int i = 0; i < lootAmount; i++)
         {
-            ObjectGenerator.Instance.GenerateLoot(this, lootQualityMultiplier); // if player has no backpack generate two items
-            ObjectGenerator.Instance.GenerateLoot(this, lootQualityMultiplier);
-        } 
-        else
-        {
-            for (int i = 0; i < equippedBackpack.backpackSize; i++)
-            {
-                ObjectGenerator.Instance.GenerateLoot(this, lootQualityMultiplier);
-            }
-        }   
+            ObjectGenerator.Instance.GenerateLoot(this, lootQualityMinimal, lootQualityMaximal);
+        }
     }
 
     private void ReturnSurvivorLoadout()
@@ -119,7 +78,6 @@ public class Mission
             else
             {
                 missionInventory.ReceiveObject(equippedWeapon);
-
             }
         }
 
@@ -152,9 +110,7 @@ public class Mission
     {
         if (equippedWeapon is Weapon weapon)
         {
-            float weaponWear = (missionDuration / 100) * MissionController.Instance.loadoutWearWeaponWeight;
-
-            if (weapon.DamageObject((int)weaponWear))
+            if (weapon.DamageObject(weaponWear))
             {
                 Debug.Log(weapon.objectName + " destroyed on a mission");
             }            
@@ -162,9 +118,7 @@ public class Mission
 
         if (equippedBackpack is Backpack backpack)
         {
-            float backpackWear = (missionDuration / 100) * MissionController.Instance.loadoutWearBackpackWeight;            
-
-            if (backpack.DamageObject((int)backpackWear))
+            if (backpack.DamageObject(backpackWear))
             {
                 Debug.Log(backpack.objectName + " destroyed on a mission");
             }
@@ -172,9 +126,7 @@ public class Mission
 
         if (equippedArmor is Armor armor)
         {
-            float armorWear = (missionDuration / 100) * MissionController.Instance.loadoutWearArmorWeight;
-
-            if (armor.DamageObject((int)armorWear))
+            if (armor.DamageObject(armorWear))
             {
                 Debug.Log(armor.objectName + " destroyed on a mission");
             }
