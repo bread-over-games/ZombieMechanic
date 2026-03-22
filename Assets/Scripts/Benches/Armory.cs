@@ -86,12 +86,6 @@ public class Armory : Bench, IInteractable
             return;
         }
 
-        if (storedWeapon == null)
-        {
-            Debug.Log("No weapon, cant go to mission");
-            return;
-        }
-
         MissionController.Instance.SendMission(storedWeapon, storedBackpack, storedArmor, inventory, this);
 
         inventory.SendObjectOnMission(storedArmor);

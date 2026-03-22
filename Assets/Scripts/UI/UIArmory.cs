@@ -73,6 +73,7 @@ public class UIArmory : MonoBehaviour
         armoryWindow.SetActive(true);
         EventSystem.current.SetSelectedGameObject(firstSelected);
         RefreshInventoryUI();
+        RefreshEstimatesUI();
     }
 
     private void HideArmoryWindow(Bench.BenchType benchType)

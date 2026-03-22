@@ -13,7 +13,7 @@ public static class MissionCalculator
             estimatedLootQualityMaximal = CalculateLootQualityMaximal(CalculateLootQualityMinimal(missionDuration)),
             estimatedZombiesKills = CalculateZombiesKills(missionDuration),
             estimatedGearWear = EstimateGearWear(missionDuration),
-            estimatedLootAmount = CalculateLootAmount(backpackToEquip)
+            estimatedLootAmount = CalculateLootAmount(backpackToEquip, weaponToEquip)
         };
     }
 
@@ -30,7 +30,7 @@ public static class MissionCalculator
             weaponWear = CalculateWeaponWear(missionDuration),
             armorWear = CalculateArmorWear(missionDuration),
             backpackWear = CalculateBackpackWear(missionDuration),
-            lootAmount = CalculateLootAmount(backpackToEquip)
+            lootAmount = CalculateLootAmount(backpackToEquip, weaponToEquip)
         };
     }
 
@@ -62,16 +62,26 @@ public static class MissionCalculator
         return backpackWear;
     }
 
-    private static int CalculateLootAmount(Backpack backpackToEquip)
+    private static int CalculateLootAmount(Backpack backpackToEquip, Weapon weaponToEquip)
     {
-        if (backpackToEquip == null)
+        int lootAmount = 1;
+
+        if (weaponToEquip == null)
         {
-            return 2;
-        } else
-        {
-            return backpackToEquip.backpackSize;
+            lootAmount = 1;
         }
-            
+
+        if (weaponToEquip != null && backpackToEquip == null)
+        {
+            lootAmount = 2;
+        }
+
+        if (weaponToEquip != null && backpackToEquip != null)        
+        {
+            lootAmount = backpackToEquip.backpackSize;
+        }
+
+        return lootAmount;            
     }
 
     private static float CalculateLootQualityMinimal(int missionDuration)
