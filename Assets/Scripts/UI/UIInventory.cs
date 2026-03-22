@@ -41,13 +41,19 @@ public class UIInventory : MonoBehaviour
     [SerializeField] private TMP_Text antibioticsNameText;
     [SerializeField] private TMP_Text antibioticsAmountText;
 
-
     [Header("Empty inventory messages")]
     [SerializeField] private GameObject workbenchEmptyMessage;
     [SerializeField] private GameObject loottableEmptyMessage;
     [SerializeField] private GameObject medicalCabinetEmptyMessage;
     [SerializeField] private GameObject salvageTableEmptyMessage;
     [SerializeField] private GameObject toolboxEmptyMessage;
+
+    [Header("ControlTips")]
+    [SerializeField] private GameObject workbenchControls;
+    [SerializeField] private GameObject salvageTableControls;
+    [SerializeField] private GameObject tableControls;
+    [SerializeField] private GameObject medicalCabinetControls;
+    [SerializeField] private GameObject lootTableControls;
 
     private void Start()
     {
@@ -135,7 +141,13 @@ public class UIInventory : MonoBehaviour
         salvageTableEmptyMessage.SetActive(false);
         medicalCabinetEmptyMessage.SetActive(false);
         toolboxEmptyMessage.SetActive(false);   
-        
+
+        lootTableControls.SetActive(false);
+        salvageTableControls.SetActive(false);
+        tableControls.SetActive(false);
+        medicalCabinetControls.SetActive(false);
+        workbenchControls.SetActive(false); 
+                
         currentWeaponInfo.SetActive(false);
         currentArmorInfo.SetActive(false);  
         currentBackpackInfo.SetActive(false);
@@ -148,6 +160,30 @@ public class UIInventory : MonoBehaviour
         } else
         {
             DisplayEmptyMessage();
+        }
+
+        DisplayControls();
+    }
+
+    private void DisplayControls()
+    {
+        switch (inventory.GetInventoryOfType())
+        {
+            case Inventory.InventoryOfType.Workbench:
+                workbenchControls.SetActive(true);
+                break;
+            case Inventory.InventoryOfType.LootTable:
+                lootTableControls.SetActive(true);
+                break;
+            case Inventory.InventoryOfType.SalvageTable:
+                salvageTableControls.SetActive(true);
+                break;
+            case Inventory.InventoryOfType.Table:
+                tableControls.SetActive(true);
+                break;
+            case Inventory.InventoryOfType.MedicalCabinet:
+                medicalCabinetControls.SetActive(true);
+                break;
         }
     }
 
