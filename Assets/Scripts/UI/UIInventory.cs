@@ -35,6 +35,13 @@ public class UIInventory : MonoBehaviour
     [SerializeField] private TMP_Text scrapNameText;
     [SerializeField] private TMP_Text scrapDurabilityText;
 
+    [Header("Antibiotics")]
+    [SerializeField] private GameObject currentAntibioticsInfo;
+    [SerializeField] private Image antibioticsImage;
+    [SerializeField] private TMP_Text antibioticsNameText;
+    [SerializeField] private TMP_Text antibioticsAmountText;
+
+
     [Header("Empty inventory messages")]
     [SerializeField] private GameObject workbenchEmptyMessage;
     [SerializeField] private GameObject loottableEmptyMessage;
@@ -133,6 +140,7 @@ public class UIInventory : MonoBehaviour
         currentArmorInfo.SetActive(false);  
         currentBackpackInfo.SetActive(false);
         currentScrapInfo.SetActive(false);
+        currentAntibioticsInfo.SetActive(false);
 
         if (inventory.GetObjectList().Count > 0)
         {
@@ -185,6 +193,10 @@ public class UIInventory : MonoBehaviour
                 currentScrapInfo.SetActive(true); 
                 scrapImage.sprite = inventory.GetObjectList()[0].GetObjectSprite();
                 break;
+            case Antibiotics antibiotics:
+                currentAntibioticsInfo.SetActive(true);
+                antibioticsImage.sprite = inventory.GetObjectList()[0].GetObjectSprite();
+                break;
         }
 
         RefreshInventoryValues();
@@ -197,14 +209,14 @@ public class UIInventory : MonoBehaviour
         switch (inventory.GetObjectList()[0])
         {
             case Weapon weapon:
-                damageText.text = weapon.baseDamage.ToString() + "+" + weapon.bonusDamage.ToString();
+                damageText.text = weapon.baseDamage.ToString();
                 durabilityText.text = weapon.currentDurability.ToString() + "/" + weapon.maxDurability.ToString();
                 weaponNameText.text = weapon.objectName.ToString();
                 break;
             case Backpack backpack:
                 backpackDurabilityText.text = backpack.currentDurability.ToString() + "/" + backpack.maxDurability.ToString();
                 backpackNameText.text = backpack.objectName.ToString();
-                backpackLootAmountText.text = backpack.objectName.ToString();
+                backpackLootAmountText.text = backpack.backpackSize.ToString();
                 break;
             case Armor armor:
                 armorDurabilityText.text = armor.currentDurability.ToString() + "/" + armor.maxDurability.ToString();
@@ -213,6 +225,10 @@ public class UIInventory : MonoBehaviour
             case Scrap scrap:
                 scrapNameText.text = scrap.scrapName.ToString();
                 scrapDurabilityText.text = scrap.currentDurability.ToString() + "/" + scrap.maxDurability.ToString();
+                break;
+            case Antibiotics antibiotics:
+                antibioticsNameText.text = antibiotics.objectName.ToString();
+                antibioticsAmountText.text = antibiotics.currentDurability.ToString() + "/" + antibiotics.maxDurability.ToString();
                 break;
         }        
     }
