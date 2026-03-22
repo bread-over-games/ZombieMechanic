@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   antibioticsVisual: {fileID: -1910602607, guid: 1dc62fca54a272142a26c9494ee680d1, type: 3}
   antibioticsVisualPrefab: {fileID: 4198996785675536476, guid: 2ea52a43472312f40befb6e9d942be00, type: 3}
-  antibioticsName: Antibiotics - Broad Spectrum
+  antibioticsName: Antibiotics
   maxAmount: 3

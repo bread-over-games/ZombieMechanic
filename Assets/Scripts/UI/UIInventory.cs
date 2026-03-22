@@ -20,12 +20,14 @@ public class UIInventory : MonoBehaviour
     [SerializeField] private Image backpackImage;
     [SerializeField] private TMP_Text backpackNameText;    
     [SerializeField] private TMP_Text backpackDurabilityText;
+    [SerializeField] private TMP_Text backpackLootAmountText;
 
     [Header("Armors")]
     [SerializeField] private GameObject currentArmorInfo;
     [SerializeField] private Image armorImage;
     [SerializeField] private TMP_Text armorNameText;
     [SerializeField] private TMP_Text armorDurabilityText;
+    [SerializeField] private TMP_Text armorLootQualityText;
 
     [Header("Scraps")]
     [SerializeField] private GameObject currentScrapInfo;
@@ -33,9 +35,25 @@ public class UIInventory : MonoBehaviour
     [SerializeField] private TMP_Text scrapNameText;
     [SerializeField] private TMP_Text scrapDurabilityText;
 
+    [Header("Antibiotics")]
+    [SerializeField] private GameObject currentAntibioticsInfo;
+    [SerializeField] private Image antibioticsImage;
+    [SerializeField] private TMP_Text antibioticsNameText;
+    [SerializeField] private TMP_Text antibioticsAmountText;
+
     [Header("Empty inventory messages")]
     [SerializeField] private GameObject workbenchEmptyMessage;
     [SerializeField] private GameObject loottableEmptyMessage;
+    [SerializeField] private GameObject medicalCabinetEmptyMessage;
+    [SerializeField] private GameObject salvageTableEmptyMessage;
+    [SerializeField] private GameObject toolboxEmptyMessage;
+
+    [Header("ControlTips")]
+    [SerializeField] private GameObject workbenchControls;
+    [SerializeField] private GameObject salvageTableControls;
+    [SerializeField] private GameObject tableControls;
+    [SerializeField] private GameObject medicalCabinetControls;
+    [SerializeField] private GameObject lootTableControls;
 
     private void Start()
     {
@@ -120,11 +138,21 @@ public class UIInventory : MonoBehaviour
         interactableName.text = inventory.gameObject.GetComponent<IInteractable>().GetName();
         workbenchEmptyMessage.SetActive(false);
         loottableEmptyMessage.SetActive(false);
-        
+        salvageTableEmptyMessage.SetActive(false);
+        medicalCabinetEmptyMessage.SetActive(false);
+        toolboxEmptyMessage.SetActive(false);   
+
+        lootTableControls.SetActive(false);
+        salvageTableControls.SetActive(false);
+        tableControls.SetActive(false);
+        medicalCabinetControls.SetActive(false);
+        workbenchControls.SetActive(false); 
+                
         currentWeaponInfo.SetActive(false);
         currentArmorInfo.SetActive(false);  
         currentBackpackInfo.SetActive(false);
         currentScrapInfo.SetActive(false);
+        currentAntibioticsInfo.SetActive(false);
 
         if (inventory.GetObjectList().Count > 0)
         {
@@ -132,6 +160,30 @@ public class UIInventory : MonoBehaviour
         } else
         {
             DisplayEmptyMessage();
+        }
+
+        DisplayControls();
+    }
+
+    private void DisplayControls()
+    {
+        switch (inventory.GetInventoryOfType())
+        {
+            case Inventory.InventoryOfType.Workbench:
+                workbenchControls.SetActive(true);
+                break;
+            case Inventory.InventoryOfType.LootTable:
+                lootTableControls.SetActive(true);
+                break;
+            case Inventory.InventoryOfType.SalvageTable:
+                salvageTableControls.SetActive(true);
+                break;
+            case Inventory.InventoryOfType.Table:
+                tableControls.SetActive(true);
+                break;
+            case Inventory.InventoryOfType.MedicalCabinet:
+                medicalCabinetControls.SetActive(true);
+                break;
         }
     }
 
@@ -144,6 +196,15 @@ public class UIInventory : MonoBehaviour
                 break;
             case Inventory.InventoryOfType.LootTable:
                 loottableEmptyMessage.SetActive(true);
+                break;
+            case Inventory.InventoryOfType.SalvageTable:
+                salvageTableEmptyMessage.SetActive(true);
+                break;
+            case Inventory.InventoryOfType.Table:
+                toolboxEmptyMessage.SetActive(true);
+                break;
+            case Inventory.InventoryOfType.MedicalCabinet:
+                medicalCabinetEmptyMessage.SetActive(true);
                 break;
         }
     }
@@ -168,6 +229,10 @@ public class UIInventory : MonoBehaviour
                 currentScrapInfo.SetActive(true); 
                 scrapImage.sprite = inventory.GetObjectList()[0].GetObjectSprite();
                 break;
+            case Antibiotics antibiotics:
+                currentAntibioticsInfo.SetActive(true);
+                antibioticsImage.sprite = inventory.GetObjectList()[0].GetObjectSprite();
+                break;
         }
 
         RefreshInventoryValues();
@@ -180,13 +245,14 @@ public class UIInventory : MonoBehaviour
         switch (inventory.GetObjectList()[0])
         {
             case Weapon weapon:
-                damageText.text = weapon.baseDamage.ToString() + "+" + weapon.bonusDamage.ToString();
+                damageText.text = weapon.baseDamage.ToString();
                 durabilityText.text = weapon.currentDurability.ToString() + "/" + weapon.maxDurability.ToString();
                 weaponNameText.text = weapon.objectName.ToString();
                 break;
             case Backpack backpack:
                 backpackDurabilityText.text = backpack.currentDurability.ToString() + "/" + backpack.maxDurability.ToString();
                 backpackNameText.text = backpack.objectName.ToString();
+                backpackLootAmountText.text = backpack.backpackSize.ToString();
                 break;
             case Armor armor:
                 armorDurabilityText.text = armor.currentDurability.ToString() + "/" + armor.maxDurability.ToString();
@@ -196,9 +262,10 @@ public class UIInventory : MonoBehaviour
                 scrapNameText.text = scrap.scrapName.ToString();
                 scrapDurabilityText.text = scrap.currentDurability.ToString() + "/" + scrap.maxDurability.ToString();
                 break;
-                /*case Medicine medicine:
-                    medicine.LoadValues(medicine);
-                    break;*/
+            case Antibiotics antibiotics:
+                antibioticsNameText.text = antibiotics.objectName.ToString();
+                antibioticsAmountText.text = antibiotics.currentDurability.ToString() + "/" + antibiotics.maxDurability.ToString();
+                break;
         }        
     }
 }
