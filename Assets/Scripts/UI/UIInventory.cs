@@ -20,12 +20,14 @@ public class UIInventory : MonoBehaviour
     [SerializeField] private Image backpackImage;
     [SerializeField] private TMP_Text backpackNameText;    
     [SerializeField] private TMP_Text backpackDurabilityText;
+    [SerializeField] private TMP_Text backpackLootAmountText;
 
     [Header("Armors")]
     [SerializeField] private GameObject currentArmorInfo;
     [SerializeField] private Image armorImage;
     [SerializeField] private TMP_Text armorNameText;
     [SerializeField] private TMP_Text armorDurabilityText;
+    [SerializeField] private TMP_Text armorLootQualityText;
 
     [Header("Scraps")]
     [SerializeField] private GameObject currentScrapInfo;
@@ -36,6 +38,9 @@ public class UIInventory : MonoBehaviour
     [Header("Empty inventory messages")]
     [SerializeField] private GameObject workbenchEmptyMessage;
     [SerializeField] private GameObject loottableEmptyMessage;
+    [SerializeField] private GameObject medicalCabinetEmptyMessage;
+    [SerializeField] private GameObject salvageTableEmptyMessage;
+    [SerializeField] private GameObject toolboxEmptyMessage;
 
     private void Start()
     {
@@ -120,6 +125,9 @@ public class UIInventory : MonoBehaviour
         interactableName.text = inventory.gameObject.GetComponent<IInteractable>().GetName();
         workbenchEmptyMessage.SetActive(false);
         loottableEmptyMessage.SetActive(false);
+        salvageTableEmptyMessage.SetActive(false);
+        medicalCabinetEmptyMessage.SetActive(false);
+        toolboxEmptyMessage.SetActive(false);   
         
         currentWeaponInfo.SetActive(false);
         currentArmorInfo.SetActive(false);  
@@ -144,6 +152,15 @@ public class UIInventory : MonoBehaviour
                 break;
             case Inventory.InventoryOfType.LootTable:
                 loottableEmptyMessage.SetActive(true);
+                break;
+            case Inventory.InventoryOfType.SalvageTable:
+                salvageTableEmptyMessage.SetActive(true);
+                break;
+            case Inventory.InventoryOfType.Table:
+                toolboxEmptyMessage.SetActive(true);
+                break;
+            case Inventory.InventoryOfType.MedicalCabinet:
+                medicalCabinetEmptyMessage.SetActive(true);
                 break;
         }
     }
@@ -187,6 +204,7 @@ public class UIInventory : MonoBehaviour
             case Backpack backpack:
                 backpackDurabilityText.text = backpack.currentDurability.ToString() + "/" + backpack.maxDurability.ToString();
                 backpackNameText.text = backpack.objectName.ToString();
+                backpackLootAmountText.text = backpack.objectName.ToString();
                 break;
             case Armor armor:
                 armorDurabilityText.text = armor.currentDurability.ToString() + "/" + armor.maxDurability.ToString();
@@ -196,9 +214,6 @@ public class UIInventory : MonoBehaviour
                 scrapNameText.text = scrap.scrapName.ToString();
                 scrapDurabilityText.text = scrap.currentDurability.ToString() + "/" + scrap.maxDurability.ToString();
                 break;
-                /*case Medicine medicine:
-                    medicine.LoadValues(medicine);
-                    break;*/
         }        
     }
 }
