@@ -11,6 +11,7 @@ public class PlayerInteraction : MonoBehaviour
 
     public static Action<Bench.BenchType> OnInteractableApproached;
     public static Action<Bench.BenchType> OnInteractableLeft;
+    public static Action OnIntroSkip;
 
     [SerializeField] private Inventory playerInventory;
 
@@ -18,6 +19,8 @@ public class PlayerInteraction : MonoBehaviour
     [SerializeField] private Transform rayOrigin;  
     [SerializeField] private float maxDistance;
     [SerializeField] private LayerMask interactableLayer;
+
+    private bool introSkipped = false;
 
     private void Update()
     {
@@ -54,6 +57,13 @@ public class PlayerInteraction : MonoBehaviour
 
     public void OnInteractPrimary(InputAction.CallbackContext context)
     {
+        if (!introSkipped)
+        {
+            introSkipped = true;
+            OnIntroSkip?.Invoke();
+            return;
+        }
+
         if (currentInteractable == null)
         {
             return;
