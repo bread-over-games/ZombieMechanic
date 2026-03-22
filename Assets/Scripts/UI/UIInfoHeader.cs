@@ -27,6 +27,8 @@ public class UIInfoHeader : MonoBehaviour
     private void Start()
     {
         UpdateAmounts();
+        UpdateAntibioticsAmount();
+        UpdateZombiesAmount();
     }
 
     private void UpdateAntibioticsAmount()
