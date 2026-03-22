@@ -12,6 +12,9 @@ public class UIArmory : MonoBehaviour
     [SerializeField] private GameObject firstSelected;
     public ButtonSelector.ArmorySlot currentSlotSelected;
     public static Action<ButtonSelector.ArmorySlot> OnCurrentArmorySlotSelected;
+        
+    [SerializeField] private GameObject objectsSlots;
+    [SerializeField] private GameObject survivorOnMission;
 
     [Header("Weapon")]
     [SerializeField] private GameObject currentWeaponInfo;
@@ -42,7 +45,6 @@ public class UIArmory : MonoBehaviour
     [SerializeField] private TMP_Text gearWearText;
     [SerializeField] private TMP_Text zombieKillsText;
 
-
     [Header("Empty messages")]
     [SerializeField] private GameObject weaponEmptyMessage;
     [SerializeField] private GameObject backpackEmptyMessage;
@@ -54,6 +56,8 @@ public class UIArmory : MonoBehaviour
         Inventory.OnInventoryChange += RefreshEstimatesUI;
         PlayerInteraction.OnInteractableApproached += ShowArmoryWindow;
         PlayerInteraction.OnInteractableLeft += HideArmoryWindow;
+        MissionController.OnMissionStarted += ChangeMissionStateGUI;
+        MissionController.OnMissionCompleted += ChangeMissionStateGUI;
     }
 
     private void OnDisable()
@@ -62,6 +66,8 @@ public class UIArmory : MonoBehaviour
         Inventory.OnInventoryChange -= RefreshEstimatesUI;
         PlayerInteraction.OnInteractableApproached -= ShowArmoryWindow;
         PlayerInteraction.OnInteractableLeft -= HideArmoryWindow;
+        MissionController.OnMissionStarted -= ChangeMissionStateGUI;
+        MissionController.OnMissionCompleted -= ChangeMissionStateGUI;
     }
 
     private void ShowArmoryWindow(Bench.BenchType benchType)
@@ -75,6 +81,7 @@ public class UIArmory : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(firstSelected);
         RefreshInventoryUI();
         RefreshEstimatesUI();
+        ChangeMissionStateGUI(null);
     }
 
     private void HideArmoryWindow(Bench.BenchType benchType)
@@ -87,7 +94,7 @@ public class UIArmory : MonoBehaviour
         armoryWindow.SetActive(false);
         EventSystem.current.SetSelectedGameObject(null);
         DropInventory();
-        DropArmory();
+        DropArmory();        
     }
 
     public void SetInventory(Inventory currentInventory)
@@ -198,6 +205,21 @@ public class UIArmory : MonoBehaviour
         }
     }
 
+    private void ChangeMissionStateGUI(Mission mission)
+    {
+        if (!armory.isAvailableForMission)
+        {
+            objectsSlots.SetActive(false);
+            missionEstimates.SetActive(false);
+            survivorOnMission.SetActive(true);            
+        } else
+        {            
+            objectsSlots.SetActive(true);
+            missionEstimates.SetActive(true);
+            survivorOnMission.SetActive(false);
+        }
+    }
+
     public void OnButtonSelected(ButtonSelector.ArmorySlot armorySlot)
     {        
         currentSlotSelected = armorySlot;
@@ -209,3 +231,4 @@ public class UIArmory : MonoBehaviour
         
     }
 }
+;
