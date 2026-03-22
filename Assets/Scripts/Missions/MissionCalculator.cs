@@ -11,7 +11,7 @@ public static class MissionCalculator
             estimatedDuration = missionDuration,
             estimatedLootQualityMinimal = CalculateLootQualityMinimal(missionDuration),
             estimatedLootQualityMaximal = CalculateLootQualityMaximal(CalculateLootQualityMinimal(missionDuration)),
-            estimatedZombiesKills = CalculateZombiesKills(missionDuration),
+            estimatedZombiesKills = CalculateZombiesKills(missionDuration, weaponToEquip),
             estimatedGearWear = EstimateGearWear(missionDuration),
             estimatedLootAmount = CalculateLootAmount(backpackToEquip, weaponToEquip)
         };
@@ -26,7 +26,7 @@ public static class MissionCalculator
             duration = missionDuration,
             lootQualityMinimal = CalculateLootQualityMinimal(missionDuration),
             lootQualityMaximal = CalculateLootQualityMaximal(CalculateLootQualityMinimal(missionDuration)),
-            zombiesKilled = CalculateZombiesKills(missionDuration),
+            zombiesKilled = CalculateZombiesKills(missionDuration, weaponToEquip),
             weaponWear = CalculateWeaponWear(missionDuration),
             armorWear = CalculateArmorWear(missionDuration),
             backpackWear = CalculateBackpackWear(missionDuration),
@@ -109,9 +109,21 @@ public static class MissionCalculator
         return maximalLootQuality;
     }
 
-    private static int CalculateZombiesKills(int missionDuration)
+    private static int CalculateZombiesKills(int missionDuration, Weapon equippedWeapon)
     {
+        float weaponKills;
+        int weaponDamage;
+        if (equippedWeapon == null)
+        {
+            weaponDamage = 1;
+        } else
+        {
+            weaponDamage = equippedWeapon.baseDamage;
+        }
+
+        weaponKills = missionDuration * (weaponDamage / 50f);
         int zombiesKills = (int)(missionDuration * missionDuration / 35f); // basic formula, will be improved with weapon damage. Divisor - the lower the value the higher the kill count
+        zombiesKills += (int)weaponKills;
         return zombiesKills;
     }
 

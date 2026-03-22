@@ -18,6 +18,7 @@ public class UIArmory : MonoBehaviour
     [SerializeField] private Image weaponImage;
     [SerializeField] private TMP_Text weaponNameText;
     [SerializeField] private TMP_Text weaponDurabilityText;
+    [SerializeField] private TMP_Text weaponDamageText;
 
     [Header("Backpack")]
     [SerializeField] private GameObject currentBackpackInfo;
@@ -186,6 +187,7 @@ public class UIArmory : MonoBehaviour
         if (armory.storedWeapon is Weapon weapon)
         {
             weaponDurabilityText.text = weapon.currentDurability.ToString() + "/" + weapon.maxDurability.ToString();
+            weaponDamageText.text = weapon.baseDamage.ToString();
             weaponNameText.text = weapon.objectName.ToString();
         }
 

@@ -14,7 +14,6 @@ public class Weapon : Object
 
     public WeaponType weaponType;
     public int baseDamage;
-    public int bonusDamage;
 
     public override Sprite GetObjectSprite()
     {
@@ -42,16 +41,14 @@ public class Weapon : Object
         {
             default:
             case WeaponType.BaseballBat:
-                baseDamage = WeaponAssets.Instance.baseballBatSO.baseDamage;
-                bonusDamage = UnityEngine.Random.Range(0, WeaponAssets.Instance.baseballBatSO.baseDamage);
+                baseDamage = UnityEngine.Random.Range(WeaponAssets.Instance.baseballBatSO.minimalBaseDamage, WeaponAssets.Instance.baseballBatSO.maximalBaseDamage);
                 maxDurability = WeaponAssets.Instance.baseballBatSO.maxDurability;
                 currentDurability = UnityEngine.Random.Range((int)((maxDurability / 100f) * minimalLootQuality), (int)((maxDurability / 100f) * maximalLootQuality));
                 objectName = WeaponAssets.Instance.baseballBatSO.weaponName;
 
                 break;
             case WeaponType.Crowbar:
-                baseDamage = WeaponAssets.Instance.crowbarSO.baseDamage;
-                bonusDamage = UnityEngine.Random.Range(0, WeaponAssets.Instance.crowbarSO.baseDamage);
+                baseDamage = UnityEngine.Random.Range(WeaponAssets.Instance.crowbarSO.minimalBaseDamage, WeaponAssets.Instance.crowbarSO.maximalBaseDamage);
                 maxDurability = WeaponAssets.Instance.crowbarSO.maxDurability;
                 currentDurability = UnityEngine.Random.Range((int)((maxDurability / 100f) * minimalLootQuality), (int)((maxDurability / 100f) * maximalLootQuality));
                 objectName = WeaponAssets.Instance.crowbarSO.weaponName;
@@ -64,7 +61,6 @@ public class Weapon : Object
         if (existingObject is Weapon existingWeapon)
         {
             baseDamage = existingWeapon.baseDamage;
-            bonusDamage = existingWeapon.bonusDamage;
             maxDurability = existingWeapon.maxDurability;
             currentDurability = existingWeapon.currentDurability;
             objectName = existingWeapon.objectName;
