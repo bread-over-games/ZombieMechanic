@@ -11,4 +11,5 @@ public class WeaponData : ScriptableObject
     public int minimalBaseDamage;
     public int maximalBaseDamage;
     public int maxDurability;
+    public int spawnChance;
 }

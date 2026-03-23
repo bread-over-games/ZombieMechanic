@@ -15,4 +15,4 @@ MonoBehaviour:
   armorVisual: {fileID: -1858961652, guid: d077688e1b97b2c47852d0e77dbd2933, type: 3}
   armorVisualPrefab: {fileID: 1024016258484320585, guid: 7eea41288f2f8b24097de54b7d7ddcc6, type: 3}
   armorName: Balistic Vest
-  maxDurability: 40
+  maxDurability: 30

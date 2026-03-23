@@ -67,6 +67,27 @@ public class Weapon : Object
         }        
     }
 
+    public static WeaponType ChooseWeaponTypeToGenerate()
+    {
+        WeaponAssets weaponAssets = WeaponAssets.Instance;
+
+        float total = weaponAssets.baseballBatSO.spawnChance + weaponAssets.crowbarSO.spawnChance;
+        float roll = UnityEngine.Random.Range(0f, total);
+
+        WeaponType weaponTypeToGenerate = Weapon.WeaponType.Crowbar;
+
+        if ((roll -= weaponAssets.baseballBatSO.spawnChance) < 0)
+        {
+            weaponTypeToGenerate = Weapon.WeaponType.BaseballBat;
+        }
+        else if ((roll -= weaponAssets.crowbarSO.spawnChance) < 0)
+        {
+            weaponTypeToGenerate = Weapon.WeaponType.Crowbar;
+        }
+
+        return weaponTypeToGenerate;
+    }
+
     public override bool DamageObject(int damageAmount) // returns true when weapon is destroyed
     {
         currentDurability -= damageAmount;

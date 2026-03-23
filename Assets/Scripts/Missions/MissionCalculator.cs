@@ -13,7 +13,7 @@ public static class MissionCalculator
             estimatedLootQualityMaximal = CalculateLootQualityMaximal(CalculateLootQualityMinimal(missionDuration)),
             estimatedZombiesKills = CalculateZombiesKills(missionDuration, weaponToEquip),
             estimatedGearWear = EstimateGearWear(missionDuration),
-            estimatedLootAmount = CalculateLootAmount(backpackToEquip, weaponToEquip)
+            estimatedLootAmount = EstimateLootAmount(backpackToEquip, weaponToEquip)
         };
     }
 
@@ -68,12 +68,12 @@ public static class MissionCalculator
 
         if (weaponToEquip == null)
         {
-            lootAmount = 1;
+            lootAmount = Random.Range(0,2);
         }
 
         if (weaponToEquip != null && backpackToEquip == null)
         {
-            lootAmount = 2;
+            lootAmount = Random.Range(1, 3);
         }
 
         if (weaponToEquip != null && backpackToEquip != null)        
@@ -82,6 +82,28 @@ public static class MissionCalculator
         }
 
         return lootAmount;            
+    }
+
+    private static int EstimateLootAmount(Backpack backpackToEquip, Weapon weaponToEquip)
+    {
+        int lootAmount = 1;
+
+        if (weaponToEquip == null)
+        {
+            lootAmount = 0;
+        }
+
+        if (weaponToEquip != null && backpackToEquip == null)
+        {
+            lootAmount = 1;
+        }
+
+        if (weaponToEquip != null && backpackToEquip != null)
+        {
+            lootAmount = backpackToEquip.backpackSize;
+        }
+
+        return lootAmount;
     }
 
     private static float CalculateLootQualityMinimal(int missionDuration)
@@ -99,7 +121,7 @@ public static class MissionCalculator
 
     private static float CalculateLootQualityMaximal(float minimalQuality)
     {
-        float maximalLootQuality = minimalQuality * 3f;
+        float maximalLootQuality = minimalQuality * 2.5f;
 
         if (maximalLootQuality > 100)
         {
@@ -111,19 +133,27 @@ public static class MissionCalculator
 
     private static int CalculateZombiesKills(int missionDuration, Weapon equippedWeapon)
     {
+        float zombieKillsDivisor = 35f; // Divisor - the lower the value the higher the kill count
         float weaponKills;
         int weaponDamage;
         if (equippedWeapon == null)
         {
             weaponDamage = 1;
+            zombieKillsDivisor = 100f;
         } else
         {
             weaponDamage = equippedWeapon.baseDamage;
         }
 
         weaponKills = missionDuration * (weaponDamage / 50f);
-        int zombiesKills = (int)(missionDuration * missionDuration / 35f); // basic formula, will be improved with weapon damage. Divisor - the lower the value the higher the kill count
+        int zombiesKills = (int)(missionDuration * missionDuration / zombieKillsDivisor); // basic formula, will be improved with weapon damage
         zombiesKills += (int)weaponKills;
+
+        if (zombiesKills < 1)
+        {
+            zombiesKills = 1;
+        }
+
         return zombiesKills;
     }
 
@@ -163,6 +193,18 @@ public static class MissionCalculator
 
         float missionDuration = (weaponTimeValue + armorTimeValue + backpackTimeValue) * MissionController.Instance.missionLengthMultiplier;
 
+        if (missionDuration > MissionController.Instance.missionMaximumLength)
+        {
+            missionDuration = MissionController.Instance.missionMaximumLength;
+        }
+
+        if (weaponToEquip == null)
+        {
+            if (missionDuration > 20)
+            {
+                missionDuration = 20;
+            }
+        }
         
         return missionDuration;
     }

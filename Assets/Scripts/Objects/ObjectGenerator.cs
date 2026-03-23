@@ -27,7 +27,7 @@ public class ObjectGenerator : MonoBehaviour
 
         if ((roll -= generateWeaponChance) < 0)
         {
-            loot = new Weapon { weaponType = Weapon.WeaponType.BaseballBat };
+            loot = new Weapon { weaponType = Weapon.ChooseWeaponTypeToGenerate() };
         }
         else if ((roll -= generateScrapChance) < 0)
         {

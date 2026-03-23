@@ -11,6 +11,7 @@ public class UIInventory : MonoBehaviour
     [Header("Weapons")]
     [SerializeField] private GameObject currentWeaponInfo;
     [SerializeField] private Image weaponImage;
+    [SerializeField] private Image weaponDurabilityImage;
     [SerializeField] private TMP_Text weaponNameText;
     [SerializeField] private TMP_Text damageText;
     [SerializeField] private TMP_Text durabilityText;
@@ -18,6 +19,7 @@ public class UIInventory : MonoBehaviour
     [Header("Backpacks")]
     [SerializeField] private GameObject currentBackpackInfo;
     [SerializeField] private Image backpackImage;
+    [SerializeField] private Image backpackDurabilityImage;
     [SerializeField] private TMP_Text backpackNameText;    
     [SerializeField] private TMP_Text backpackDurabilityText;
     [SerializeField] private TMP_Text backpackLootAmountText;
@@ -25,6 +27,7 @@ public class UIInventory : MonoBehaviour
     [Header("Armors")]
     [SerializeField] private GameObject currentArmorInfo;
     [SerializeField] private Image armorImage;
+    [SerializeField] private Image armorDurabilityImage;
     [SerializeField] private TMP_Text armorNameText;
     [SerializeField] private TMP_Text armorDurabilityText;
     [SerializeField] private TMP_Text armorLootQualityText;
@@ -32,6 +35,7 @@ public class UIInventory : MonoBehaviour
     [Header("Scraps")]
     [SerializeField] private GameObject currentScrapInfo;
     [SerializeField] private Image scrapImage;
+    [SerializeField] private Image scrapDurabilityImage;
     [SerializeField] private TMP_Text scrapNameText;
     [SerializeField] private TMP_Text scrapDurabilityText;
 
@@ -248,19 +252,23 @@ public class UIInventory : MonoBehaviour
                 damageText.text = weapon.baseDamage.ToString();
                 durabilityText.text = weapon.currentDurability.ToString() + "/" + weapon.maxDurability.ToString();
                 weaponNameText.text = weapon.objectName.ToString();
+                weaponDurabilityImage.fillAmount = (float)weapon.currentDurability / weapon.maxDurability;
                 break;
             case Backpack backpack:
                 backpackDurabilityText.text = backpack.currentDurability.ToString() + "/" + backpack.maxDurability.ToString();
                 backpackNameText.text = backpack.objectName.ToString();
                 backpackLootAmountText.text = backpack.backpackSize.ToString();
+                backpackDurabilityImage.fillAmount = (float)backpack.currentDurability / backpack.maxDurability;
                 break;
             case Armor armor:
                 armorDurabilityText.text = armor.currentDurability.ToString() + "/" + armor.maxDurability.ToString();
                 armorNameText.text = armor.objectName.ToString();
+                armorDurabilityImage.fillAmount = (float)armor.currentDurability / armor.maxDurability;
                 break;
             case Scrap scrap:
                 scrapNameText.text = scrap.scrapName.ToString();
                 scrapDurabilityText.text = scrap.currentDurability.ToString() + "/" + scrap.maxDurability.ToString();
+                scrapDurabilityImage.fillAmount = (float)scrap.currentDurability / scrap.maxDurability;
                 break;
             case Antibiotics antibiotics:
                 antibioticsNameText.text = antibiotics.objectName.ToString();

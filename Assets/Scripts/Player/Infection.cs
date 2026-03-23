@@ -54,7 +54,7 @@ public class Infection : MonoBehaviour
     
     private void DecreaseInfection()
     {
-        currentInfectionLevel -= 20; // replace with antibiotics strength
+        currentInfectionLevel -= 30; // replace with antibiotics strength
 
         if (currentInfectionLevel <= 0)
         {

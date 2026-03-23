@@ -5,6 +5,8 @@ public class EndStatesUI : MonoBehaviour
     [SerializeField] private GameObject zombieEndState;
     [SerializeField] private GameObject exterminationEndState;
 
+    private bool victoryStateShown = false;
+
     private void OnEnable()
     {
         Infection.OnInfectionReachedMaxLevel += ZombieEndState;
@@ -24,8 +26,12 @@ public class EndStatesUI : MonoBehaviour
 
     private void ExterminationEdnStateShow()
     {
-        exterminationEndState.SetActive(true);
-        Invoke("ExterminationEndStateHide", 13f);
+        if (!victoryStateShown)
+        {
+            exterminationEndState.SetActive(true);
+            Invoke("ExterminationEndStateHide", 13f);
+            victoryStateShown = true;
+        }        
     }
 
     private void ExterminationEndStateHide()

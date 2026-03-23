@@ -24,7 +24,7 @@ public class UIIntro : MonoBehaviour
     private void Awake()
     {
         introUI.SetActive(true);
-        Invoke("DisplayJournalEntry1", 1f);
+        Invoke("DisplayJournalEntry1", 0.1f);
         Invoke("DisplayJournalEntry2", 8f);
         Invoke("DisplayJournalEntry3", 15f);
         Invoke("DisplayContinueHint", 22f);
