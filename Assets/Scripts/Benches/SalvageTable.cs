@@ -39,21 +39,24 @@ public class SalvageTable : Bench
     }
 
     IEnumerator DoSalvage()
-    {
-        switch (inventory.GetObjectList()[0])
+    {        
+        if (currentObject == null)
         {
-            default:
+            yield break;
+        }
 
-                while (!currentObject.DamageObject(2))
-                {
-                    yield return new WaitForSeconds(salvagingInterval);
-                    ResourceController.Instance.ChangeSparePartsAmount(salvagingValue);
-                }
-                //ResourceController.Instance.ChangeSparePartsAmount(salvagingValue); // to´give last amount of salvage
+        while (true)
+        {
+            yield return new WaitForSeconds(salvagingInterval); // player must hold for this long
+
+            ResourceController.Instance.ChangeSparePartsAmount(salvagingValue); // reward
+
+            if (currentObject.DamageObject(2)) // damage, check if destroyed
+            {
                 currentObject.DestroyObject();
-
                 break;
-        }        
+            }
+        }
     }
 
     public override void StartInteractionSecondary()

@@ -49,7 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   benchType: 5
   inventory: {fileID: -2822845031268065542}
-  interactableName: MedicalCabinet
+  interactableName: Medical Cabinet
 --- !u!65 &5124182726727076555
 BoxCollider:
   m_ObjectHideFlags: 0

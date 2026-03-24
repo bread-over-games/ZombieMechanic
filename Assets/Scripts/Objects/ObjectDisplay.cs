@@ -80,15 +80,10 @@ public class ObjectDisplay : MonoBehaviour
         Sequence spawnSequence = DOTween.Sequence();
 
         // Drop down to the final position
-        spawnSequence.Append(
-            spawnedObject.transform.DOMove(spawnPosition, 0.2f)
-
-        );
+        spawnSequence.Append(spawnedObject.transform.DOMove(spawnPosition, 0.2f).SetLink(spawnedObject));
 
         // Shake in place after landing
-        spawnSequence.Append(
-            spawnedObject.transform.DOShakePosition(0.1f, strength: 0.02f, vibrato: 15, randomness: 45)
-        );
+        spawnSequence.Append(spawnedObject.transform.DOShakePosition(0.1f, strength: 0.02f, vibrato: 15, randomness: 45).SetLink(spawnedObject));
     }
 
     private void DoMultipleObjectsDisplay()
@@ -128,9 +123,11 @@ public class ObjectDisplay : MonoBehaviour
                     currentObjects.Add(spawnedObject);
                     break;
             }
+
+            ObjectSpawnEffect(spawnedObject, spawnPosition);
         }
 
-        ObjectSpawnEffect(spawnedObject, spawnPosition);
+
     }
 
     private void DoObjectDisplay()
@@ -171,6 +168,7 @@ public class ObjectDisplay : MonoBehaviour
         {
             if (currentObject != null)
             {
+                currentObject.transform.DOKill();
                 Destroy(currentObject);
             }
         }
