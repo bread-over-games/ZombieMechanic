@@ -5,6 +5,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using static Inventory;
+using DG.Tweening;
+using UnityEngine.UIElements;
 
 
 public class ObjectDisplay : MonoBehaviour
@@ -59,59 +61,105 @@ public class ObjectDisplay : MonoBehaviour
         }
     }
 
+    private void ObjectSpawnEffect(GameObject spawnedObject, Vector3 spawnPosition)
+    {
+        if (spawnedObject == null)
+        {
+            return; 
+        }
+
+        if (inventory.GetInventoryOfType() == Inventory.InventoryOfType.Player)
+        {
+            return;
+        }
+
+        // Start slightly above the target position
+        Vector3 dropFrom = spawnPosition + Vector3.up * 0.35f;
+        spawnedObject.transform.position = dropFrom;
+
+        Sequence spawnSequence = DOTween.Sequence();
+
+        // Drop down to the final position
+        spawnSequence.Append(spawnedObject.transform.DOMove(spawnPosition, 0.2f).SetLink(spawnedObject));
+
+        // Shake in place after landing
+        spawnSequence.Append(spawnedObject.transform.DOShakePosition(0.1f, strength: 0.02f, vibrato: 15, randomness: 45).SetLink(spawnedObject));
+    }
+
     private void DoMultipleObjectsDisplay()
     {
         ClearCurrentObjects();
+
+        GameObject spawnedObject = null;
+        Vector3 spawnPosition = Vector3.zero;
 
         for (int i = 0; i < inventory.GetObjectList().Count; i++)
         {
             switch (inventory.GetObjectList()[i])
             {
                 case Weapon weapon:
-                    currentObjects.Add(WeaponWorld.SpawnWeaponWorld(weaponSpawnPivot.position, weapon, weaponSpawnPivot));
+                    spawnedObject = WeaponWorld.SpawnWeaponWorld(weaponSpawnPivot.position, weapon, weaponSpawnPivot);
+                    spawnPosition = weaponSpawnPivot.position;
+                    currentObjects.Add(spawnedObject);
                     break;
                 case Backpack backpack:
-                    currentObjects.Add(BackpackWorld.SpawnBackpackWorld(backpackSpawnPivot.position, backpack, backpackSpawnPivot));
+                    spawnedObject = BackpackWorld.SpawnBackpackWorld(backpackSpawnPivot.position, backpack, backpackSpawnPivot);
+                    spawnPosition = backpackSpawnPivot.position;
+                    currentObjects.Add(spawnedObject);
                     break;
                 case Armor armor:
-                    currentObjects.Add(ArmorWorld.SpawnArmorWorld(armorSpawnPivot.position, armor, armorSpawnPivot));
+                    spawnedObject = ArmorWorld.SpawnArmorWorld(armorSpawnPivot.position, armor, armorSpawnPivot);
+                    spawnPosition = armorSpawnPivot.position;
+                    currentObjects.Add(spawnedObject);
                     break;
                 case Scrap scrap:
-                    currentObjects.Add(ScrapWorld.SpawnScrapWorld(weaponSpawnPivot.position, scrap, weaponSpawnPivot));
+                    spawnedObject = ScrapWorld.SpawnScrapWorld(weaponSpawnPivot.position, scrap, weaponSpawnPivot);
+                    spawnPosition = weaponSpawnPivot.position;
+                    currentObjects.Add(spawnedObject);
                     break;
                 case Antibiotics antibiotics:
-                    currentObjects.Add(AntibioticsWorld.SpawnAntibioticsWorld(weaponSpawnPivot.position, antibiotics, weaponSpawnPivot));
+                    spawnedObject = AntibioticsWorld.SpawnAntibioticsWorld(weaponSpawnPivot.position, antibiotics, weaponSpawnPivot);
+                    spawnPosition = weaponSpawnPivot.position;
+                    currentObjects.Add(spawnedObject);
                     break;
-                    /*    case Medicine medicine:
-                            medicine.LoadValues(medicine);
-                            break;*/
             }
+
+            ObjectSpawnEffect(spawnedObject, spawnPosition);
         }
+
+
     }
 
     private void DoObjectDisplay()
     {
+        GameObject spawnedObject = null;
+        Vector3 spawnPosition = weaponSpawnPivot.position;
+
         switch (inventory.GetObjectList()[0])
         {
             case Weapon weapon:
-                currentObjects.Add(WeaponWorld.SpawnWeaponWorld(weaponSpawnPivot.position, weapon, weaponSpawnPivot));
+                spawnedObject = WeaponWorld.SpawnWeaponWorld(weaponSpawnPivot.position, weapon, weaponSpawnPivot);
+                currentObjects.Add(spawnedObject);
                 break;
             case Backpack backpack:
-                currentObjects.Add(BackpackWorld.SpawnBackpackWorld(weaponSpawnPivot.position, backpack, weaponSpawnPivot));
+                spawnedObject = BackpackWorld.SpawnBackpackWorld(weaponSpawnPivot.position, backpack, weaponSpawnPivot);
+                currentObjects.Add(spawnedObject);
                 break;
             case Armor armor:
-                currentObjects.Add(ArmorWorld.SpawnArmorWorld(weaponSpawnPivot.position, armor, weaponSpawnPivot));                
+                spawnedObject = ArmorWorld.SpawnArmorWorld(weaponSpawnPivot.position, armor, weaponSpawnPivot);
+                currentObjects.Add(spawnedObject);                
                 break;
             case Scrap scrap:
-                currentObjects.Add(ScrapWorld.SpawnScrapWorld(weaponSpawnPivot.position, scrap, weaponSpawnPivot));
+                spawnedObject = ScrapWorld.SpawnScrapWorld(weaponSpawnPivot.position, scrap, weaponSpawnPivot);
+                currentObjects.Add(spawnedObject);
                 break;
             case Antibiotics antibiotics:
-                currentObjects.Add(AntibioticsWorld.SpawnAntibioticsWorld(weaponSpawnPivot.position, antibiotics, weaponSpawnPivot));
+                spawnedObject = AntibioticsWorld.SpawnAntibioticsWorld(weaponSpawnPivot.position, antibiotics, weaponSpawnPivot);
+                currentObjects.Add(spawnedObject);
                 break;
-                /*    case Medicine medicine:
-                        medicine.LoadValues(medicine);
-                        break;*/
         }
+
+        ObjectSpawnEffect(spawnedObject, spawnPosition);
     }
 
     private void ClearCurrentObjects()
@@ -120,6 +168,7 @@ public class ObjectDisplay : MonoBehaviour
         {
             if (currentObject != null)
             {
+                currentObject.transform.DOKill();
                 Destroy(currentObject);
             }
         }

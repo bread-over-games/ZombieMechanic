@@ -12,19 +12,27 @@ public class Infection : MonoBehaviour
     public static Action<float> OnInfectionLevelChange;
     public static Action OnInfectionReachedMaxLevel;
 
+    private bool isFirstMissionComplete = false;
+
     private void OnEnable()
     {
         MedicalCabinet.OnAntibioticsUsed += DecreaseInfection;
+        MissionController.OnMissionCompleted += StartInfection;
     }
 
     private void OnDisable()
     {
         MedicalCabinet.OnAntibioticsUsed -= DecreaseInfection;
+        MissionController.OnMissionCompleted -= StartInfection;
     }
 
-    private void Start()
+    private void StartInfection(Mission mission)
     {
-        StartCoroutine(IncreaseInfection());
+        if (!isFirstMissionComplete)
+        {
+            StartCoroutine(IncreaseInfection());
+            isFirstMissionComplete = true;
+        }        
     }
 
     private IEnumerator IncreaseInfection()
@@ -46,7 +54,7 @@ public class Infection : MonoBehaviour
     
     private void DecreaseInfection()
     {
-        currentInfectionLevel -= 20; // replace with antibiotics strength
+        currentInfectionLevel -= 30; // replace with antibiotics strength
 
         if (currentInfectionLevel <= 0)
         {

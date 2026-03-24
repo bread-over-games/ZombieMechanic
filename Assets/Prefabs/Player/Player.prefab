@@ -211,7 +211,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4265158418905684332}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: b99c8c361b2efe145bc0b01815dc5488, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -350,7 +350,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76bcc994bf1e5484f9e75880487df54e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  infectionInterval: 2
+  infectionInterval: 1.5
   maxInfectionLevel: 100
 --- !u!1 &5763209099063731316
 GameObject:

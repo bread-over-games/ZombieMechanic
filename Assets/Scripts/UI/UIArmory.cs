@@ -12,16 +12,22 @@ public class UIArmory : MonoBehaviour
     [SerializeField] private GameObject firstSelected;
     public ButtonSelector.ArmorySlot currentSlotSelected;
     public static Action<ButtonSelector.ArmorySlot> OnCurrentArmorySlotSelected;
+        
+    [SerializeField] private GameObject objectsSlots;
+    [SerializeField] private GameObject survivorOnMission;
 
     [Header("Weapon")]
     [SerializeField] private GameObject currentWeaponInfo;
     [SerializeField] private Image weaponImage;
+    [SerializeField] private Image weaponDurabilityImage;
     [SerializeField] private TMP_Text weaponNameText;
     [SerializeField] private TMP_Text weaponDurabilityText;
+    [SerializeField] private TMP_Text weaponDamageText;
 
     [Header("Backpack")]
     [SerializeField] private GameObject currentBackpackInfo;
     [SerializeField] private Image backpackImage;
+    [SerializeField] private Image backpackDurabilityImage;
     [SerializeField] private TMP_Text backpackNameText;
     [SerializeField] private TMP_Text backpackDurabilityText;
     [SerializeField] private TMP_Text backpackItemAmountText;
@@ -29,6 +35,7 @@ public class UIArmory : MonoBehaviour
     [Header("Armor")]
     [SerializeField] private GameObject currentArmorInfo;
     [SerializeField] private Image armorImage;
+    [SerializeField] private Image armorDurabilityImage;
     [SerializeField] private TMP_Text armorNameText;
     [SerializeField] private TMP_Text armorDurabilityText;
     [SerializeField] private TMP_Text armorLootQualityText;
@@ -41,7 +48,6 @@ public class UIArmory : MonoBehaviour
     [SerializeField] private TMP_Text gearWearText;
     [SerializeField] private TMP_Text zombieKillsText;
 
-
     [Header("Empty messages")]
     [SerializeField] private GameObject weaponEmptyMessage;
     [SerializeField] private GameObject backpackEmptyMessage;
@@ -53,6 +59,8 @@ public class UIArmory : MonoBehaviour
         Inventory.OnInventoryChange += RefreshEstimatesUI;
         PlayerInteraction.OnInteractableApproached += ShowArmoryWindow;
         PlayerInteraction.OnInteractableLeft += HideArmoryWindow;
+        MissionController.OnMissionStarted += ChangeMissionStateGUI;
+        MissionController.OnMissionCompleted += ChangeMissionStateGUI;
     }
 
     private void OnDisable()
@@ -61,6 +69,8 @@ public class UIArmory : MonoBehaviour
         Inventory.OnInventoryChange -= RefreshEstimatesUI;
         PlayerInteraction.OnInteractableApproached -= ShowArmoryWindow;
         PlayerInteraction.OnInteractableLeft -= HideArmoryWindow;
+        MissionController.OnMissionStarted -= ChangeMissionStateGUI;
+        MissionController.OnMissionCompleted -= ChangeMissionStateGUI;
     }
 
     private void ShowArmoryWindow(Bench.BenchType benchType)
@@ -74,6 +84,7 @@ public class UIArmory : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(firstSelected);
         RefreshInventoryUI();
         RefreshEstimatesUI();
+        ChangeMissionStateGUI(null);
     }
 
     private void HideArmoryWindow(Bench.BenchType benchType)
@@ -86,7 +97,7 @@ public class UIArmory : MonoBehaviour
         armoryWindow.SetActive(false);
         EventSystem.current.SetSelectedGameObject(null);
         DropInventory();
-        DropArmory();
+        DropArmory();        
     }
 
     public void SetInventory(Inventory currentInventory)
@@ -120,7 +131,7 @@ public class UIArmory : MonoBehaviour
 
         durationText.text = missionEstimates.estimatedDuration.ToString() + "s +-";
         lootQualityText.text = missionEstimates.estimatedLootQualityMinimal.ToString("F0") + "% - " + missionEstimates.estimatedLootQualityMaximal.ToString("F0") + "%";
-        lootAmountText.text = missionEstimates.estimatedLootAmount.ToString();
+        lootAmountText.text = missionEstimates.estimatedLootAmount.ToString() + "-" + (missionEstimates.estimatedLootAmount + 1).ToString();
         zombieKillsText.text = missionEstimates.estimatedZombiesKills.ToString() + "+-";
         gearWearText.text = missionEstimates.estimatedGearWear.ToString() + "+- per item";
     }
@@ -181,18 +192,39 @@ public class UIArmory : MonoBehaviour
         {
             armorDurabilityText.text = armor.currentDurability.ToString() + "/" + armor.maxDurability.ToString();
             armorNameText.text = armor.objectName.ToString();
+            armorDurabilityImage.fillAmount = (float)armor.currentDurability / armor.maxDurability;
         }
 
         if (armory.storedWeapon is Weapon weapon)
         {
             weaponDurabilityText.text = weapon.currentDurability.ToString() + "/" + weapon.maxDurability.ToString();
+            weaponDamageText.text = weapon.baseDamage.ToString();
             weaponNameText.text = weapon.objectName.ToString();
+            weaponDurabilityImage.fillAmount = (float)weapon.currentDurability / weapon.maxDurability;
         }
 
         if (armory.storedBackpack is Backpack backpack)
         {
             backpackDurabilityText.text = backpack.currentDurability.ToString() + "/" + backpack.maxDurability.ToString();  
             backpackNameText.text = backpack.objectName.ToString();
+            backpackDurabilityImage.fillAmount = (float)backpack.currentDurability / backpack.maxDurability;
+        }
+    }
+
+    private void ChangeMissionStateGUI(Mission mission)
+    {
+        if (armory == null) return;
+
+        if (!armory.isAvailableForMission)
+        {
+            objectsSlots.SetActive(false);
+            missionEstimates.SetActive(false);
+            survivorOnMission.SetActive(true);            
+        } else
+        {            
+            objectsSlots.SetActive(true);
+            missionEstimates.SetActive(true);
+            survivorOnMission.SetActive(false);
         }
     }
 
@@ -207,3 +239,4 @@ public class UIArmory : MonoBehaviour
         
     }
 }
+;

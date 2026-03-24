@@ -3,7 +3,7 @@ using UnityEngine.EventSystems;
 
 public class Armory : Bench, IInteractable
 {
-    private bool isAvailableForMission = true;
+    [HideInInspector] public bool isAvailableForMission = true;
 
     [SerializeReference] public Armor storedArmor = null;
     [SerializeReference] public Backpack storedBackpack = null;
@@ -86,14 +86,14 @@ public class Armory : Bench, IInteractable
             return;
         }
 
+        isAvailableForMission = false;
+
         MissionController.Instance.SendMission(storedWeapon, storedBackpack, storedArmor, inventory, this);
 
         inventory.SendObjectOnMission(storedArmor);
         inventory.SendObjectOnMission(storedWeapon);
         inventory.SendObjectOnMission(storedBackpack);
         Debug.Log("Sent on mission!");
-
-        isAvailableForMission = false;
     }
 
     public override void EndInteractionSecondary()

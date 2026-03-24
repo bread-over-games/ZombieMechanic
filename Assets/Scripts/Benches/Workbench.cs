@@ -42,7 +42,7 @@ public class Workbench : Bench, IInteractable
             {
                 repairCoroutine = StartCoroutine(DoRepair());
             }            
-        }        
+        }
     }
 
     IEnumerator DoRepair()
