@@ -10,5 +10,25 @@ using System.Collections.Generic;
 
 public class LootTable : Bench, IInteractable
 {
-    
+    public static Action OnTutorialSparePartsPicked;
+    public static Action OnTutorialBaseballBatPicked;
+
+    public override void StartInteractionPrimary()
+    {
+        base.StartInteractionPrimary();
+
+        if (!TutorialController.Instance.skipTutorial)
+        {
+            if (!TutorialController.Instance.sparePartsPicked)
+            {
+                OnTutorialSparePartsPicked?.Invoke();
+                return;
+            }
+
+            if (!TutorialController.Instance.baseballBatPicked)
+            {
+                OnTutorialBaseballBatPicked?.Invoke();
+            }
+        }
+    }         
 }

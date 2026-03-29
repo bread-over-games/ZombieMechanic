@@ -9,6 +9,10 @@ public class Workbench : Bench, IInteractable
 
     private Coroutine repairCoroutine;
 
+    public static Action OnTutorialBaseballBatPlaced;
+    public static Action OnTutorialBaseballBatRepaired;
+    public static Action OnTutorialBaseballBatPicked;
+
     public void Awake()
     {
         acceptedTypes.Add(typeof(Weapon));
@@ -55,10 +59,35 @@ public class Workbench : Bench, IInteractable
 
             if (!ResourceController.Instance.CanRepair(repairSalvageCost))
             {
+                if (!TutorialController.Instance.skipTutorial)
+                {
+                    if (!TutorialController.Instance.baseballBatRepaired)
+                    {
+                        OnTutorialBaseballBatRepaired?.Invoke();
+                    }                    
+                }
                 break;
             }
-
         }        
+    }
+
+    public override void StartInteractionPrimary()
+    {
+        base.StartInteractionPrimary();
+
+        if (!TutorialController.Instance.skipTutorial)
+        {
+            if (!TutorialController.Instance.baseballBatPlacedWorkbench)
+            {
+                OnTutorialBaseballBatPlaced?.Invoke();
+                return;
+            }
+            
+            if (!TutorialController.Instance.baseballBatPickedWorkbench)
+            {
+                OnTutorialBaseballBatPicked?.Invoke();
+            }
+        }
     }
 
     public override void StartInteractionSecondary()

@@ -25,9 +25,38 @@ public class ObjectSpawner : MonoBehaviour
 
     [SerializeField] private ObjectSpawnConfig spawnConfig;
 
-    private void Start()
+    private void OnEnable()
     {
-        SpawnObject();
+        TutorialController.OnTutorialEnd += SpawnObject;
+        TutorialController.OnSpawnTutorialSpareParts += SpawnTutorialSpareParts;
+        TutorialController.OnSpawnTutorialBaseballBat += SpawnTutorialBaseballBat;
+    }
+
+    private void OnDisable()
+    {
+        TutorialController.OnTutorialEnd -= SpawnObject; 
+        TutorialController.OnSpawnTutorialSpareParts -= SpawnTutorialSpareParts;
+        TutorialController.OnSpawnTutorialBaseballBat -= SpawnTutorialBaseballBat;
+    }    
+
+    private void SpawnTutorialSpareParts(Inventory sourceInventory)
+    {
+        if (sourceInventory == inventory)
+        {
+            Object loot = new Scrap { scrapType = Scrap.ScrapType.SparePartsBox };
+            loot.SetValues(49, 51);
+            inventory.ReceiveObject(loot);
+        }
+    }
+
+    private void SpawnTutorialBaseballBat(Inventory sourceInventory)
+    {
+        if (sourceInventory == inventory)
+        {
+            Object loot = new Weapon { weaponType = Weapon.WeaponType.BaseballBat };
+            loot.SetValues(49, 51);
+            inventory.ReceiveObject(loot);
+        }
     }
 
     private void SpawnObject()
