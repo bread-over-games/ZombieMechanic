@@ -53,8 +53,10 @@ public class UIInventory : MonoBehaviour
     [SerializeField] private GameObject toolboxEmptyMessage;
 
     [Header("ControlTips")]
-    [SerializeField] private GameObject workbenchControls;
-    [SerializeField] private GameObject salvageTableControls;
+    [SerializeField] private GameObject workbenchPickPlaceControls;
+    [SerializeField] private GameObject workbenchRepairControls;
+    [SerializeField] private GameObject salvageTablePickPlaceControls;
+    [SerializeField] private GameObject salvageTableSalvageControls;
     [SerializeField] private GameObject tableControls;
     [SerializeField] private GameObject medicalCabinetControls;
     [SerializeField] private GameObject lootTableControls;
@@ -147,11 +149,13 @@ public class UIInventory : MonoBehaviour
         toolboxEmptyMessage.SetActive(false);   
 
         lootTableControls.SetActive(false);
-        salvageTableControls.SetActive(false);
+        salvageTablePickPlaceControls.SetActive(false);
+        salvageTableSalvageControls.SetActive(false);
         tableControls.SetActive(false);
         medicalCabinetControls.SetActive(false);
-        workbenchControls.SetActive(false); 
-                
+        workbenchPickPlaceControls.SetActive(false);
+        workbenchRepairControls.SetActive(false);
+
         currentWeaponInfo.SetActive(false);
         currentArmorInfo.SetActive(false);  
         currentBackpackInfo.SetActive(false);
@@ -174,19 +178,42 @@ public class UIInventory : MonoBehaviour
         switch (inventory.GetInventoryOfType())
         {
             case Inventory.InventoryOfType.Workbench:
-                workbenchControls.SetActive(true);
+                if (inventory.GetObjectList().Count > 0 || InventoriesController.Instance.playerInventory.GetObjectList().Count > 0)
+                {
+                    if (inventory.GetObjectList().Count > 0)
+                    {                        
+                        workbenchRepairControls.SetActive(true);
+                    }
+                    workbenchPickPlaceControls.SetActive(true);
+                }
                 break;
             case Inventory.InventoryOfType.LootTable:
-                lootTableControls.SetActive(true);
+                if (inventory.GetObjectList().Count > 0)
+                {
+                    lootTableControls.SetActive(true);
+                }
                 break;
             case Inventory.InventoryOfType.SalvageTable:
-                salvageTableControls.SetActive(true);
+                if (inventory.GetObjectList().Count > 0 || InventoriesController.Instance.playerInventory.GetObjectList().Count > 0)
+                {
+                    if (inventory.GetObjectList().Count > 0)
+                    {
+                        salvageTableSalvageControls.SetActive(true);    
+                    }
+                    salvageTablePickPlaceControls.SetActive(true);
+                }
                 break;
             case Inventory.InventoryOfType.Table:
-                tableControls.SetActive(true);
+                if (inventory.GetObjectList().Count > 0 || InventoriesController.Instance.playerInventory.GetObjectList().Count > 0)
+                {
+                    tableControls.SetActive(true);
+                }
                 break;
             case Inventory.InventoryOfType.MedicalCabinet:
-                medicalCabinetControls.SetActive(true);
+                if (ResourceController.Instance.GetAntibioticsAmount() > 0)
+                {
+                    medicalCabinetControls.SetActive(true);
+                }                
                 break;
         }
     }

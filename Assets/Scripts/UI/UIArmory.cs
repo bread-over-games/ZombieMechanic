@@ -53,6 +53,11 @@ public class UIArmory : MonoBehaviour
     [SerializeField] private GameObject backpackEmptyMessage;
     [SerializeField] private GameObject armorEmptyMessage;
 
+    [Header("Controls")]
+    [SerializeField] private GameObject armoryPickPlaceControls;
+    [SerializeField] private GameObject armorySendMissionControls;
+    [SerializeField] private GameObject armorySelectGearControls;
+
     private void OnEnable()
     {
         Inventory.OnInventoryChange += RefreshInventoryUI;
@@ -181,7 +186,22 @@ public class UIArmory : MonoBehaviour
         else
         {
             backpackEmptyMessage.SetActive(true);
-        }        
+        }
+
+        DisplayControls();
+    }
+
+    private void DisplayControls()
+    {
+        armoryPickPlaceControls.SetActive(false);
+
+        if (inventory.GetObjectList().Count > 0 || InventoriesController.Instance.playerInventory.GetObjectList().Count > 0)
+        {
+            armoryPickPlaceControls.SetActive(armory.isAvailableForMission);
+        }
+
+        armorySelectGearControls.SetActive(armory.isAvailableForMission);
+        armorySendMissionControls.SetActive(armory.isAvailableForMission);
     }
 
     private void RefreshInventoryValues()
@@ -214,6 +234,8 @@ public class UIArmory : MonoBehaviour
     private void ChangeMissionStateGUI(Mission mission)
     {
         if (armory == null) return;
+
+        DisplayControls();
 
         if (!armory.isAvailableForMission)
         {

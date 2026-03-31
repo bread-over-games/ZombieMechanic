@@ -1900,7 +1900,7 @@ GameObject:
   m_Component:
   - component: {fileID: 211935430}
   m_Layer: 5
-  m_Name: Controls2
+  m_Name: SalvageTableSalvage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4604,7 +4604,7 @@ GameObject:
   m_Component:
   - component: {fileID: 475063369}
   m_Layer: 5
-  m_Name: Controls3
+  m_Name: ArmorySelectItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6033,7 +6033,7 @@ GameObject:
   m_Component:
   - component: {fileID: 678687666}
   m_Layer: 5
-  m_Name: Controls1
+  m_Name: SalvageTablePickPlace
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6520,7 +6520,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &727157171
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9728,7 +9728,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1042694874}
   m_Layer: 5
-  m_Name: Controls1
+  m_Name: ArmoryPickPlacer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9904,7 +9904,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1063525257}
   m_Layer: 5
-  m_Name: InteractableInventorySingleItem
+  m_Name: Interactables
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11641,7 +11641,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1232942547}
   m_Layer: 5
-  m_Name: Controls1
+  m_Name: WorkbenchPickPlace
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13077,6 +13077,9 @@ MonoBehaviour:
   weaponEmptyMessage: {fileID: 768305082}
   backpackEmptyMessage: {fileID: 2930204399579929481}
   armorEmptyMessage: {fileID: 9068785025364668508}
+  armoryPickPlaceControls: {fileID: 1042694873}
+  armorySendMissionControls: {fileID: 1907444551}
+  armorySelectGearControls: {fileID: 475063368}
 --- !u!1001 &1481345540
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13297,7 +13300,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1482928395
 RectTransform:
   m_ObjectHideFlags: 0
@@ -15053,7 +15056,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1721399487}
   m_Layer: 5
-  m_Name: Controls2
+  m_Name: WorkbenchRepair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15091,7 +15094,7 @@ GameObject:
   - component: {fileID: 1724728991}
   - component: {fileID: 1724728992}
   m_Layer: 5
-  m_Name: InteractableInventorySingleItemParent
+  m_Name: InteractableIsParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15163,8 +15166,10 @@ MonoBehaviour:
   medicalCabinetEmptyMessage: {fileID: 229968584}
   salvageTableEmptyMessage: {fileID: 435090767}
   toolboxEmptyMessage: {fileID: 795738401}
-  workbenchControls: {fileID: 2081942475}
-  salvageTableControls: {fileID: 727157170}
+  workbenchPickPlaceControls: {fileID: 1232942546}
+  workbenchRepairControls: {fileID: 1721399486}
+  salvageTablePickPlaceControls: {fileID: 678687665}
+  salvageTableSalvageControls: {fileID: 211935429}
   tableControls: {fileID: 1413244163}
   medicalCabinetControls: {fileID: 799405334}
   lootTableControls: {fileID: 1059862294}
@@ -15247,7 +15252,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50, y: -80}
+  m_AnchoredPosition: {x: 50, y: -50}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1734637034
@@ -16265,7 +16270,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1907444552}
   m_Layer: 5
-  m_Name: Controls2
+  m_Name: ArmorySendMission
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17544,7 +17549,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2081942476
 RectTransform:
   m_ObjectHideFlags: 0
