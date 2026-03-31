@@ -323,7 +323,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 65356427185fb974cbc013da1e8e7bf9, type: 3}
       propertyPath: m_Name
-      value: Workbench
+      value: SalvageTable
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 65356427185fb974cbc013da1e8e7bf9, type: 3}
       propertyPath: m_Layer

@@ -11,6 +11,11 @@ public class SalvageTable : Bench
 
     private Coroutine lootingCoroutine;
 
+    private bool isEnabled = true;
+
+    public static Action OnTutorialSparePartsPlaced;
+    public static Action OnTutorialSparePartsSalvaged;
+
     private void OnEnable()
     {
         Inventory.OnObjectReceive += AssignCurrentObject;
@@ -34,8 +39,22 @@ public class SalvageTable : Bench
         if (myInventory == inventory)
         {
             currentObject = obj;
-        }
-        
+        }        
+    }
+
+    public void EnableSalvageTable()
+    {
+        isEnabled = true;
+    }
+
+    public void DisableSalvageTable()
+    {
+        isEnabled = false;
+    }
+
+    public override bool IsInteractionPossible()
+    {
+        return isEnabled;
     }
 
     IEnumerator DoSalvage()
@@ -54,7 +73,28 @@ public class SalvageTable : Bench
             if (currentObject.DamageObject(2)) // damage, check if destroyed
             {
                 currentObject.DestroyObject();
+
+                if (!TutorialController.Instance.skipTutorial)
+                {
+                    if (!TutorialController.Instance.sparePartsSalvaged)
+                    {
+                        OnTutorialSparePartsSalvaged?.Invoke();
+                    }
+                }
                 break;
+            }
+        }
+    }
+
+    public override void StartInteractionPrimary()
+    {
+        base.StartInteractionPrimary();
+
+        if (!TutorialController.Instance.skipTutorial)
+        {
+            if (!TutorialController.Instance.sparePartsPlacedSalvage)
+            {
+                OnTutorialSparePartsPlaced?.Invoke();
             }
         }
     }

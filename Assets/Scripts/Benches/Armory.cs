@@ -1,8 +1,10 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using System;
 
 public class Armory : Bench, IInteractable
 {
+    [HideInInspector] public bool isEnabled = true;
     [HideInInspector] public bool isAvailableForMission = true;
 
     [SerializeReference] public Armor storedArmor = null;
@@ -10,6 +12,9 @@ public class Armory : Bench, IInteractable
     [SerializeReference] public Weapon storedWeapon = null;
 
     private ButtonSelector.ArmorySlot currentSlotSelection;
+
+    public static Action OnBaseballBatPlaced;
+    public static Action OnSentOnMission;
 
     public void Awake()
     {
@@ -44,18 +49,25 @@ public class Armory : Bench, IInteractable
 
     public override bool IsInteractionPossible()
     {
-        if (isAvailableForMission)
-        {
-            return true;
+        if (!isEnabled)
+        {  
+            return false; 
         }
-        else
-        {            
-            return false;
-        }
+
+        return isAvailableForMission;
     }
 
     public override void StartInteractionPrimary()
     {
+        if (!TutorialController.Instance.skipTutorial)
+        {
+            if (!TutorialController.Instance.baseballBatPlacedArmory)
+            {
+                OnBaseballBatPlaced?.Invoke();
+                return;
+            }
+        }
+
         if (InventoriesController.Instance.playerInventory.GetObjectList().Count == 0)
         {
             if (inventory.GetObjectList().Count > 0)
@@ -93,7 +105,14 @@ public class Armory : Bench, IInteractable
         inventory.SendObjectOnMission(storedArmor);
         inventory.SendObjectOnMission(storedWeapon);
         inventory.SendObjectOnMission(storedBackpack);
-        Debug.Log("Sent on mission!");
+        
+        if (!TutorialController.Instance.skipTutorial)
+        {
+            if (!TutorialController.Instance.sentOnMissionArmory)
+            {
+                OnSentOnMission?.Invoke();
+            }
+        }
     }
 
     public override void EndInteractionSecondary()

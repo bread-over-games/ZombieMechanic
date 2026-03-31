@@ -57,7 +57,7 @@ public class PlayerInteraction : MonoBehaviour
 
     public void OnInteractPrimary(InputAction.CallbackContext context)
     {
-        if (!introSkipped)
+        if (!introSkipped) // skips intro
         {
             introSkipped = true;
             OnIntroSkip?.Invoke();
@@ -109,17 +109,22 @@ public class PlayerInteraction : MonoBehaviour
     private void PrimaryInteractStarted()
     {
         Inventory currentInventory = currentInteractable.GetInventory();
-        if (playerInventory.GetObjectList().Count > 0 && currentInventory.GetObjectList().Count < currentInventory.GetCapacity()) // player has item and there is a space in the target inventory
+
+        if (playerInventory.GetObjectList().Count == 0) // player has no item in hands and wants to pick up from bench
+        {
+            interactionStarted = true;
+            currentInteractable.StartInteractionPrimary();
+        } else         
+        if (currentInventory.GetObjectList().Count < currentInventory.GetCapacity()) // player has item and there is a space in the target inventory
         {
             if (currentInteractable.CanAcceptObject(playerInventory.GetObjectList()[0])) // interactable can accept object of given type
             {
+                currentInteractable.StartInteractionPrimary();
                 playerInventory.SendObject(currentInteractable.GetInventory(), playerInventory.GetObjectList()[0]); // deposit item
-                return;
             }
         }
 
-        interactionStarted = true;
-        currentInteractable.StartInteractionPrimary();
+     
     }
 
     private void PrimaryInteractEnded()

@@ -21,13 +21,13 @@ public class UIHealthBar : MonoBehaviour
     private void OnEnable()
     {
         Infection.OnInfectionLevelChange += UpdateInfectionLevel;
-        MissionController.OnMissionCompleted += DisplayInfectionBar;
+        TutorialController.OnTutorialEnd += DisplayInfectionBar;
     }
 
     private void OnDisable()
     {
         Infection.OnInfectionLevelChange -= UpdateInfectionLevel;
-        MissionController.OnMissionCompleted -= DisplayInfectionBar;
+        TutorialController.OnTutorialEnd -= DisplayInfectionBar;
     }
 
     private void Awake()
@@ -35,7 +35,7 @@ public class UIHealthBar : MonoBehaviour
         healthBarUI.SetActive(false);   
     }
 
-    private void DisplayInfectionBar(Mission mission)
+    private void DisplayInfectionBar()
     {
         healthBarUI.SetActive(true);
     }
