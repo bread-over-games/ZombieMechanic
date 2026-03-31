@@ -13,6 +13,16 @@ public class LootTable : Bench, IInteractable
     public static Action OnTutorialSparePartsPicked;
     public static Action OnTutorialBaseballBatPicked;
 
+    private void OnEnable()
+    {
+        Inventory.OnObjectReceive += InsertAntibiotics;
+    }
+
+    private void OnDisable()
+    {
+        Inventory.OnObjectReceive -= InsertAntibiotics;
+    }
+
     public override void StartInteractionPrimary()
     {
         base.StartInteractionPrimary();
@@ -30,5 +40,19 @@ public class LootTable : Bench, IInteractable
                 OnTutorialBaseballBatPicked?.Invoke();
             }
         }
-    }         
+    }
+
+    private void InsertAntibiotics(Object obj, Inventory myInventory) // when antibiotics are found on mission they are automatically added to medical cabinet
+    {
+        if (myInventory != inventory)
+        {
+            return;
+        }
+
+        if (obj is Antibiotics antibiotics)
+        {
+            ResourceController.Instance.ChangeAntibioticsAmount(antibiotics.currentDurability);
+            antibiotics.DestroyObject();
+        }
+    }
 }
