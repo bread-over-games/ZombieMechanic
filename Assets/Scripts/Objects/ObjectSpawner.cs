@@ -61,6 +61,11 @@ public class ObjectSpawner : MonoBehaviour
 
     private void SpawnObject()
     {
+        if (!TutorialController.Instance.skipTutorial && inventory.GetInventoryOfType() == Inventory.InventoryOfType.LootTable) // if this bench is LootTable and player did not skip tutorial, don't spawn another weapon
+        {
+            return;
+        }
+
         Object loot = spawnConfig.objectType switch
         {
             GeneratableObjectType.Weapon => new Weapon { weaponType = Weapon.WeaponType.BaseballBat },

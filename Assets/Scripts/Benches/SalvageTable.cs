@@ -11,6 +11,8 @@ public class SalvageTable : Bench
 
     private Coroutine lootingCoroutine;
 
+    private bool isEnabled = true;
+
     public static Action OnTutorialSparePartsPlaced;
     public static Action OnTutorialSparePartsSalvaged;
 
@@ -37,8 +39,22 @@ public class SalvageTable : Bench
         if (myInventory == inventory)
         {
             currentObject = obj;
-        }
-        
+        }        
+    }
+
+    public void EnableSalvageTable()
+    {
+        isEnabled = true;
+    }
+
+    public void DisableSalvageTable()
+    {
+        isEnabled = false;
+    }
+
+    public override bool IsInteractionPossible()
+    {
+        return isEnabled;
     }
 
     IEnumerator DoSalvage()

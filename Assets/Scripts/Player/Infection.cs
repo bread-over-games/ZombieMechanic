@@ -17,22 +17,19 @@ public class Infection : MonoBehaviour
     private void OnEnable()
     {
         MedicalCabinet.OnAntibioticsUsed += DecreaseInfection;
-        MissionController.OnMissionCompleted += StartInfection;
+        TutorialController.OnTutorialEnd += StartInfection;
     }
 
     private void OnDisable()
     {
         MedicalCabinet.OnAntibioticsUsed -= DecreaseInfection;
-        MissionController.OnMissionCompleted -= StartInfection;
+        TutorialController.OnTutorialEnd -= StartInfection;
     }
 
-    private void StartInfection(Mission mission)
+    private void StartInfection()
     {
-        if (!isFirstMissionComplete)
-        {
-            StartCoroutine(IncreaseInfection());
-            isFirstMissionComplete = true;
-        }        
+        StartCoroutine(IncreaseInfection());
+        isFirstMissionComplete = true;      
     }
 
     private IEnumerator IncreaseInfection()

@@ -11,6 +11,10 @@ public class TutorialController : MonoBehaviour
     public EmissionFlasher medicalCabinetFlasher;
     public EmissionFlasher armoryFlasher;
 
+    public Armory armoryFirst;
+    public Armory armorySecond;
+    public SalvageTable salvageTable;
+
     public bool skipTutorial = false;
     [HideInInspector] public bool sparePartsPicked = false;
     [HideInInspector] public bool sparePartsPlacedSalvage = false;
@@ -21,6 +25,8 @@ public class TutorialController : MonoBehaviour
     [HideInInspector] public bool baseballBatPickedWorkbench = false;
     [HideInInspector] public bool baseballBatPlacedArmory = false;
     [HideInInspector] public bool sentOnMissionArmory = false;
+    private bool medicalCabinetTutorialStarted = false;
+    private bool antibioticsUsed = false;
 
     public static Action OnTutorialEnd;
     public static Action OnTutorialStart;
@@ -31,7 +37,7 @@ public class TutorialController : MonoBehaviour
     {
         LootTable.OnTutorialSparePartsPicked += SparePartsPicked;
         LootTable.OnTutorialSparePartsPicked += StartSalvageTableFlash;
-        SalvageTable.OnTutorialSparePartsPlaced += StopSalvageTableFlash;
+        SalvageTable.OnTutorialSparePartsPlaced += SparePartsPlacedSalvage;
         SalvageTable.OnTutorialSparePartsSalvaged += SpawnBaseballBat;
         LootTable.OnTutorialBaseballBatPicked += BaseballBatPicked;
         Workbench.OnTutorialBaseballBatPlaced += BaseballBatPlacedWorkbench;
@@ -39,13 +45,15 @@ public class TutorialController : MonoBehaviour
         Workbench.OnTutorialBaseballBatRepaired += BaseballBatRepaired;
         Armory.OnBaseballBatPlaced += BaseballBatPlacedArmory;
         Armory.OnSentOnMission += ArmorySentOnMission;
+        Infection.OnInfectionLevelChange += InfectionTutorialStart;
+        MedicalCabinet.OnAntibioticsUsed += InfectionTutorialStop;
     }
 
     private void OnDisable()
     {
         LootTable.OnTutorialSparePartsPicked -= SparePartsPicked;
         LootTable.OnTutorialSparePartsPicked -= StartSalvageTableFlash;
-        SalvageTable.OnTutorialSparePartsPlaced -= StopSalvageTableFlash;
+        SalvageTable.OnTutorialSparePartsPlaced -= SparePartsPlacedSalvage;
         SalvageTable.OnTutorialSparePartsSalvaged -= SpawnBaseballBat;
         LootTable.OnTutorialBaseballBatPicked -= BaseballBatPicked;
         Workbench.OnTutorialBaseballBatPlaced -= BaseballBatPlacedWorkbench;
@@ -53,6 +61,8 @@ public class TutorialController : MonoBehaviour
         Workbench.OnTutorialBaseballBatRepaired -= BaseballBatRepaired;
         Armory.OnBaseballBatPlaced -= BaseballBatPlacedArmory;
         Armory.OnSentOnMission -= ArmorySentOnMission;
+        Infection.OnInfectionLevelChange -= InfectionTutorialStart;
+        MedicalCabinet.OnAntibioticsUsed -= InfectionTutorialStop;
     }
 
     private void Awake()
@@ -66,12 +76,43 @@ public class TutorialController : MonoBehaviour
         {
             OnTutorialStart?.Invoke();
             SpawnSpareParts();
+            DisableArmories();
         }
         else
         {
             OnTutorialEnd?.Invoke();
         }
-    }    
+    }   
+    
+    private void InfectionTutorialStart(float infectionLevel)
+    {
+        if (infectionLevel > 60 && !medicalCabinetTutorialStarted && !skipTutorial)
+        {
+            medicalCabinetFlasher.StartFlash();
+            medicalCabinetTutorialStarted = true;
+        }
+    }
+
+    private void InfectionTutorialStop()
+    {
+        if (medicalCabinetTutorialStarted && !antibioticsUsed)
+        {
+            medicalCabinetFlasher.StopFlash();
+            antibioticsUsed = true;
+        }
+    }
+
+    private void DisableArmories()
+    {
+        armoryFirst.isEnabled = false;
+        armorySecond.isEnabled = false; 
+    }
+
+    private void EnableArmories()
+    {
+        armoryFirst.isEnabled = true;
+        armorySecond.isEnabled = true;
+    }
 
     private void SpawnSpareParts()
     {
@@ -90,9 +131,8 @@ public class TutorialController : MonoBehaviour
         salvageTableFlasher.StartFlash();
     }
 
-    private void StopSalvageTableFlash()
+    private void SparePartsPlacedSalvage()
     {
-        salvageTableFlasher.StopFlash();
         sparePartsPlacedSalvage = true;
     }
 
@@ -102,6 +142,7 @@ public class TutorialController : MonoBehaviour
         OnSpawnTutorialBaseballBat?.Invoke(InventoriesController.Instance.lootTableInventory);
         sparePartsSalvaged = true;
         lootTableFlasher.StartFlash();
+        salvageTable.DisableSalvageTable();
     }
 
     private void BaseballBatPicked()
@@ -125,7 +166,8 @@ public class TutorialController : MonoBehaviour
     private void BaseballBatRepaired()
     {
         armoryFlasher.StartFlash();
-        baseballBatRepaired = true; 
+        baseballBatRepaired = true;
+        EnableArmories();
     }
 
     private void BaseballBatPlacedArmory()
@@ -138,6 +180,7 @@ public class TutorialController : MonoBehaviour
         sentOnMissionArmory = true;
         armoryFlasher.StopFlash();
         TutorialFinished();
+        salvageTable.EnableSalvageTable();
     }
 
     private void TutorialFinished()
