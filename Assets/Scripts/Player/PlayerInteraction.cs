@@ -23,6 +23,16 @@ public class PlayerInteraction : MonoBehaviour
 
     private bool introSkipped = false;
 
+    private void OnEnable()
+    {
+        Inventory.OnObjectReceive += InsertAntibiotics;
+    }
+
+    private void OnDisable()
+    {
+        Inventory.OnObjectReceive -= InsertAntibiotics;
+    }
+
     private void Update()
     {
         CheckForInteractable();
@@ -125,15 +135,18 @@ public class PlayerInteraction : MonoBehaviour
                 playerInventory.SendObject(currentInteractable.GetInventory(), playerInventory.GetObjectList()[0]); // deposit item
                 playerAnims.SetCarrying(false);
             }
-        }
-
-     
+        }     
     }
 
     private void PrimaryInteractEnded()
     {
         interactionStarted = false;
         currentInteractable.EndInteractionPrimary();
+
+        if (playerInventory.GetObjectList().Count == 0)
+        {
+            playerAnims.SetCarrying(false);
+        }
     }
 
     public void OnInteractSecondary(InputAction.CallbackContext context)
@@ -158,6 +171,20 @@ public class PlayerInteraction : MonoBehaviour
         {
             interactionStarted = false;
             currentInteractable.EndInteractionSecondary();
+        }
+    }
+
+    private void InsertAntibiotics(Object obj, Inventory myInventory) // when antibiotics are found on mission they are automatically added to medical cabinet
+    {
+        if (myInventory != playerInventory)
+        {
+            return;
+        }
+
+        if (obj is Antibiotics antibiotics)
+        {
+            ResourceController.Instance.ChangeAntibioticsAmount(antibiotics.currentDurability);
+            antibiotics.DestroyObject();
         }
     }
 }

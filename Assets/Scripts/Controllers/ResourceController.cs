@@ -71,8 +71,7 @@ public class ResourceController : MonoBehaviour
 
         if (antibioticsAmount <= 0)
         {
-            antibioticsAmount = 0;
-            Debug.Log("Not enough antibiotics!");
+            antibioticsAmount = 0;            
             OnNoAntibiotics?.Invoke();
         }
 
