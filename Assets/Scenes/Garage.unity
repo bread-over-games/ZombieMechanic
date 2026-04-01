@@ -11631,6 +11631,55 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1219791002
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1219791003}
+  - component: {fileID: 1219791004}
+  m_Layer: 0
+  m_Name: XPCounter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1219791003
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1219791002}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1356441990}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1219791004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1219791002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c5d2e3a0b2fb754294052597da1d467, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  zombieKillXP: 2
+  repairXP: 2
+  salvageXP: 1
+  upgradeXP: 50
+  xpRequiredForNextLevel: 0a0000003200000064000000c8000000
 --- !u!1 &1232942546
 GameObject:
   m_ObjectHideFlags: 0
@@ -12791,6 +12840,7 @@ Transform:
   - {fileID: 2074582465}
   - {fileID: 180530656}
   - {fileID: 622655308}
+  - {fileID: 1219791003}
   - {fileID: 1712566067}
   m_Father: {fileID: 952983817}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

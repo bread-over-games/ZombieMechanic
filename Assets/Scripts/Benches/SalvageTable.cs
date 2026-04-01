@@ -16,6 +16,8 @@ public class SalvageTable : Bench
     public static Action OnTutorialSparePartsPlaced;
     public static Action OnTutorialSparePartsSalvaged;
 
+    public static Action OnSalvage;
+
     private void OnEnable()
     {
         Inventory.OnObjectReceive += AssignCurrentObject;
@@ -69,6 +71,7 @@ public class SalvageTable : Bench
             yield return new WaitForSeconds(salvagingInterval); // player must hold for this long
 
             ResourceController.Instance.ChangeSparePartsAmount(salvagingValue); // reward
+            OnSalvage?.Invoke();
 
             if (currentObject.DamageObject(2)) // damage, check if destroyed
             {

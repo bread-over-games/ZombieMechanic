@@ -9,6 +9,8 @@ public class Workbench : Bench, IInteractable
 
     private Coroutine repairCoroutine;
 
+    public static Action OnRepair;
+
     public static Action OnTutorialBaseballBatPlaced;
     public static Action OnTutorialBaseballBatRepaired;
     public static Action OnTutorialBaseballBatPicked;
@@ -56,6 +58,7 @@ public class Workbench : Bench, IInteractable
             yield return new WaitForSeconds(repairInterval);
             ResourceController.Instance.ChangeSparePartsAmount(-repairSalvageCost);
             currentObject.RepairObject(repairValue);
+            OnRepair?.Invoke();
 
             if (!ResourceController.Instance.CanRepair(repairSalvageCost))
             {

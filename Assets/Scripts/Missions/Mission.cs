@@ -49,6 +49,7 @@ public class Mission
     public void ResolveMission()
     {
         ZombiesController.Instance.AddKilledZombies(zombiesKilled);
+        XPCounter.Instance.AddZombieKillXP(zombiesKilled);
         ApplyWearToLoadout();
         ReturnSurvivorLoadout();
 
