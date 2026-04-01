@@ -6,6 +6,7 @@ using System.Collections.Generic;
 
 public class PlayerInteraction : MonoBehaviour
 {
+    [SerializeField] private PlayerAnimations playerAnims;
     private IInteractable currentInteractable;
     private bool interactionStarted = false;
 
@@ -114,6 +115,7 @@ public class PlayerInteraction : MonoBehaviour
         {
             interactionStarted = true;
             currentInteractable.StartInteractionPrimary();
+            playerAnims.SetCarrying(true);
         } else         
         if (currentInventory.GetObjectList().Count < currentInventory.GetCapacity()) // player has item and there is a space in the target inventory
         {
@@ -121,6 +123,7 @@ public class PlayerInteraction : MonoBehaviour
             {
                 currentInteractable.StartInteractionPrimary();
                 playerInventory.SendObject(currentInteractable.GetInventory(), playerInventory.GetObjectList()[0]); // deposit item
+                playerAnims.SetCarrying(false);
             }
         }
 

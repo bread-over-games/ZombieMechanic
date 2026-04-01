@@ -4,6 +4,8 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMovement : MonoBehaviour
 {
+    [SerializeField] private PlayerAnimations playerAnims;
+
     [Header("Movement")]
     [SerializeField] private float moveSpeed = 5f;
 
@@ -58,6 +60,7 @@ public class PlayerMovement : MonoBehaviour
         if (moveInput.sqrMagnitude < 0.01f)
         {
             rb.linearVelocity = new Vector3(0f, rb.linearVelocity.y, 0f);
+            playerAnims.SetMoving(false);
             return;
         }
 
@@ -70,6 +73,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         rb.linearVelocity = new Vector3(finalDirection.x * moveSpeed, rb.linearVelocity.y, finalDirection.z * moveSpeed);
+        playerAnims.SetMoving(true);
     }
 
     private void Rotate()
