@@ -7,6 +7,7 @@ public class PerkData : ScriptableObject
 {
     public Sprite perkVisual;    
     public string perkName;
+    [TextArea(3, 6)]
     public string perkDescription;
     public string perkLevel;
     public Perk perkEffect;

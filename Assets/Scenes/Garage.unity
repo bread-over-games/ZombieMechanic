@@ -10812,6 +10812,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   availablePerks:
   - {fileID: 11400000, guid: bda2f5571fe74404da0700f709066201, type: 2}
+  - {fileID: 11400000, guid: bda2f5571fe74404da0700f709066201, type: 2}
+  - {fileID: 11400000, guid: bda2f5571fe74404da0700f709066201, type: 2}
+  firstPerkPick: {fileID: 0}
+  secondPerkPick: {fileID: 0}
   isSelectingPerk: 0
 --- !u!1 &984756744 stripped
 GameObject:
@@ -11824,6 +11828,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firstSlotSelected: {fileID: 1893681517322424000}
   perkSystemWindow: {fileID: 1321483809}
+  firstPerkName: {fileID: 8093818858149092374}
+  firstPerkDescription: {fileID: 3448864349652262597}
+  firstPerkImage: {fileID: 0}
+  secondPerkName: {fileID: 301210007}
+  secondPerkDescription: {fileID: 1238147488}
+  secondPerkImage: {fileID: 0}
   currentSlotSelected: 0
 --- !u!1 &1071438079
 GameObject:
@@ -13889,11 +13899,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Cures infection to 0% and pauses infection for two minutes.
+  m_text: 'Holder text holder text holder text.
 
 
-    Infection
-    resumes back at normal rate after time is up.'
+    Holder holder text text holder
+    text.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6cf58e1c0760fb5498d8b9fbdc006a31, type: 2}
   m_sharedMaterial: {fileID: 6546664967563981354, guid: 6cf58e1c0760fb5498d8b9fbdc006a31, type: 2}
@@ -21940,11 +21950,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Cures infection to 0% and pauses infection for two minutes.
+  m_text: 'Holder text holder text holder text.
 
 
-    Infection
-    resumes back at normal rate after time is up.'
+    Holder holder text text holder
+    text.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6cf58e1c0760fb5498d8b9fbdc006a31, type: 2}
   m_sharedMaterial: {fileID: 6546664967563981354, guid: 6cf58e1c0760fb5498d8b9fbdc006a31, type: 2}

@@ -1,11 +1,23 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using System;
+using TMPro;
+using UnityEngine.UI;
 
 public class UIPerkSystem : MonoBehaviour
 {
     [SerializeField] private GameObject firstSlotSelected;
     [SerializeField] private GameObject perkSystemWindow;
+
+    [Header("First perk info")]
+    [SerializeField] private TMP_Text firstPerkName;
+    [SerializeField] private TMP_Text firstPerkDescription;
+    [SerializeField] private Sprite firstPerkImage;
+
+    [Header("Second perk info")]
+    [SerializeField] private TMP_Text secondPerkName;
+    [SerializeField] private TMP_Text secondPerkDescription;
+    [SerializeField] private Sprite secondPerkImage;
 
     [HideInInspector] public ButtonSelectorPerks.PerkSlot currentSlotSelected;
     public static Action OnUIPerkWindowActive;
@@ -13,13 +25,13 @@ public class UIPerkSystem : MonoBehaviour
 
     private void OnEnable()
     {
-        XPCounter.OnLevelUp += ShowPerkWindow;
+        PerkController.OnRandomPerksGenerated += ShowPerkWindow;
         PlayerInteraction.OnPerkActivated += ActivatePerk;
     }
 
     private void OnDisable()
     {
-        XPCounter.OnLevelUp -= ShowPerkWindow;
+        PerkController.OnRandomPerksGenerated -= ShowPerkWindow;
         PlayerInteraction.OnPerkActivated -= ActivatePerk;
     }
 
@@ -27,6 +39,7 @@ public class UIPerkSystem : MonoBehaviour
     {
         perkSystemWindow.SetActive(true);
         EventSystem.current.SetSelectedGameObject(firstSlotSelected);
+        DisplayPerks();
         OnUIPerkWindowActive?.Invoke();
     }
 
@@ -34,6 +47,20 @@ public class UIPerkSystem : MonoBehaviour
     {
         EventSystem.current.SetSelectedGameObject(null);
         perkSystemWindow.SetActive(false);
+    }
+
+    public void DisplayPerks()
+    {
+        PerkData firstPerk = PerkController.Instance.firstPerkPick;
+        PerkData secondPerk = PerkController.Instance.secondPerkPick;
+
+        firstPerkName.text = firstPerk.perkName;
+        firstPerkDescription.text = firstPerk.perkDescription;
+        //firstPerkImage = firstPerk.perkVisual;
+
+        secondPerkName.text = secondPerk.perkName;
+        secondPerkDescription.text = secondPerk.perkDescription;
+        //secondPerkImage = secondPerk.perkVisual;
     }
 
     public virtual void ActivatePerk()

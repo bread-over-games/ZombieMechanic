@@ -14,6 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   perkVisual: {fileID: 0}
   perkName: Infection pause
-  perkDescription: Pauses infection for x minutes
+  perkDescription: 'Cures infection to 0% and pauses infection for two minutes.
+
+
+    Infection
+    resumes back at normal rate after time is up.'
   perkLevel: 
   perkEffect: {fileID: 11400000, guid: 87923bbc67a99a747a457bb5ed35e198, type: 2}

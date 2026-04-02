@@ -8,22 +8,23 @@ public class PerkController : MonoBehaviour
     private List<PerkData> activePerks = new List<PerkData>(); // perks player has chosen
     public List<PerkData> availablePerks = new List<PerkData>(); // all perks in the game minus those which player has already chosen
 
-    private PerkData firstPerkPick;
-    private PerkData secondPerkPick;
+    [HideInInspector] public PerkData firstPerkPick;
+    [HideInInspector] public PerkData secondPerkPick;
 
     [HideInInspector] public bool isSelectingPerk = false;
 
     public static PerkController Instance { get; private set; }
+    public static Action OnRandomPerksGenerated;
 
     private void OnEnable()
     {
-        UIPerkSystem.OnUIPerkWindowActive += GenerateRandomPerks;
+        XPCounter.OnLevelUp += GenerateRandomPerks;
         UIPerkSystem.OnCurrentPerkSlotSelected += PlayerChosePerk;
     }
 
     private void OnDisable()
     {
-        UIPerkSystem.OnUIPerkWindowActive -= GenerateRandomPerks;
+        XPCounter.OnLevelUp -= GenerateRandomPerks;
         UIPerkSystem.OnCurrentPerkSlotSelected -= PlayerChosePerk;
     }
 
@@ -39,8 +40,9 @@ public class PerkController : MonoBehaviour
         List<PerkData> availablePerksWOFirstPick = new List<PerkData>(availablePerks); // temporary storage for generating secondPerkPick
         firstPerkPick = availablePerksWOFirstPick[UnityEngine.Random.Range(0, availablePerks.Count)];
         availablePerksWOFirstPick.Remove(firstPerkPick);
-        secondPerkPick = availablePerksWOFirstPick[UnityEngine.Random.Range(0, availablePerksWOFirstPick.Count)];     
-        
+        secondPerkPick = availablePerksWOFirstPick[UnityEngine.Random.Range(0, availablePerksWOFirstPick.Count)];
+
+        OnRandomPerksGenerated?.Invoke();
         // display perks
     }
 
