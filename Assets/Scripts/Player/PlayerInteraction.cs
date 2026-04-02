@@ -13,24 +13,44 @@ public class PlayerInteraction : MonoBehaviour
     public static Action<Bench.BenchType> OnInteractableApproached;
     public static Action<Bench.BenchType> OnInteractableLeft;
     public static Action OnIntroSkip;
+    public static Action OnPerkActivated;
 
     [SerializeField] private Inventory playerInventory;
 
     [Header("Raycast Settings")]
     [SerializeField] private Transform rayOrigin;  
     [SerializeField] private float maxDistance;
-    [SerializeField] private LayerMask interactableLayer;
+    [SerializeField] private LayerMask interactableLayer;    
 
+    private bool isInputBlocked = false; // true means the input is blocked
     private bool introSkipped = false;
 
     private void OnEnable()
     {
         Inventory.OnObjectReceive += InsertAntibiotics;
+        XPCounter.OnLevelUp += BlockInputLevelUp;
     }
 
     private void OnDisable()
     {
         Inventory.OnObjectReceive -= InsertAntibiotics;
+        XPCounter.OnLevelUp -= BlockInputLevelUp;
+    }
+
+    private void BlockInputLevelUp()
+    {
+        BlockInput();
+        Invoke("UnblockInput", 2f);
+    }
+
+    private void BlockInput()
+    {
+        isInputBlocked = true;
+    }
+
+    private void UnblockInput()
+    {
+        isInputBlocked = false;
     }
 
     private void Update()
@@ -68,6 +88,8 @@ public class PlayerInteraction : MonoBehaviour
 
     public void OnInteractPrimary(InputAction.CallbackContext context)
     {
+        if (isInputBlocked) return;
+
         if (!introSkipped) // skips intro
         {
             introSkipped = true;
@@ -112,9 +134,7 @@ public class PlayerInteraction : MonoBehaviour
             default:
                 UIController.Instance.interactableInvSingleItem.SetInventory(currentInteractable.GetInventory());
                 break;
-        }
-        
-        OnInteractableApproached?.Invoke(currentInteractable.GetBenchType());        
+        }        
     }
 
     private void PrimaryInteractStarted()
@@ -151,6 +171,14 @@ public class PlayerInteraction : MonoBehaviour
 
     public void OnInteractSecondary(InputAction.CallbackContext context)
     {
+        if (isInputBlocked) return;
+
+        if (PerkController.Instance.isSelectingPerk)
+        {
+            if (context.started) OnPerkActivated?.Invoke();
+            return;
+        }
+
         if (currentInteractable == null)
         {
             return;

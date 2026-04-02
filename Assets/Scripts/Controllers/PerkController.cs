@@ -1,0 +1,67 @@
+using UnityEngine;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+
+public class PerkController : MonoBehaviour
+{
+    private List<PerkData> activePerks = new List<PerkData>(); // perks player has chosen
+    public List<PerkData> availablePerks = new List<PerkData>(); // all perks in the game minus those which player has already chosen
+
+    private PerkData firstPerkPick;
+    private PerkData secondPerkPick;
+
+    [HideInInspector] public bool isSelectingPerk = false;
+
+    public static PerkController Instance { get; private set; }
+
+    private void OnEnable()
+    {
+        UIPerkSystem.OnUIPerkWindowActive += GenerateRandomPerks;
+        UIPerkSystem.OnCurrentPerkSlotSelected += PlayerChosePerk;
+    }
+
+    private void OnDisable()
+    {
+        UIPerkSystem.OnUIPerkWindowActive -= GenerateRandomPerks;
+        UIPerkSystem.OnCurrentPerkSlotSelected -= PlayerChosePerk;
+    }
+
+    private void Awake()
+    {
+        Instance = this;
+    }
+
+    private void GenerateRandomPerks()
+    {
+        isSelectingPerk = true;
+
+        List<PerkData> availablePerksWOFirstPick = new List<PerkData>(availablePerks); // temporary storage for generating secondPerkPick
+        firstPerkPick = availablePerksWOFirstPick[UnityEngine.Random.Range(0, availablePerks.Count)];
+        availablePerksWOFirstPick.Remove(firstPerkPick);
+        secondPerkPick = availablePerksWOFirstPick[UnityEngine.Random.Range(0, availablePerksWOFirstPick.Count)];     
+        
+        // display perks
+    }
+
+    private void PlayerChosePerk(ButtonSelectorPerks.PerkSlot perkSlot)
+    {
+        if (perkSlot == ButtonSelectorPerks.PerkSlot.FirstPerkSlot)
+        {
+            firstPerkPick.perkEffect.ActivatePerk();
+            activePerks.Add(firstPerkPick);
+            availablePerks.Remove(firstPerkPick);
+            Debug.Log("First perk activated");
+        } else
+        {
+            secondPerkPick.perkEffect.ActivatePerk();
+            activePerks.Add(secondPerkPick);
+            availablePerks.Remove(secondPerkPick);
+            Debug.Log("Second perk activated");
+        }
+
+        firstPerkPick = null;
+        secondPerkPick = null;
+        isSelectingPerk = false;        
+    }
+}

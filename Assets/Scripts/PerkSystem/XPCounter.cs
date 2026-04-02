@@ -69,7 +69,7 @@ public class XPCounter : MonoBehaviour
     private void CheckLevel()
     {
         OnXPChange?.Invoke();
-        if (currentXP >= xpRequiredForNextLevel[currentLvl])
+        if (currentXP > xpRequiredForNextLevel[currentLvl])
         {            
             currentLvl += 1;
             currentXP = 0;
