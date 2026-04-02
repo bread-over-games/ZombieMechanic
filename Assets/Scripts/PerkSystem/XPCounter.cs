@@ -11,8 +11,8 @@ public class XPCounter : MonoBehaviour
     public int salvageXP;
     public int upgradeXP;
 
-    private int currentXP = 0;
-    private int currentLvl = 0;
+    [HideInInspector] public int currentXP = 0;
+    [HideInInspector] public int currentLvl = 0;
     private int maxLevel = 12;
 
     private bool maxLevelReached = false;
@@ -20,6 +20,7 @@ public class XPCounter : MonoBehaviour
     public List<int> xpRequiredForNextLevel = new List<int>();
 
     public static Action OnLevelUp;
+    public static Action OnXPChange;
 
     private void Awake()
     {
@@ -67,13 +68,12 @@ public class XPCounter : MonoBehaviour
 
     private void CheckLevel()
     {
-        Debug.Log(currentXP);
+        OnXPChange?.Invoke();
         if (currentXP >= xpRequiredForNextLevel[currentLvl])
         {            
             currentLvl += 1;
             currentXP = 0;
             OnLevelUp?.Invoke();
-            Debug.Log(currentLvl);
 
             if (currentLvl == maxLevel)
             {
