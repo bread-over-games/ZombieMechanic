@@ -41,12 +41,14 @@ public class UIPerkSystem : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(firstSlotSelected);
         DisplayPerks();
         OnUIPerkWindowActive?.Invoke();
+        UIFocusStack.Push(perkSystemWindow);
     }
 
     private void HidePerkWindow()
     {
         EventSystem.current.SetSelectedGameObject(null);
         perkSystemWindow.SetActive(false);
+        UIFocusStack.Pop();
     }
 
     public void DisplayPerks()

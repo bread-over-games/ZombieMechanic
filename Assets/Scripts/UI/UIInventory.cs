@@ -64,6 +64,7 @@ public class UIInventory : MonoBehaviour
     private void Start()
     {
         singleItemInventoryWindow.SetActive(false);
+        UIFocusStack.Push(singleItemInventoryWindow);
     }
 
     private void OnEnable()
