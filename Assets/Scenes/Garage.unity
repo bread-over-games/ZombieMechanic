@@ -806,6 +806,7 @@ Transform:
   m_Children:
   - {fileID: 1060130167}
   - {fileID: 1033553272}
+  - {fileID: 2079418817}
   m_Father: {fileID: 665413515}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &71308689
@@ -11384,6 +11385,7 @@ MonoBehaviour:
   availablePerks:
   - {fileID: 11400000, guid: bda2f5571fe74404da0700f709066201, type: 2}
   - {fileID: 11400000, guid: 57b700dd5274e084bae3e52a7a1b2418, type: 2}
+  - {fileID: 11400000, guid: 67be85d5416aae34895dc5bdbc0db81f, type: 2}
   firstPerkPick: {fileID: 0}
   secondPerkPick: {fileID: 0}
   isSelectingPerk: 0
@@ -21476,6 +21478,51 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactableInvSingleItem: {fileID: 1724728992}
   armoryUI: {fileID: 1454226950}
+--- !u!1 &2079418816
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2079418817}
+  - component: {fileID: 2079418818}
+  m_Layer: 0
+  m_Name: RepairMasteryHandler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2079418817
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2079418816}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 61553602}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2079418818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2079418816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 147835597c9a5844aa12459936670c19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  repairMasterySO: {fileID: 11400000, guid: 91d6978400ee9b64fa7c781e59f1e9b2, type: 2}
 --- !u!1 &2081942475
 GameObject:
   m_ObjectHideFlags: 0

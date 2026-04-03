@@ -10,10 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4eaf8422331d5b346893b6d1af95b0fe, type: 3}
-  m_Name: SalvageMastery
+  m_Name: RepairMastery
   m_EditorClassIdentifier: 
   perkVisual: {fileID: 0}
-  perkName: Salvage mastery
-  perkDescription: 10% chance each salvage tick yields one bonus Spare Part when
-    working on Salvage Table.
-  perkEffect: {fileID: 11400000, guid: 816de181be2a950439fe39fbac19941c, type: 2}
+  perkName: Repair mastery
+  perkDescription: 10% chance each repair tick costs no Spare Parts at the Workbench.
+  perkEffect: {fileID: 11400000, guid: 91d6978400ee9b64fa7c781e59f1e9b2, type: 2}
