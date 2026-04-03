@@ -807,6 +807,7 @@ Transform:
   - {fileID: 1060130167}
   - {fileID: 1033553272}
   - {fileID: 2079418817}
+  - {fileID: 451968523}
   m_Father: {fileID: 665413515}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &71308689
@@ -4894,6 +4895,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 443310569}
   m_CullTransparentMesh: 1
+--- !u!1 &451968522
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 451968523}
+  - component: {fileID: 451968524}
+  m_Layer: 0
+  m_Name: InstantSalvageHandler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &451968523
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 451968522}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 61553602}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &451968524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 451968522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f645ed0b6cf970a45a2b8ecc7a2fc0f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  instantSalvageSO: {fileID: 11400000, guid: 5c2f6db80c82abd48910e91964a2c8c4, type: 2}
 --- !u!1 &452287252
 GameObject:
   m_ObjectHideFlags: 0
@@ -11384,8 +11430,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   availablePerks:
   - {fileID: 11400000, guid: bda2f5571fe74404da0700f709066201, type: 2}
-  - {fileID: 11400000, guid: 57b700dd5274e084bae3e52a7a1b2418, type: 2}
+  - {fileID: 11400000, guid: a0252a00e66d6414bad44566dcc26dc3, type: 2}
   - {fileID: 11400000, guid: 67be85d5416aae34895dc5bdbc0db81f, type: 2}
+  - {fileID: 11400000, guid: 57b700dd5274e084bae3e52a7a1b2418, type: 2}
   firstPerkPick: {fileID: 0}
   secondPerkPick: {fileID: 0}
   isSelectingPerk: 0
