@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a289717b0b0bafb44875aba4e8bb975a, type: 3}
   m_Name: InfectionPauseEffect
   m_EditorClassIdentifier: 
+  infectionPauseDuration: 30

@@ -12,24 +12,40 @@ public class Infection : MonoBehaviour
     public static Action<float> OnInfectionLevelChange;
     public static Action OnInfectionReachedMaxLevel;
 
-    private bool isFirstMissionComplete = false;
+    private Coroutine currentInfectionCoroutine;
 
     private void OnEnable()
     {
         MedicalCabinet.OnAntibioticsUsed += DecreaseInfection;
         TutorialController.OnTutorialEnd += StartInfection;
+        InfectionPauseHandler.OnInfectionPause += StopInfection;
+        InfectionPauseHandler.OnInfectionPause += ResetInfectionlevel;
+        InfectionPauseHandler.OnInfectionResume += StartInfection;
     }
 
     private void OnDisable()
     {
         MedicalCabinet.OnAntibioticsUsed -= DecreaseInfection;
         TutorialController.OnTutorialEnd -= StartInfection;
+        InfectionPauseHandler.OnInfectionPause -= StopInfection;
+        InfectionPauseHandler.OnInfectionPause -= ResetInfectionlevel;
+        InfectionPauseHandler.OnInfectionResume -= StartInfection;
     }
 
     private void StartInfection()
     {
-        StartCoroutine(IncreaseInfection());
-        isFirstMissionComplete = true;      
+        currentInfectionCoroutine = StartCoroutine(IncreaseInfection());    
+    }
+
+    private void StopInfection()
+    {
+        StopCoroutine(currentInfectionCoroutine);
+    }
+
+    private void ResetInfectionlevel()
+    {
+        currentInfectionLevel = 0f;
+        OnInfectionLevelChange?.Invoke(currentInfectionLevel);
     }
 
     private IEnumerator IncreaseInfection()

@@ -52,8 +52,9 @@ public class PerkController : MonoBehaviour
         {
             firstPerkPick.perkEffect.ActivatePerk();
             activePerks.Add(firstPerkPick);
-            availablePerks.Remove(firstPerkPick);
+            availablePerks.Remove(firstPerkPick);            
             Debug.Log("First perk activated");
+
         } else
         {
             secondPerkPick.perkEffect.ActivatePerk();
