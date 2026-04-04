@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: MediumFlame03
+  m_Name: WeldFlames
   m_Shader: {fileID: 211, guid: 0000000000000000f000000000000000, type: 0}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -120,9 +120,9 @@ Material:
     - _BaseColor: {r: 1.6037736, g: 0.944728, b: 0.34042364, a: 1}
     - _BaseColorAddSubDiff: {r: 0, g: 0, b: 0, a: 0}
     - _CameraFadeParams: {r: 0, g: Infinity, b: 0, a: 0}
-    - _Color: {r: 1.6037736, g: 0.944728, b: 0.3404236, a: 1}
+    - _Color: {r: 2.1411638, g: 0.6889003, b: 0, a: 1}
     - _ColorAddSubDiff: {r: 1, g: 0, b: 0, a: 0}
-    - _EmissionColor: {r: 6.8831816, g: 3.063196, b: 0, a: 1}
+    - _EmissionColor: {r: 6.217398, g: 5.22264, b: 3.0924234, a: 1}
     - _SoftParticleFadeParams: {r: 0, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

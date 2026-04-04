@@ -19,6 +19,7 @@ public class SalvageTable : Bench
 
     public static Action OnSalvageStart;
     public static Action OnSalvageTick;
+    public static Action OnSalvageStop;
 
     private void OnEnable()
     {
@@ -87,6 +88,7 @@ public class SalvageTable : Bench
             if (currentObject.DamageObject(2)) // damage, check if destroyed
             {
                 currentObject.DestroyObject();
+                OnSalvageStop?.Invoke();
 
                 if (!TutorialController.Instance.skipTutorial)
                 {
@@ -131,6 +133,7 @@ public class SalvageTable : Bench
         if (salvagingCoroutine != null)
         {
             StopCoroutine(salvagingCoroutine);
+            OnSalvageStop?.Invoke();
             salvagingCoroutine = null;
         }
     }
