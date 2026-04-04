@@ -7,6 +7,7 @@ public class InfectionPauseHandler : MonoBehaviour
     public InfectionPause infectionPauseSO;
     public static Action OnInfectionPause;
     public static Action OnInfectionResume;
+    public static Action OnInfectionPauseDeactivated;
 
     private void OnEnable()
     {
@@ -27,6 +28,7 @@ public class InfectionPauseHandler : MonoBehaviour
     private void InfectionPauseStop()
     {
         OnInfectionResume?.Invoke();
+        OnInfectionPauseDeactivated?.Invoke();
     }
 
     private IEnumerator InfectionPauseTimer()

@@ -12,12 +12,12 @@ public class UIPerkSystem : MonoBehaviour
     [Header("First perk info")]
     [SerializeField] private TMP_Text firstPerkName;
     [SerializeField] private TMP_Text firstPerkDescription;
-    [SerializeField] private Sprite firstPerkImage;
+    [SerializeField] private Image firstPerkImage;
 
     [Header("Second perk info")]
     [SerializeField] private TMP_Text secondPerkName;
     [SerializeField] private TMP_Text secondPerkDescription;
-    [SerializeField] private Sprite secondPerkImage;
+    [SerializeField] private Image secondPerkImage;
 
     [HideInInspector] public ButtonSelectorPerks.PerkSlot currentSlotSelected;
     public static Action OnUIPerkWindowActive;
@@ -58,11 +58,11 @@ public class UIPerkSystem : MonoBehaviour
 
         firstPerkName.text = firstPerk.perkName;
         firstPerkDescription.text = firstPerk.perkDescription;
-        //firstPerkImage = firstPerk.perkVisual;
+        firstPerkImage.sprite = firstPerk.perkVisual;
 
         secondPerkName.text = secondPerk.perkName;
         secondPerkDescription.text = secondPerk.perkDescription;
-        //secondPerkImage = secondPerk.perkVisual;
+        secondPerkImage.sprite = secondPerk.perkVisual;
     }
 
     public virtual void ActivatePerk()

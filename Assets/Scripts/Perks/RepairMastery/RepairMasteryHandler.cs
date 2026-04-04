@@ -1,9 +1,12 @@
 using UnityEngine;
+using System;
 
 public class RepairMasteryHandler : MonoBehaviour
 {
     public RepairMastery repairMasterySO;
     private bool isActive = false;
+
+    public static Action OnRepairMasteryProc;
 
     private void OnEnable()
     {
@@ -26,12 +29,12 @@ public class RepairMasteryHandler : MonoBehaviour
     {
         if (!isActive) return;
 
-        int roll = Random.Range(0, 100);
+        int roll = UnityEngine.Random.Range(0, 100);
 
         if (roll <= repairMasterySO.freeRepairChance)
         {
             ResourceController.Instance.ChangeSparePartsAmount(repairMasterySO.sparePartsReturnAmount);
-            Debug.Log("free repair");
+            OnRepairMasteryProc?.Invoke();
         }
     }
 }

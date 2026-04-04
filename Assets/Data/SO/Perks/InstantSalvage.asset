@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4eaf8422331d5b346893b6d1af95b0fe, type: 3}
   m_Name: InstantSalvage
   m_EditorClassIdentifier: 
-  perkVisual: {fileID: 0}
+  perkVisual: {fileID: 218236337, guid: 3739824b4cdbbfd45a8e6b0d8e239143, type: 3}
   perkName: Instant Salvage
   perkDescription: '20% item will be instantly salvaged on Salvage Table.
 

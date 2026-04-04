@@ -1,9 +1,12 @@
 using UnityEngine;
+using System;
 
 public class SalvageMasteryHandler : MonoBehaviour
 {
     public SalvageMastery salvageMasterySO;
     private bool isActive = false;
+
+    public static Action OnSalvageMasteryProc;
 
     private void OnEnable()
     {
@@ -26,11 +29,12 @@ public class SalvageMasteryHandler : MonoBehaviour
     {
         if (!isActive) return;
 
-        int roll = Random.Range(0, 100);
+        int roll = UnityEngine.Random.Range(0, 100);
 
         if (roll <= salvageMasterySO.extraSalvageChance)
         {
-            ResourceController.Instance.ChangeSparePartsAmount(salvageMasterySO.extraSalvageAmount);            
+            ResourceController.Instance.ChangeSparePartsAmount(salvageMasterySO.extraSalvageAmount);
+            OnSalvageMasteryProc?.Invoke();
         }
     }
 }

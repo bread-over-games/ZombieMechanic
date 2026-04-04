@@ -23,6 +23,7 @@ public class MissionController : MonoBehaviour
     [Header("Mission loot quality outcome")]
     public float minimalLootQuality;
 
+    public static Action OnMissionStarting;
     public static Action<Mission> OnMissionStarted;
     public static Action<Mission> OnMissionCompleted;
 
@@ -53,6 +54,7 @@ public class MissionController : MonoBehaviour
 
     public void SendMission (Weapon weaponInArmory, Backpack backpackInArmory, Armor armorInArmory, Inventory missionInventory, Armory missionArmory)
     {
+        OnMissionStarting?.Invoke();
         Mission mission = new Mission(weaponInArmory, backpackInArmory, armorInArmory, missionInventory, missionArmory);
 
         activeMissions.Add(mission); 
