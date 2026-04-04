@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4eaf8422331d5b346893b6d1af95b0fe, type: 3}
+  m_Name: InfectionPause
+  m_EditorClassIdentifier: 
+  perkVisual: {fileID: -1828252578, guid: f2e090f562c4bfb42976d5523a80cef5, type: 3}
+  perkName: Infection Pause
+  perkDescription: 'Cures infection to 0% and pauses infection for two minutes.
+
+
+    Infection
+    resumes back at normal rate after time is up.'
+  perkEffect: {fileID: 11400000, guid: 87923bbc67a99a747a457bb5ed35e198, type: 2}

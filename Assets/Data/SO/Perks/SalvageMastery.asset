@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4eaf8422331d5b346893b6d1af95b0fe, type: 3}
+  m_Name: SalvageMastery
+  m_EditorClassIdentifier: 
+  perkVisual: {fileID: -612916393, guid: 0447f2b6dedb47d4184172ed8787d516, type: 3}
+  perkName: Salvage Mastery
+  perkDescription: 10% chance each salvage tick yields one bonus Spare Part when
+    working on Salvage Table.
+  perkEffect: {fileID: 11400000, guid: 816de181be2a950439fe39fbac19941c, type: 2}

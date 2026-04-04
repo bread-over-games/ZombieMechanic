@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4eaf8422331d5b346893b6d1af95b0fe, type: 3}
+  m_Name: LuckyBastard
+  m_EditorClassIdentifier: 
+  perkVisual: {fileID: -347639800, guid: 53d9b5c97c8a8c245a0c223d8aea6544, type: 3}
+  perkName: Lucky Bastard
+  perkDescription: 5% chance gear will not suffer any durability loss when on mission.
+  perkEffect: {fileID: 11400000, guid: 34041f1042c5f5441b5ecac4124122f9, type: 2}

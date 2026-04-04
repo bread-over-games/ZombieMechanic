@@ -7,25 +7,29 @@ using UnityEngine.UIElements;
 public class SalvageTable : Bench
 {
     [SerializeField] private float salvagingInterval; // tick of looting, how often can player get salvage from loot
+    private float defaultSalvagingInterval;
     [SerializeField] private int salvagingValue; // how much salvage is looted per tick
 
-    private Coroutine lootingCoroutine;
+    private Coroutine salvagingCoroutine;
 
     private bool isEnabled = true;
 
     public static Action OnTutorialSparePartsPlaced;
     public static Action OnTutorialSparePartsSalvaged;
 
-    public static Action OnSalvage;
+    public static Action OnSalvageStart;
+    public static Action OnSalvageTick;
 
     private void OnEnable()
     {
         Inventory.OnObjectReceive += AssignCurrentObject;
+        InstantSalvageHandler.OnSalvageInstantly += InstantSalvageInterval;
     }
 
     private void OnDisable()
     {
         Inventory.OnObjectReceive -= AssignCurrentObject;
+        InstantSalvageHandler.OnSalvageInstantly -= InstantSalvageInterval;
     }
 
     public void Awake()
@@ -34,6 +38,8 @@ public class SalvageTable : Bench
         acceptedTypes.Add(typeof(Backpack));
         acceptedTypes.Add(typeof(Armor));
         acceptedTypes.Add(typeof(Scrap));
+
+        defaultSalvagingInterval = salvagingInterval;
     }
 
     private void AssignCurrentObject(Object obj, Inventory myInventory)
@@ -42,6 +48,11 @@ public class SalvageTable : Bench
         {
             currentObject = obj;
         }        
+    }
+
+    private void InstantSalvageInterval()
+    {
+        salvagingInterval = 0;
     }
 
     public void EnableSalvageTable()
@@ -60,18 +71,18 @@ public class SalvageTable : Bench
     }
 
     IEnumerator DoSalvage()
-    {        
+    {           
         if (currentObject == null)
         {
             yield break;
-        }
+        }    
 
         while (true)
         {
             yield return new WaitForSeconds(salvagingInterval); // player must hold for this long
 
             ResourceController.Instance.ChangeSparePartsAmount(salvagingValue); // reward
-            OnSalvage?.Invoke();
+            OnSalvageTick?.Invoke();
 
             if (currentObject.DamageObject(2)) // damage, check if destroyed
             {
@@ -109,15 +120,18 @@ public class SalvageTable : Bench
             return;
         }
 
-        lootingCoroutine = StartCoroutine(DoSalvage());
+        salvagingInterval = defaultSalvagingInterval;
+        OnSalvageStart?.Invoke();
+
+        salvagingCoroutine = StartCoroutine(DoSalvage());
     }
 
     public override void EndInteractionSecondary()
     {
-        if (lootingCoroutine != null)
+        if (salvagingCoroutine != null)
         {
-            StopCoroutine(lootingCoroutine);
-            lootingCoroutine = null;
+            StopCoroutine(salvagingCoroutine);
+            salvagingCoroutine = null;
         }
     }
 }

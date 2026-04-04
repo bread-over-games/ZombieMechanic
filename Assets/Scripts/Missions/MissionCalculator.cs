@@ -2,6 +2,39 @@ using UnityEngine;
 
 public static class MissionCalculator
 {
+    private static bool negateWeaponWear = false;
+    private static bool negateArmorWear = false;
+    private static bool negateBackpackWear = false;
+
+    public static void Initialize()
+    {
+        LuckyBastardHandler.OnNoWeaponWear += SetNegateWeaponWear;
+        LuckyBastardHandler.OnNoArmorWear += SetNegateArmorWear;
+        LuckyBastardHandler.OnNoBackpackWear += SetNegateBackpackWear;
+    }
+
+    public static void Cleanup()
+    {
+        LuckyBastardHandler.OnNoWeaponWear -= SetNegateWeaponWear;
+        LuckyBastardHandler.OnNoArmorWear -= SetNegateArmorWear;
+        LuckyBastardHandler.OnNoBackpackWear -= SetNegateBackpackWear;
+    }
+
+    private static void SetNegateWeaponWear()
+    {
+        negateWeaponWear = true; 
+    }
+
+    private static void SetNegateArmorWear()
+    {
+        negateArmorWear = true;
+    }
+
+    private static void SetNegateBackpackWear()
+    {
+        negateBackpackWear = true;
+    }
+
     public static MissionEstimate EstimateMission(Weapon weaponToEquip, Backpack backpackToEquip, Armor armorToEquip)
     {
         int missionDuration = (int)CalculateMissionDuration(weaponToEquip, backpackToEquip, armorToEquip); 
@@ -36,9 +69,9 @@ public static class MissionCalculator
 
     private static int EstimateGearWear(int missionDuration)
     {
-        float weaponWear = (missionDuration / 100f) * MissionController.Instance.loadoutWearWeaponWeight;
-        float backpackWear = (missionDuration / 100f) * MissionController.Instance.loadoutWearBackpackWeight;
-        float armorWear = (missionDuration / 100f) * MissionController.Instance.loadoutWearArmorWeight;
+        float weaponWear = (missionDuration / 100f) * MissionController.Instance.loadoutWearWeaponWeight * ValueModifiers.Instance.gearWearModifier;
+        float backpackWear = (missionDuration / 100f) * MissionController.Instance.loadoutWearBackpackWeight * ValueModifiers.Instance.gearWearModifier;
+        float armorWear = (missionDuration / 100f) * MissionController.Instance.loadoutWearArmorWeight * ValueModifiers.Instance.gearWearModifier;
 
         int gearWear = (int)((weaponWear + backpackWear + armorWear)/3f);
         return gearWear;
@@ -46,19 +79,37 @@ public static class MissionCalculator
 
     private static int CalculateWeaponWear(int missionDuration)
     {
-        int weaponWear = (int)((missionDuration / 100f) * MissionController.Instance.loadoutWearWeaponWeight);
+        if (negateWeaponWear)
+        {
+            negateWeaponWear = false;
+            return 0;
+        }
+
+        int weaponWear = (int)((missionDuration / 100f) * MissionController.Instance.loadoutWearWeaponWeight * ValueModifiers.Instance.gearWearModifier);
         return weaponWear;
     }
 
     private static int CalculateArmorWear(int missionDuration)
     {
-        int armorWear = (int)((missionDuration / 100f) * MissionController.Instance.loadoutWearArmorWeight);
+        if (negateArmorWear)
+        {
+            negateArmorWear = false;
+            return 0;
+        }
+
+        int armorWear = (int)((missionDuration / 100f) * MissionController.Instance.loadoutWearArmorWeight * ValueModifiers.Instance.gearWearModifier);
         return armorWear;
     }
 
     private static int CalculateBackpackWear(int missionDuration)
     {
-        int backpackWear = (int)((missionDuration / 100f) * MissionController.Instance.loadoutWearBackpackWeight);
+        if (negateBackpackWear)
+        {
+            negateBackpackWear = false;
+            return 0;
+        }
+
+        int backpackWear = (int)((missionDuration / 100f) * MissionController.Instance.loadoutWearBackpackWeight * ValueModifiers.Instance.gearWearModifier);
         return backpackWear;
     }
 
@@ -146,7 +197,7 @@ public static class MissionCalculator
         }
 
         weaponKills = missionDuration * (weaponDamage / 50f);
-        int zombiesKills = (int)(missionDuration * missionDuration / zombieKillsDivisor); // basic formula, will be improved with weapon damage
+        int zombiesKills = (int)((missionDuration * missionDuration / zombieKillsDivisor) * ValueModifiers.Instance.zombieKillsModifier);
         zombiesKills += (int)weaponKills;
 
         if (zombiesKills < 1)

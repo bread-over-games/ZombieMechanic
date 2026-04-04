@@ -78,6 +78,11 @@ public class UIArmory : MonoBehaviour
         MissionController.OnMissionCompleted -= ChangeMissionStateGUI;
     }
 
+    private void Start()
+    {
+        UIFocusStack.Push(armoryWindow);
+    }
+
     private void ShowArmoryWindow(Bench.BenchType benchType)
     {
         if (benchType != Bench.BenchType.Armory)
