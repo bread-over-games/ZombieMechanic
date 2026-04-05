@@ -4,14 +4,15 @@ using System;
 public class ResourceController : MonoBehaviour
 {
     private int sparePartsAmount; // used for repairing
-    private int antibioticsAmount;
+    private int sparePartsLimit;
+    private int antibioticsAmount;    
 
     public static Action OnSparePartsAmountChange;
+    public static Action OnSparePartsLimitReached;
     public static Action OnNoSpareParts;
 
     public static Action OnAntibioticsAmountChange;
     public static Action OnNoAntibiotics;
-
     public static ResourceController Instance { get; private set; }
     
     void Awake()
@@ -50,6 +51,20 @@ public class ResourceController : MonoBehaviour
     public int GetAntibioticsAmount()
     {
         return antibioticsAmount; 
+    }
+
+    public bool CheckSparePartsLimit(int amount)
+    {
+        int sparePartsHolder = sparePartsAmount + amount;
+
+        if (sparePartsHolder >= sparePartsLimit)
+        {
+            OnSparePartsLimitReached?.Invoke();
+            return false; // no space left in storage racks
+        } else
+        {
+            return true; // there is a space in storage racks
+        }
     }
 
     public void ChangeSparePartsAmount(int amount)

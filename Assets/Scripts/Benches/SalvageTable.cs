@@ -82,23 +82,26 @@ public class SalvageTable : Bench
         {
             yield return new WaitForSeconds(salvagingInterval); // player must hold for this long
 
-            ResourceController.Instance.ChangeSparePartsAmount(salvagingValue); // reward
-            OnSalvageTick?.Invoke();
-
-            if (currentObject.DamageObject(2)) // damage, check if destroyed
+            if (ResourceController.Instance.CheckSparePartsLimit(salvagingValue))
             {
-                currentObject.DestroyObject();
-                EndInteractionSecondary();
+                ResourceController.Instance.ChangeSparePartsAmount(salvagingValue); // reward
+                OnSalvageTick?.Invoke();
 
-                if (!TutorialController.Instance.skipTutorial)
+                if (currentObject.DamageObject(2)) // damage, check if destroyed
                 {
-                    if (!TutorialController.Instance.sparePartsSalvaged)
+                    currentObject.DestroyObject();
+                    EndInteractionSecondary();
+
+                    if (!TutorialController.Instance.skipTutorial)
                     {
-                        OnTutorialSparePartsSalvaged?.Invoke();
+                        if (!TutorialController.Instance.sparePartsSalvaged)
+                        {
+                            OnTutorialSparePartsSalvaged?.Invoke();
+                        }
                     }
+                    break;
                 }
-                break;
-            }
+            }           
         }
     }
 
