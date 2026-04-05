@@ -45,7 +45,7 @@ public class Workbench : Bench, IInteractable
     {        
         if (ResourceController.Instance.CanRepair(repairSalvageCost))
         {
-            if (currentObject.currentDurability < currentObject.maxDurability)
+            if (currentObject.currentDurability < currentObject.maxDurability && currentObject != null)
             {
                 repairCoroutine = StartCoroutine(DoRepair());
             }            

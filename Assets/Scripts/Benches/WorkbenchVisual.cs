@@ -15,12 +15,6 @@ public class WorkbenchVisual : MonoBehaviour
 
     public Light weldLight;
 
-
-    private void Awake()
-    {
-        StartWeldSparks();
-    }
-
     private void OnEnable()
     {
         Workbench.OnRepairStart += StartWeldSparks;
