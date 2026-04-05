@@ -4,6 +4,7 @@ using UnityEngine;
 public class ScalePulse : MonoBehaviour
 {
     [SerializeField] private float duration = 0.2f;
+    [SerializeField] private float scaleIncrease = 1.5f;
 
     private Vector3 _originalScale;
 
@@ -17,6 +18,6 @@ public class ScalePulse : MonoBehaviour
         transform.DOKill();
         transform.localScale = _originalScale;
 
-        transform.DOScale(_originalScale * 1.5f, duration).OnComplete(() => transform.DOScale(_originalScale, duration));
+        transform.DOScale(_originalScale * scaleIncrease, duration).OnComplete(() => transform.DOScale(_originalScale, duration));
     }
 }
