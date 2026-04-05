@@ -4,7 +4,7 @@ using System.Collections;
 public class Workbench : Bench, IInteractable
 {
     [SerializeField] private float repairInterval;
-    [SerializeField] private int repairSalvageCost;
+    [SerializeField] private int repairSparePartsCost;
     [SerializeField] private int repairValue;    
 
     private Coroutine repairCoroutine;
@@ -43,7 +43,7 @@ public class Workbench : Bench, IInteractable
 
     private void TryRepair()
     {        
-        if (ResourceController.Instance.CanRepair(repairSalvageCost))
+        if (ResourceController.Instance.CanRepair(repairSparePartsCost))
         {
             if (currentObject.currentDurability < currentObject.maxDurability && currentObject != null)
             {
@@ -57,11 +57,16 @@ public class Workbench : Bench, IInteractable
         while (currentObject.currentDurability < currentObject.maxDurability)
         {
             yield return new WaitForSeconds(repairInterval);
-            ResourceController.Instance.ChangeSparePartsAmount(-repairSalvageCost);
+            ResourceController.Instance.ChangeSparePartsAmount(-repairSparePartsCost);
             currentObject.RepairObject(repairValue);
             OnRepairStart?.Invoke();
 
-            if (!ResourceController.Instance.CanRepair(repairSalvageCost))
+            if (currentObject.currentDurability == currentObject.maxDurability || ResourceController.Instance.GetSparePartsAmount() < repairSparePartsCost)
+            {
+                EndInteractionSecondary();
+            }
+
+            if (!ResourceController.Instance.CanRepair(repairSparePartsCost))
             {
                 if (!TutorialController.Instance.skipTutorial)
                 {

@@ -141,7 +141,7 @@ MonoBehaviour:
   inventory: {fileID: 5261058445298813840}
   interactableName: Workbench
   repairInterval: 0.2
-  repairSalvageCost: 1
+  repairSparePartsCost: 1
   repairValue: 1
 --- !u!114 &5261058445298813840
 MonoBehaviour:

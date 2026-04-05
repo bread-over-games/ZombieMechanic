@@ -88,7 +88,7 @@ public class SalvageTable : Bench
             if (currentObject.DamageObject(2)) // damage, check if destroyed
             {
                 currentObject.DestroyObject();
-                OnSalvageStop?.Invoke();
+                EndInteractionSecondary();
 
                 if (!TutorialController.Instance.skipTutorial)
                 {
