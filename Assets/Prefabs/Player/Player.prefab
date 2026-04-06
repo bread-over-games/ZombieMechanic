@@ -229,7 +229,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aac0512c82405f645be66f2689f60014, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerAnims: {fileID: 5197575818006923089}
+  playerAnims: {fileID: 198297479350393597}
   moveSpeed: 3.3
   rotationSpeed: 10
   rb: {fileID: 8348718820898648073}
@@ -309,8 +309,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f9be0420e5d076479eef6bfd2ce6136, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerAnims: {fileID: 5197575818006923089}
-  inventory: {fileID: 5303107533594216243}
+  playerAnims: {fileID: 198297479350393597}
   playerInventory: {fileID: 5303107533594216243}
   rayOrigin: {fileID: 323232856266620898}
   maxDistance: 0.7
@@ -414,9 +413,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 3fca45f3dc73fa34fb2d3e65ac7a06a5, type: 3}
       insertIndex: -1
       addedObject: {fileID: 198297479350393597}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 3fca45f3dc73fa34fb2d3e65ac7a06a5, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 5197575818006923089}
   m_SourcePrefab: {fileID: 100100000, guid: 3fca45f3dc73fa34fb2d3e65ac7a06a5, type: 3}
 --- !u!1 &4879343281037103649 stripped
 GameObject:
@@ -446,19 +442,6 @@ Animator:
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &198297479350393597
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4879343281037103649}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4358b4c1f9f770c4dbfe6c31c3814d9a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animator: {fileID: 3470352160501809875}
---- !u!114 &5197575818006923089
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

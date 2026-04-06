@@ -87,7 +87,7 @@ public class UIInventory : MonoBehaviour
 
     private void ShowSingleItemInventoryWindow(Bench.BenchType benchType)
     {
-        if (benchType == Bench.BenchType.Armory)
+        if (benchType == Bench.BenchType.Armory || benchType == Bench.BenchType.StorageRack)
         {
             return;
         }
@@ -215,7 +215,7 @@ public class UIInventory : MonoBehaviour
                 {
                     medicalCabinetControls.SetActive(true);
                 }                
-                break;
+                break;            
         }
     }
 
