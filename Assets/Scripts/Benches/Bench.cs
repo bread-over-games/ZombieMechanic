@@ -13,7 +13,8 @@ public class Bench : MonoBehaviour, IInteractable
         SalvageTable,
         Table,
         Workbench,
-        MedicalCabinet
+        MedicalCabinet,
+        StorageRack
     }
 
     public BenchType benchType;
@@ -29,6 +30,8 @@ public class Bench : MonoBehaviour, IInteractable
 
     public virtual void StartInteractionPrimary()
     {
+        if (inventory == null) return;
+
         if (InventoriesController.Instance.playerInventory.GetObjectList().Count == 0) // if player has no item in hands
         {
             if (inventory.GetObjectList().Count > 0)
