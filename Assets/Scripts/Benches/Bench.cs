@@ -13,7 +13,8 @@ public class Bench : MonoBehaviour, IInteractable
         SalvageTable,
         Table,
         Workbench,
-        MedicalCabinet
+        MedicalCabinet,
+        StorageRack
     }
 
     public BenchType benchType;

@@ -14,7 +14,17 @@ public class ResourceController : MonoBehaviour
     public static Action OnAntibioticsAmountChange;
     public static Action OnNoAntibiotics;
     public static ResourceController Instance { get; private set; }
-    
+
+    private void OnEnable()
+    {
+        StorageRack.OnStorageRackBuilt += IncreaseSparePartsLimit;
+    }
+
+    private void OnDisable()
+    {
+        StorageRack.OnStorageRackBuilt -= IncreaseSparePartsLimit;
+    }
+
     void Awake()
     {
         if (Instance == null)
@@ -23,6 +33,11 @@ public class ResourceController : MonoBehaviour
         }
 
         GiveStarterAntibiotics();
+    }
+
+    private void IncreaseSparePartsLimit(int amount)
+    {
+        sparePartsLimit += amount;
     }
 
     private void GiveStarterAntibiotics()
@@ -46,6 +61,11 @@ public class ResourceController : MonoBehaviour
     public int GetSparePartsAmount()
     {
         return sparePartsAmount;
+    }
+
+    public int GetSparePartsLimit()
+    {
+        return sparePartsLimit;
     }
 
     public int GetAntibioticsAmount()

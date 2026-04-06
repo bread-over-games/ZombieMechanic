@@ -43,7 +43,7 @@ public class UIInfoHeader : MonoBehaviour
 
     private void UpdateAmounts()
     {
-        sparePartsAmount.text = ResourceController.Instance.GetSparePartsAmount().ToString() + "/" + 500.ToString();
+        sparePartsAmount.text = ResourceController.Instance.GetSparePartsAmount().ToString() + "/" + ResourceController.Instance.GetSparePartsLimit().ToString();
         sparePartsPulse.Pulse();
     }
 
