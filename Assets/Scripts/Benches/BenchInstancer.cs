@@ -12,17 +12,15 @@ public class BenchInstancer : MonoBehaviour
 
     private void OnDisable()
     {
-        BenchConstruction.OnConstructionFinished += SpawnBench;
+        BenchConstruction.OnConstructionFinished -= SpawnBench;
     }
 
-    private void SpawnBench()
+    private void SpawnBench(GameObject finishedBench)
     {
+        if (this == null) return;
+        if (finishedBench == null) return;
+        if (finishedBench != gameObject) return;
         Instantiate(benchToSpawn, gameObject.transform.position, gameObject.transform.rotation, spawnParent);
-        DestroyObject();
-    }
-
-    private void DestroyObject()
-    {
         Destroy(gameObject);
     }
 }

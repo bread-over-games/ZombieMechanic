@@ -91,13 +91,12 @@ public class UIArmory : MonoBehaviour
             {
                 return;
             }
+            armoryWindow.SetActive(true);
+            EventSystem.current.SetSelectedGameObject(firstSelected);
+            RefreshInventoryUI();
+            RefreshEstimatesUI();
+            ChangeMissionStateGUI(null);
         }        
-
-        armoryWindow.SetActive(true);
-        EventSystem.current.SetSelectedGameObject(firstSelected);
-        RefreshInventoryUI();
-        RefreshEstimatesUI();
-        ChangeMissionStateGUI(null);
     }
 
     private void HideArmoryWindow(IInteractable interactableType)
@@ -108,12 +107,11 @@ public class UIArmory : MonoBehaviour
             {
                 return;
             }
-        }
-
-        armoryWindow.SetActive(false);
-        EventSystem.current.SetSelectedGameObject(null);
-        DropInventory();
-        DropArmory();        
+            armoryWindow.SetActive(false);
+            EventSystem.current.SetSelectedGameObject(null);
+            DropInventory();
+            DropArmory();
+        }     
     }
 
     public void SetInventory(Inventory currentInventory)

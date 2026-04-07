@@ -139,6 +139,10 @@ public class PlayerInteraction : MonoBehaviour
                 break;
 
             case IConstructible constructible:
+                if (currentInteractable is IConstructible currentConstructible)
+                {
+
+                }
                 break;
         }
     }

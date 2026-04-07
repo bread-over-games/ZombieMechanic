@@ -94,10 +94,9 @@ public class UIInventory : MonoBehaviour
             {
                 return;
             }
+            singleItemInventoryWindow.SetActive(true);
+            RefreshInventoryUI();
         }
-
-        singleItemInventoryWindow.SetActive(true);
-        RefreshInventoryUI();
     }
 
     private void HideSingleItemInventoryWindow(IInteractable interactableType)
@@ -108,10 +107,9 @@ public class UIInventory : MonoBehaviour
             {
                 return;
             }
+            singleItemInventoryWindow.SetActive(false);
+            DropInventory();
         }
-
-        singleItemInventoryWindow.SetActive(false);
-        DropInventory();
     }
 
     private void ToggleSingleItemInventoryWindow(Bench.BenchType benchType)
