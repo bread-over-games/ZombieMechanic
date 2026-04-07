@@ -38,6 +38,7 @@ public class ResourceController : MonoBehaviour
     private void IncreaseSparePartsLimit(int amount)
     {
         sparePartsLimit += amount;
+        OnSparePartsAmountChange?.Invoke();
     }
 
     private void GiveStarterAntibiotics()
@@ -46,9 +47,9 @@ public class ResourceController : MonoBehaviour
         OnAntibioticsAmountChange?.Invoke();
     }
 
-    public bool CanRepair(int requiredSalvage)
+    public bool CanRepair(int requiredSpareParts)
     {
-        if (sparePartsAmount >= requiredSalvage)
+        if (sparePartsAmount >= requiredSpareParts)
         {
             return true;
         }

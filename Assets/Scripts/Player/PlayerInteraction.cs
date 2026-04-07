@@ -40,7 +40,7 @@ public class PlayerInteraction : MonoBehaviour
     private void BlockInputLevelUp()
     {
         BlockInput();
-        Invoke("UnblockInput", 2f);
+        Invoke("UnblockInput", 1.5f);
     }
 
     private void BlockInput()

@@ -23,8 +23,8 @@ public class WorkbenchVisual : MonoBehaviour
 
     private void OnDisable()
     {
-        SalvageTable.OnSalvageStart -= StartWeldSparks;
-        SalvageTable.OnSalvageStop -= StopWeldSparks;
+        Workbench.OnRepairStart -= StartWeldSparks;
+        Workbench.OnRepairStop -= StopWeldSparks;
     }
 
     private void StartWeldSparks()
