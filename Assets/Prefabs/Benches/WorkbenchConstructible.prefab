@@ -9,6 +9,18 @@ PrefabInstance:
     m_TransformParent: {fileID: 7029825536317205129}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: e91df62cd34c13f49b64d85cdad1581a, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.76525
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e91df62cd34c13f49b64d85cdad1581a, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.90601
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e91df62cd34c13f49b64d85cdad1581a, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.90601
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e91df62cd34c13f49b64d85cdad1581a, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0
       objectReference: {fileID: 0}
@@ -55,6 +67,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: e91df62cd34c13f49b64d85cdad1581a, type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e91df62cd34c13f49b64d85cdad1581a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -116,7 +132,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6323397939658624292, guid: bfd2c8931aa0047408c7b861674cb5f0, type: 3}
       propertyPath: m_Size.x
-      value: 2.6907983
+      value: 2.0648775
       objectReference: {fileID: 0}
     - target: {fileID: 6323397939658624292, guid: bfd2c8931aa0047408c7b861674cb5f0, type: 3}
       propertyPath: m_Size.y
@@ -124,11 +140,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6323397939658624292, guid: bfd2c8931aa0047408c7b861674cb5f0, type: 3}
       propertyPath: m_Size.z
-      value: 0.9701942
+      value: 0.88619614
       objectReference: {fileID: 0}
     - target: {fileID: 6323397939658624292, guid: bfd2c8931aa0047408c7b861674cb5f0, type: 3}
       propertyPath: m_Center.x
-      value: -0.02980566
+      value: -0.028450727
       objectReference: {fileID: 0}
     - target: {fileID: 6323397939658624292, guid: bfd2c8931aa0047408c7b861674cb5f0, type: 3}
       propertyPath: m_Center.y
@@ -136,7 +152,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6323397939658624292, guid: bfd2c8931aa0047408c7b861674cb5f0, type: 3}
       propertyPath: m_Center.z
-      value: -0.01490289
+      value: -0.0054192394
       objectReference: {fileID: 0}
     - target: {fileID: 7981850474893848027, guid: bfd2c8931aa0047408c7b861674cb5f0, type: 3}
       propertyPath: benchToSpawn
