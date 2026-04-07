@@ -23,9 +23,8 @@ public class UIStorageRack : MonoBehaviour
             {
                 return;
             }
+            storageRackWindow.SetActive(true);
         }
-
-        storageRackWindow.SetActive(true);
     }
 
     private void HideStorageRackWindow(IInteractable interactableType)
@@ -36,8 +35,7 @@ public class UIStorageRack : MonoBehaviour
             {
                 return;
             }
+            storageRackWindow.SetActive(false);
         }
-
-        storageRackWindow.SetActive(false);
     }
 }

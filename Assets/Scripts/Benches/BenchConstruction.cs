@@ -15,9 +15,9 @@ public class BenchConstruction : MonoBehaviour, IConstructible
 
     private Coroutine constructionCoroutine;
 
-    public static Action OnConstructionStart;
+    public static Action<GameObject> OnConstructionStart;
     public static Action OnConstructionTick;
-    public static Action OnConstructionStop;
+    public static Action<GameObject> OnConstructionStop;
     public static Action<GameObject> OnConstructionFinished;
 
     public string GetName()
@@ -38,13 +38,19 @@ public class BenchConstruction : MonoBehaviour, IConstructible
     public float GetCurrentConstructionLevel()
     {        
         return (float)currentConstructionLevel / maxConstructionLevel; 
-    }   
+    }  
+    
+    public int GetSparePartsTickCost()
+    {
+        return sparePartsConstructionCost;
+    }
 
     private void TryConstruction()
     {
         if (ResourceController.Instance.CanRepair(sparePartsConstructionCost))
         {
             constructionCoroutine = StartCoroutine(DoConstruction());
+            OnConstructionStart?.Invoke(gameObject);
         }
     }
 
@@ -94,7 +100,7 @@ public class BenchConstruction : MonoBehaviour, IConstructible
         if (constructionCoroutine != null)
         {
             StopCoroutine(constructionCoroutine);
-            OnConstructionStop?.Invoke();
+            OnConstructionStop?.Invoke(gameObject);
             constructionCoroutine = null;
         }
     }

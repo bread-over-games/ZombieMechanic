@@ -7,6 +7,7 @@ public class UIConstructible : MonoBehaviour
     private IConstructible currentConstructible;
 
     [SerializeField] private GameObject constructibleWindow;
+    [SerializeField] private GameObject controlTip;
     [SerializeField] private TMP_Text constructibleDescription;
     [SerializeField] private TMP_Text constructibleName;
     [SerializeField] private TMP_Text sparePartsRequired;
@@ -17,13 +18,27 @@ public class UIConstructible : MonoBehaviour
         PlayerInteraction.OnInteractableApproached += ShowConstructibleWindow;
         PlayerInteraction.OnInteractableLeft += HideConstructibleWindow;
         BenchConstruction.OnConstructionTick += UpdateConstructibleInfo;
+        ResourceController.OnSparePartsAmountChange += ToggleControlTip;
     }
 
     private void OnDisable()
     {
-        PlayerInteraction.OnInteractableApproached += ShowConstructibleWindow;
-        PlayerInteraction.OnInteractableLeft += HideConstructibleWindow;
-        BenchConstruction.OnConstructionTick += UpdateConstructibleInfo;
+        PlayerInteraction.OnInteractableApproached -= ShowConstructibleWindow;
+        PlayerInteraction.OnInteractableLeft -= HideConstructibleWindow;
+        BenchConstruction.OnConstructionTick -= UpdateConstructibleInfo;
+        ResourceController.OnSparePartsAmountChange -= ToggleControlTip;
+    }
+
+    private void ToggleControlTip()
+    {
+        if (currentConstructible == null) return;
+        if (currentConstructible.GetSparePartsTickCost() <= ResourceController.Instance.GetSparePartsAmount())
+        {
+            controlTip.SetActive(true);
+        } else
+        {
+            controlTip.SetActive(false);
+        }
     }
 
     private void ShowConstructibleWindow(IInteractable currentInteractable)
@@ -33,6 +48,7 @@ public class UIConstructible : MonoBehaviour
             constructibleWindow.SetActive(true);
             currentConstructible = constructible;
             UpdateConstructibleInfo();
+            ToggleControlTip();
         }
     }
 
@@ -51,6 +67,5 @@ public class UIConstructible : MonoBehaviour
         builtBar.fillAmount = currentConstructible.GetCurrentConstructionLevel();
         constructibleDescription.text = currentConstructible.GetDescription();
         constructibleName.text = currentConstructible.GetName();
-        // description as well
     }
 }
