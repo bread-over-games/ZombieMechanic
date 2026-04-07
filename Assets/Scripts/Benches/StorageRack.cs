@@ -1,7 +1,7 @@
 using UnityEngine;
 using System;
 
-public class StorageRack : Bench, IInteractable
+public class StorageRack : Bench, IBench
 {
     [SerializeField] private int storageSpace;
 

@@ -8,7 +8,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-public class LootTable : Bench, IInteractable
+public class LootTable : Bench, IBench
 {
     public static Action OnTutorialSparePartsPicked;
     public static Action OnTutorialBaseballBatPicked;

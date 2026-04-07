@@ -1,7 +1,7 @@
-using UnityEngine;
 using DG.Tweening;
+using UnityEngine;
 
-public class WorkbenchVisual : MonoBehaviour
+public class BenchConstruictibleVisual : MonoBehaviour
 {
     public ParticleSystem angleGrinderSparks;
 
@@ -17,25 +17,27 @@ public class WorkbenchVisual : MonoBehaviour
 
     private void OnEnable()
     {
-        Workbench.OnRepairStart += StartWeldSparks;
-        Workbench.OnRepairStop += StopWeldSparks;
+        BenchConstruction.OnConstructionStart += StartWeldSparks;
+        BenchConstruction.OnConstructionStop += StopWeldSparks;
     }
 
     private void OnDisable()
     {
-        Workbench.OnRepairStart -= StartWeldSparks;
-        Workbench.OnRepairStop -= StopWeldSparks;
+        BenchConstruction.OnConstructionStart -= StartWeldSparks;
+        BenchConstruction.OnConstructionStop -= StopWeldSparks;
     }
 
-    private void StartWeldSparks()
+    private void StartWeldSparks(GameObject obj)
     {
+        if (obj != gameObject) return;
         angleGrinderSparks.Play();
         weldLight.enabled = true;
         FlickerNext();
     }
 
-    private void StopWeldSparks()
+    private void StopWeldSparks(GameObject obj)
     {
+        if (obj != gameObject) return;
         angleGrinderSparks.Stop();
         weldLight.enabled = false;
         StopFlicker();

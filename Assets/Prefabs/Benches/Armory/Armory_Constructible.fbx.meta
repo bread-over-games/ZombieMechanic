@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 3419825c3d8138945966df73a8006350
+guid: 70f678f4a9bccce47b9b64ab54d5ae8f
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -7,8 +7,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: StorageRack
-    second: {fileID: 2100000, guid: 942bde58a234b6e4cb967da63322d27e, type: 2}
+      name: pintura
+    second: {fileID: 2100000, guid: 3981a85c56296c744885577f56f47d30, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

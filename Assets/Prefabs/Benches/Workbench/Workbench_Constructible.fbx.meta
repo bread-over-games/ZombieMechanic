@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 3419825c3d8138945966df73a8006350
+guid: e91df62cd34c13f49b64d85cdad1581a
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -7,8 +7,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: StorageRack
-    second: {fileID: 2100000, guid: 942bde58a234b6e4cb967da63322d27e, type: 2}
+      name: Workbench
+    second: {fileID: 2100000, guid: c8b518b0a99d08347a5e4293436d83f2, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

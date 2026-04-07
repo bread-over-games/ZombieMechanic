@@ -83,31 +83,35 @@ public class UIArmory : MonoBehaviour
         UIFocusStack.Push(armoryWindow);
     }
 
-    private void ShowArmoryWindow(Bench.BenchType benchType)
+    private void ShowArmoryWindow(IInteractable interactableType)
     {
-        if (benchType != Bench.BenchType.Armory)
+        if (interactableType is IBench bench)
         {
-            return;
-        }
-
-        armoryWindow.SetActive(true);
-        EventSystem.current.SetSelectedGameObject(firstSelected);
-        RefreshInventoryUI();
-        RefreshEstimatesUI();
-        ChangeMissionStateGUI(null);
+            if (bench.GetBenchType() != Bench.BenchType.Armory)
+            {
+                return;
+            }
+            armoryWindow.SetActive(true);
+            EventSystem.current.SetSelectedGameObject(firstSelected);
+            RefreshInventoryUI();
+            RefreshEstimatesUI();
+            ChangeMissionStateGUI(null);
+        }        
     }
 
-    private void HideArmoryWindow(Bench.BenchType benchType)
+    private void HideArmoryWindow(IInteractable interactableType)
     {
-        if (benchType != Bench.BenchType.Armory)
+        if (interactableType is IBench bench)
         {
-            return;
-        }
-
-        armoryWindow.SetActive(false);
-        EventSystem.current.SetSelectedGameObject(null);
-        DropInventory();
-        DropArmory();        
+            if (bench.GetBenchType() != Bench.BenchType.Armory)
+            {
+                return;
+            }
+            armoryWindow.SetActive(false);
+            EventSystem.current.SetSelectedGameObject(null);
+            DropInventory();
+            DropArmory();
+        }     
     }
 
     public void SetInventory(Inventory currentInventory)

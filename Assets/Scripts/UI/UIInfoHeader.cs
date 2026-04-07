@@ -17,20 +17,20 @@ public class UIInfoHeader : MonoBehaviour
     private void OnEnable()
     {
         ResourceController.OnAntibioticsAmountChange += UpdateAntibioticsAmount;
-        ResourceController.OnSparePartsAmountChange += UpdateAmounts;
+        ResourceController.OnSparePartsAmountChange += UpdateSparePartsAmounts;
         ZombiesController.OnZombiesKilledChanged += UpdateZombiesAmount;
     }
 
     private void OnDisable()
     {
         ResourceController.OnAntibioticsAmountChange -= UpdateAntibioticsAmount;
-        ResourceController.OnSparePartsAmountChange -= UpdateAmounts;
+        ResourceController.OnSparePartsAmountChange -= UpdateSparePartsAmounts;
         ZombiesController.OnZombiesKilledChanged -= UpdateZombiesAmount;
     }
 
     private void Start()
     {
-        UpdateAmounts();
+        UpdateSparePartsAmounts();
         UpdateAntibioticsAmount();
         UpdateZombiesAmount();
     }
@@ -41,7 +41,7 @@ public class UIInfoHeader : MonoBehaviour
         antibioticsPulse.Pulse();
     }
 
-    private void UpdateAmounts()
+    private void UpdateSparePartsAmounts()
     {
         sparePartsAmount.text = ResourceController.Instance.GetSparePartsAmount().ToString() + "/" + ResourceController.Instance.GetSparePartsLimit().ToString();
         sparePartsPulse.Pulse();

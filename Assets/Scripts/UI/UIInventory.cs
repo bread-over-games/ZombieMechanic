@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using static Bench;
 
 public class UIInventory : MonoBehaviour
 {
@@ -85,26 +86,30 @@ public class UIInventory : MonoBehaviour
         Object.OnObjectDamage -= RefreshInventoryValues;
     }
 
-    private void ShowSingleItemInventoryWindow(Bench.BenchType benchType)
+    private void ShowSingleItemInventoryWindow(IInteractable interactableType)
     {
-        if (benchType == Bench.BenchType.Armory || benchType == Bench.BenchType.StorageRack)
+        if (interactableType is IBench bench)
         {
-            return;
+            if (bench.GetBenchType() == Bench.BenchType.Armory || bench.GetBenchType() == Bench.BenchType.StorageRack)
+            {
+                return;
+            }
+            singleItemInventoryWindow.SetActive(true);
+            RefreshInventoryUI();
         }
-
-        singleItemInventoryWindow.SetActive(true);
-        RefreshInventoryUI();
     }
 
-    private void HideSingleItemInventoryWindow(Bench.BenchType benchType)
+    private void HideSingleItemInventoryWindow(IInteractable interactableType)
     {
-        if (benchType == Bench.BenchType.Armory)
+        if (interactableType is IBench bench)
         {
-            return;
+            if (bench.GetBenchType() == Bench.BenchType.Armory || bench.GetBenchType() == Bench.BenchType.StorageRack)
+            {
+                return;
+            }
+            singleItemInventoryWindow.SetActive(false);
+            DropInventory();
         }
-
-        singleItemInventoryWindow.SetActive(false);
-        DropInventory();
     }
 
     private void ToggleSingleItemInventoryWindow(Bench.BenchType benchType)
@@ -142,7 +147,7 @@ public class UIInventory : MonoBehaviour
             return;
         }        
 
-        interactableName.text = inventory.gameObject.GetComponent<IInteractable>().GetName();
+        interactableName.text = inventory.gameObject.GetComponent<IBench>().GetName();
         workbenchEmptyMessage.SetActive(false);
         loottableEmptyMessage.SetActive(false);
         salvageTableEmptyMessage.SetActive(false);

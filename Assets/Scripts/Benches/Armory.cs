@@ -68,26 +68,36 @@ public class Armory : Bench, IInteractable
             }
         }
 
-        if (InventoriesController.Instance.playerInventory.GetObjectList().Count == 0)
+        Inventory playerInventory = InventoriesController.Instance.playerInventory;
+
+        if (playerInventory.GetObjectList().Count == 0) // player has no item - try take item from slot
         {
-            if (inventory.GetObjectList().Count > 0)
+            if (inventory.GetObjectList().Count > 0) // check if there are items in inventory
             {
                 switch (currentSlotSelection)
                 {
                     case ButtonSelector.ArmorySlot.Weapon: 
                         if (storedWeapon != null)
-                            inventory.SendObject(InventoriesController.Instance.playerInventory, storedWeapon);                        
+                            inventory.SendObject(playerInventory, storedWeapon);                        
                         break;
                     case ButtonSelector.ArmorySlot.Armor:
                         if (storedArmor != null)
-                            inventory.SendObject(InventoriesController.Instance.playerInventory, storedArmor);
+                            inventory.SendObject(playerInventory, storedArmor);
                         break;
                     case ButtonSelector.ArmorySlot.Backpack:
                         if (storedBackpack != null)
-                            inventory.SendObject(InventoriesController.Instance.playerInventory, storedBackpack);                        
+                            inventory.SendObject(playerInventory, storedBackpack);                        
                         break;
-                }                
+                }
+                OnObjectPicked?.Invoke(); // player picked item on bench - subscribe animation SetCarrying(true)
             }
+        }
+        else
+        {
+            if (inventory.GetObjectList().Count >= inventory.GetCapacity()) return; // bench full
+            if (!CanAcceptObject(playerInventory.GetObjectList()[0])) return;
+            playerInventory.SendObject(inventory, playerInventory.GetObjectList()[0]);
+            OnObjectDeposited?.Invoke(); // player deposited item on bench - subscribe SetCarrying(false) animation
         }
     }
 

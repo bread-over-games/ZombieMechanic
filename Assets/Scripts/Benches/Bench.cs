@@ -4,7 +4,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System;
 
-public class Bench : MonoBehaviour, IInteractable
+public class Bench : MonoBehaviour, IBench
 {
     public enum BenchType
     { 
@@ -32,17 +32,21 @@ public class Bench : MonoBehaviour, IInteractable
     {
         if (inventory == null) return;
 
-        if (InventoriesController.Instance.playerInventory.GetObjectList().Count == 0) // if player has no item in hands
+        Inventory playerInventory = InventoriesController.Instance.playerInventory;
+
+        if (playerInventory.GetObjectList().Count == 0) // player has no item in hands - wants to pick up
         {
-            if (inventory.GetObjectList().Count > 0)
-            {
-                inventory.SendObject(InventoriesController.Instance.playerInventory, inventory.GetObjectList()[0]);
-                OnObjectPicked?.Invoke(); // player picked item on bench
-            }
+            if (inventory.GetObjectList().Count == 0) return; // bench emty, nothing to do
+            
+                inventory.SendObject(playerInventory, inventory.GetObjectList()[0]);
+                OnObjectPicked?.Invoke(); // player picked item on bench - subscribe animation SetCarrying(true)
         }
-        else // player has item in hands
+        else // player has item in hands - try to depisot
         {
-            OnObjectDeposited?.Invoke(); // player deposited item on bench
+            if (inventory.GetObjectList().Count >= inventory.GetCapacity()) return; // bench full
+            if (!CanAcceptObject(playerInventory.GetObjectList()[0])) return;
+            playerInventory.SendObject(inventory, playerInventory.GetObjectList()[0]);
+            OnObjectDeposited?.Invoke(); // player deposited item on bench - subscribe SetCarrying(false) animation
         }
     }
 

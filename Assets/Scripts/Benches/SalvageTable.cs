@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UIElements;
 
-public class SalvageTable : Bench
+public class SalvageTable : Bench, IBench
 {
     [SerializeField] private float salvagingInterval; // tick of looting, how often can player get salvage from loot
     private float defaultSalvagingInterval;

@@ -11,13 +11,13 @@ public class RepairMasteryHandler : MonoBehaviour
     private void OnEnable()
     {
         RepairMastery.OnRepairMasteryActivated += ActivateRepairMastery;
-        Workbench.OnRepairStart += FreeRepairChance;
+        Workbench.OnRepairTick += FreeRepairChance;
     }
 
     private void OnDisable()
     {
         RepairMastery.OnRepairMasteryActivated -= ActivateRepairMastery;
-        Workbench.OnRepairStart -= FreeRepairChance;
+        Workbench.OnRepairTick -= FreeRepairChance;
     }
 
     private void ActivateRepairMastery()

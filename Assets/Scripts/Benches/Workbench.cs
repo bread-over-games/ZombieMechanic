@@ -1,7 +1,7 @@
 using UnityEngine;
 using System;
 using System.Collections;
-public class Workbench : Bench, IInteractable
+public class Workbench : Bench, IBench
 {
     [SerializeField] private float repairInterval;
     [SerializeField] private int repairSparePartsCost;
@@ -10,6 +10,7 @@ public class Workbench : Bench, IInteractable
     private Coroutine repairCoroutine;
 
     public static Action OnRepairStart;
+    public static Action OnRepairTick;
     public static Action OnRepairStop;
 
     public static Action OnTutorialBaseballBatPlaced;
@@ -48,6 +49,7 @@ public class Workbench : Bench, IInteractable
             if (currentObject.currentDurability < currentObject.maxDurability && currentObject != null)
             {
                 repairCoroutine = StartCoroutine(DoRepair());
+                OnRepairStart?.Invoke();
             }            
         }
     }
@@ -59,7 +61,7 @@ public class Workbench : Bench, IInteractable
             yield return new WaitForSeconds(repairInterval);
             ResourceController.Instance.ChangeSparePartsAmount(-repairSparePartsCost);
             currentObject.RepairObject(repairValue);
-            OnRepairStart?.Invoke();
+            OnRepairTick?.Invoke();
 
             if (currentObject.currentDurability == currentObject.maxDurability || ResourceController.Instance.GetSparePartsAmount() < repairSparePartsCost)
             {

@@ -31,24 +31,17 @@ public class ResourceController : MonoBehaviour
         {
             Instance = this;
         }
-
-        GiveStarterAntibiotics();
     }
 
     private void IncreaseSparePartsLimit(int amount)
     {
         sparePartsLimit += amount;
+        OnSparePartsAmountChange?.Invoke();
     }
 
-    private void GiveStarterAntibiotics()
+    public bool CanRepair(int requiredSpareParts)
     {
-        antibioticsAmount = 2;
-        OnAntibioticsAmountChange?.Invoke();
-    }
-
-    public bool CanRepair(int requiredSalvage)
-    {
-        if (sparePartsAmount >= requiredSalvage)
+        if (sparePartsAmount >= requiredSpareParts)
         {
             return true;
         }
