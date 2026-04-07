@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Table :  Bench, IInteractable
+public class Table :  Bench, IBench
 {
     public void Awake()
     {

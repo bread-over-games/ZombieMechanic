@@ -10,8 +10,8 @@ public class PlayerInteraction : MonoBehaviour
     private IInteractable currentInteractable;
     private bool interactionStarted = false;
 
-    public static Action<Bench.BenchType> OnInteractableApproached;
-    public static Action<Bench.BenchType> OnInteractableLeft;
+    public static Action<IInteractable> OnInteractableApproached;
+    public static Action<IInteractable> OnInteractableLeft;
     public static Action OnIntroSkip;
     public static Action OnPerkActivated;
 
@@ -74,7 +74,7 @@ public class PlayerInteraction : MonoBehaviour
             if (interactionStarted && currentInteractable.IsInteractionPossible())
                 PrimaryInteractEnded();
 
-            OnInteractableLeft?.Invoke(currentInteractable.GetBenchType());
+            OnInteractableLeft?.Invoke(currentInteractable);
             currentInteractable = null;
         }
 
@@ -82,7 +82,7 @@ public class PlayerInteraction : MonoBehaviour
         {
             currentInteractable = detected;
             InteractableApproached();
-            OnInteractableApproached?.Invoke(currentInteractable.GetBenchType());
+            OnInteractableApproached?.Invoke(currentInteractable);
         }
     }
 
@@ -120,42 +120,36 @@ public class PlayerInteraction : MonoBehaviour
 
     private void InteractableApproached()
     {
-        switch (currentInteractable.GetBenchType())
+        switch (currentInteractable)
         {
-            case Bench.BenchType.Armory:
-                UIController.Instance.armoryUI.SetInventory(currentInteractable.GetInventory());
-
-                if (currentInteractable is Armory armory) 
+            case IBench bench:
+                switch (bench.GetBenchType())
                 {
-                    UIController.Instance.armoryUI.SetArmory(armory);
+                    case Bench.BenchType.Armory:
+                        UIController.Instance.armoryUI.SetInventory(bench.GetInventory());
+                        if (bench is Armory armory)
+                        {
+                            UIController.Instance.armoryUI.SetArmory(armory);
+                        }
+                        break;
+                    default:
+                        UIController.Instance.interactableInvSingleItem.SetInventory(bench.GetInventory());
+                        break;
                 }
-               
                 break;
-            default:
-                UIController.Instance.interactableInvSingleItem.SetInventory(currentInteractable.GetInventory());
+
+            case IConstructible constructible:
                 break;
-        }        
+        }
     }
 
     private void PrimaryInteractStarted()
     {
-        Inventory currentInventory = currentInteractable.GetInventory();
+        if (currentInteractable == null) return;
+        if (!currentInteractable.IsInteractionPossible()) return;
 
-        if (playerInventory.GetObjectList().Count == 0) // player has no item in hands and wants to pick up from bench
-        {
-            interactionStarted = true;
-            currentInteractable.StartInteractionPrimary();
-            playerAnims.SetCarrying(true);
-        } else         
-        if (currentInventory.GetObjectList().Count < currentInventory.GetCapacity()) // player has item and there is a space in the target inventory
-        {
-            if (currentInteractable.CanAcceptObject(playerInventory.GetObjectList()[0])) // interactable can accept object of given type
-            {
-                currentInteractable.StartInteractionPrimary();
-                playerInventory.SendObject(currentInteractable.GetInventory(), playerInventory.GetObjectList()[0]); // deposit item
-                playerAnims.SetCarrying(false);
-            }
-        }     
+        interactionStarted = true;
+        currentInteractable.StartInteractionPrimary();        
     }
 
     private void PrimaryInteractEnded()

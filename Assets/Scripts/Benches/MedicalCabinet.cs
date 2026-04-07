@@ -1,7 +1,7 @@
 using UnityEngine;
 using System;
 
-public class MedicalCabinet : Bench, IInteractable
+public class MedicalCabinet : Bench, IBench
 {
     public static Action OnAntibioticsUsed;
 

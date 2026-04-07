@@ -1,16 +1,7 @@
-using UnityEngine;
-
-public class IBench : MonoBehaviour
+public interface IBench : IInteractable
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    Bench.BenchType GetBenchType();
+    Inventory GetInventory();
+    string GetName();
+    bool CanAcceptObject(Object objectToPlace);
 }

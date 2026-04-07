@@ -2,7 +2,7 @@ using UnityEngine;
 using System;
 using System.Collections;
 
-public class BenchConstruction : Bench, IInteractable
+public class BenchConstruction : Bench, IBench
 {
     [SerializeField] private int sparePartsConstructionCost;
     [SerializeField] private int maxConstructionLevel;

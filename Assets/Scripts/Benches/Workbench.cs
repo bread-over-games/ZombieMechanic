@@ -1,7 +1,7 @@
 using UnityEngine;
 using System;
 using System.Collections;
-public class Workbench : Bench, IInteractable
+public class Workbench : Bench, IBench
 {
     [SerializeField] private float repairInterval;
     [SerializeField] private int repairSparePartsCost;

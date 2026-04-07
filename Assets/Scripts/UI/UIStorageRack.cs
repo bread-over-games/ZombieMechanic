@@ -15,22 +15,29 @@ public class UIStorageRack : MonoBehaviour
         UIFocusStack.Push(storageRackWindow);
     }
 
-    private void ShowStorageRackWindow(Bench.BenchType benchType)
+    private void ShowStorageRackWindow(IInteractable interactableType)
     {
-        if (benchType != Bench.BenchType.StorageRack)
+        if (interactableType is IBench bench)
         {
-            return;
+            if (bench.GetBenchType() != Bench.BenchType.StorageRack)
+            {
+                return;
+            }
         }
 
         storageRackWindow.SetActive(true);
     }
 
-    private void HideStorageRackWindow(Bench.BenchType benchType)
+    private void HideStorageRackWindow(IInteractable interactableType)
     {
-        if (benchType != Bench.BenchType.StorageRack)
+        if (interactableType is IBench bench)
         {
-            return;
+            if (bench.GetBenchType() != Bench.BenchType.StorageRack)
+            {
+                return;
+            }
         }
+
         storageRackWindow.SetActive(false);
     }
 }
