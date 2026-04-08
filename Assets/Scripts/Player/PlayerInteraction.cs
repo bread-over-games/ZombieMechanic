@@ -144,6 +144,12 @@ public class PlayerInteraction : MonoBehaviour
 
                 }
                 break;
+            case IDeconstructible deconstructible:
+                if (currentInteractable is IDeconstructible currentDeconstructible)
+                {
+
+                }
+                break;
         }
     }
 
