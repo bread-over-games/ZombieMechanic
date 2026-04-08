@@ -17,8 +17,23 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: ChainlinkFence
+    second: {fileID: 2100000, guid: 84012799555597042aadec2d062ba89d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: ConcreteFloor
     second: {fileID: 2100000, guid: 445099c7424381045a73a8da1914e34d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Door
+    second: {fileID: 2100000, guid: e73b1d0daa8ecdc488e75e7a2b6f545c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Frame
+    second: {fileID: 2100000, guid: 3c1ff2f5c64654c4e9ed02a6de6d4b52, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -29,6 +44,16 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: Glass
     second: {fileID: 2100000, guid: ccc5f1578596a9246aa538e80ac6f22a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: GlassDoor
+    second: {fileID: 2100000, guid: 4599c31aae7c36f48b7124535f95f902, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Gravel
+    second: {fileID: 2100000, guid: 3a7c219a8d1d71f458f29db601f96491, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
