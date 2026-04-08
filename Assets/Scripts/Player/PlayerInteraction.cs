@@ -72,7 +72,11 @@ public class PlayerInteraction : MonoBehaviour
         if (currentInteractable != null)
         {
             if (interactionStarted && currentInteractable.IsInteractionPossible())
+            {
                 PrimaryInteractEnded();
+                SecondaryInteractedEnded();
+            }
+                
 
             OnInteractableLeft?.Invoke(currentInteractable);
             currentInteractable = null;
@@ -144,6 +148,12 @@ public class PlayerInteraction : MonoBehaviour
 
                 }
                 break;
+            case IDeconstructible deconstructible:
+                if (currentInteractable is IDeconstructible currentDeconstructible)
+                {
+
+                }
+                break;
         }
     }
 
@@ -189,15 +199,28 @@ public class PlayerInteraction : MonoBehaviour
 
         if (context.started)
         {
-            interactionStarted = true;
-            currentInteractable.StartInteractionSecondary();
+            SecondaryInteractStarted();
         }
 
         if (context.canceled)
         {
-            interactionStarted = false;
-            currentInteractable.EndInteractionSecondary();
+            SecondaryInteractedEnded();
         }
+    }
+
+    private void SecondaryInteractStarted()
+    {
+        if (currentInteractable == null) return;
+        if (!currentInteractable.IsInteractionPossible()) return;
+
+        interactionStarted = true;
+        currentInteractable.StartInteractionSecondary();
+    }
+
+    private void SecondaryInteractedEnded()
+    {
+        interactionStarted = false;
+        currentInteractable.EndInteractionSecondary();
     }
 
     private void InsertAntibiotics(Object obj, Inventory myInventory) // when antibiotics are found on mission they are automatically added to medical cabinet

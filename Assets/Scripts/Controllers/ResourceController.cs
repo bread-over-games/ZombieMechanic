@@ -70,7 +70,7 @@ public class ResourceController : MonoBehaviour
     {
         int sparePartsHolder = sparePartsAmount + amount;
 
-        if (sparePartsHolder >= sparePartsLimit)
+        if (sparePartsHolder > sparePartsLimit)
         {
             OnSparePartsLimitReached?.Invoke();
             return false; // no space left in storage racks
