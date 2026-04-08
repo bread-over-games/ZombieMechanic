@@ -32,8 +32,8 @@ public class CabinetVisual : MonoBehaviour
         {
             Vector3 targetLeft = isOpen ? closedRotation : openRotationDoorLeft;
             Vector3 targetRight = isOpen ? closedRotation : openRotationDoorRight;
-            doorLeft.DOLocalRotate(targetLeft, duration).SetEase(Ease.OutBack);
-            doorRight.DOLocalRotate(targetRight, duration).SetEase(Ease.OutBack);
+            doorLeft.DOLocalRotate(targetLeft, duration).SetEase(Ease.OutBounce);
+            doorRight.DOLocalRotate(targetRight, duration).SetEase(Ease.OutBounce);
             isOpen = !isOpen;
         }
     }
