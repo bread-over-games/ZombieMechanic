@@ -12,13 +12,11 @@ public class DoorOpening : MonoBehaviour
     private void OnEnable()
     {
         MissionController.OnMissionStarted += OpenCloseDoor;
-        MissionController.OnMissionCompleted += OpenCloseDoor;
     }
 
     private void OnDisable()
     {
         MissionController.OnMissionStarted -= OpenCloseDoor;
-        MissionController.OnMissionCompleted -= OpenCloseDoor;
     }    
 
     private void OpenCloseDoor(Mission mission)
