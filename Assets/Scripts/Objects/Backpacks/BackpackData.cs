@@ -10,4 +10,5 @@ public class BackpackData : ScriptableObject
     public int backpackSize;
     public string backpackName;
     public int maxDurability;
+    public int spawnChance;
 }

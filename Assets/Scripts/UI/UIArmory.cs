@@ -222,6 +222,7 @@ public class UIArmory : MonoBehaviour
             armorDurabilityText.text = armor.currentDurability.ToString() + "/" + armor.maxDurability.ToString();
             armorNameText.text = armor.objectName.ToString();
             armorDurabilityImage.fillAmount = (float)armor.currentDurability / armor.maxDurability;
+            armorLootQualityText.text = armor.lootQualityBonus.ToString();
         }
 
         if (armory.storedWeapon is Weapon weapon)

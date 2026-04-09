@@ -1,12 +1,15 @@
 using System;
 using UnityEngine;
+using static Armor;
 
 [System.Serializable]
 public class Backpack : Object
 {
     public enum BackpackType
     {
-        SmallBackpack
+        SmallBackpack,
+        HuntingBackpack,
+        DuffelBag
     }
 
     public BackpackType backpackType;
@@ -18,6 +21,8 @@ public class Backpack : Object
         {
             default:
             case BackpackType.SmallBackpack: return BackpackAssets.Instance.smallBackpackSO.backpackVisual;
+            case BackpackType.DuffelBag: return BackpackAssets.Instance.duffelBagSO.backpackVisual;
+            case BackpackType.HuntingBackpack: return BackpackAssets.Instance.huntingBackpackSO.backpackVisual;
         }
     }
     public override GameObject GetObjectGameObject()
@@ -26,6 +31,8 @@ public class Backpack : Object
         {
             default:
             case BackpackType.SmallBackpack: return BackpackAssets.Instance.smallBackpackSO.backpackVisualPrefab;
+            case BackpackType.DuffelBag: return BackpackAssets.Instance.duffelBagSO.backpackVisualPrefab;
+            case BackpackType.HuntingBackpack: return BackpackAssets.Instance.huntingBackpackSO.backpackVisualPrefab;
         }
     }
 
@@ -39,6 +46,18 @@ public class Backpack : Object
                 currentDurability = UnityEngine.Random.Range((int)((maxDurability / 100f) * minimalLootQuality), (int)((maxDurability / 100f) * maximalLootQuality));
                 backpackSize = BackpackAssets.Instance.smallBackpackSO.backpackSize;
                 objectName = BackpackAssets.Instance.smallBackpackSO.backpackName;
+                break;
+            case BackpackType.DuffelBag:
+                maxDurability = BackpackAssets.Instance.duffelBagSO.maxDurability;
+                currentDurability = UnityEngine.Random.Range((int)((maxDurability / 100f) * minimalLootQuality), (int)((maxDurability / 100f) * maximalLootQuality));
+                backpackSize = BackpackAssets.Instance.duffelBagSO.backpackSize;
+                objectName = BackpackAssets.Instance.duffelBagSO.backpackName;
+                break;
+            case BackpackType.HuntingBackpack:
+                maxDurability = BackpackAssets.Instance.huntingBackpackSO.maxDurability;
+                currentDurability = UnityEngine.Random.Range((int)((maxDurability / 100f) * minimalLootQuality), (int)((maxDurability / 100f) * maximalLootQuality));
+                backpackSize = BackpackAssets.Instance.huntingBackpackSO.backpackSize;
+                objectName = BackpackAssets.Instance.huntingBackpackSO.backpackName;
                 break;
         }
     }
@@ -75,5 +94,30 @@ public class Backpack : Object
     {
         currentDurability += repairAmount;
         OnObjectRepair?.Invoke();
+    }
+
+    public static BackpackType ChooseBackpackTypeToGenerate()
+    {
+        BackpackAssets backpackAssets = BackpackAssets.Instance;
+
+        float total = backpackAssets.smallBackpackSO.spawnChance + backpackAssets.duffelBagSO.spawnChance + backpackAssets.huntingBackpackSO.spawnChance;
+        float roll = UnityEngine.Random.Range(0f, total);
+
+        BackpackType backpackTypeToGenerate = BackpackType.SmallBackpack;
+
+        if ((roll -= backpackAssets.smallBackpackSO.spawnChance) < 0)
+        {
+            backpackTypeToGenerate = BackpackType.SmallBackpack;
+        }
+        else if ((roll -= backpackAssets.duffelBagSO.spawnChance) < 0)
+        {
+            backpackTypeToGenerate = BackpackType.DuffelBag;
+        }
+        else if ((roll -= backpackAssets.huntingBackpackSO.spawnChance) < 0)
+        {
+            backpackTypeToGenerate = BackpackType.HuntingBackpack;
+        }
+
+        return backpackTypeToGenerate;
     }
 }

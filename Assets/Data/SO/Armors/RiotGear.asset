@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0317a7041dbcca44ab2211815cd1839, type: 3}
+  m_Name: RiotGear
+  m_EditorClassIdentifier: 
+  armorVisual: {fileID: -1250874396, guid: 225b21e282673f64fb0482657486d05f, type: 3}
+  armorVisualPrefab: {fileID: 5155881556197574539, guid: b622bbf0f7bbed84889cd5c2ebaf61b9, type: 3}
+  armorName: Riot Gear
+  maxDurability: 40
+  lootQualityBonus: 15
+  spawnChance: 10

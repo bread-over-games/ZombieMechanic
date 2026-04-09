@@ -16,3 +16,5 @@ MonoBehaviour:
   armorVisualPrefab: {fileID: 1024016258484320585, guid: 7eea41288f2f8b24097de54b7d7ddcc6, type: 3}
   armorName: Balistic Vest
   maxDurability: 30
+  lootQualityBonus: 10
+  spawnChance: 30

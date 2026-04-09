@@ -3031,7 +3031,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activeMissions: []
-  missionMaximumLength: 70
+  missionMaximumLength: 120
   missionLengthMultiplier: 1.8
   missionLengthWeaponWeight: 25
   missionLengthArmorWeight: 75
@@ -9461,6 +9461,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   balisticVestSO: {fileID: 11400000, guid: 27b2c368b5866804bbb457b46980e9ae, type: 2}
+  riotGearSO: {fileID: 11400000, guid: f8579e4f4efa879478888e01c3ddd551, type: 2}
+  leatherJacketSO: {fileID: 11400000, guid: 22c932b6d7edcd943aad7040d2db6aad, type: 2}
 --- !u!4 &528243757 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5946392743219651045, guid: 43a5dedc5f584454dac8f7008ef1c337, type: 3}
@@ -10634,6 +10636,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseballBatSO: {fileID: 11400000, guid: c896f0c45791fbd4884c17945f671144, type: 2}
   crowbarSO: {fileID: 11400000, guid: 54c0916e74a84224684d35b6a5f0eea8, type: 2}
+  batonSO: {fileID: 11400000, guid: b1b7323fccb4d2a40a8dd54b4c291db1, type: 2}
+  fireAxeSO: {fileID: 11400000, guid: df99019bc43002b4e9fcfd576a546cad, type: 2}
 --- !u!1 &609714077
 GameObject:
   m_ObjectHideFlags: 0
@@ -23992,6 +23996,7 @@ Transform:
   - {fileID: 180530656}
   - {fileID: 622655308}
   - {fileID: 1219791003}
+  - {fileID: 1439947131}
   - {fileID: 1712566067}
   - {fileID: 665413515}
   m_Father: {fileID: 952983817}
@@ -24816,6 +24821,51 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1439947130
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1439947131}
+  - component: {fileID: 1439947132}
+  m_Layer: 0
+  m_Name: PauseController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1439947131
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1439947130}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1356441990}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1439947132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1439947130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0499880001f39fa44928bc9a2203335b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isPaused: 0
 --- !u!1 &1451664715
 GameObject:
   m_ObjectHideFlags: 0
@@ -28558,6 +28608,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   smallBackpackSO: {fileID: 11400000, guid: b211b14bdda643d4190ae24f432c7a79, type: 2}
+  duffelBagSO: {fileID: 11400000, guid: 5e1957b7a2808d6449686645373f187c, type: 2}
+  huntingBackpackSO: {fileID: 11400000, guid: 59572f75f4ed4514bbbccba81ed0a325, type: 2}
 --- !u!1 &1726580209
 GameObject:
   m_ObjectHideFlags: 0

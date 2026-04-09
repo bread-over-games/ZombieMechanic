@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc850fe134d4c0f40a8103ac3fb9e2bc, type: 3}
+  m_Name: FireAxe
+  m_EditorClassIdentifier: 
+  weaponVisual: {fileID: 1498307123, guid: b0a5cad4c26bab8448aad661d723c0e0, type: 3}
+  weaponVisualPrefab: {fileID: 6491438594319727547, guid: 5068b1bd926f45b42be641810dbf0b43, type: 3}
+  weaponName: Fire Axe
+  minimalBaseDamage: 14
+  maximalBaseDamage: 16
+  maxDurability: 50
+  spawnChance: 10

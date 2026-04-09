@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92dd8056b76f58b429e15a71bcb42a3a, type: 3}
+  m_Name: DuffelBag
+  m_EditorClassIdentifier: 
+  backpackVisual: {fileID: 1271861881, guid: b1cbc4c2db4784b408b8950175671c9c, type: 3}
+  backpackVisualPrefab: {fileID: 7855655202046095556, guid: 4176350fe007e9345845ea37edbafde5, type: 3}
+  backpackSize: 4
+  backpackName: Duffel Bag
+  maxDurability: 35
+  spawnChance: 10

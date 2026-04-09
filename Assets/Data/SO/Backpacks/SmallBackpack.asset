@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   backpackVisual: {fileID: 1256411281, guid: cd7885a9a289e194c99eb0d5959d6b04, type: 3}
   backpackVisualPrefab: {fileID: 8733942901714294039, guid: ddd500db9ccdcfd46863525b190f9529, type: 3}
-  backpackSize: 3
+  backpackSize: 2
   backpackName: Small backpack
-  maxDurability: 20
+  maxDurability: 15
+  spawnChance: 60

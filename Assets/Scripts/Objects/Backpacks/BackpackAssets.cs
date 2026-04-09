@@ -12,4 +12,6 @@ public class BackpackAssets : MonoBehaviour
     }
 
     public BackpackData smallBackpackSO;
+    public BackpackData duffelBagSO;
+    public BackpackData huntingBackpackSO;
 }

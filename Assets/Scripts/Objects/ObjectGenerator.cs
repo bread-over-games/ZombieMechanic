@@ -35,18 +35,18 @@ public class ObjectGenerator : MonoBehaviour
         }
         else if ((roll -= generateBackpackChance) < 0)
         {
-            loot = new Backpack { backpackType = Backpack.BackpackType.SmallBackpack };
+            loot = new Backpack { backpackType = Backpack.ChooseBackpackTypeToGenerate() };
         }
         else if ((roll -= generateArmorChance) < 0)
         {
-            loot = new Armor { armorType = Armor.ArmorType.BalisticVest };
+            loot = new Armor { armorType = Armor.ChooseArmorTypeToGenerate() };
         }
         else if ((roll -= generateAntibioticsChance) < 0)
         {
             loot = new Antibiotics { antibioType = Antibiotics.AntibioticsType.BSAntibiotics };
         }
 
-        if (loot == null) return;
+        if (loot == null) return;        
 
         loot.SetValues(minimalLootQuality, maximalLootQuality);
         InventoriesController.Instance.lootTableInventory.ReceiveObject(loot);
