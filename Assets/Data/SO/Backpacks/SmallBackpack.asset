@@ -17,4 +17,4 @@ MonoBehaviour:
   backpackSize: 2
   backpackName: Small backpack
   maxDurability: 15
-  spawnChance: 50
+  spawnChance: 60

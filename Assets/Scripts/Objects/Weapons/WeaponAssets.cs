@@ -13,4 +13,6 @@ public class WeaponAssets : MonoBehaviour
 
     public WeaponData baseballBatSO;
     public WeaponData crowbarSO;
+    public WeaponData batonSO;
+    public WeaponData fireAxeSO;
 }

@@ -6,7 +6,9 @@ public class Armor : Object
 {
     public enum ArmorType
     {
-        BalisticVest
+        BalisticVest,
+        RiotGear,
+        LeatherJacker
     }
 
     public ArmorType armorType;
@@ -17,7 +19,9 @@ public class Armor : Object
         switch (armorType)
         {
             default:
-            case ArmorType.BalisticVest: return ArmorAssets.Instance.balisticVestSO.armorVisual;          
+            case ArmorType.BalisticVest: return ArmorAssets.Instance.balisticVestSO.armorVisual;
+            case ArmorType.LeatherJacker: return ArmorAssets.Instance.leatherJacketSO.armorVisual;
+            case ArmorType.RiotGear: return ArmorAssets.Instance.riotGearSO.armorVisual;
         }
     }
     public override GameObject GetObjectGameObject()
@@ -26,6 +30,8 @@ public class Armor : Object
         {
             default:
             case ArmorType.BalisticVest: return ArmorAssets.Instance.balisticVestSO.armorVisualPrefab;
+            case ArmorType.LeatherJacker: return ArmorAssets.Instance.leatherJacketSO.armorVisualPrefab;
+            case ArmorType.RiotGear: return ArmorAssets.Instance.riotGearSO.armorVisualPrefab;
         }
     }
 
@@ -39,7 +45,18 @@ public class Armor : Object
                 currentDurability = Random.Range((int)((maxDurability / 100f) * minimalLootQuality), (int)((maxDurability / 100f) * maximalLootQuality));
                 objectName = ArmorAssets.Instance.balisticVestSO.armorName;
                 lootQualityBonus = ArmorAssets.Instance.balisticVestSO.lootQualityBonus;
-
+                break;
+            case ArmorType.RiotGear:
+                maxDurability = ArmorAssets.Instance.riotGearSO.maxDurability;
+                currentDurability = Random.Range((int)((maxDurability / 100f) * minimalLootQuality), (int)((maxDurability / 100f) * maximalLootQuality));
+                objectName = ArmorAssets.Instance.riotGearSO.armorName;
+                lootQualityBonus = ArmorAssets.Instance.riotGearSO.lootQualityBonus;
+                break;
+            case ArmorType.LeatherJacker:
+                maxDurability = ArmorAssets.Instance.leatherJacketSO.maxDurability;
+                currentDurability = Random.Range((int)((maxDurability / 100f) * minimalLootQuality), (int)((maxDurability / 100f) * maximalLootQuality));
+                objectName = ArmorAssets.Instance.leatherJacketSO.armorName;
+                lootQualityBonus = ArmorAssets.Instance.leatherJacketSO.lootQualityBonus;
                 break;
         }
     }
@@ -83,8 +100,8 @@ public class Armor : Object
     {
         ArmorAssets armorAssets = ArmorAssets.Instance;
 
-        float total = armorAssets.balisticVestSO.spawnChance;
-        float roll = UnityEngine.Random.Range(0f, total);
+        float total = armorAssets.balisticVestSO.spawnChance + armorAssets.riotGearSO.spawnChance + armorAssets.leatherJacketSO.spawnChance;
+        float roll = Random.Range(0f, total);
 
         ArmorType armorTypeToGenerate = ArmorType.BalisticVest;
 
@@ -92,10 +109,14 @@ public class Armor : Object
         {
             armorTypeToGenerate = ArmorType.BalisticVest;
         }
-        /*else if ((roll -= armorAssets.crowbarSO.spawnChance) < 0)
+        else if ((roll -= armorAssets.leatherJacketSO.spawnChance) < 0)
         {
-            weaponTypeToGenerate = Weapon.WeaponType.Crowbar;
-        }*/
+            armorTypeToGenerate = ArmorType.LeatherJacker;
+        }
+        else if ((roll -= armorAssets.riotGearSO.spawnChance) < 0)
+        {
+            armorTypeToGenerate = ArmorType.RiotGear;
+        }
 
         return armorTypeToGenerate;
     }

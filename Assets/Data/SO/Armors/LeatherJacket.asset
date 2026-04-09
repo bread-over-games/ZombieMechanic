@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: LeatherJacket
   m_EditorClassIdentifier: 
   armorVisual: {fileID: -1579379302, guid: c048e123f467bc64eb6c87923cc5f0f3, type: 3}
-  armorVisualPrefab: {fileID: 0}
+  armorVisualPrefab: {fileID: 8807012845229600689, guid: 11b1f85bb98481c4ab1a3154a7da3578, type: 3}
   armorName: Leather Jacket
   maxDurability: 15
   lootQualityBonus: 5

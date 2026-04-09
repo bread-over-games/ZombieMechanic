@@ -9,5 +9,7 @@ public class ArmorAssets : MonoBehaviour
         Instance = this;
     }
 
-    public ArmorData balisticVestSO;    
+    public ArmorData balisticVestSO;
+    public ArmorData riotGearSO;
+    public ArmorData leatherJacketSO;
 }

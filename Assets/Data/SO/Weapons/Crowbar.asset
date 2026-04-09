@@ -18,4 +18,4 @@ MonoBehaviour:
   minimalBaseDamage: 6
   maximalBaseDamage: 8
   maxDurability: 35
-  spawnChance: 50
+  spawnChance: 40

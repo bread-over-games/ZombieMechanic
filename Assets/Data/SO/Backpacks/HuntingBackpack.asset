@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: HuntingBackpack
   m_EditorClassIdentifier: 
   backpackVisual: {fileID: -1882081581, guid: 67d882322f2283d40ac58690c15fe080, type: 3}
-  backpackVisualPrefab: {fileID: 0}
+  backpackVisualPrefab: {fileID: 641546632836676228, guid: 5ceb874264ebf1549abd69707704a8e9, type: 3}
   backpackSize: 3
   backpackName: Hunting Backpack
   maxDurability: 25
-  spawnChance: 30
+  spawnChance: 25

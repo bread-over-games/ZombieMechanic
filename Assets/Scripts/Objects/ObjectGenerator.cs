@@ -46,7 +46,7 @@ public class ObjectGenerator : MonoBehaviour
             loot = new Antibiotics { antibioType = Antibiotics.AntibioticsType.BSAntibiotics };
         }
 
-        if (loot == null) return;
+        if (loot == null) return;        
 
         loot.SetValues(minimalLootQuality, maximalLootQuality);
         InventoriesController.Instance.lootTableInventory.ReceiveObject(loot);

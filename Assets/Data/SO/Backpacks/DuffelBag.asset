@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DuffelBag
   m_EditorClassIdentifier: 
   backpackVisual: {fileID: 1271861881, guid: b1cbc4c2db4784b408b8950175671c9c, type: 3}
-  backpackVisualPrefab: {fileID: 0}
+  backpackVisualPrefab: {fileID: 7855655202046095556, guid: 4176350fe007e9345845ea37edbafde5, type: 3}
   backpackSize: 4
   backpackName: Duffel Bag
   maxDurability: 35

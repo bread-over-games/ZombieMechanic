@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: FireAxe
   m_EditorClassIdentifier: 
   weaponVisual: {fileID: 1498307123, guid: b0a5cad4c26bab8448aad661d723c0e0, type: 3}
-  weaponVisualPrefab: {fileID: 0}
+  weaponVisualPrefab: {fileID: 6491438594319727547, guid: 5068b1bd926f45b42be641810dbf0b43, type: 3}
   weaponName: Fire Axe
   minimalBaseDamage: 14
   maximalBaseDamage: 16

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: RiotGear
   m_EditorClassIdentifier: 
   armorVisual: {fileID: -1250874396, guid: 225b21e282673f64fb0482657486d05f, type: 3}
-  armorVisualPrefab: {fileID: 0}
+  armorVisualPrefab: {fileID: 5155881556197574539, guid: b622bbf0f7bbed84889cd5c2ebaf61b9, type: 3}
   armorName: Riot Gear
   maxDurability: 40
   lootQualityBonus: 15
