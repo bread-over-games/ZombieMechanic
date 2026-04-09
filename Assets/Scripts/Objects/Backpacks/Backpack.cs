@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using static Armor;
 
 [System.Serializable]
 public class Backpack : Object
@@ -75,5 +76,26 @@ public class Backpack : Object
     {
         currentDurability += repairAmount;
         OnObjectRepair?.Invoke();
+    }
+
+    public static BackpackType ChooseBackpackTypeToGenerate()
+    {
+        BackpackAssets backpackAssets = BackpackAssets.Instance;
+
+        float total = backpackAssets.smallBackpackSO.spawnChance;
+        float roll = UnityEngine.Random.Range(0f, total);
+
+        BackpackType backpackTypeToGenerate = BackpackType.SmallBackpack;
+
+        if ((roll -= backpackAssets.smallBackpackSO.spawnChance) < 0)
+        {
+            backpackTypeToGenerate = BackpackType.SmallBackpack;
+        }
+        /*else if ((roll -= armorAssets.crowbarSO.spawnChance) < 0)
+        {
+            weaponTypeToGenerate = Weapon.WeaponType.Crowbar;
+        }*/
+
+        return backpackTypeToGenerate;
     }
 }

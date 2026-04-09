@@ -3031,7 +3031,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activeMissions: []
-  missionMaximumLength: 70
+  missionMaximumLength: 120
   missionLengthMultiplier: 1.8
   missionLengthWeaponWeight: 25
   missionLengthArmorWeight: 75

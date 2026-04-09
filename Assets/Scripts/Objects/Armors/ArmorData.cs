@@ -7,4 +7,6 @@ public class ArmorData : ScriptableObject
     public GameObject armorVisualPrefab;
     public string armorName;    
     public int maxDurability;
+    public int lootQualityBonus;
+    public int spawnChance;
 }

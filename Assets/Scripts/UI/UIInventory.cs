@@ -296,6 +296,7 @@ public class UIInventory : MonoBehaviour
             case Armor armor:
                 armorDurabilityText.text = armor.currentDurability.ToString() + "/" + armor.maxDurability.ToString();
                 armorNameText.text = armor.objectName.ToString();
+                armorLootQualityText.text = armor.lootQualityBonus.ToString();
                 armorDurabilityImage.fillAmount = (float)armor.currentDurability / armor.maxDurability;
                 break;
             case Scrap scrap:

@@ -42,8 +42,8 @@ public static class MissionCalculator
         return new MissionEstimate
         {
             estimatedDuration = missionDuration,
-            estimatedLootQualityMinimal = CalculateLootQualityMinimal(missionDuration),
-            estimatedLootQualityMaximal = CalculateLootQualityMaximal(CalculateLootQualityMinimal(missionDuration)),
+            estimatedLootQualityMinimal = CalculateLootQualityMinimal(missionDuration, armorToEquip),
+            estimatedLootQualityMaximal = CalculateLootQualityMaximal(CalculateLootQualityMinimal(missionDuration, armorToEquip)),
             estimatedZombiesKills = CalculateZombiesKills(missionDuration, weaponToEquip),
             estimatedGearWear = EstimateGearWear(missionDuration),
             estimatedLootAmount = EstimateLootAmount(backpackToEquip, weaponToEquip)
@@ -57,8 +57,8 @@ public static class MissionCalculator
         return new MissionResult
         {
             duration = missionDuration,
-            lootQualityMinimal = CalculateLootQualityMinimal(missionDuration),
-            lootQualityMaximal = CalculateLootQualityMaximal(CalculateLootQualityMinimal(missionDuration)),
+            lootQualityMinimal = CalculateLootQualityMinimal(missionDuration, armorToEquip),
+            lootQualityMaximal = CalculateLootQualityMaximal(CalculateLootQualityMinimal(missionDuration, armorToEquip)),
             zombiesKilled = CalculateZombiesKills(missionDuration, weaponToEquip),
             weaponWear = CalculateWeaponWear(missionDuration),
             armorWear = CalculateArmorWear(missionDuration),
@@ -157,11 +157,17 @@ public static class MissionCalculator
         return lootAmount;
     }
 
-    private static float CalculateLootQualityMinimal(int missionDuration)
+    private static float CalculateLootQualityMinimal(int missionDuration, Armor eqippedArmor)
     {
         float lootQuality;
 
-        lootQuality = (missionDuration / MissionController.Instance.missionMaximumLength) * 100;
+        lootQuality = ((missionDuration / MissionController.Instance.missionMaximumLength) * 100);
+
+        if (eqippedArmor != null)
+        {
+            lootQuality += eqippedArmor.lootQualityBonus;
+        }
+
         if (lootQuality < MissionController.Instance.minimalLootQuality)
         {
             lootQuality = MissionController.Instance.minimalLootQuality;
@@ -172,7 +178,7 @@ public static class MissionCalculator
 
     private static float CalculateLootQualityMaximal(float minimalQuality)
     {
-        float maximalLootQuality = minimalQuality * 2.5f;
+        float maximalLootQuality = minimalQuality * 2f;
 
         if (maximalLootQuality > 100)
         {

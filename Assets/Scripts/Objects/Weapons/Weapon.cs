@@ -74,15 +74,15 @@ public class Weapon : Object
         float total = weaponAssets.baseballBatSO.spawnChance + weaponAssets.crowbarSO.spawnChance;
         float roll = UnityEngine.Random.Range(0f, total);
 
-        WeaponType weaponTypeToGenerate = Weapon.WeaponType.Crowbar;
+        WeaponType weaponTypeToGenerate = WeaponType.Crowbar;
 
         if ((roll -= weaponAssets.baseballBatSO.spawnChance) < 0)
         {
-            weaponTypeToGenerate = Weapon.WeaponType.BaseballBat;
+            weaponTypeToGenerate = WeaponType.BaseballBat;
         }
         else if ((roll -= weaponAssets.crowbarSO.spawnChance) < 0)
         {
-            weaponTypeToGenerate = Weapon.WeaponType.Crowbar;
+            weaponTypeToGenerate = WeaponType.Crowbar;
         }
 
         return weaponTypeToGenerate;

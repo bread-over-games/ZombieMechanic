@@ -1,4 +1,5 @@
 using UnityEngine;
+using static Weapon;
 
 [System.Serializable]
 public class Armor : Object
@@ -9,6 +10,7 @@ public class Armor : Object
     }
 
     public ArmorType armorType;
+    public int lootQualityBonus;
 
     public override Sprite GetObjectSprite()
     {
@@ -36,6 +38,7 @@ public class Armor : Object
                 maxDurability = ArmorAssets.Instance.balisticVestSO.maxDurability;
                 currentDurability = Random.Range((int)((maxDurability / 100f) * minimalLootQuality), (int)((maxDurability / 100f) * maximalLootQuality));
                 objectName = ArmorAssets.Instance.balisticVestSO.armorName;
+                lootQualityBonus = ArmorAssets.Instance.balisticVestSO.lootQualityBonus;
 
                 break;
         }
@@ -74,5 +77,26 @@ public class Armor : Object
         }
 
         return false;
+    }
+
+    public static ArmorType ChooseArmorTypeToGenerate()
+    {
+        ArmorAssets armorAssets = ArmorAssets.Instance;
+
+        float total = armorAssets.balisticVestSO.spawnChance;
+        float roll = UnityEngine.Random.Range(0f, total);
+
+        ArmorType armorTypeToGenerate = ArmorType.BalisticVest;
+
+        if ((roll -= armorAssets.balisticVestSO.spawnChance) < 0)
+        {
+            armorTypeToGenerate = ArmorType.BalisticVest;
+        }
+        /*else if ((roll -= armorAssets.crowbarSO.spawnChance) < 0)
+        {
+            weaponTypeToGenerate = Weapon.WeaponType.Crowbar;
+        }*/
+
+        return armorTypeToGenerate;
     }
 }

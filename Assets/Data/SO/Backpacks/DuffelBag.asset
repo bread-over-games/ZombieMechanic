@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 92dd8056b76f58b429e15a71bcb42a3a, type: 3}
-  m_Name: SmallBackpack
+  m_Name: DuffelBag
   m_EditorClassIdentifier: 
-  backpackVisual: {fileID: 1256411281, guid: cd7885a9a289e194c99eb0d5959d6b04, type: 3}
-  backpackVisualPrefab: {fileID: 8733942901714294039, guid: ddd500db9ccdcfd46863525b190f9529, type: 3}
-  backpackSize: 2
-  backpackName: Small backpack
-  maxDurability: 15
-  spawnChance: 50
+  backpackVisual: {fileID: 1271861881, guid: b1cbc4c2db4784b408b8950175671c9c, type: 3}
+  backpackVisualPrefab: {fileID: 0}
+  backpackSize: 4
+  backpackName: Duffel Bag
+  maxDurability: 35
+  spawnChance: 10

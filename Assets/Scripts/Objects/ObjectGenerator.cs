@@ -35,11 +35,11 @@ public class ObjectGenerator : MonoBehaviour
         }
         else if ((roll -= generateBackpackChance) < 0)
         {
-            loot = new Backpack { backpackType = Backpack.BackpackType.SmallBackpack };
+            loot = new Backpack { backpackType = Backpack.ChooseBackpackTypeToGenerate() };
         }
         else if ((roll -= generateArmorChance) < 0)
         {
-            loot = new Armor { armorType = Armor.ArmorType.BalisticVest };
+            loot = new Armor { armorType = Armor.ChooseArmorTypeToGenerate() };
         }
         else if ((roll -= generateAntibioticsChance) < 0)
         {

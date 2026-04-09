@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c0317a7041dbcca44ab2211815cd1839, type: 3}
-  m_Name: BalisticVest
+  m_Name: RiotGear
   m_EditorClassIdentifier: 
-  armorVisual: {fileID: -1858961652, guid: d077688e1b97b2c47852d0e77dbd2933, type: 3}
-  armorVisualPrefab: {fileID: 1024016258484320585, guid: 7eea41288f2f8b24097de54b7d7ddcc6, type: 3}
-  armorName: Balistic Vest
-  maxDurability: 30
-  lootQualityBonus: 10
-  spawnChance: 30
+  armorVisual: {fileID: -1250874396, guid: 225b21e282673f64fb0482657486d05f, type: 3}
+  armorVisualPrefab: {fileID: 0}
+  armorName: Riot Gear
+  maxDurability: 40
+  lootQualityBonus: 15
+  spawnChance: 10
