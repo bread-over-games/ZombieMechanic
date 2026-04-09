@@ -39,17 +39,13 @@ public class PlayerInteraction : MonoBehaviour
 
     private void BlockInputLevelUp()
     {
-        BlockInput();
-        Invoke("UnblockInput", 1.5f);
-    }
-
-    private void BlockInput()
-    {
         isInputBlocked = true;
+        StartCoroutine(UnblockInputAfterDelay(1f));
     }
 
-    private void UnblockInput()
+    private IEnumerator UnblockInputAfterDelay(float delay)
     {
+        yield return new WaitForSecondsRealtime(delay);
         isInputBlocked = false;
     }
 

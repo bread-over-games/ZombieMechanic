@@ -14,10 +14,13 @@ public class UIInfoHeader : MonoBehaviour
     [SerializeField] private ScalePulse sparePartsPulse;
     [SerializeField] private ScalePulse zombiesKilledPulse;
 
+    [SerializeField] private TextFlasher sparePartsTextFlasher;
+
     private void OnEnable()
     {
         ResourceController.OnAntibioticsAmountChange += UpdateAntibioticsAmount;
         ResourceController.OnSparePartsAmountChange += UpdateSparePartsAmounts;
+        ResourceController.OnSparePartsLimitReached += FlashSparePartsRed;
         ZombiesController.OnZombiesKilledChanged += UpdateZombiesAmount;
     }
 
@@ -25,6 +28,7 @@ public class UIInfoHeader : MonoBehaviour
     {
         ResourceController.OnAntibioticsAmountChange -= UpdateAntibioticsAmount;
         ResourceController.OnSparePartsAmountChange -= UpdateSparePartsAmounts;
+        ResourceController.OnSparePartsLimitReached -= FlashSparePartsRed;
         ZombiesController.OnZombiesKilledChanged -= UpdateZombiesAmount;
     }
 
@@ -33,6 +37,11 @@ public class UIInfoHeader : MonoBehaviour
         UpdateSparePartsAmounts();
         UpdateAntibioticsAmount();
         UpdateZombiesAmount();
+    }
+
+    private void FlashSparePartsRed()
+    {
+        sparePartsTextFlasher.Flash();
     }
 
     private void UpdateAntibioticsAmount()

@@ -2410,6 +2410,7 @@ MonoBehaviour:
   antibioticsPulse: {fileID: 2006786109}
   sparePartsPulse: {fileID: 768761965}
   zombiesKilledPulse: {fileID: 71308693}
+  sparePartsTextFlasher: {fileID: 768761966}
 --- !u!114 &153872788
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10343,6 +10344,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 763100415}
     m_Modifications:
+    - target: {fileID: 2678635374253839660, guid: 334bafedd724595499106d05e60295c5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2964552360356515705, guid: 334bafedd724595499106d05e60295c5, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
@@ -10357,7 +10362,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6169973104664657139, guid: 334bafedd724595499106d05e60295c5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.522
+      value: -5.65
       objectReference: {fileID: 0}
     - target: {fileID: 6169973104664657139, guid: 334bafedd724595499106d05e60295c5, type: 3}
       propertyPath: m_LocalPosition.y
@@ -13216,6 +13221,7 @@ GameObject:
   m_Component:
   - component: {fileID: 768761962}
   - component: {fileID: 768761964}
+  - component: {fileID: 768761966}
   - component: {fileID: 768761965}
   - component: {fileID: 768761963}
   m_Layer: 0
@@ -13357,6 +13363,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   duration: 0.1
   scaleIncrease: 1.2
+--- !u!114 &768761966
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 768761961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24bb4d94aca581b45b9ae4c44a9bed4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 768761963}
+  duration: 0.3
 --- !u!1 &769241020
 GameObject:
   m_ObjectHideFlags: 0
@@ -13670,6 +13690,11 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!1 &800740126 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7730046865287223204, guid: dfe3f9b2a84fc384986d39c05f4813c3, type: 3}
+  m_PrefabInstance: {fileID: 1297584613}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &805900272
 GameObject:
   m_ObjectHideFlags: 0
@@ -21275,13 +21300,37 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3054230413136879638, guid: 1cf25cad7ec19234d8a09d611cff9443, type: 3}
+      insertIndex: 1
+      addedObject: {fileID: 1214555821}
   m_SourcePrefab: {fileID: 100100000, guid: 1cf25cad7ec19234d8a09d611cff9443, type: 3}
 --- !u!4 &1214555819 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2820541076526507262, guid: 1cf25cad7ec19234d8a09d611cff9443, type: 3}
   m_PrefabInstance: {fileID: 1214555818}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1214555820 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3054230413136879638, guid: 1cf25cad7ec19234d8a09d611cff9443, type: 3}
+  m_PrefabInstance: {fileID: 1214555818}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1214555821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1214555820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fd829b86c546794ebd3e9e59961c4e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EmissionColor: {r: 0.9384973, g: 1, b: 0, a: 1}
+  m_PeakIntensity: 15
+  m_BaseIntensity: 0
+  m_FlashDuration: 0.5
 --- !u!1 &1216868697
 GameObject:
   m_ObjectHideFlags: 0
@@ -23414,13 +23463,33 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7730046865287223204, guid: dfe3f9b2a84fc384986d39c05f4813c3, type: 3}
+      insertIndex: 4
+      addedObject: {fileID: 1297584619}
   m_SourcePrefab: {fileID: 100100000, guid: dfe3f9b2a84fc384986d39c05f4813c3, type: 3}
 --- !u!4 &1297584614 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7028020551961809978, guid: dfe3f9b2a84fc384986d39c05f4813c3, type: 3}
   m_PrefabInstance: {fileID: 1297584613}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1297584619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 800740126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4c95ca87976b5d4ea070006148c2092, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventory: {fileID: 754061679}
+  spawnConfig:
+    objectType: 3
+    minQuality: 40
+    maxQuality: 50
 --- !u!1 &1309299279
 GameObject:
   m_ObjectHideFlags: 0
@@ -32129,8 +32198,8 @@ MonoBehaviour:
   salvageTableFlasher: {fileID: 1088256049}
   medicalCabinetFlasher: {fileID: 157295941}
   armoryFlasher: {fileID: 1239581517}
+  storageRackConstructible: {fileID: 1214555821}
   armoryFirst: {fileID: 155053022065181570}
-  armorySecond: {fileID: 0}
   salvageTable: {fileID: 1571740917}
   skipTutorial: 1
   sparePartsPicked: 0
@@ -36219,6 +36288,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 763100415}
     m_Modifications:
+    - target: {fileID: 2678635374253839660, guid: 334bafedd724595499106d05e60295c5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2964552360356515705, guid: 334bafedd724595499106d05e60295c5, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
@@ -36233,7 +36306,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6169973104664657139, guid: 334bafedd724595499106d05e60295c5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.522
+      value: -5.65
       objectReference: {fileID: 0}
     - target: {fileID: 6169973104664657139, guid: 334bafedd724595499106d05e60295c5, type: 3}
       propertyPath: m_LocalPosition.y
