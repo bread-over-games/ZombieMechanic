@@ -10,9 +10,9 @@ public class TutorialController : MonoBehaviour
     public EmissionFlasher salvageTableFlasher;
     public EmissionFlasher medicalCabinetFlasher;
     public EmissionFlasher armoryFlasher;
+    public EmissionFlasher storageRackConstructible;
 
     public Armory armoryFirst;
-    public Armory armorySecond;
     public SalvageTable salvageTable;
 
     public bool skipTutorial = false;
@@ -27,6 +27,7 @@ public class TutorialController : MonoBehaviour
     [HideInInspector] public bool sentOnMissionArmory = false;
     private bool medicalCabinetTutorialStarted = false;
     private bool antibioticsUsed = false;
+    private bool storageRackBuilt = false;
 
     public static Action OnTutorialEnd;
     public static Action OnTutorialStart;
@@ -47,6 +48,8 @@ public class TutorialController : MonoBehaviour
         Armory.OnSentOnMission += ArmorySentOnMission;
         Infection.OnInfectionLevelChange += InfectionTutorialStart;
         MedicalCabinet.OnAntibioticsUsed += InfectionTutorialStop;
+        ResourceController.OnSparePartsLimitReached += BuildStorageRackFlashStart;        
+        StorageRack.OnStorageRackBuilt += BuildStorageRackFlashStop;
     }
 
     private void OnDisable()
@@ -63,6 +66,8 @@ public class TutorialController : MonoBehaviour
         Armory.OnSentOnMission -= ArmorySentOnMission;
         Infection.OnInfectionLevelChange -= InfectionTutorialStart;
         MedicalCabinet.OnAntibioticsUsed -= InfectionTutorialStop;
+        ResourceController.OnSparePartsLimitReached -= BuildStorageRackFlashStart;
+        StorageRack.OnStorageRackBuilt -= BuildStorageRackFlashStop;
     }
 
     private void Awake()
@@ -82,8 +87,22 @@ public class TutorialController : MonoBehaviour
         {
             OnTutorialEnd?.Invoke();
         }
-    }   
+    }  
     
+    private void BuildStorageRackFlashStart()
+    {
+        if (!storageRackBuilt)
+        {
+            storageRackConstructible.StartFlash();
+            storageRackBuilt = true;
+        }        
+    }
+
+    private void BuildStorageRackFlashStop(int value)
+    {
+        storageRackConstructible.StopFlash();
+    }
+
     private void InfectionTutorialStart(float infectionLevel)
     {
         if (infectionLevel > 60 && !medicalCabinetTutorialStarted && !skipTutorial)
@@ -105,13 +124,11 @@ public class TutorialController : MonoBehaviour
     private void DisableArmories()
     {
         armoryFirst.isEnabled = false;
-        armorySecond.isEnabled = false; 
     }
 
     private void EnableArmories()
     {
         armoryFirst.isEnabled = true;
-        armorySecond.isEnabled = true;
     }
 
     private void SpawnSpareParts()

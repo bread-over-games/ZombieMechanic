@@ -21275,13 +21275,37 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3054230413136879638, guid: 1cf25cad7ec19234d8a09d611cff9443, type: 3}
+      insertIndex: 1
+      addedObject: {fileID: 1214555821}
   m_SourcePrefab: {fileID: 100100000, guid: 1cf25cad7ec19234d8a09d611cff9443, type: 3}
 --- !u!4 &1214555819 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2820541076526507262, guid: 1cf25cad7ec19234d8a09d611cff9443, type: 3}
   m_PrefabInstance: {fileID: 1214555818}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1214555820 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3054230413136879638, guid: 1cf25cad7ec19234d8a09d611cff9443, type: 3}
+  m_PrefabInstance: {fileID: 1214555818}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1214555821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1214555820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fd829b86c546794ebd3e9e59961c4e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EmissionColor: {r: 0.9384973, g: 1, b: 0, a: 1}
+  m_PeakIntensity: 15
+  m_BaseIntensity: 0
+  m_FlashDuration: 1
 --- !u!1 &1216868697
 GameObject:
   m_ObjectHideFlags: 0
@@ -32129,8 +32153,8 @@ MonoBehaviour:
   salvageTableFlasher: {fileID: 1088256049}
   medicalCabinetFlasher: {fileID: 157295941}
   armoryFlasher: {fileID: 1239581517}
+  storageRackConstructible: {fileID: 1214555821}
   armoryFirst: {fileID: 155053022065181570}
-  armorySecond: {fileID: 0}
   salvageTable: {fileID: 1571740917}
   skipTutorial: 1
   sparePartsPicked: 0

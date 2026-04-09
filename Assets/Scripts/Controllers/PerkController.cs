@@ -43,7 +43,6 @@ public class PerkController : MonoBehaviour
         secondPerkPick = availablePerksWOFirstPick[UnityEngine.Random.Range(0, availablePerksWOFirstPick.Count)];
 
         OnRandomPerksGenerated?.Invoke();
-        // display perks
     }
 
     private void PlayerChosePerk(ButtonSelectorPerks.PerkSlot perkSlot)
@@ -53,14 +52,12 @@ public class PerkController : MonoBehaviour
             firstPerkPick.perkEffect.ActivatePerk();
             activePerks.Add(firstPerkPick);
             availablePerks.Remove(firstPerkPick);            
-            Debug.Log("First perk activated");
 
         } else
         {
             secondPerkPick.perkEffect.ActivatePerk();
             activePerks.Add(secondPerkPick);
             availablePerks.Remove(secondPerkPick);
-            Debug.Log("Second perk activated");
         }
 
         firstPerkPick = null;
