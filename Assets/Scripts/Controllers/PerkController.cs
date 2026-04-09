@@ -15,6 +15,7 @@ public class PerkController : MonoBehaviour
 
     public static PerkController Instance { get; private set; }
     public static Action OnRandomPerksGenerated;
+    public static Action OnPerkSelected;
 
     private void OnEnable()
     {
@@ -62,6 +63,7 @@ public class PerkController : MonoBehaviour
 
         firstPerkPick = null;
         secondPerkPick = null;
-        isSelectingPerk = false;        
+        isSelectingPerk = false;   
+        OnPerkSelected?.Invoke();   
     }
 }
