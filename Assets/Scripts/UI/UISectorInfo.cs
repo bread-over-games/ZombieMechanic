@@ -20,23 +20,18 @@ public class UISectorInfo : MonoBehaviour
         PlayerInteraction.OnMessageConfirmed -= HideWindows;
     }
 
-    private void Start()
-    {
-        UIFocusStack.Push(sectorInfoWindow);
-    }
-
     private void ShowAtbDepletedWindow()
     {
-        atbLowWindow.SetActive(false);
-        atbDepletedWindow.SetActive(true);
         UIFocusStack.Push(sectorInfoWindow);
+        atbLowWindow.SetActive(false);
+        atbDepletedWindow.SetActive(true);        
     }
 
     private void ShowAtbLowWindow()
     {
-        atbLowWindow.SetActive(true);
-        atbDepletedWindow.SetActive(false);
         UIFocusStack.Push(sectorInfoWindow);
+        atbLowWindow.SetActive(true);
+        atbDepletedWindow.SetActive(false);        
     }
 
     private void HideWindows()

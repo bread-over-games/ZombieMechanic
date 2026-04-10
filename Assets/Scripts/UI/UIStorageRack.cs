@@ -10,11 +10,6 @@ public class UIStorageRack : MonoBehaviour
         PlayerInteraction.OnInteractableLeft += HideStorageRackWindow;
     }
 
-    private void Start()
-    {
-        UIFocusStack.Push(storageRackWindow);
-    }
-
     private void ShowStorageRackWindow(IInteractable interactableType)
     {
         if (interactableType is IBench bench)
@@ -23,7 +18,7 @@ public class UIStorageRack : MonoBehaviour
             {
                 return;
             }
-            storageRackWindow.SetActive(true);
+            UIFocusStack.Push(storageRackWindow);
         }
     }
 
@@ -35,7 +30,7 @@ public class UIStorageRack : MonoBehaviour
             {
                 return;
             }
-            storageRackWindow.SetActive(false);
+            UIFocusStack.Pop();
         }
     }
 }

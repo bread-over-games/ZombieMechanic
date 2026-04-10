@@ -5,7 +5,8 @@ using static Bench;
 
 public class UIInventory : MonoBehaviour
 {
-    private Inventory inventory;        
+    private Inventory inventory;
+    private IInteractable currentInteractable;
     [SerializeField] private GameObject singleItemInventoryWindow;
     [SerializeField] private TMP_Text interactableName;
 
@@ -62,12 +63,6 @@ public class UIInventory : MonoBehaviour
     [SerializeField] private GameObject medicalCabinetControls;
     [SerializeField] private GameObject lootTableControls;
 
-    private void Start()
-    {
-        UIFocusStack.Push(singleItemInventoryWindow);
-        singleItemInventoryWindow.SetActive(false);        
-    }
-
     private void OnEnable()
     {
         Inventory.OnInventoryChange += RefreshInventoryUI;        
@@ -87,28 +82,28 @@ public class UIInventory : MonoBehaviour
     }
 
     private void ShowSingleItemInventoryWindow(IInteractable interactableType)
-    {
+    {       
         if (interactableType is IBench bench)
         {
             if (bench.GetBenchType() == Bench.BenchType.Armory || bench.GetBenchType() == Bench.BenchType.StorageRack)
             {
                 return;
             }
-            singleItemInventoryWindow.SetActive(true);
-            RefreshInventoryUI();
+            UIFocusStack.Push(singleItemInventoryWindow);
+            RefreshInventoryUI();            
         }
     }
 
     private void HideSingleItemInventoryWindow(IInteractable interactableType)
-    {
+    {        
         if (interactableType is IBench bench)
         {
             if (bench.GetBenchType() == Bench.BenchType.Armory || bench.GetBenchType() == Bench.BenchType.StorageRack)
             {
                 return;
             }
-            singleItemInventoryWindow.SetActive(false);
             DropInventory();
+            UIFocusStack.Pop();
         }
     }
 
