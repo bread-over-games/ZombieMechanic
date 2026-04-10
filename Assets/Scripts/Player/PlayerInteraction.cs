@@ -14,6 +14,7 @@ public class PlayerInteraction : MonoBehaviour
     public static Action<IInteractable> OnInteractableLeft;
     public static Action OnIntroSkip;
     public static Action OnPerkActivated;
+    public static Action OnMessageConfirmed;
 
     [SerializeField] private Inventory playerInventory;
 
@@ -28,16 +29,20 @@ public class PlayerInteraction : MonoBehaviour
     private void OnEnable()
     {
         Inventory.OnObjectReceive += InsertAntibiotics;
-        XPCounter.OnLevelUp += BlockInputLevelUp;
+        XPCounter.OnLevelUp += BlockInputTemporarily;
+        SectorController.OnAntibioticsDepleted += BlockInputTemporarily;
+        SectorController.OnAntibioticsRunningLow += BlockInputTemporarily;
     }
 
     private void OnDisable()
     {
         Inventory.OnObjectReceive -= InsertAntibiotics;
-        XPCounter.OnLevelUp -= BlockInputLevelUp;
+        XPCounter.OnLevelUp -= BlockInputTemporarily;
+        SectorController.OnAntibioticsDepleted -= BlockInputTemporarily;
+        SectorController.OnAntibioticsRunningLow -= BlockInputTemporarily;
     }
 
-    private void BlockInputLevelUp()
+    private void BlockInputTemporarily()
     {
         isInputBlocked = true;
         StartCoroutine(UnblockInputAfterDelay(1f));
@@ -176,6 +181,12 @@ public class PlayerInteraction : MonoBehaviour
     public void OnInteractSecondary(InputAction.CallbackContext context)
     {
         if (isInputBlocked) return;
+
+        if (SectorController.Instance.isReadingMessage)
+        {
+            if (context.started) OnMessageConfirmed?.Invoke();
+            return;
+        }
 
         if (PerkController.Instance.isSelectingPerk)
         {

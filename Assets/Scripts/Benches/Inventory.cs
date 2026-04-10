@@ -11,7 +11,7 @@ public class Inventory : MonoBehaviour
         LootTable,
         Armory,
         Storage,
-        Outside,
+        Sector,
         Player,
         Table,
         SalvageTable,

@@ -9,12 +9,18 @@ public class PauseController : MonoBehaviour
     {
         XPCounter.OnLevelUp += PauseGame;
         PerkController.OnPerkSelected += ResumeGame;
+        SectorController.OnAntibioticsDepleted += PauseGame;
+        SectorController.OnAntibioticsRunningLow += PauseGame;
+        PlayerInteraction.OnMessageConfirmed += ResumeGame;
     }
 
     private void OnDisable()
     {
         XPCounter.OnLevelUp -= PauseGame;
         PerkController.OnPerkSelected -= ResumeGame;
+        SectorController.OnAntibioticsDepleted -= PauseGame;
+        SectorController.OnAntibioticsRunningLow -= PauseGame;
+        PlayerInteraction.OnMessageConfirmed -= ResumeGame;
     }
 
     private void Awake()
