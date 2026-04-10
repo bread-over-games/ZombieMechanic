@@ -1,10 +1,13 @@
 using UnityEngine;
+using System;
+using TMPro;
 
 public class UISectorInfo : MonoBehaviour
 {
     [SerializeField] private GameObject sectorInfoWindow;
     [SerializeField] private GameObject atbDepletedWindow;
     [SerializeField] private GameObject atbLowWindow;
+    [SerializeField] private TMP_Text[] zombiesLeft;
 
     private void OnEnable()
     {
@@ -23,6 +26,7 @@ public class UISectorInfo : MonoBehaviour
     private void ShowAtbDepletedWindow()
     {
         UIFocusStack.Push(sectorInfoWindow);
+        UpdateZombiesLeft();
         atbLowWindow.SetActive(false);
         atbDepletedWindow.SetActive(true);        
     }
@@ -30,6 +34,7 @@ public class UISectorInfo : MonoBehaviour
     private void ShowAtbLowWindow()
     {
         UIFocusStack.Push(sectorInfoWindow);
+        UpdateZombiesLeft();
         atbLowWindow.SetActive(true);
         atbDepletedWindow.SetActive(false);        
     }
@@ -39,5 +44,13 @@ public class UISectorInfo : MonoBehaviour
         atbLowWindow.SetActive(false);
         atbDepletedWindow.SetActive(false);
         UIFocusStack.Pop();
+    }
+
+    private void UpdateZombiesLeft()
+    {
+        foreach (TMP_Text zombLeft in zombiesLeft)
+        {
+            zombLeft.text = (ZombiesController.Instance.zombiesKillVictoryGoal - ZombiesController.Instance.zombiesKilledTotal).ToString();
+        }
     }
 }

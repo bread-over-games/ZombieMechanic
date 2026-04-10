@@ -1050,6 +1050,9 @@ MonoBehaviour:
   sectorInfoWindow: {fileID: 1795797575}
   atbDepletedWindow: {fileID: 1858523193}
   atbLowWindow: {fileID: 1938145431}
+  zombiesLeft:
+  - {fileID: 426566048}
+  - {fileID: 1254077731}
 --- !u!1 &71308689
 GameObject:
   m_ObjectHideFlags: 0
@@ -18603,6 +18606,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 952983817}
+  - component: {fileID: 952983818}
   m_Layer: 0
   m_Name: Logic
   m_TagString: Untagged
@@ -18628,6 +18632,18 @@ Transform:
   - {fileID: 1356441990}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &952983818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 952983816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fab9da9e22d6fa4dab5e503156a4a61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &956745170 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7730046865287223204, guid: dfe3f9b2a84fc384986d39c05f4813c3, type: 3}
@@ -18835,7 +18851,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   zombiesLeft: 0
-  antibioticsLeft: 8
+  antibioticsLeft: 10
   antibioticsDepleted: 0
   isReadingMessage: 0
 --- !u!1001 &979573746
@@ -30535,11 +30551,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 921298055db781347ae7f16541e06a60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  generateWeaponChance: 0
-  generateScrapChance: 0
-  generateBackpackChance: 0
-  generateArmorChance: 0
-  generateAntibioticsChance: 20
+  generateWeaponChance: 20
+  generateScrapChance: 60
+  generateBackpackChance: 15
+  generateArmorChance: 5
+  generateAntibioticsChance: 30
 --- !u!1 &1713238845
 GameObject:
   m_ObjectHideFlags: 0

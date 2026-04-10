@@ -61,7 +61,6 @@ public class SectorController : MonoBehaviour
 
     private void MessageConfirmed()
     {
-
         isReadingMessage = false;
     }
 }

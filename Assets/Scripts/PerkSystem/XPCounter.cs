@@ -11,9 +11,9 @@ public class XPCounter : MonoBehaviour
     public int salvageXP;
     public int upgradeXP;
 
-     public int currentXP = 0;
+    [HideInInspector] public int currentXP = 0;
     [HideInInspector] public int currentLvl = 0;
-    private int maxLevel = 12;
+    private int maxLevel = 5;
 
     private bool maxLevelReached = false;
 
