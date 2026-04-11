@@ -18851,7 +18851,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   zombiesLeft: 0
-  antibioticsLeft: 10
+  antibioticsLeft: 0
   antibioticsDepleted: 0
   isReadingMessage: 0
 --- !u!1001 &979573746
