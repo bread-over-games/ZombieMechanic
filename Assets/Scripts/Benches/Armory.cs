@@ -64,7 +64,7 @@ public class Armory : Bench, IInteractable
             if (!TutorialController.Instance.baseballBatPlacedArmory)
             {
                 OnBaseballBatPlaced?.Invoke();
-                return;
+                //return;
             }
         }
 
