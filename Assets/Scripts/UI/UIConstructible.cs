@@ -45,7 +45,7 @@ public class UIConstructible : MonoBehaviour
     {
         if (currentInteractable is IConstructible constructible)
         {
-            constructibleWindow.SetActive(true);
+            UIFocusStack.Push(constructibleWindow);
             currentConstructible = constructible;
             UpdateConstructibleInfo();
             ToggleControlTip();
@@ -56,8 +56,8 @@ public class UIConstructible : MonoBehaviour
     {
         if (currentInteractable is IConstructible constructible)
         {
-            constructibleWindow.SetActive(false);
             currentConstructible = null;
+            UIFocusStack.Pop();
         }
     }
 

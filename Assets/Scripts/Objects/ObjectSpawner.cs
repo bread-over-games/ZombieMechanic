@@ -29,18 +29,19 @@ public class ObjectSpawner : MonoBehaviour
     {
         TutorialController.OnTutorialEnd += SpawnObject;
         TutorialController.OnSpawnTutorialSpareParts += SpawnTutorialSpareParts;
-        TutorialController.OnSpawnTutorialBaseballBat += SpawnTutorialBaseballBat;
+        TutorialController.OnSpawnTutorialBaseballBat += SpawnTutorialWeapon;
     }
 
     private void OnDisable()
     {
         TutorialController.OnTutorialEnd -= SpawnObject; 
         TutorialController.OnSpawnTutorialSpareParts -= SpawnTutorialSpareParts;
-        TutorialController.OnSpawnTutorialBaseballBat -= SpawnTutorialBaseballBat;
+        TutorialController.OnSpawnTutorialBaseballBat -= SpawnTutorialWeapon;
     }    
 
     private void SpawnTutorialSpareParts(Inventory sourceInventory)
     {
+        Debug.Log("Spawn spare parts");
         if (sourceInventory == inventory)
         {
             Object loot = new Scrap { scrapType = Scrap.ScrapType.SparePartsBox };
@@ -49,11 +50,12 @@ public class ObjectSpawner : MonoBehaviour
         }
     }
 
-    private void SpawnTutorialBaseballBat(Inventory sourceInventory)
+    private void SpawnTutorialWeapon(Inventory sourceInventory)
     {
+        Debug.Log("Spawn weapon");
         if (sourceInventory == inventory)
         {
-            Object loot = new Weapon { weaponType = Weapon.WeaponType.BaseballBat };
+            Object loot = new Weapon { weaponType = Weapon.WeaponType.Baton };
             loot.SetValues(49, 51);
             inventory.ReceiveObject(loot);
         }

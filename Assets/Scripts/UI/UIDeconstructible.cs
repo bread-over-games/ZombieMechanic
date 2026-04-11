@@ -30,7 +30,7 @@ public class UIDeconstructible : MonoBehaviour
     {
         if (currentInteractable is IDeconstructible deconstructible)
         {
-            deconstructibleWindow.SetActive(true);
+            UIFocusStack.Push(deconstructibleWindow);            
             currentDeconstructible = deconstructible;
             UpdateDeconstructibleInfo();            
         }
@@ -39,9 +39,9 @@ public class UIDeconstructible : MonoBehaviour
     private void HideDeconstructibleWindow(IInteractable currentInteractable)
     {
         if (currentInteractable is IDeconstructible deconstructible)
-        {
-            deconstructibleWindow.SetActive(false);
+        {            
             currentDeconstructible = null;
+            UIFocusStack.Pop();
         }
     }
 

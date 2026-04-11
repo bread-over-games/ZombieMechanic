@@ -78,11 +78,6 @@ public class UIArmory : MonoBehaviour
         MissionController.OnMissionCompleted -= ChangeMissionStateGUI;
     }
 
-    private void Start()
-    {
-        UIFocusStack.Push(armoryWindow);
-    }
-
     private void ShowArmoryWindow(IInteractable interactableType)
     {
         if (interactableType is IBench bench)
@@ -91,7 +86,7 @@ public class UIArmory : MonoBehaviour
             {
                 return;
             }
-            armoryWindow.SetActive(true);
+            UIFocusStack.Push(armoryWindow);
             EventSystem.current.SetSelectedGameObject(firstSelected);
             RefreshInventoryUI();
             RefreshEstimatesUI();
@@ -107,10 +102,10 @@ public class UIArmory : MonoBehaviour
             {
                 return;
             }
-            armoryWindow.SetActive(false);
             EventSystem.current.SetSelectedGameObject(null);
             DropInventory();
             DropArmory();
+            UIFocusStack.Pop();
         }     
     }
 
@@ -271,4 +266,3 @@ public class UIArmory : MonoBehaviour
         
     }
 }
-;

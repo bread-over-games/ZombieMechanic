@@ -36,5 +36,6 @@ public class UIXPCounter : MonoBehaviour
     private void ChangeCurrentLevel()
     {
         currentLevel.text = xpCounter.currentLvl.ToString();
+        ChangeXPBar();
     }
 }
