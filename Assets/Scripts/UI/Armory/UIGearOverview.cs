@@ -65,6 +65,7 @@ public class UIGearOverview : MonoBehaviour
 
     public void CloseWindow()
     {
+        EventSystem.current.SetSelectedGameObject(null);
         gearOverviewWindow.SetActive(false);        
     }
 

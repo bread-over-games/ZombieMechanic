@@ -15,6 +15,7 @@ public class PlayerInteraction : MonoBehaviour
     public static Action OnIntroSkip;
     public static Action OnPerkActivated;
     public static Action OnMessageConfirmed;
+    public static Action OnMisisonTypeSelected;
 
     [SerializeField] private Inventory playerInventory;
 
@@ -191,6 +192,12 @@ public class PlayerInteraction : MonoBehaviour
         if (PerkController.Instance.isSelectingPerk)
         {
             if (context.started) OnPerkActivated?.Invoke();
+            return;
+        }
+
+        if (MissionController.Instance.isSelectingMissionType)
+        {
+            if (context.started) OnMisisonTypeSelected?.Invoke();
             return;
         }
 

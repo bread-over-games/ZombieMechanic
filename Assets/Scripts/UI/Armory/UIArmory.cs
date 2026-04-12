@@ -11,21 +11,24 @@ public class UIArmory : MonoBehaviour
     [SerializeField] private GameObject armoryWindow;
     [SerializeField] private UIGearOverview gearOverviewUI;
     [SerializeField] private UIOnMission onMissionUI;
+    [SerializeField] private UIMissionSelect missionSelectUI;
 
     private void OnEnable()
     {
         PlayerInteraction.OnInteractableApproached += ShowArmoryWindow;
         PlayerInteraction.OnInteractableLeft += HideArmoryWindow;
-        MissionController.OnMissionStarted += ChangeSubWindow;
-        MissionController.OnMissionCompleted += ChangeSubWindow;
+        MissionController.OnMissionStarted += ArmoryWindowMissionStateChange;
+        MissionController.OnMissionCompleted += ArmoryWindowMissionStateChange;
+        Armory.OnMissionGearSelected += OpenMissionTypeSelectWindow;
     }
 
     private void OnDisable()
     {
         PlayerInteraction.OnInteractableApproached -= ShowArmoryWindow;
         PlayerInteraction.OnInteractableLeft -= HideArmoryWindow;
-        MissionController.OnMissionStarted -= ChangeSubWindow;
-        MissionController.OnMissionCompleted -= ChangeSubWindow;
+        MissionController.OnMissionStarted -= ArmoryWindowMissionStateChange;
+        MissionController.OnMissionCompleted -= ArmoryWindowMissionStateChange;
+        Armory.OnMissionGearSelected -= OpenMissionTypeSelectWindow;
     }
 
     private void ShowArmoryWindow(IInteractable interactableType)
@@ -36,9 +39,8 @@ public class UIArmory : MonoBehaviour
             {
                 return;
             }
-            UIFocusStack.Push(armoryWindow);
-           
-            ChangeSubWindow(null);
+            UIFocusStack.Push(armoryWindow);           
+            ArmoryWindowMissionStateChange(null);
         }        
     }
 
@@ -49,8 +51,7 @@ public class UIArmory : MonoBehaviour
             if (bench.GetBenchType() != Bench.BenchType.Armory)
             {
                 return;
-            }
-            EventSystem.current.SetSelectedGameObject(null);
+            }            
             DropInventory();
             DropArmory();
             UIFocusStack.Pop();
@@ -77,7 +78,7 @@ public class UIArmory : MonoBehaviour
         armory = null;
     }
 
-    private void ChangeSubWindow(Mission mission)
+    private void ArmoryWindowMissionStateChange(Mission mission)
     {
         if (armory == null) return;
 
@@ -90,5 +91,13 @@ public class UIArmory : MonoBehaviour
             gearOverviewUI.CloseWindow();
             onMissionUI.OpenWindow();
         }
+    }
+
+    private void OpenMissionTypeSelectWindow()
+    {
+        if (armory == null) return;
+
+        gearOverviewUI.CloseWindow();
+        missionSelectUI.OpenWindow();
     }
 }

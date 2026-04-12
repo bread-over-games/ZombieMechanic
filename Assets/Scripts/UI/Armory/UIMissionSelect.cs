@@ -1,11 +1,13 @@
 using UnityEngine;
 using System;
 using TMPro;
+using UnityEngine.EventSystems;
 
 public class UIMissionSelect : MonoBehaviour
 {
     [SerializeField] private UIArmory uiArmory;
     [SerializeField] private GameObject missionSelectWindow;
+    [SerializeField] private GameObject firstSelected;
 
     public ButtonSelectorMissionTypes.MissionTypeSlot currentSlotSelected;
 
@@ -19,21 +21,38 @@ public class UIMissionSelect : MonoBehaviour
     [SerializeField] private TMP_Text gearWearText;
     [SerializeField] private TMP_Text zombieKillsText;
 
+    private void OnEnable()
+    {
+        PlayerInteraction.OnMisisonTypeSelected += SelectCurrentMissionType;
+    }
+
+    private void OnDisable()
+    {
+        PlayerInteraction.OnMisisonTypeSelected -= SelectCurrentMissionType;
+    }
+
     public void OpenWindow()
     {
         missionSelectWindow.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(firstSelected);
         RefreshEstimatesUI();
     }
 
     public void CloseWindow()
     {
+        EventSystem.current.SetSelectedGameObject(null);
         missionSelectWindow.SetActive(false);        
+    }
+
+    private void SelectCurrentMissionType()
+    {
+        OnCurrentMissionTypeSlotSelected?.Invoke(currentSlotSelected);
+        CloseWindow();
     }
 
     public void OnButtonSelected(ButtonSelectorMissionTypes.MissionTypeSlot missionTypeSlot)
     {
         currentSlotSelected = missionTypeSlot;
-        OnCurrentMissionTypeSlotSelected?.Invoke(currentSlotSelected);
     }
 
     public void OnButtonDeselected(ButtonSelectorMissionTypes.MissionTypeSlot missionTypeSlot)

@@ -11,15 +11,15 @@ public class ButtonSelectorMissionTypes : MonoBehaviour, ISelectHandler, IDesele
     }
     
     [SerializeField] private MissionTypeSlot missionTypeSlot;
-    [SerializeField] private UIArmory armoryUI;
+    [SerializeField] private UIMissionSelect missionSelectUI;
 
     public void OnSelect(BaseEventData eventData)
     {
-       //armoryUI.OnButtonSelected(missionTypeSlot);
+        missionSelectUI.OnButtonSelected(missionTypeSlot);
     }
 
     public void OnDeselect(BaseEventData eventData)
     {
-        //armoryUI.OnButtonDeselected(missionTypeSlot);
+        missionSelectUI.OnButtonDeselected(missionTypeSlot);
     }
 }

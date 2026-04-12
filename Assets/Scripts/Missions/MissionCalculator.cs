@@ -50,7 +50,7 @@ public static class MissionCalculator
         };
     }
 
-    public static MissionResult MissionResults(Weapon weaponToEquip, Backpack backpackToEquip, Armor armorToEquip)
+    public static MissionResult MissionResults(Weapon weaponToEquip, Backpack backpackToEquip, Armor armorToEquip, Mission.MissionType missionType)
     {
         int missionDuration = (int)CalculateMissionDuration(weaponToEquip, backpackToEquip, armorToEquip);
 

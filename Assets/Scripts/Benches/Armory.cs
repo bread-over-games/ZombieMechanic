@@ -15,6 +15,7 @@ public class Armory : Bench, IInteractable
 
     public static Action OnBaseballBatPlaced;
     public static Action OnSentOnMission; // for tutorial purpose only
+    public static Action OnMissionGearSelected;
 
     public void Awake()
     {
@@ -109,7 +110,7 @@ public class Armory : Bench, IInteractable
 
         isAvailableForMission = false;
 
-        MissionController.Instance.SendMission(storedWeapon, storedBackpack, storedArmor, inventory, this);
+        MissionController.Instance.ConfirmMissionGear(storedWeapon, storedBackpack, storedArmor, inventory, this);
 
         inventory.SendObjectOnMission(storedArmor);
         inventory.SendObjectOnMission(storedWeapon);
@@ -122,6 +123,8 @@ public class Armory : Bench, IInteractable
                 OnSentOnMission?.Invoke();
             }
         }
+
+        OnMissionGearSelected?.Invoke();
     }
 
     public override void EndInteractionSecondary()

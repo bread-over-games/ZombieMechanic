@@ -3829,6 +3829,7 @@ MonoBehaviour:
   loadoutWearArmorWeight: 20
   loadoutWearBackpackWeight: 10
   minimalLootQuality: 20
+  isSelectingMissionType: 0
   references:
     version: 2
     RefIds: []
@@ -7560,7 +7561,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   missionTypeSlot: 2
-  armoryUI: {fileID: 0}
+  missionSelectUI: {fileID: 515875856}
 --- !u!114 &341785994
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11956,6 +11957,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 154bb0546ca85b74c8e31fb8a3daf81b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiArmory: {fileID: 1454226950}
+  missionSelectWindow: {fileID: 1290976119}
+  firstSelected: {fileID: 8674755619444232123}
+  currentSlotSelected: 0
+  missionEstimates: {fileID: 356656184}
+  durationText: {fileID: 1768384062}
+  lootQualityText: {fileID: 110952840}
+  lootAmountText: {fileID: 1182809530}
+  gearWearText: {fileID: 1366056736}
+  zombieKillsText: {fileID: 686012343}
 --- !u!1 &518541572
 GameObject:
   m_ObjectHideFlags: 0
@@ -30849,7 +30860,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   missionTypeSlot: 1
-  armoryUI: {fileID: 0}
+  missionSelectUI: {fileID: 515875856}
 --- !u!224 &1432297882
 RectTransform:
   m_ObjectHideFlags: 0
@@ -31120,6 +31131,7 @@ MonoBehaviour:
   armoryWindow: {fileID: 336443909}
   gearOverviewUI: {fileID: 183412058}
   onMissionUI: {fileID: 1065591606}
+  missionSelectUI: {fileID: 515875856}
 --- !u!1 &1476393894
 GameObject:
   m_ObjectHideFlags: 0
@@ -40267,7 +40279,7 @@ MonoBehaviour:
   storageRackConstructible: {fileID: 1214555821}
   armoryFirst: {fileID: 155053022065181570}
   salvageTable: {fileID: 1571740917}
-  skipTutorial: 0
+  skipTutorial: 1
   sparePartsPicked: 0
   sparePartsPlacedSalvage: 0
   sparePartsSalvaged: 0
@@ -46413,7 +46425,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   missionTypeSlot: 0
-  armoryUI: {fileID: 0}
+  missionSelectUI: {fileID: 515875856}
 --- !u!114 &8945386683560624727
 MonoBehaviour:
   m_ObjectHideFlags: 0

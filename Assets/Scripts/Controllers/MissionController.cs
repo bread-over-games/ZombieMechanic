@@ -27,6 +27,28 @@ public class MissionController : MonoBehaviour
     public static Action<Mission> OnMissionStarted;
     public static Action<Mission> OnMissionCompleted;
 
+    private Weapon preparingMissionWeapon;
+    private Backpack preparingMissionBackpack;
+    private Armor preparingMissionArmor;
+    private Inventory preparingMissionInventory;
+    private Armory preparingMissionArmory;
+    private Mission.MissionType preparingMissionType;
+
+    public bool isSelectingMissionType = false;
+
+    private void OnEnable()
+    {
+        Armory.OnMissionGearSelected += SelectingMissionType;
+        UIMissionSelect.OnCurrentMissionTypeSlotSelected += ConfirmMissionType;
+    }
+
+    private void OnDisable()
+    {
+        Armory.OnMissionGearSelected -= SelectingMissionType;
+        UIMissionSelect.OnCurrentMissionTypeSlotSelected -= ConfirmMissionType;
+    }
+
+
     void Awake()
     {
         Instance = this;
@@ -46,18 +68,58 @@ public class MissionController : MonoBehaviour
         }
     }
 
+    private void SelectingMissionType()
+    {
+        isSelectingMissionType = true;
+    }
+
     private void ResolveMission(Mission mission, int index)
     {
         OnMissionCompleted?.Invoke(mission);
         activeMissions.RemoveAt(index); // deletes mission when it's done
     }
 
-    public void SendMission (Weapon weaponInArmory, Backpack backpackInArmory, Armor armorInArmory, Inventory missionInventory, Armory missionArmory)
+    public void ConfirmMissionGear(Weapon weaponInArmory, Backpack backpackInArmory, Armor armorInArmory, Inventory missionInventory, Armory missionArmory)
+    {
+        preparingMissionWeapon = weaponInArmory;
+        preparingMissionBackpack = backpackInArmory;
+        preparingMissionArmor = armorInArmory;
+        preparingMissionInventory = missionInventory;
+        preparingMissionArmory = missionArmory;
+    }
+
+    public void ConfirmMissionType(ButtonSelectorMissionTypes.MissionTypeSlot missionType)
+    {
+        switch (missionType)
+        {
+            case ButtonSelectorMissionTypes.MissionTypeSlot.Scavenge:
+                preparingMissionType = Mission.MissionType.Scavenge;
+                break;
+            case ButtonSelectorMissionTypes.MissionTypeSlot.Extermination:
+                preparingMissionType = Mission.MissionType.Extermination;
+                break;
+            case ButtonSelectorMissionTypes.MissionTypeSlot.Antibiotics:
+                preparingMissionType = Mission.MissionType.Antibiotics;
+                break;
+        }
+
+        SendMission();
+    }
+
+    public void SendMission()
     {
         OnMissionStarting?.Invoke();
-        Mission mission = new Mission(weaponInArmory, backpackInArmory, armorInArmory, missionInventory, missionArmory);
+        Mission mission = new Mission(preparingMissionWeapon, preparingMissionBackpack, preparingMissionArmor, preparingMissionInventory, preparingMissionArmory, preparingMissionType);
 
-        activeMissions.Add(mission); 
-        OnMissionStarted?.Invoke(mission);  
-    }
+        activeMissions.Add(mission);
+        OnMissionStarted?.Invoke(mission);
+
+        preparingMissionWeapon = null;
+        preparingMissionBackpack = null;
+        preparingMissionArmor = null;
+        preparingMissionInventory = null;
+        preparingMissionArmory = null;
+        preparingMissionType = default;
+        isSelectingMissionType = false;
+    }        
 }

@@ -12,6 +12,8 @@ public class PauseController : MonoBehaviour
         SectorController.OnAntibioticsDepleted += PauseGame;
         SectorController.OnAntibioticsRunningLow += PauseGame;
         PlayerInteraction.OnMessageConfirmed += ResumeGame;
+        Armory.OnMissionGearSelected += PauseGame;
+        PlayerInteraction.OnMisisonTypeSelected += ResumeGame;
     }
 
     private void OnDisable()
@@ -21,6 +23,8 @@ public class PauseController : MonoBehaviour
         SectorController.OnAntibioticsDepleted -= PauseGame;
         SectorController.OnAntibioticsRunningLow -= PauseGame;
         PlayerInteraction.OnMessageConfirmed -= ResumeGame;
+        Armory.OnMissionGearSelected -= PauseGame;
+        PlayerInteraction.OnMisisonTypeSelected -= ResumeGame;
     }
 
     private void Awake()
