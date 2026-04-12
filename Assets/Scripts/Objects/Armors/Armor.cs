@@ -80,12 +80,14 @@ public class Armor : Object
     public override void RepairObject(int repairAmount)
     {
         currentDurability += repairAmount;
+        CanBeDestroyedChange();
         OnObjectRepair?.Invoke();
     }
 
     public override bool DamageObject(int decayAmount) // returns true when weapon is destroyed
     {
         currentDurability -= decayAmount;
+        CanBeDestroyedChange();
         OnObjectDamage?.Invoke();
 
         if (currentDurability < 0)
@@ -119,5 +121,10 @@ public class Armor : Object
         }
 
         return armorTypeToGenerate;
+    }
+
+    private void CanBeDestroyedChange()
+    {
+        canBeDestroyed = (float)currentDurability / maxDurability < 0.20f;
     }
 }

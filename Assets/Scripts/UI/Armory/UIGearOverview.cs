@@ -163,14 +163,25 @@ public class UIGearOverview : MonoBehaviour
 
     private void RefreshInventoryValues()
     {
+        Color red = new Color(255f / 255f, 68f / 255f, 68f / 255f);
+        Color standardBlue = new Color(77f / 255f, 135f / 255f, 147f / 255f);
+
         if (uiArmory.inventory == null || uiArmory.inventory.GetObjectList().Count == 0) return;
 
         if (uiArmory.armory.storedArmor is Armor armor)
         {
             armorDurabilityText.text = armor.currentDurability.ToString() + "/" + armor.maxDurability.ToString();
             armorNameText.text = armor.objectName.ToString();
-            armorDurabilityImage.fillAmount = (float)armor.currentDurability / armor.maxDurability;
+            armorDurabilityImage.fillAmount = (float)armor.currentDurability / armor.maxDurability;            
             armorLootQualityText.text = armor.lootQualityBonus.ToString();
+            
+            if (armor.canBeDestroyed)
+            {
+                armorDurabilityImage.color = red;
+            } else
+            {
+                armorDurabilityImage.color = standardBlue;
+            }
         }
 
         if (uiArmory.armory.storedWeapon is Weapon weapon)
@@ -179,6 +190,15 @@ public class UIGearOverview : MonoBehaviour
             weaponDamageText.text = weapon.baseDamage.ToString();
             weaponNameText.text = weapon.objectName.ToString();
             weaponDurabilityImage.fillAmount = (float)weapon.currentDurability / weapon.maxDurability;
+
+            if (weapon.canBeDestroyed)
+            {
+                weaponDurabilityImage.color = red;
+            }
+            else
+            {
+                weaponDurabilityImage.color = standardBlue;
+            }
         }
 
         if (uiArmory.armory.storedBackpack is Backpack backpack)
@@ -186,6 +206,15 @@ public class UIGearOverview : MonoBehaviour
             backpackDurabilityText.text = backpack.currentDurability.ToString() + "/" + backpack.maxDurability.ToString();
             backpackNameText.text = backpack.objectName.ToString();
             backpackDurabilityImage.fillAmount = (float)backpack.currentDurability / backpack.maxDurability;
+
+            if (backpack.canBeDestroyed)
+            {
+                backpackDurabilityImage.color = red;
+            }
+            else
+            {
+                backpackDurabilityImage.color = standardBlue;
+            }
         }
     }
 

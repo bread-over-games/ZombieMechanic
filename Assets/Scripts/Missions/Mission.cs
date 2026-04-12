@@ -122,25 +122,48 @@ public class Mission
     {
         if (equippedWeapon is Weapon weapon)
         {
-            if (weapon.DamageObject(weaponWear))
+            if (!weapon.canBeDestroyed)
+            {                
+                int damageToApply = Mathf.Min(weaponWear, weapon.currentDurability - 1); // Weapon is safe — clamp damage so it survives with at least 1 durability
+                weapon.DamageObject(damageToApply);
+            } else
             {
-                Debug.Log(weapon.objectName + " destroyed on a mission");
-            }            
+                if (weapon.DamageObject(weaponWear))
+                {
+                    Debug.Log(weapon.objectName + " destroyed on a mission");
+                }
+            }                     
         }
 
         if (equippedBackpack is Backpack backpack)
         {
-            if (backpack.DamageObject(backpackWear))
+            if (!backpack.canBeDestroyed)
             {
-                Debug.Log(backpack.objectName + " destroyed on a mission");
+                int damageToApply = Mathf.Min(backpackWear, backpack.currentDurability - 1);
+                backpack.DamageObject(damageToApply);
+            }
+            else
+            {
+                if (backpack.DamageObject(backpackWear))
+                {
+                    Debug.Log(backpack.objectName + " destroyed on a mission");
+                }
             }
         }
 
         if (equippedArmor is Armor armor)
         {
-            if (armor.DamageObject(armorWear))
+            if (!armor.canBeDestroyed)
             {
-                Debug.Log(armor.objectName + " destroyed on a mission");
+                int damageToApply = Mathf.Min(armorWear, armor.currentDurability - 1);
+                armor.DamageObject(damageToApply);
+            }
+            else
+            {
+                if (armor.DamageObject(armorWear))
+                {
+                    Debug.Log(armor.objectName + " destroyed on a mission");
+                }
             }
         }
     }

@@ -90,7 +90,5 @@ public class UIMissionSelect : MonoBehaviour
         lootAmountText.text = missionEstimates.estimatedLootAmount.ToString() + "-" + (missionEstimates.estimatedLootAmount + 1).ToString();
         zombieKillsText.text = missionEstimates.estimatedZombiesKills.ToString() + "+-";
         gearWearText.text = missionEstimates.estimatedGearWear.ToString() + "+- per item";
-
-        Debug.Log(missionEstimates.estimatedZombiesKills.ToString());
     }
 }

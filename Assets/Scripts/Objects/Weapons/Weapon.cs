@@ -116,6 +116,7 @@ public class Weapon : Object
     public override bool DamageObject(int damageAmount) // returns true when weapon is destroyed
     {
         currentDurability -= damageAmount;
+        CanBeDestroyedChange();
         OnObjectDamage?.Invoke();
 
         if (currentDurability <= 0)
@@ -135,6 +136,12 @@ public class Weapon : Object
     public override void RepairObject(int repairAmount)
     {        
         currentDurability += repairAmount;
+        CanBeDestroyedChange();
         OnObjectRepair?.Invoke();
+    }
+
+    private void CanBeDestroyedChange()
+    {
+        canBeDestroyed = (float)currentDurability / maxDurability < 0.20f;
     }
 }

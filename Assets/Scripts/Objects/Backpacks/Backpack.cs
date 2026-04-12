@@ -74,6 +74,7 @@ public class Backpack : Object
     public override bool DamageObject(int decayAmount) // returns true when weapon is destroyed
     {
         currentDurability -= decayAmount;
+        CanBeDestroyedChange();
         OnObjectDamage?.Invoke();        
 
         if (currentDurability < 0)
@@ -93,6 +94,7 @@ public class Backpack : Object
     public override void RepairObject(int repairAmount)
     {
         currentDurability += repairAmount;
+        CanBeDestroyedChange();
         OnObjectRepair?.Invoke();
     }
 
@@ -119,5 +121,10 @@ public class Backpack : Object
         }
 
         return backpackTypeToGenerate;
+    }
+
+    private void CanBeDestroyedChange()
+    {
+        canBeDestroyed = (float)currentDurability / maxDurability < 0.20f;
     }
 }
