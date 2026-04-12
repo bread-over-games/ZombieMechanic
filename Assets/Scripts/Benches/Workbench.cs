@@ -38,15 +38,20 @@ public class Workbench : Bench, IBench
     {
         if (myInventory == inventory)
         {
-                currentObject = obj;
+            currentObject = obj;
         }           
+    }
+
+    private void RemoveCurrentObject()
+    {
+        currentObject = null;
     }
 
     private void TryRepair()
     {        
-        if (ResourceController.Instance.CanRepair(repairSparePartsCost))
+        if (ResourceController.Instance.CanRepair(repairSparePartsCost) && currentObject != null)
         {
-            if (currentObject.currentDurability < currentObject.maxDurability && currentObject != null)
+            if (currentObject.currentDurability < currentObject.maxDurability)
             {
                 repairCoroutine = StartCoroutine(DoRepair());
                 OnRepairStart?.Invoke();
@@ -98,6 +103,11 @@ public class Workbench : Bench, IBench
             {
                 OnTutorialBaseballBatPicked?.Invoke();
             }
+        }
+
+        if (inventory.GetObjectList().Count <= 0)
+        {
+            RemoveCurrentObject();
         }
     }
 
