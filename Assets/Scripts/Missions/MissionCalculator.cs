@@ -255,7 +255,7 @@ public static class MissionCalculator
 
         if (weaponToEquip == null)
         {
-            weaponTimeValue = 2f;
+            weaponTimeValue = 1f;
         }
         else
         {
@@ -264,7 +264,7 @@ public static class MissionCalculator
 
         if (armorToEquip == null)
         {
-            armorTimeValue = 2f;
+            armorTimeValue = 1f;
         }
         else
         {
@@ -273,7 +273,7 @@ public static class MissionCalculator
 
         if (backpackToEquip == null)
         {
-            backpackTimeValue = 2f;
+            backpackTimeValue = 1f;
         }
         else
         {
@@ -297,5 +297,4 @@ public static class MissionCalculator
         
         return missionDuration;
     }
-
 }

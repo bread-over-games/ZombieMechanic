@@ -3825,9 +3825,6 @@ MonoBehaviour:
   missionLengthWeaponWeight: 25
   missionLengthArmorWeight: 75
   missionLengthBackpackWeight: 50
-  loadoutWearWeaponWeight: 30
-  loadoutWearArmorWeight: 20
-  loadoutWearBackpackWeight: 10
   minimalLootQuality: 20
   isSelectingMissionType: 0
   references:
@@ -35071,8 +35068,8 @@ MonoBehaviour:
   generateWeaponChance: 20
   generateScrapChance: 40
   generateBackpackChance: 15
-  generateArmorChance: 5
-  generateAntibioticsChance: 50
+  generateArmorChance: 10
+  generateAntibioticsChance: 5
 --- !u!1 &1713238845
 GameObject:
   m_ObjectHideFlags: 0

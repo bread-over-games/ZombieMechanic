@@ -110,6 +110,7 @@ public class Armory : Bench, IInteractable
             return;
         }
 
+        MissionController.Instance.ConfirmMissionGear(storedWeapon, storedBackpack, storedArmor, inventory, this);
         isAvailableForMission = false;   
         OnMissionGearSelected?.Invoke();
     }
@@ -119,9 +120,9 @@ public class Armory : Bench, IInteractable
 
     }
 
-    private void SendGearOnMission()
+    private void SendGearOnMission(Armory missionStartingArmory)
     {
-        MissionController.Instance.ConfirmMissionGear(storedWeapon, storedBackpack, storedArmor, inventory, this);
+        if (missionStartingArmory != this) return;        
 
         inventory.SendObjectOnMission(storedArmor);
         inventory.SendObjectOnMission(storedWeapon);

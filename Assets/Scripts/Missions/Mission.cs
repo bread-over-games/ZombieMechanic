@@ -75,7 +75,7 @@ public class Mission
     {
         for (int i = 0; i < lootAmount; i++)
         {
-            ObjectGenerator.Instance.GenerateLoot(this, lootQualityMinimal, lootQualityMaximal);
+            ObjectGenerator.Instance.GenerateLoot(this, lootQualityMinimal, lootQualityMaximal, missionType);
         }
     }
 
