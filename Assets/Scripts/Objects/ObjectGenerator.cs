@@ -21,35 +21,62 @@ public class ObjectGenerator : MonoBehaviour
         }
     }
 
-    public void GenerateLoot(Mission mission, float minimalLootQuality, float maximalLootQuality) // generates completely new object
+    public void GenerateLoot(Mission mission, float minimalLootQuality, float maximalLootQuality, Mission.MissionType missionType) // generates completely new object
     {
+        int genWeapChanceHolder = generateWeaponChance;
+        int genScrapChanceHolder = generateScrapChance;
+        int genBackpackChanceHolder = generateBackpackChance;
+        int genArmorChanceHolder = generateArmorChance;
+        int genAtbChanceHolder = generateAntibioticsChance;
+
+        switch (missionType)
+        {
+            case Mission.MissionType.Scavenge:
+                break;
+            case Mission.MissionType.Antibiotics:
+                genWeapChanceHolder = 0;
+                genScrapChanceHolder = 0;
+                genBackpackChanceHolder = 0;
+                genArmorChanceHolder = 0;
+                genAtbChanceHolder = 100;
+
+                break;
+            case Mission.MissionType.Extermination:
+                genWeapChanceHolder = 0;
+                genScrapChanceHolder = 20;
+                genBackpackChanceHolder = 0;
+                genArmorChanceHolder = 0;
+                genAtbChanceHolder = 0;
+                break;
+        }    
+
         if (SectorController.Instance.antibioticsDepleted)
         {
             generateAntibioticsChance = 0;
         }
 
-            float total = generateWeaponChance + generateScrapChance + generateBackpackChance + generateArmorChance + generateAntibioticsChance;
+        float total = genWeapChanceHolder + genScrapChanceHolder + genBackpackChanceHolder + genArmorChanceHolder + genAtbChanceHolder;
         float roll = UnityEngine.Random.Range(0f, total);
 
         Object loot = null;
 
-        if ((roll -= generateWeaponChance) < 0)
+        if ((roll -= genWeapChanceHolder) < 0)
         {
             loot = new Weapon { weaponType = Weapon.ChooseWeaponTypeToGenerate() };
         }
-        else if ((roll -= generateScrapChance) < 0)
+        else if ((roll -= genScrapChanceHolder) < 0)
         {
             loot = new Scrap { scrapType = Scrap.ScrapType.SparePartsBox };
         }
-        else if ((roll -= generateBackpackChance) < 0)
+        else if ((roll -= genBackpackChanceHolder) < 0)
         {
             loot = new Backpack { backpackType = Backpack.ChooseBackpackTypeToGenerate() };
         }
-        else if ((roll -= generateArmorChance) < 0)
+        else if ((roll -= genArmorChanceHolder) < 0)
         {
             loot = new Armor { armorType = Armor.ChooseArmorTypeToGenerate() };
         }
-        else if ((roll -= generateAntibioticsChance) < 0)
+        else if ((roll -= genAtbChanceHolder) < 0)
         {
             loot = new Antibiotics { antibioType = Antibiotics.AntibioticsType.BSAntibiotics };
             if (loot.currentDurability < 1)

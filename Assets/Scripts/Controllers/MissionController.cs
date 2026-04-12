@@ -15,17 +15,34 @@ public class MissionController : MonoBehaviour
     public float missionLengthArmorWeight;
     public float missionLengthBackpackWeight;
 
-    [Header("Mission loadout wear")]
-    public float loadoutWearWeaponWeight;
-    public float loadoutWearArmorWeight;
-    public float loadoutWearBackpackWeight;
-
     [Header("Mission loot quality outcome")]
     public float minimalLootQuality;
 
-    public static Action OnMissionStarting;
+    public static Action<Armory> OnMissionStarting;
     public static Action<Mission> OnMissionStarted;
     public static Action<Mission> OnMissionCompleted;
+
+    private Weapon preparingMissionWeapon;
+    private Backpack preparingMissionBackpack;
+    private Armor preparingMissionArmor;
+    private Inventory preparingMissionInventory;
+    private Armory preparingMissionArmory;
+    private Mission.MissionType preparingMissionType;
+
+    public bool isSelectingMissionType = false;
+
+    private void OnEnable()
+    {
+        Armory.OnMissionGearSelected += SelectingMissionType;
+        UIMissionSelect.OnCurrentMissionTypeSlotSelected += ConfirmMissionType;
+    }
+
+    private void OnDisable()
+    {
+        Armory.OnMissionGearSelected -= SelectingMissionType;
+        UIMissionSelect.OnCurrentMissionTypeSlotSelected -= ConfirmMissionType;
+    }
+
 
     void Awake()
     {
@@ -46,18 +63,46 @@ public class MissionController : MonoBehaviour
         }
     }
 
+    private void SelectingMissionType()
+    {
+        isSelectingMissionType = true;
+    }
+
     private void ResolveMission(Mission mission, int index)
     {
         OnMissionCompleted?.Invoke(mission);
         activeMissions.RemoveAt(index); // deletes mission when it's done
     }
 
-    public void SendMission (Weapon weaponInArmory, Backpack backpackInArmory, Armor armorInArmory, Inventory missionInventory, Armory missionArmory)
+    public void ConfirmMissionGear(Weapon weaponInArmory, Backpack backpackInArmory, Armor armorInArmory, Inventory missionInventory, Armory missionArmory)
     {
-        OnMissionStarting?.Invoke();
-        Mission mission = new Mission(weaponInArmory, backpackInArmory, armorInArmory, missionInventory, missionArmory);
-
-        activeMissions.Add(mission); 
-        OnMissionStarted?.Invoke(mission);  
+        preparingMissionWeapon = weaponInArmory;
+        preparingMissionBackpack = backpackInArmory;
+        preparingMissionArmor = armorInArmory;
+        preparingMissionInventory = missionInventory;
+        preparingMissionArmory = missionArmory;
     }
+
+    public void ConfirmMissionType(Mission.MissionType missionType)
+    {
+        preparingMissionType = missionType;
+        SendMission();
+    }
+
+    public void SendMission()
+    {
+        OnMissionStarting?.Invoke(preparingMissionArmory);
+        Mission mission = new Mission(preparingMissionWeapon, preparingMissionBackpack, preparingMissionArmor, preparingMissionInventory, preparingMissionArmory, preparingMissionType);
+
+        activeMissions.Add(mission);
+        OnMissionStarted?.Invoke(mission);
+
+        preparingMissionWeapon = null;
+        preparingMissionBackpack = null;
+        preparingMissionArmor = null;
+        preparingMissionInventory = null;
+        preparingMissionArmory = null;
+        preparingMissionType = default;
+        isSelectingMissionType = false;
+    }        
 }

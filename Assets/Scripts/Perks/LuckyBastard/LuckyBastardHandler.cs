@@ -30,7 +30,7 @@ public class LuckyBastardHandler : MonoBehaviour
         isActive = true;
     }
 
-    private void NoDurabilityWearRoll()
+    private void NoDurabilityWearRoll(Armory armory)
     {
         NoWeaponWearRoll();
         NoArmorWearRoll();

@@ -12,6 +12,7 @@ public abstract class Object
     public static Action OnObjectRepair; // called when weapon is repaired
     public static Action OnObjectDamage;
     public static Action<Inventory> OnObjectDestroyed;
+    public bool canBeDestroyed;
 
     public void AssignOwnerInventory(Inventory ownerInventory)
     {
@@ -30,6 +31,4 @@ public abstract class Object
     public abstract void DestroyObject();
     public abstract void RepairObject(int repairAmount);
     public abstract bool DamageObject(int decayAmount); // returns true when weapon is destroyed
-
-
 }

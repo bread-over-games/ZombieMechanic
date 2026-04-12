@@ -272,6 +272,9 @@ public class UIInventory : MonoBehaviour
 
     private void RefreshInventoryValues()
     {
+        Color red = new Color(255f / 255f, 68f / 255f, 68f / 255f);
+        Color standardBlue = new Color(77f / 255f, 135f / 255f, 147f / 255f);
+
         if (inventory == null || inventory.GetObjectList().Count == 0) return;
 
         switch (inventory.GetObjectList()[0])
@@ -281,18 +284,45 @@ public class UIInventory : MonoBehaviour
                 durabilityText.text = weapon.currentDurability.ToString() + "/" + weapon.maxDurability.ToString();
                 weaponNameText.text = weapon.objectName.ToString();
                 weaponDurabilityImage.fillAmount = (float)weapon.currentDurability / weapon.maxDurability;
+
+                if (weapon.canBeDestroyed)
+                {
+                    weaponDurabilityImage.color = red;
+                }
+                else
+                {
+                    weaponDurabilityImage.color = standardBlue;
+                }
                 break;
             case Backpack backpack:
                 backpackDurabilityText.text = backpack.currentDurability.ToString() + "/" + backpack.maxDurability.ToString();
                 backpackNameText.text = backpack.objectName.ToString();
                 backpackLootAmountText.text = backpack.backpackSize.ToString();
                 backpackDurabilityImage.fillAmount = (float)backpack.currentDurability / backpack.maxDurability;
+
+                if (backpack.canBeDestroyed)
+                {
+                    backpackDurabilityImage.color = red;
+                }
+                else
+                {
+                    backpackDurabilityImage.color = standardBlue;
+                }
                 break;
             case Armor armor:
                 armorDurabilityText.text = armor.currentDurability.ToString() + "/" + armor.maxDurability.ToString();
                 armorNameText.text = armor.objectName.ToString();
                 armorLootQualityText.text = armor.lootQualityBonus.ToString();
                 armorDurabilityImage.fillAmount = (float)armor.currentDurability / armor.maxDurability;
+
+                if (armor.canBeDestroyed)
+                {
+                    armorDurabilityImage.color = red;
+                }
+                else
+                {
+                    armorDurabilityImage.color = standardBlue;
+                }
                 break;
             case Scrap scrap:
                 scrapNameText.text = scrap.scrapName.ToString();

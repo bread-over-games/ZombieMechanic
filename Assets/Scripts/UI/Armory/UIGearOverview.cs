@@ -4,17 +4,14 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems;
 
-public class UIArmory : MonoBehaviour
+public class UIGearOverview : MonoBehaviour
 {
-    private Inventory inventory;
-    [SerializeField] private Armory armory;
-    [SerializeField] private GameObject armoryWindow;
+    [SerializeField] private UIArmory uiArmory;
+
+    [SerializeField] private GameObject gearOverviewWindow;
     [SerializeField] private GameObject firstSelected;
     public ButtonSelector.ArmorySlot currentSlotSelected;
     public static Action<ButtonSelector.ArmorySlot> OnCurrentArmorySlotSelected;
-        
-    [SerializeField] private GameObject objectsSlots;
-    [SerializeField] private GameObject survivorOnMission;
 
     [Header("Weapon")]
     [SerializeField] private GameObject currentWeaponInfo;
@@ -58,85 +55,40 @@ public class UIArmory : MonoBehaviour
     [SerializeField] private GameObject armorySendMissionControls;
     [SerializeField] private GameObject armorySelectGearControls;
 
+    public void OpenWindow()
+    {
+        gearOverviewWindow.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(firstSelected);
+        RefreshEstimatesUI();
+        RefreshInventoryUI();
+    }
+
+    public void CloseWindow()
+    {
+        EventSystem.current.SetSelectedGameObject(null);
+        gearOverviewWindow.SetActive(false);        
+    }
+
     private void OnEnable()
     {
         Inventory.OnInventoryChange += RefreshInventoryUI;
         Inventory.OnInventoryChange += RefreshEstimatesUI;
-        PlayerInteraction.OnInteractableApproached += ShowArmoryWindow;
-        PlayerInteraction.OnInteractableLeft += HideArmoryWindow;
-        MissionController.OnMissionStarted += ChangeMissionStateGUI;
-        MissionController.OnMissionCompleted += ChangeMissionStateGUI;
     }
 
     private void OnDisable()
     {
-        Inventory.OnInventoryChange -= RefreshInventoryUI;
-        Inventory.OnInventoryChange -= RefreshEstimatesUI;
-        PlayerInteraction.OnInteractableApproached -= ShowArmoryWindow;
-        PlayerInteraction.OnInteractableLeft -= HideArmoryWindow;
-        MissionController.OnMissionStarted -= ChangeMissionStateGUI;
-        MissionController.OnMissionCompleted -= ChangeMissionStateGUI;
-    }
-
-    private void ShowArmoryWindow(IInteractable interactableType)
-    {
-        if (interactableType is IBench bench)
-        {
-            if (bench.GetBenchType() != Bench.BenchType.Armory)
-            {
-                return;
-            }
-            UIFocusStack.Push(armoryWindow);
-            EventSystem.current.SetSelectedGameObject(firstSelected);
-            RefreshInventoryUI();
-            RefreshEstimatesUI();
-            ChangeMissionStateGUI(null);
-        }        
-    }
-
-    private void HideArmoryWindow(IInteractable interactableType)
-    {
-        if (interactableType is IBench bench)
-        {
-            if (bench.GetBenchType() != Bench.BenchType.Armory)
-            {
-                return;
-            }
-            EventSystem.current.SetSelectedGameObject(null);
-            DropInventory();
-            DropArmory();
-            UIFocusStack.Pop();
-        }     
-    }
-
-    public void SetInventory(Inventory currentInventory)
-    {
-        inventory = currentInventory;
-    }
-
-    public void SetArmory(Armory currentArmory)
-    {
-        armory = currentArmory;
-    }
-
-    private void DropInventory()
-    {
-        inventory = null;
-    }
-
-    private void DropArmory()
-    {
-        armory = null;
+        Inventory.OnInventoryChange += RefreshInventoryUI;
+        Inventory.OnInventoryChange += RefreshEstimatesUI;
     }
 
     private void RefreshEstimatesUI()
     {
-        if (inventory == null)
+        if (uiArmory.inventory == null)
         {
             return;
         }
 
-        MissionEstimate missionEstimates = MissionCalculator.EstimateMission(armory.storedWeapon, armory.storedBackpack, armory.storedArmor);
+        MissionEstimate missionEstimates = MissionCalculator.EstimateMission(uiArmory.armory.storedWeapon, uiArmory.armory.storedBackpack, uiArmory.armory.storedArmor, Mission.MissionType.Scavenge);
 
         durationText.text = missionEstimates.estimatedDuration.ToString() + "s +-";
         lootQualityText.text = missionEstimates.estimatedLootQualityMinimal.ToString("F0") + "% - " + missionEstimates.estimatedLootQualityMaximal.ToString("F0") + "%";
@@ -147,7 +99,7 @@ public class UIArmory : MonoBehaviour
 
     private void RefreshInventoryUI()
     {
-        if (inventory == null)
+        if (uiArmory.inventory == null)
         {
             return;
         }
@@ -160,17 +112,18 @@ public class UIArmory : MonoBehaviour
         currentArmorInfo.SetActive(false);
         currentBackpackInfo.SetActive(false);
 
-        if (armory.storedArmor is Armor armor)
+        if (uiArmory.armory.storedArmor is Armor armor)
         {
             currentArmorInfo.SetActive(true);
             armorImage.sprite = armor.GetObjectSprite();
             RefreshInventoryValues();
-        } else
+        }
+        else
         {
             armorEmptyMessage.SetActive(true);
         }
 
-        if (armory.storedWeapon is Weapon weapon)
+        if (uiArmory.armory.storedWeapon is Weapon weapon)
         {
             currentWeaponInfo.SetActive(true);
             weaponImage.sprite = weapon.GetObjectSprite();
@@ -181,7 +134,7 @@ public class UIArmory : MonoBehaviour
             weaponEmptyMessage.SetActive(true);
         }
 
-        if (armory.storedBackpack is Backpack backpack)
+        if (uiArmory.armory.storedBackpack is Backpack backpack)
         {
             currentBackpackInfo.SetActive(true);
             backpackImage.sprite = backpack.GetObjectSprite();
@@ -199,70 +152,80 @@ public class UIArmory : MonoBehaviour
     {
         armoryPickPlaceControls.SetActive(false);
 
-        if (inventory.GetObjectList().Count > 0 || InventoriesController.Instance.playerInventory.GetObjectList().Count > 0)
+        if (uiArmory.inventory.GetObjectList().Count > 0 || InventoriesController.Instance.playerInventory.GetObjectList().Count > 0)
         {
-            armoryPickPlaceControls.SetActive(armory.isAvailableForMission);
+            armoryPickPlaceControls.SetActive(uiArmory.armory.isAvailableForMission);
         }
 
-        armorySelectGearControls.SetActive(armory.isAvailableForMission);
-        armorySendMissionControls.SetActive(armory.isAvailableForMission);
+        armorySelectGearControls.SetActive(uiArmory.armory.isAvailableForMission);
+        armorySendMissionControls.SetActive(uiArmory.armory.isAvailableForMission);
     }
 
     private void RefreshInventoryValues()
     {
-        if (inventory == null || inventory.GetObjectList().Count == 0) return;
+        Color red = new Color(255f / 255f, 68f / 255f, 68f / 255f);
+        Color standardBlue = new Color(77f / 255f, 135f / 255f, 147f / 255f);
 
-        if (armory.storedArmor is Armor armor)
+        if (uiArmory.inventory == null || uiArmory.inventory.GetObjectList().Count == 0) return;
+
+        if (uiArmory.armory.storedArmor is Armor armor)
         {
             armorDurabilityText.text = armor.currentDurability.ToString() + "/" + armor.maxDurability.ToString();
             armorNameText.text = armor.objectName.ToString();
-            armorDurabilityImage.fillAmount = (float)armor.currentDurability / armor.maxDurability;
+            armorDurabilityImage.fillAmount = (float)armor.currentDurability / armor.maxDurability;            
             armorLootQualityText.text = armor.lootQualityBonus.ToString();
+            
+            if (armor.canBeDestroyed)
+            {
+                armorDurabilityImage.color = red;
+            } else
+            {
+                armorDurabilityImage.color = standardBlue;
+            }
         }
 
-        if (armory.storedWeapon is Weapon weapon)
+        if (uiArmory.armory.storedWeapon is Weapon weapon)
         {
             weaponDurabilityText.text = weapon.currentDurability.ToString() + "/" + weapon.maxDurability.ToString();
             weaponDamageText.text = weapon.baseDamage.ToString();
             weaponNameText.text = weapon.objectName.ToString();
             weaponDurabilityImage.fillAmount = (float)weapon.currentDurability / weapon.maxDurability;
+
+            if (weapon.canBeDestroyed)
+            {
+                weaponDurabilityImage.color = red;
+            }
+            else
+            {
+                weaponDurabilityImage.color = standardBlue;
+            }
         }
 
-        if (armory.storedBackpack is Backpack backpack)
+        if (uiArmory.armory.storedBackpack is Backpack backpack)
         {
-            backpackDurabilityText.text = backpack.currentDurability.ToString() + "/" + backpack.maxDurability.ToString();  
+            backpackDurabilityText.text = backpack.currentDurability.ToString() + "/" + backpack.maxDurability.ToString();
             backpackNameText.text = backpack.objectName.ToString();
             backpackDurabilityImage.fillAmount = (float)backpack.currentDurability / backpack.maxDurability;
-        }
-    }
 
-    private void ChangeMissionStateGUI(Mission mission)
-    {
-        if (armory == null) return;
-
-        DisplayControls();
-
-        if (!armory.isAvailableForMission)
-        {
-            objectsSlots.SetActive(false);
-            missionEstimates.SetActive(false);
-            survivorOnMission.SetActive(true);            
-        } else
-        {            
-            objectsSlots.SetActive(true);
-            missionEstimates.SetActive(true);
-            survivorOnMission.SetActive(false);
+            if (backpack.canBeDestroyed)
+            {
+                backpackDurabilityImage.color = red;
+            }
+            else
+            {
+                backpackDurabilityImage.color = standardBlue;
+            }
         }
     }
 
     public void OnButtonSelected(ButtonSelector.ArmorySlot armorySlot)
-    {        
+    {
         currentSlotSelected = armorySlot;
         OnCurrentArmorySlotSelected?.Invoke(currentSlotSelected);
     }
 
     public void OnButtonDeselected(ButtonSelector.ArmorySlot armorySlot)
     {
-        
+
     }
 }
