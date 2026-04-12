@@ -14,7 +14,7 @@ public class Armory : Bench, IInteractable
     private ButtonSelector.ArmorySlot currentSlotSelection;
 
     public static Action OnBaseballBatPlaced;
-    public static Action OnSentOnMission;
+    public static Action OnSentOnMission; // for tutorial purpose only
 
     public void Awake()
     {
@@ -27,14 +27,14 @@ public class Armory : Bench, IInteractable
     {
         Inventory.OnObjectReceive += AssignCurrentObject;
         Inventory.OnObjectSend += RemoveCurrentObject;
-        UIArmory.OnCurrentArmorySlotSelected += AssignCurrentSlotSelection;        
+        UIGearOverview.OnCurrentArmorySlotSelected += AssignCurrentSlotSelection;        
     }    
 
     private void OnDisable()
     {
         Inventory.OnObjectReceive -= AssignCurrentObject;
         Inventory.OnObjectSend -= RemoveCurrentObject;
-        UIArmory.OnCurrentArmorySlotSelected -= AssignCurrentSlotSelection;
+        UIGearOverview.OnCurrentArmorySlotSelected -= AssignCurrentSlotSelection;
     }
 
     public void MakeArmoryAvailableForMission()
@@ -64,7 +64,6 @@ public class Armory : Bench, IInteractable
             if (!TutorialController.Instance.baseballBatPlacedArmory)
             {
                 OnBaseballBatPlaced?.Invoke();
-                //return;
             }
         }
 

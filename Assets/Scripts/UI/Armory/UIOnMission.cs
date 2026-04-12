@@ -1,16 +1,20 @@
 using UnityEngine;
+using System;
+using UnityEngine.UI;
+using TMPro;
+using UnityEngine.EventSystems;
 
 public class UIOnMission : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField] private GameObject onMissionWindow;
+
+    public void OpenWindow()
     {
-        
+        onMissionWindow.SetActive(true);   
     }
 
-    // Update is called once per frame
-    void Update()
+    public void CloseWindow()
     {
-        
+        onMissionWindow.SetActive(false);
     }
 }

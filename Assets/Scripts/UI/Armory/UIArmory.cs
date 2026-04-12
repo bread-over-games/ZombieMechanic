@@ -6,76 +6,26 @@ using UnityEngine.EventSystems;
 
 public class UIArmory : MonoBehaviour
 {
-    private Inventory inventory;
-    [SerializeField] private Armory armory;
+    public Inventory inventory;
+    public Armory armory;
     [SerializeField] private GameObject armoryWindow;
-    [SerializeField] private GameObject firstSelected;
-    public ButtonSelector.ArmorySlot currentSlotSelected;
-    public static Action<ButtonSelector.ArmorySlot> OnCurrentArmorySlotSelected;
-        
-    [SerializeField] private GameObject objectsSlots;
-    [SerializeField] private GameObject survivorOnMission;
-
-    [Header("Weapon")]
-    [SerializeField] private GameObject currentWeaponInfo;
-    [SerializeField] private Image weaponImage;
-    [SerializeField] private Image weaponDurabilityImage;
-    [SerializeField] private TMP_Text weaponNameText;
-    [SerializeField] private TMP_Text weaponDurabilityText;
-    [SerializeField] private TMP_Text weaponDamageText;
-
-    [Header("Backpack")]
-    [SerializeField] private GameObject currentBackpackInfo;
-    [SerializeField] private Image backpackImage;
-    [SerializeField] private Image backpackDurabilityImage;
-    [SerializeField] private TMP_Text backpackNameText;
-    [SerializeField] private TMP_Text backpackDurabilityText;
-    [SerializeField] private TMP_Text backpackItemAmountText;
-
-    [Header("Armor")]
-    [SerializeField] private GameObject currentArmorInfo;
-    [SerializeField] private Image armorImage;
-    [SerializeField] private Image armorDurabilityImage;
-    [SerializeField] private TMP_Text armorNameText;
-    [SerializeField] private TMP_Text armorDurabilityText;
-    [SerializeField] private TMP_Text armorLootQualityText;
-
-    [Header("Mission Estimates")]
-    [SerializeField] private GameObject missionEstimates;
-    [SerializeField] private TMP_Text durationText;
-    [SerializeField] private TMP_Text lootQualityText;
-    [SerializeField] private TMP_Text lootAmountText;
-    [SerializeField] private TMP_Text gearWearText;
-    [SerializeField] private TMP_Text zombieKillsText;
-
-    [Header("Empty messages")]
-    [SerializeField] private GameObject weaponEmptyMessage;
-    [SerializeField] private GameObject backpackEmptyMessage;
-    [SerializeField] private GameObject armorEmptyMessage;
-
-    [Header("Controls")]
-    [SerializeField] private GameObject armoryPickPlaceControls;
-    [SerializeField] private GameObject armorySendMissionControls;
-    [SerializeField] private GameObject armorySelectGearControls;
+    [SerializeField] private UIGearOverview gearOverviewUI;
+    [SerializeField] private UIOnMission onMissionUI;
 
     private void OnEnable()
     {
-        Inventory.OnInventoryChange += RefreshInventoryUI;
-        Inventory.OnInventoryChange += RefreshEstimatesUI;
         PlayerInteraction.OnInteractableApproached += ShowArmoryWindow;
         PlayerInteraction.OnInteractableLeft += HideArmoryWindow;
-        MissionController.OnMissionStarted += ChangeMissionStateGUI;
-        MissionController.OnMissionCompleted += ChangeMissionStateGUI;
+        MissionController.OnMissionStarted += ChangeSubWindow;
+        MissionController.OnMissionCompleted += ChangeSubWindow;
     }
 
     private void OnDisable()
     {
-        Inventory.OnInventoryChange -= RefreshInventoryUI;
-        Inventory.OnInventoryChange -= RefreshEstimatesUI;
         PlayerInteraction.OnInteractableApproached -= ShowArmoryWindow;
         PlayerInteraction.OnInteractableLeft -= HideArmoryWindow;
-        MissionController.OnMissionStarted -= ChangeMissionStateGUI;
-        MissionController.OnMissionCompleted -= ChangeMissionStateGUI;
+        MissionController.OnMissionStarted -= ChangeSubWindow;
+        MissionController.OnMissionCompleted -= ChangeSubWindow;
     }
 
     private void ShowArmoryWindow(IInteractable interactableType)
@@ -87,10 +37,8 @@ public class UIArmory : MonoBehaviour
                 return;
             }
             UIFocusStack.Push(armoryWindow);
-            EventSystem.current.SetSelectedGameObject(firstSelected);
-            RefreshInventoryUI();
-            RefreshEstimatesUI();
-            ChangeMissionStateGUI(null);
+           
+            ChangeSubWindow(null);
         }        
     }
 
@@ -129,140 +77,18 @@ public class UIArmory : MonoBehaviour
         armory = null;
     }
 
-    private void RefreshEstimatesUI()
-    {
-        if (inventory == null)
-        {
-            return;
-        }
-
-        MissionEstimate missionEstimates = MissionCalculator.EstimateMission(armory.storedWeapon, armory.storedBackpack, armory.storedArmor);
-
-        durationText.text = missionEstimates.estimatedDuration.ToString() + "s +-";
-        lootQualityText.text = missionEstimates.estimatedLootQualityMinimal.ToString("F0") + "% - " + missionEstimates.estimatedLootQualityMaximal.ToString("F0") + "%";
-        lootAmountText.text = missionEstimates.estimatedLootAmount.ToString() + "-" + (missionEstimates.estimatedLootAmount + 1).ToString();
-        zombieKillsText.text = missionEstimates.estimatedZombiesKills.ToString() + "+-";
-        gearWearText.text = missionEstimates.estimatedGearWear.ToString() + "+- per item";
-    }
-
-    private void RefreshInventoryUI()
-    {
-        if (inventory == null)
-        {
-            return;
-        }
-
-        weaponEmptyMessage.SetActive(false);
-        armorEmptyMessage.SetActive(false);
-        backpackEmptyMessage.SetActive(false);
-
-        currentWeaponInfo.SetActive(false);
-        currentArmorInfo.SetActive(false);
-        currentBackpackInfo.SetActive(false);
-
-        if (armory.storedArmor is Armor armor)
-        {
-            currentArmorInfo.SetActive(true);
-            armorImage.sprite = armor.GetObjectSprite();
-            RefreshInventoryValues();
-        } else
-        {
-            armorEmptyMessage.SetActive(true);
-        }
-
-        if (armory.storedWeapon is Weapon weapon)
-        {
-            currentWeaponInfo.SetActive(true);
-            weaponImage.sprite = weapon.GetObjectSprite();
-            RefreshInventoryValues();
-        }
-        else
-        {
-            weaponEmptyMessage.SetActive(true);
-        }
-
-        if (armory.storedBackpack is Backpack backpack)
-        {
-            currentBackpackInfo.SetActive(true);
-            backpackImage.sprite = backpack.GetObjectSprite();
-            RefreshInventoryValues();
-        }
-        else
-        {
-            backpackEmptyMessage.SetActive(true);
-        }
-
-        DisplayControls();
-    }
-
-    private void DisplayControls()
-    {
-        armoryPickPlaceControls.SetActive(false);
-
-        if (inventory.GetObjectList().Count > 0 || InventoriesController.Instance.playerInventory.GetObjectList().Count > 0)
-        {
-            armoryPickPlaceControls.SetActive(armory.isAvailableForMission);
-        }
-
-        armorySelectGearControls.SetActive(armory.isAvailableForMission);
-        armorySendMissionControls.SetActive(armory.isAvailableForMission);
-    }
-
-    private void RefreshInventoryValues()
-    {
-        if (inventory == null || inventory.GetObjectList().Count == 0) return;
-
-        if (armory.storedArmor is Armor armor)
-        {
-            armorDurabilityText.text = armor.currentDurability.ToString() + "/" + armor.maxDurability.ToString();
-            armorNameText.text = armor.objectName.ToString();
-            armorDurabilityImage.fillAmount = (float)armor.currentDurability / armor.maxDurability;
-            armorLootQualityText.text = armor.lootQualityBonus.ToString();
-        }
-
-        if (armory.storedWeapon is Weapon weapon)
-        {
-            weaponDurabilityText.text = weapon.currentDurability.ToString() + "/" + weapon.maxDurability.ToString();
-            weaponDamageText.text = weapon.baseDamage.ToString();
-            weaponNameText.text = weapon.objectName.ToString();
-            weaponDurabilityImage.fillAmount = (float)weapon.currentDurability / weapon.maxDurability;
-        }
-
-        if (armory.storedBackpack is Backpack backpack)
-        {
-            backpackDurabilityText.text = backpack.currentDurability.ToString() + "/" + backpack.maxDurability.ToString();  
-            backpackNameText.text = backpack.objectName.ToString();
-            backpackDurabilityImage.fillAmount = (float)backpack.currentDurability / backpack.maxDurability;
-        }
-    }
-
-    private void ChangeMissionStateGUI(Mission mission)
+    private void ChangeSubWindow(Mission mission)
     {
         if (armory == null) return;
 
-        DisplayControls();
-
-        if (!armory.isAvailableForMission)
+        if (armory.isAvailableForMission)
         {
-            objectsSlots.SetActive(false);
-            missionEstimates.SetActive(false);
-            survivorOnMission.SetActive(true);            
+            gearOverviewUI.OpenWindow();
+            onMissionUI.CloseWindow();  
         } else
-        {            
-            objectsSlots.SetActive(true);
-            missionEstimates.SetActive(true);
-            survivorOnMission.SetActive(false);
+        {
+            gearOverviewUI.CloseWindow();
+            onMissionUI.OpenWindow();
         }
-    }
-
-    public void OnButtonSelected(ButtonSelector.ArmorySlot armorySlot)
-    {        
-        currentSlotSelected = armorySlot;
-        OnCurrentArmorySlotSelected?.Invoke(currentSlotSelected);
-    }
-
-    public void OnButtonDeselected(ButtonSelector.ArmorySlot armorySlot)
-    {
-        
     }
 }

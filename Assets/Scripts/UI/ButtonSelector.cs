@@ -11,15 +11,15 @@ public class ButtonSelector : MonoBehaviour, ISelectHandler, IDeselectHandler
     }
     
     [SerializeField] private ArmorySlot armorySlot;
-    [SerializeField] private UIArmory armoryUI;
+    [SerializeField] private UIGearOverview gearOverviewUI;
 
     public void OnSelect(BaseEventData eventData)
     {
-       armoryUI.OnButtonSelected(armorySlot);
+        gearOverviewUI.OnButtonSelected(armorySlot);
     }
 
     public void OnDeselect(BaseEventData eventData)
     {
-        armoryUI.OnButtonDeselected(armorySlot);
+        gearOverviewUI.OnButtonDeselected(armorySlot);
     }
 }
