@@ -88,7 +88,7 @@ public class UIGearOverview : MonoBehaviour
             return;
         }
 
-        MissionEstimate missionEstimates = MissionCalculator.EstimateMission(uiArmory.armory.storedWeapon, uiArmory.armory.storedBackpack, uiArmory.armory.storedArmor);
+        MissionEstimate missionEstimates = MissionCalculator.EstimateMission(uiArmory.armory.storedWeapon, uiArmory.armory.storedBackpack, uiArmory.armory.storedArmor, Mission.MissionType.Scavenge);
 
         durationText.text = missionEstimates.estimatedDuration.ToString() + "s +-";
         lootQualityText.text = missionEstimates.estimatedLootQualityMinimal.ToString("F0") + "% - " + missionEstimates.estimatedLootQualityMaximal.ToString("F0") + "%";

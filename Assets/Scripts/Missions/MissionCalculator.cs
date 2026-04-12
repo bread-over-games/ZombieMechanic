@@ -1,4 +1,5 @@
 using UnityEngine;
+using static Mission;
 
 public static class MissionCalculator
 {
@@ -35,7 +36,7 @@ public static class MissionCalculator
         negateBackpackWear = true;
     }
 
-    public static MissionEstimate EstimateMission(Weapon weaponToEquip, Backpack backpackToEquip, Armor armorToEquip)
+    public static MissionEstimate EstimateMission(Weapon weaponToEquip, Backpack backpackToEquip, Armor armorToEquip, Mission.MissionType missionType)
     {
         int missionDuration = (int)CalculateMissionDuration(weaponToEquip, backpackToEquip, armorToEquip); 
 
@@ -44,9 +45,9 @@ public static class MissionCalculator
             estimatedDuration = missionDuration,
             estimatedLootQualityMinimal = CalculateLootQualityMinimal(missionDuration, armorToEquip),
             estimatedLootQualityMaximal = CalculateLootQualityMaximal(CalculateLootQualityMinimal(missionDuration, armorToEquip)),
-            estimatedZombiesKills = CalculateZombiesKills(missionDuration, weaponToEquip),
-            estimatedGearWear = EstimateGearWear(missionDuration),
-            estimatedLootAmount = EstimateLootAmount(backpackToEquip, weaponToEquip)
+            estimatedZombiesKills = CalculateZombiesKills(missionDuration, weaponToEquip, missionType),
+            estimatedGearWear = (CalculateWeaponWear(missionDuration, missionType) + CalculateArmorWear(missionDuration, missionType) + CalculateBackpackWear(missionDuration, missionType)) / 3,
+            estimatedLootAmount = EstimateLootAmount(backpackToEquip, weaponToEquip, missionType)
         };
     }
 
@@ -59,25 +60,25 @@ public static class MissionCalculator
             duration = missionDuration,
             lootQualityMinimal = CalculateLootQualityMinimal(missionDuration, armorToEquip),
             lootQualityMaximal = CalculateLootQualityMaximal(CalculateLootQualityMinimal(missionDuration, armorToEquip)),
-            zombiesKilled = CalculateZombiesKills(missionDuration, weaponToEquip),
-            weaponWear = CalculateWeaponWear(missionDuration),
-            armorWear = CalculateArmorWear(missionDuration),
-            backpackWear = CalculateBackpackWear(missionDuration),
-            lootAmount = CalculateLootAmount(backpackToEquip, weaponToEquip)
+            zombiesKilled = CalculateZombiesKills(missionDuration, weaponToEquip, missionType),
+            weaponWear = CalculateWeaponWear(missionDuration, missionType),
+            armorWear = CalculateArmorWear(missionDuration, missionType),
+            backpackWear = CalculateBackpackWear(missionDuration, missionType),
+            lootAmount = CalculateLootAmount(backpackToEquip, weaponToEquip, missionType)
         };
     }
 
     private static int EstimateGearWear(int missionDuration)
     {
-        float weaponWear = (missionDuration / 100f) * MissionController.Instance.loadoutWearWeaponWeight * ValueModifiers.Instance.gearWearModifier;
-        float backpackWear = (missionDuration / 100f) * MissionController.Instance.loadoutWearBackpackWeight * ValueModifiers.Instance.gearWearModifier;
-        float armorWear = (missionDuration / 100f) * MissionController.Instance.loadoutWearArmorWeight * ValueModifiers.Instance.gearWearModifier;
+        float weaponWear = missionDuration * 0.25f * ValueModifiers.Instance.gearWearModifier;
+        float backpackWear = missionDuration * 0.25f * ValueModifiers.Instance.gearWearModifier;
+        float armorWear = missionDuration * 0.25f * ValueModifiers.Instance.gearWearModifier;
 
         int gearWear = (int)((weaponWear + backpackWear + armorWear)/3f);
         return gearWear;
     }
 
-    private static int CalculateWeaponWear(int missionDuration)
+    private static int CalculateWeaponWear(int missionDuration, MissionType missionType)
     {
         if (negateWeaponWear)
         {
@@ -85,11 +86,18 @@ public static class MissionCalculator
             return 0;
         }
 
-        int weaponWear = (int)((missionDuration / 100f) * MissionController.Instance.loadoutWearWeaponWeight * ValueModifiers.Instance.gearWearModifier);
-        return weaponWear;
+        float missionTypeMultiplier = missionType switch
+        {
+            Mission.MissionType.Extermination => 0.65f,
+            _ => 0.1f,
+        };
+
+        float raw = missionDuration * missionTypeMultiplier * ValueModifiers.Instance.gearWearModifier;
+
+        return Mathf.RoundToInt(raw);
     }
 
-    private static int CalculateArmorWear(int missionDuration)
+    private static int CalculateArmorWear(int missionDuration, MissionType missionType)
     {
         if (negateArmorWear)
         {
@@ -97,11 +105,18 @@ public static class MissionCalculator
             return 0;
         }
 
-        int armorWear = (int)((missionDuration / 100f) * MissionController.Instance.loadoutWearArmorWeight * ValueModifiers.Instance.gearWearModifier);
-        return armorWear;
+        float missionTypeMultiplier = missionType switch
+        {
+            Mission.MissionType.Extermination => 0.5f,
+            _ => 0.1f,
+        };
+
+        float raw = missionDuration * missionTypeMultiplier * ValueModifiers.Instance.gearWearModifier;
+
+        return Mathf.RoundToInt(raw);
     }
 
-    private static int CalculateBackpackWear(int missionDuration)
+    private static int CalculateBackpackWear(int missionDuration, MissionType missionType)
     {
         if (negateBackpackWear)
         {
@@ -109,11 +124,18 @@ public static class MissionCalculator
             return 0;
         }
 
-        int backpackWear = (int)((missionDuration / 100f) * MissionController.Instance.loadoutWearBackpackWeight * ValueModifiers.Instance.gearWearModifier);
-        return backpackWear;
+        float missionTypeMultiplier = missionType switch
+        {
+            Mission.MissionType.Extermination => 0.3f,
+            _ => 0.1f,
+        };
+
+        float raw = missionDuration * missionTypeMultiplier * ValueModifiers.Instance.gearWearModifier;
+
+        return Mathf.RoundToInt(raw);
     }
 
-    private static int CalculateLootAmount(Backpack backpackToEquip, Weapon weaponToEquip)
+    private static int CalculateLootAmount(Backpack backpackToEquip, Weapon weaponToEquip, MissionType missionType)
     {
         int lootAmount = 1;
 
@@ -132,10 +154,15 @@ public static class MissionCalculator
             lootAmount = backpackToEquip.backpackSize;
         }
 
+        if (missionType == MissionType.Extermination)
+        {
+            lootAmount = Random.Range(0, 2); 
+        }
+
         return lootAmount;            
     }
 
-    private static int EstimateLootAmount(Backpack backpackToEquip, Weapon weaponToEquip)
+    private static int EstimateLootAmount(Backpack backpackToEquip, Weapon weaponToEquip, MissionType missionType)
     {
         int lootAmount = 1;
 
@@ -152,6 +179,11 @@ public static class MissionCalculator
         if (weaponToEquip != null && backpackToEquip != null)
         {
             lootAmount = backpackToEquip.backpackSize;
+        }
+
+        if (missionType == MissionType.Extermination)
+        {
+            lootAmount = Random.Range(0, 2); 
         }
 
         return lootAmount;
@@ -188,30 +220,30 @@ public static class MissionCalculator
         return maximalLootQuality;
     }
 
-    private static int CalculateZombiesKills(int missionDuration, Weapon equippedWeapon)
+    private static int CalculateZombiesKills(int missionDuration, Weapon equippedWeapon, Mission.MissionType selectedMissionType)
     {
-        float zombieKillsDivisor = 35f; // Divisor - the lower the value the higher the kill count
-        float weaponKills;
-        int weaponDamage;
-        if (equippedWeapon == null)
         {
-            weaponDamage = 1;
-            zombieKillsDivisor = 100f;
-        } else
-        {
-            weaponDamage = equippedWeapon.baseDamage;
+            float missionTypeDamageMultiplier = selectedMissionType switch
+            {
+                Mission.MissionType.Extermination => 1f,
+                Mission.MissionType.Scavenge => 0.1f,
+                Mission.MissionType.Antibiotics => 0.1f,
+                _ => 1f
+            };
+
+            int weaponDamage;
+            if (equippedWeapon == null)
+            {
+                weaponDamage = 1;
+            }
+            else
+            {
+                weaponDamage = equippedWeapon.baseDamage;
+            }
+
+            float zombiesKills = weaponDamage * Mathf.Sqrt(missionDuration) * missionTypeDamageMultiplier * ValueModifiers.Instance.zombieKillsModifier;
+            return Mathf.RoundToInt(zombiesKills);
         }
-
-        weaponKills = missionDuration * (weaponDamage / 50f);
-        int zombiesKills = (int)((missionDuration * missionDuration / zombieKillsDivisor) * ValueModifiers.Instance.zombieKillsModifier);
-        zombiesKills += (int)weaponKills;
-
-        if (zombiesKills < 1)
-        {
-            zombiesKills = 1;
-        }
-
-        return zombiesKills;
     }
 
     private static float CalculateMissionDuration(Weapon weaponToEquip, Backpack backpackToEquip, Armor armorToEquip)

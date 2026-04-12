@@ -21496,6 +21496,7 @@ GameObject:
   m_Component:
   - component: {fileID: 952983817}
   - component: {fileID: 952983818}
+  - component: {fileID: 952983819}
   m_Layer: 0
   m_Name: Logic
   m_TagString: Untagged
@@ -21531,6 +21532,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5fab9da9e22d6fa4dab5e503156a4a61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &952983819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 952983816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f95826abd44d5934181350bcdcfcc52b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &956745170 stripped
@@ -21740,7 +21753,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   zombiesLeft: 0
-  antibioticsLeft: 0
+  antibioticsLeft: 10
   antibioticsDepleted: 0
   isReadingMessage: 0
 --- !u!1001 &979573746

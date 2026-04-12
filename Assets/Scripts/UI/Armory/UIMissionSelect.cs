@@ -2,6 +2,7 @@ using UnityEngine;
 using System;
 using TMPro;
 using UnityEngine.EventSystems;
+using static Mission;
 
 public class UIMissionSelect : MonoBehaviour
 {
@@ -10,8 +11,9 @@ public class UIMissionSelect : MonoBehaviour
     [SerializeField] private GameObject firstSelected;
 
     public ButtonSelectorMissionTypes.MissionTypeSlot currentSlotSelected;
+    private MissionType currentMissionType;
 
-    public static Action<ButtonSelectorMissionTypes.MissionTypeSlot> OnCurrentMissionTypeSlotSelected;
+    public static Action<MissionType> OnCurrentMissionTypeSlotSelected;
 
     [Header("Mission Estimates")]
     [SerializeField] private GameObject missionEstimates;
@@ -46,13 +48,27 @@ public class UIMissionSelect : MonoBehaviour
 
     private void SelectCurrentMissionType()
     {
-        OnCurrentMissionTypeSlotSelected?.Invoke(currentSlotSelected);
+        OnCurrentMissionTypeSlotSelected?.Invoke(currentMissionType);
         CloseWindow();
     }
 
     public void OnButtonSelected(ButtonSelectorMissionTypes.MissionTypeSlot missionTypeSlot)
     {
+        switch (missionTypeSlot)
+        {
+            case ButtonSelectorMissionTypes.MissionTypeSlot.Scavenge:
+                currentMissionType = Mission.MissionType.Scavenge;
+                break;
+            case ButtonSelectorMissionTypes.MissionTypeSlot.Extermination:
+                currentMissionType = Mission.MissionType.Extermination;
+                break;
+            case ButtonSelectorMissionTypes.MissionTypeSlot.Antibiotics:
+                currentMissionType = Mission.MissionType.Antibiotics;
+                break;
+        }
+
         currentSlotSelected = missionTypeSlot;
+        RefreshEstimatesUI();
     }
 
     public void OnButtonDeselected(ButtonSelectorMissionTypes.MissionTypeSlot missionTypeSlot)
@@ -61,18 +77,20 @@ public class UIMissionSelect : MonoBehaviour
     }
 
     private void RefreshEstimatesUI()
-    {
+    {        
         if (uiArmory.inventory == null)
         {
             return;
         }
 
-        MissionEstimate missionEstimates = MissionCalculator.EstimateMission(uiArmory.armory.storedWeapon, uiArmory.armory.storedBackpack, uiArmory.armory.storedArmor);
+        MissionEstimate missionEstimates = MissionCalculator.EstimateMission(uiArmory.armory.storedWeapon, uiArmory.armory.storedBackpack, uiArmory.armory.storedArmor, currentMissionType);
 
         durationText.text = missionEstimates.estimatedDuration.ToString() + "s +-";
         lootQualityText.text = missionEstimates.estimatedLootQualityMinimal.ToString("F0") + "% - " + missionEstimates.estimatedLootQualityMaximal.ToString("F0") + "%";
         lootAmountText.text = missionEstimates.estimatedLootAmount.ToString() + "-" + (missionEstimates.estimatedLootAmount + 1).ToString();
         zombieKillsText.text = missionEstimates.estimatedZombiesKills.ToString() + "+-";
         gearWearText.text = missionEstimates.estimatedGearWear.ToString() + "+- per item";
+
+        Debug.Log(missionEstimates.estimatedZombiesKills.ToString());
     }
 }

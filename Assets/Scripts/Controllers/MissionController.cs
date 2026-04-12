@@ -15,11 +15,6 @@ public class MissionController : MonoBehaviour
     public float missionLengthArmorWeight;
     public float missionLengthBackpackWeight;
 
-    [Header("Mission loadout wear")]
-    public float loadoutWearWeaponWeight;
-    public float loadoutWearArmorWeight;
-    public float loadoutWearBackpackWeight;
-
     [Header("Mission loot quality outcome")]
     public float minimalLootQuality;
 
@@ -88,21 +83,9 @@ public class MissionController : MonoBehaviour
         preparingMissionArmory = missionArmory;
     }
 
-    public void ConfirmMissionType(ButtonSelectorMissionTypes.MissionTypeSlot missionType)
+    public void ConfirmMissionType(Mission.MissionType missionType)
     {
-        switch (missionType)
-        {
-            case ButtonSelectorMissionTypes.MissionTypeSlot.Scavenge:
-                preparingMissionType = Mission.MissionType.Scavenge;
-                break;
-            case ButtonSelectorMissionTypes.MissionTypeSlot.Extermination:
-                preparingMissionType = Mission.MissionType.Extermination;
-                break;
-            case ButtonSelectorMissionTypes.MissionTypeSlot.Antibiotics:
-                preparingMissionType = Mission.MissionType.Antibiotics;
-                break;
-        }
-
+        preparingMissionType = missionType;
         SendMission();
     }
 

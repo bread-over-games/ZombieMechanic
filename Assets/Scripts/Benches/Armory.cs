@@ -28,7 +28,8 @@ public class Armory : Bench, IInteractable
     {
         Inventory.OnObjectReceive += AssignCurrentObject;
         Inventory.OnObjectSend += RemoveCurrentObject;
-        UIGearOverview.OnCurrentArmorySlotSelected += AssignCurrentSlotSelection;        
+        UIGearOverview.OnCurrentArmorySlotSelected += AssignCurrentSlotSelection;
+        MissionController.OnMissionStarting += SendGearOnMission;
     }    
 
     private void OnDisable()
@@ -36,6 +37,7 @@ public class Armory : Bench, IInteractable
         Inventory.OnObjectReceive -= AssignCurrentObject;
         Inventory.OnObjectSend -= RemoveCurrentObject;
         UIGearOverview.OnCurrentArmorySlotSelected -= AssignCurrentSlotSelection;
+        MissionController.OnMissionStarting += SendGearOnMission;
     }
 
     public void MakeArmoryAvailableForMission()
@@ -97,7 +99,7 @@ public class Armory : Bench, IInteractable
             if (inventory.GetObjectList().Count >= inventory.GetCapacity()) return; // bench full
             if (!CanAcceptObject(playerInventory.GetObjectList()[0])) return;
             playerInventory.SendObject(inventory, playerInventory.GetObjectList()[0]);
-            OnObjectDeposited?.Invoke(); // player deposited item on bench - subscribe SetCarrying(false) animation
+            OnObjectDeposited?.Invoke(); 
         }
     }
 
@@ -108,14 +110,23 @@ public class Armory : Bench, IInteractable
             return;
         }
 
-        isAvailableForMission = false;
+        isAvailableForMission = false;   
+        OnMissionGearSelected?.Invoke();
+    }
 
+    public override void EndInteractionSecondary()
+    {
+
+    }
+
+    private void SendGearOnMission()
+    {
         MissionController.Instance.ConfirmMissionGear(storedWeapon, storedBackpack, storedArmor, inventory, this);
 
         inventory.SendObjectOnMission(storedArmor);
         inventory.SendObjectOnMission(storedWeapon);
         inventory.SendObjectOnMission(storedBackpack);
-        
+
         if (!TutorialController.Instance.skipTutorial)
         {
             if (!TutorialController.Instance.sentOnMissionArmory)
@@ -123,13 +134,6 @@ public class Armory : Bench, IInteractable
                 OnSentOnMission?.Invoke();
             }
         }
-
-        OnMissionGearSelected?.Invoke();
-    }
-
-    public override void EndInteractionSecondary()
-    {
-
     }
 
     private void AssignCurrentObject(Object obj, Inventory myInventory) // when putting Object into Armory
