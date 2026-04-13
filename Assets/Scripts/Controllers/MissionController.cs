@@ -29,7 +29,7 @@ public class MissionController : MonoBehaviour
     private Armory preparingMissionArmory;
     private Mission.MissionType preparingMissionType;
 
-    public bool isSelectingMissionType = false;
+    [HideInInspector] public bool isSelectingMissionType = false;
 
     private void OnEnable()
     {

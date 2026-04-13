@@ -44,7 +44,7 @@ public class SectorController : MonoBehaviour
     {
         antibioticsLeft -= amount;
 
-        if (antibioticsLeft <= 3 && !antibioticsLowWarned)
+        if (antibioticsLeft <= 4 && !antibioticsLowWarned)
         {
             OnAntibioticsRunningLow?.Invoke();
             isReadingMessage = true;

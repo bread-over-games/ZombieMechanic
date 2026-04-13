@@ -41,7 +41,6 @@ public class ObjectSpawner : MonoBehaviour
 
     private void SpawnTutorialSpareParts(Inventory sourceInventory)
     {
-        Debug.Log("Spawn spare parts");
         if (sourceInventory == inventory)
         {
             Object loot = new Scrap { scrapType = Scrap.ScrapType.SparePartsBox };
@@ -52,7 +51,6 @@ public class ObjectSpawner : MonoBehaviour
 
     private void SpawnTutorialWeapon(Inventory sourceInventory)
     {
-        Debug.Log("Spawn weapon");
         if (sourceInventory == inventory)
         {
             Object loot = new Weapon { weaponType = Weapon.WeaponType.Baton };

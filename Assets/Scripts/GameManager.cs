@@ -1,10 +1,43 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using System;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager Instance;
+
+    public bool isGameOver = false;
+
+    public static Action OnGameOver;
+
+    private void OnEnable()
+    {
+        Infection.OnInfectionReachedMaxLevel += DeclareGameOver;
+        PlayerInteraction.OnRestartGameRequest += RestartGame;
+    }
+
+    private void OnDisable()
+    {
+        Infection.OnInfectionReachedMaxLevel -= DeclareGameOver;
+        PlayerInteraction.OnRestartGameRequest -= RestartGame;
+    }
+
     private void Awake()
     {
+        Instance = this;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    private void DeclareGameOver()
+    {
+        isGameOver = true;
+        OnGameOver?.Invoke();
+    }
+
+    private void RestartGame()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("Garage");
     }
 }

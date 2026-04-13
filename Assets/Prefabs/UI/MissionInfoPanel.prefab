@@ -549,6 +549,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   missionDuration: {fileID: 7140575826677533175}
+  missionTypeName: {fileID: 9157951446866371127}
   timerImage: {fileID: 4774736450976065419}
   scalePulse: {fileID: -9066918559056689827}
   currentMissionWindow: {fileID: 8576213446531619116}
@@ -562,6 +563,7 @@ MonoBehaviour:
     equippedBackpack:
       rid: -2
     missionInventory: {fileID: 0}
+    missionType: 0
     armoryOwner: {fileID: 0}
     elapsedTime: 0
     missionDuration: 0
@@ -1299,8 +1301,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 40, y: 20}
-  m_SizeDelta: {x: 200, y: 20}
+  m_AnchoredPosition: {x: 55, y: 20}
+  m_SizeDelta: {x: 230, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3121731838306530037
 CanvasRenderer:
@@ -1330,7 +1332,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Scavenge mission
+  m_text: Extermination mission
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6cf58e1c0760fb5498d8b9fbdc006a31, type: 2}
   m_sharedMaterial: {fileID: 6546664967563981354, guid: 6cf58e1c0760fb5498d8b9fbdc006a31, type: 2}
@@ -1357,8 +1359,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

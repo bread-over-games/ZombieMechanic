@@ -89,7 +89,7 @@ public static class MissionCalculator
         float missionTypeMultiplier = missionType switch
         {
             Mission.MissionType.Extermination => 0.65f,
-            _ => 0.1f,
+            _ => 0.05f,
         };
 
         float raw = missionDuration * missionTypeMultiplier * ValueModifiers.Instance.gearWearModifier;
@@ -108,7 +108,7 @@ public static class MissionCalculator
         float missionTypeMultiplier = missionType switch
         {
             Mission.MissionType.Extermination => 0.5f,
-            _ => 0.1f,
+            _ => 0.05f,
         };
 
         float raw = missionDuration * missionTypeMultiplier * ValueModifiers.Instance.gearWearModifier;
@@ -127,7 +127,7 @@ public static class MissionCalculator
         float missionTypeMultiplier = missionType switch
         {
             Mission.MissionType.Extermination => 0.3f,
-            _ => 0.1f,
+            _ => 0.05f,
         };
 
         float raw = missionDuration * missionTypeMultiplier * ValueModifiers.Instance.gearWearModifier;
@@ -225,9 +225,9 @@ public static class MissionCalculator
         {
             float missionTypeDamageMultiplier = selectedMissionType switch
             {
-                Mission.MissionType.Extermination => 1f,
-                Mission.MissionType.Scavenge => 0.1f,
-                Mission.MissionType.Antibiotics => 0.1f,
+                Mission.MissionType.Extermination => 0.95f,
+                Mission.MissionType.Scavenge => 0.15f,
+                Mission.MissionType.Antibiotics => 0.15f,
                 _ => 1f
             };
 

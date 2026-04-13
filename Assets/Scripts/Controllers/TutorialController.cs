@@ -87,15 +87,15 @@ public class TutorialController : MonoBehaviour
         {
             OnTutorialEnd?.Invoke();
         }
-    }  
-    
+    }
+
     private void BuildStorageRackFlashStart()
     {
-        if (!storageRackBuilt)
+        if (!storageRackBuilt && storageRackConstructible != null)
         {
             storageRackConstructible.StartFlash();
             storageRackBuilt = true;
-        }        
+        }
     }
 
     private void BuildStorageRackFlashStop(int value)

@@ -17,4 +17,4 @@ MonoBehaviour:
   backpackSize: 4
   backpackName: Duffel Bag
   maxDurability: 35
-  spawnChance: 10
+  spawnChance: 15
