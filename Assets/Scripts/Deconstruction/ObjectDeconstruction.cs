@@ -55,6 +55,11 @@ public class ObjectDeconstruction : MonoBehaviour, IDeconstructible
 
     private void TryDeconstruction()
     {
+        if (currentDurability <= 0)
+        {
+            return;
+        }
+
         deconstructionCoroutine = StartCoroutine(DoDecounstruction());
         OnDeconstructionStart?.Invoke(gameObject);
     }
@@ -67,7 +72,7 @@ public class ObjectDeconstruction : MonoBehaviour, IDeconstructible
 
             if (ResourceController.Instance.CheckSparePartsLimit(sparePartsReward))
             {
-                ConstructionTick();     
+                DeconstructionTick();     
                 
                 if (currentDurability <= 0)
                 {
@@ -78,7 +83,7 @@ public class ObjectDeconstruction : MonoBehaviour, IDeconstructible
         }    
     }
 
-    private void ConstructionTick()
+    private void DeconstructionTick()
     {
         ResourceController.Instance.ChangeSparePartsAmount(sparePartsReward); // reward
         currentDurability -= 1;

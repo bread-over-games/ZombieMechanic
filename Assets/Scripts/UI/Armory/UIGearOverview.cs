@@ -9,7 +9,6 @@ public class UIGearOverview : MonoBehaviour
     [SerializeField] private UIArmory uiArmory;
 
     [SerializeField] private GameObject gearOverviewWindow;
-    [SerializeField] private GameObject firstSelected;
     public ButtonSelector.ArmorySlot currentSlotSelected;
     public static Action<ButtonSelector.ArmorySlot> OnCurrentArmorySlotSelected;
 
@@ -55,19 +54,6 @@ public class UIGearOverview : MonoBehaviour
     [SerializeField] private GameObject armorySendMissionControls;
     [SerializeField] private GameObject armorySelectGearControls;
 
-    public void OpenWindow()
-    {
-        gearOverviewWindow.SetActive(true);
-        EventSystem.current.SetSelectedGameObject(firstSelected);
-        RefreshEstimatesUI();
-        RefreshInventoryUI();
-    }
-
-    public void CloseWindow()
-    {
-        EventSystem.current.SetSelectedGameObject(null);
-        gearOverviewWindow.SetActive(false);        
-    }
 
     private void OnEnable()
     {
@@ -77,8 +63,21 @@ public class UIGearOverview : MonoBehaviour
 
     private void OnDisable()
     {
-        Inventory.OnInventoryChange += RefreshInventoryUI;
-        Inventory.OnInventoryChange += RefreshEstimatesUI;
+        Inventory.OnInventoryChange -= RefreshInventoryUI;
+        Inventory.OnInventoryChange -= RefreshEstimatesUI;
+    }
+
+    public void OpenWindow()
+    {
+        gearOverviewWindow.SetActive(true);
+        RefreshEstimatesUI();
+        RefreshInventoryUI();
+    }
+
+    public void CloseWindow()
+    {
+        EventSystem.current.SetSelectedGameObject(null);
+        gearOverviewWindow.SetActive(false);
     }
 
     private void RefreshEstimatesUI()

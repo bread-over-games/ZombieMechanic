@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class UIPerkSystem : MonoBehaviour
 {
-    [SerializeField] private GameObject firstSlotSelected;
     [SerializeField] private GameObject perkSystemWindow;
 
     [Header("First perk info")]
@@ -37,8 +36,7 @@ public class UIPerkSystem : MonoBehaviour
 
     private void ShowPerkWindow()
     {
-        UIFocusStack.Push(perkSystemWindow);
-        EventSystem.current.SetSelectedGameObject(firstSlotSelected);
+        UIFocusStack.Push(perkSystemWindow);     
         DisplayPerks();
         OnUIPerkWindowActive?.Invoke();
     }
