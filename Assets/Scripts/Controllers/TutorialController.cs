@@ -8,8 +8,8 @@ public class TutorialController : MonoBehaviour
     public EmissionFlasher lootTableFlasher;
     public EmissionFlasher workbenchFlasher;
     public EmissionFlasher salvageTableFlasher;
-    public EmissionFlasher medicalCabinetFlasher;
-    public EmissionFlasher armoryFlasher;
+    public EmissionFlasher[] medicalCabinetFlasher;
+    public EmissionFlasher[] armoryFlasher;
     public EmissionFlasher storageRackConstructible;
 
     public Armory armoryFirst;
@@ -107,7 +107,10 @@ public class TutorialController : MonoBehaviour
     {
         if (infectionLevel > 60 && !medicalCabinetTutorialStarted && !skipTutorial)
         {
-            medicalCabinetFlasher.StartFlash();
+            foreach (EmissionFlasher medCabFlash in medicalCabinetFlasher)
+            {
+                medCabFlash.StartFlash();
+            }            
             medicalCabinetTutorialStarted = true;
         }
     }
@@ -116,7 +119,10 @@ public class TutorialController : MonoBehaviour
     {
         if (medicalCabinetTutorialStarted && !antibioticsUsed)
         {
-            medicalCabinetFlasher.StopFlash();
+            foreach (EmissionFlasher medCabFlash in medicalCabinetFlasher)
+            {
+                medCabFlash.StopFlash();
+            }
             antibioticsUsed = true;
         }
     }
@@ -182,7 +188,11 @@ public class TutorialController : MonoBehaviour
 
     private void BaseballBatRepaired()
     {
-        armoryFlasher.StartFlash();
+        foreach (EmissionFlasher armFlasher in armoryFlasher)
+        {
+            armFlasher.StartFlash();
+        }
+
         baseballBatRepaired = true;
         EnableArmories();
     }
@@ -195,7 +205,10 @@ public class TutorialController : MonoBehaviour
     private void ArmorySentOnMission()
     {
         sentOnMissionArmory = true;
-        armoryFlasher.StopFlash();
+        foreach (EmissionFlasher armFlasher in armoryFlasher)
+        {
+            armFlasher.StopFlash();
+        }
         TutorialFinished();
         salvageTable.EnableSalvageTable();
     }
