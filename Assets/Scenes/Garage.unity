@@ -3881,7 +3881,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiArmory: {fileID: 1454226950}
   gearOverviewWindow: {fileID: 1351695024}
-  firstSelected: {fileID: 1754963340}
   currentSlotSelected: 0
   currentWeaponInfo: {fileID: 7152850036000322337}
   weaponImage: {fileID: 7152850036000322336}
@@ -6505,6 +6504,7 @@ GameObject:
   m_Component:
   - component: {fileID: 294606845}
   - component: {fileID: 294606846}
+  - component: {fileID: 294606847}
   m_Layer: 5
   m_Name: ObjectsSlots
   m_TagString: Untagged
@@ -6560,6 +6560,18 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &294606847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 294606844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd79c1ba67e41c44893cc83c11fc115a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &295426671
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16327,6 +16339,7 @@ GameObject:
   m_Component:
   - component: {fileID: 757717909}
   - component: {fileID: 757717910}
+  - component: {fileID: 757717911}
   m_Layer: 5
   m_Name: MissionSlots
   m_TagString: Untagged
@@ -16382,6 +16395,18 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &757717911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 757717908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd79c1ba67e41c44893cc83c11fc115a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &759853829 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 814154517742206159, guid: 4c095e4b910046e438ea629b009ad044, type: 3}
@@ -18531,6 +18556,7 @@ GameObject:
   m_Component:
   - component: {fileID: 832780784}
   - component: {fileID: 832780785}
+  - component: {fileID: 832780786}
   m_Layer: 5
   m_Name: PerkSlots
   m_TagString: Untagged
@@ -18585,6 +18611,18 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &832780786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 832780783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd79c1ba67e41c44893cc83c11fc115a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &833851343 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1812542263862019646, guid: a3972e6243191f948b913f3f66a1b27b, type: 3}
@@ -36588,11 +36626,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2851653523366418796, guid: 8a71bf3672c73154fb45bd36a3b02f2b, type: 3}
   m_PrefabInstance: {fileID: 1751531598}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1754963340 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9062294020327189687, guid: 63bba12b8ef2bdf4e8db02842b1e51ca, type: 3}
-  m_PrefabInstance: {fileID: 7152850036000322333}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1760836559
 GameObject:
   m_ObjectHideFlags: 0
@@ -38684,7 +38717,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1648b199c54eeee48b6adaf4b44975c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firstSlotSelected: {fileID: 77450757}
   perkSystemWindow: {fileID: 1438582917}
   firstPerkName: {fileID: 1351931191}
   firstPerkDescription: {fileID: 252420805}
@@ -45845,7 +45877,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8447639395993574802, guid: 63bba12b8ef2bdf4e8db02842b1e51ca, type: 3}
   m_PrefabInstance: {fileID: 7152850036000322333}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1754963340}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}

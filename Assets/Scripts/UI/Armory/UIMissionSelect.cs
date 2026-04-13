@@ -8,7 +8,6 @@ public class UIMissionSelect : MonoBehaviour
 {
     [SerializeField] private UIArmory uiArmory;
     [SerializeField] private GameObject missionSelectWindow;
-    [SerializeField] private GameObject firstSelected;
 
     public ButtonSelectorMissionTypes.MissionTypeSlot currentSlotSelected;
     private MissionType currentMissionType;
@@ -36,7 +35,6 @@ public class UIMissionSelect : MonoBehaviour
     public void OpenWindow()
     {
         missionSelectWindow.SetActive(true);
-        EventSystem.current.SetSelectedGameObject(firstSelected);
         RefreshEstimatesUI();
     }
 
