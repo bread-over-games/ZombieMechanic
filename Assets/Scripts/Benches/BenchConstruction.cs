@@ -4,6 +4,8 @@ using System.Collections;
 
 public class BenchConstruction : MonoBehaviour, IConstructible
 {
+    private bool isEnabled = false;
+
     [SerializeField] private int sparePartsConstructionCost;
     [SerializeField] private int maxConstructionLevel;
     [SerializeField] private float constructinInterval;
@@ -19,6 +21,16 @@ public class BenchConstruction : MonoBehaviour, IConstructible
     public static Action OnConstructionTick;
     public static Action<GameObject> OnConstructionStop;
     public static Action<GameObject> OnConstructionFinished;
+
+    private void OnEnable()
+    {
+        TutorialController.OnTutorialEnd += EnableConstruction;
+    }
+
+    private void OnDisable()
+    {
+        TutorialController.OnTutorialEnd -= EnableConstruction;
+    }
 
     public string GetName()
     { 
@@ -45,8 +57,15 @@ public class BenchConstruction : MonoBehaviour, IConstructible
         return sparePartsConstructionCost;
     }
 
+    private void EnableConstruction()
+    {
+        isEnabled = true;
+    }
+
     private void TryConstruction()
     {
+        if (!isEnabled) return;
+
         if (ResourceController.Instance.CanRepair(sparePartsConstructionCost))
         {
             constructionCoroutine = StartCoroutine(DoConstruction());

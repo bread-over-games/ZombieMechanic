@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public bool isGameOver = false;
 
     public static Action OnGameOver;
+    public static Action OnGameStart;
 
     private void OnEnable()
     {
@@ -27,6 +28,11 @@ public class GameManager : MonoBehaviour
         Instance = this;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    private void Start()
+    {
+        OnGameStart?.Invoke();
     }
 
     private void DeclareGameOver()

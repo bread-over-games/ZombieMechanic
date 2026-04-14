@@ -2,6 +2,7 @@ using UnityEngine;
 using System;
 using TMPro;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 using static Mission;
 
 public class UIMissionSelect : MonoBehaviour
@@ -13,6 +14,11 @@ public class UIMissionSelect : MonoBehaviour
     private MissionType currentMissionType;
 
     public static Action<MissionType> OnCurrentMissionTypeSlotSelected;
+
+    public Button scavengeMissionButton;
+    public Button exterminationMissionButton;
+    public GameObject antibioticsMissionContainer;
+    public GameObject antibioticsDepletedContainer;
 
     [Header("Mission Estimates")]
     [SerializeField] private GameObject missionEstimates;
@@ -29,12 +35,29 @@ public class UIMissionSelect : MonoBehaviour
 
     private void OnDisable()
     {
-        PlayerInteraction.OnMisisonTypeSelected -= SelectCurrentMissionType;
+        PlayerInteraction.OnMisisonTypeSelected -= SelectCurrentMissionType;        
     }
 
     public void OpenWindow()
     {
         missionSelectWindow.SetActive(true);
+
+        if (SectorController.Instance.antibioticsDepleted)
+        {
+            antibioticsMissionContainer.SetActive(false);
+            antibioticsDepletedContainer.SetActive(true);
+
+            Navigation scavengeMissionNav = scavengeMissionButton.navigation;
+            scavengeMissionNav.selectOnUp = exterminationMissionButton;
+            scavengeMissionNav.selectOnDown = exterminationMissionButton;
+            scavengeMissionButton.navigation = scavengeMissionNav;
+
+            Navigation exterminationMissionNav = exterminationMissionButton.navigation;
+            exterminationMissionNav.selectOnDown = scavengeMissionButton;
+            exterminationMissionNav.selectOnUp = scavengeMissionButton;
+            exterminationMissionButton.navigation = exterminationMissionNav;    
+        }
+
         RefreshEstimatesUI();
     }
 
