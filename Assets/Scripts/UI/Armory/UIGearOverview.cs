@@ -157,7 +157,15 @@ public class UIGearOverview : MonoBehaviour
         }
 
         armorySelectGearControls.SetActive(uiArmory.armory.isAvailableForMission);
-        armorySendMissionControls.SetActive(uiArmory.armory.isAvailableForMission);
+
+        if (uiArmory.armory.isAvailableForMission && uiArmory.armory.storedWeapon != null)
+        {
+            armorySendMissionControls.SetActive(true);
+        }
+        else
+        {
+            armorySendMissionControls.SetActive(false);
+        }        
     }
 
     private void RefreshInventoryValues()

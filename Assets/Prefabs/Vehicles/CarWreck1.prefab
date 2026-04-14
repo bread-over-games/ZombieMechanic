@@ -190,8 +190,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac50c65dcf88b564d8ac9b1ad4e5cfe8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deconstructibleDescription: Salvage this car wreck for Spare Parts.
-  deconstructibleName: Car Wreck
+  deconstructibleDescription: Salvage this car wreck for Spare parts.
+  deconstructibleName: 'Salvage: Car Wreck'
   sparePartsReward: 1
   totalDurability: 100
   deconstructionInterval: 0.5
