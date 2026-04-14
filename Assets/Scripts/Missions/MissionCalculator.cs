@@ -68,16 +68,6 @@ public static class MissionCalculator
         };
     }
 
-    private static int EstimateGearWear(int missionDuration)
-    {
-        float weaponWear = missionDuration * 0.25f * ValueModifiers.Instance.gearWearModifier;
-        float backpackWear = missionDuration * 0.25f * ValueModifiers.Instance.gearWearModifier;
-        float armorWear = missionDuration * 0.25f * ValueModifiers.Instance.gearWearModifier;
-
-        int gearWear = (int)((weaponWear + backpackWear + armorWear)/3f);
-        return gearWear;
-    }
-
     private static int CalculateWeaponWear(int missionDuration, MissionType missionType)
     {
         if (negateWeaponWear)
@@ -138,11 +128,6 @@ public static class MissionCalculator
     private static int CalculateLootAmount(Backpack backpackToEquip, Weapon weaponToEquip, MissionType missionType)
     {
         int lootAmount = 1;
-
-        if (weaponToEquip == null)
-        {
-            lootAmount = Random.Range(0,2);
-        }
 
         if (weaponToEquip != null && backpackToEquip == null)
         {
@@ -234,7 +219,7 @@ public static class MissionCalculator
             int weaponDamage;
             if (equippedWeapon == null)
             {
-                weaponDamage = 1;
+                weaponDamage = 0;
             }
             else
             {

@@ -111,10 +111,8 @@ public class Armory : Bench, IInteractable
 
     public override void StartInteractionSecondary() // sending on mission
     {
-        if (!isAvailableForMission)
-        {
-            return;
-        }
+        if (!isAvailableForMission) return;
+        if (storedWeapon == null) return; // cannot send on mission without weapon
 
         MissionController.Instance.ConfirmMissionGear(storedWeapon, storedBackpack, storedArmor, inventory, this);
         isAvailableForMission = false;   

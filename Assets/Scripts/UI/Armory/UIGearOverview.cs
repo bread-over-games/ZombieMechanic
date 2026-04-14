@@ -204,7 +204,8 @@ public class UIGearOverview : MonoBehaviour
         {
             backpackDurabilityText.text = backpack.currentDurability.ToString() + "/" + backpack.maxDurability.ToString();
             backpackNameText.text = backpack.objectName.ToString();
-            backpackDurabilityImage.fillAmount = (float)backpack.currentDurability / backpack.maxDurability;
+            backpackItemAmountText.text = backpack.backpackSize.ToString();
+            backpackDurabilityImage.fillAmount = (float)backpack.currentDurability / backpack.maxDurability;            
 
             if (backpack.canBeDestroyed)
             {
