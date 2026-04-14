@@ -68,8 +68,8 @@ public class ObjectSpawner : MonoBehaviour
 
         Object loot = spawnConfig.objectType switch
         {
-            GeneratableObjectType.Weapon => new Weapon { weaponType = Weapon.WeaponType.BaseballBat },
-            GeneratableObjectType.Armor => new Armor { armorType = Armor.ArmorType.BalisticVest },
+            GeneratableObjectType.Weapon => new Weapon { weaponType = Weapon.WeaponType.Baton },
+            GeneratableObjectType.Armor => new Armor { armorType = Armor.ArmorType.LeatherJacker },
             GeneratableObjectType.Backpack => new Backpack { backpackType = Backpack.BackpackType.SmallBackpack },
             GeneratableObjectType.Scrap => new Scrap { scrapType = Scrap.ScrapType.SparePartsBox },
             GeneratableObjectType.Antibiotics => new Antibiotics { antibioType = Antibiotics.AntibioticsType.BSAntibiotics },

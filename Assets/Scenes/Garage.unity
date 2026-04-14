@@ -22505,9 +22505,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inventory: {fileID: 956745173}
   spawnConfig:
-    objectType: 4
-    minQuality: 79
-    maxQuality: 81
+    objectType: 0
+    minQuality: 15
+    maxQuality: 20
 --- !u!1 &958006214
 GameObject:
   m_ObjectHideFlags: 0
@@ -29635,9 +29635,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inventory: {fileID: 1282433394}
   spawnConfig:
-    objectType: 3
-    minQuality: 45
-    maxQuality: 50
+    objectType: 4
+    minQuality: 79
+    maxQuality: 81
 --- !u!1 &1283300050
 GameObject:
   m_ObjectHideFlags: 0
