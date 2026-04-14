@@ -46571,6 +46571,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1784800722}
     - target: {fileID: 3920823704356126358, guid: fd74f44b8e600f34bb3acfcdf8ddca0b, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3920823704356126358, guid: fd74f44b8e600f34bb3acfcdf8ddca0b, type: 3}
       propertyPath: swaySpeed
       value: 2
       objectReference: {fileID: 0}
