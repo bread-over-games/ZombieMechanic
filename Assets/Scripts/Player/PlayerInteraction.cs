@@ -16,6 +16,7 @@ public class PlayerInteraction : MonoBehaviour
     public static Action OnPerkActivated;
     public static Action OnMessageConfirmed;
     public static Action OnMisisonTypeSelected;
+    public static Action OnRestartGameRequest;
 
     [SerializeField] private Inventory playerInventory;
 
@@ -31,6 +32,7 @@ public class PlayerInteraction : MonoBehaviour
     {
         Inventory.OnObjectReceive += InsertAntibiotics;
         XPCounter.OnLevelUp += BlockInputTemporarily;
+        GameManager.OnGameOver += BlockInputTemporarily;
         SectorController.OnAntibioticsDepleted += BlockInputTemporarily;
         SectorController.OnAntibioticsRunningLow += BlockInputTemporarily;
     }
@@ -38,6 +40,7 @@ public class PlayerInteraction : MonoBehaviour
     private void OnDisable()
     {
         Inventory.OnObjectReceive -= InsertAntibiotics;
+        GameManager.OnGameOver -= BlockInputTemporarily;
         XPCounter.OnLevelUp -= BlockInputTemporarily;
         SectorController.OnAntibioticsDepleted -= BlockInputTemporarily;
         SectorController.OnAntibioticsRunningLow -= BlockInputTemporarily;
@@ -198,6 +201,12 @@ public class PlayerInteraction : MonoBehaviour
         if (MissionController.Instance.isSelectingMissionType)
         {
             if (context.started) OnMisisonTypeSelected?.Invoke();
+            return;
+        }
+        
+        if (GameManager.Instance.isGameOver)
+        {
+            if (context.started) OnRestartGameRequest?.Invoke();
             return;
         }
 

@@ -52,7 +52,7 @@ public class ObjectGenerator : MonoBehaviour
 
         if (SectorController.Instance.antibioticsDepleted)
         {
-            generateAntibioticsChance = 0;
+            genAtbChanceHolder = 0;
         }
 
         float total = genWeapChanceHolder + genScrapChanceHolder + genBackpackChanceHolder + genArmorChanceHolder + genAtbChanceHolder;

@@ -17,4 +17,4 @@ MonoBehaviour:
   backpackSize: 3
   backpackName: Hunting Backpack
   maxDurability: 25
-  spawnChance: 25
+  spawnChance: 30

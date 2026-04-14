@@ -6,6 +6,7 @@ using System.Collections;
 public class UIMissionInfoPanel : MonoBehaviour
 {
     public TMP_Text missionDuration;
+    public TMP_Text missionTypeName;
     public Image timerImage;
     public ScalePulse scalePulse;
 
@@ -30,6 +31,7 @@ public class UIMissionInfoPanel : MonoBehaviour
         currentMissionWindow.SetActive(true);  
         currentMission = mission;
         currentCoroutine = StartCoroutine(ChangeTimer());
+        missionTypeName.text = mission.missionType.ToString() + " mission";
         scalePulse.Pulse();
     }
 

@@ -98,6 +98,12 @@ public class Armory : Bench, IInteractable
         {
             if (inventory.GetObjectList().Count >= inventory.GetCapacity()) return; // bench full
             if (!CanAcceptObject(playerInventory.GetObjectList()[0])) return;
+
+            Object obj = playerInventory.GetObjectList()[0];
+            if (obj is Weapon && storedWeapon != null) return;
+            if (obj is Armor && storedArmor != null) return;
+            if (obj is Backpack && storedBackpack != null) return;
+
             playerInventory.SendObject(inventory, playerInventory.GetObjectList()[0]);
             OnObjectDeposited?.Invoke(); 
         }
@@ -105,10 +111,8 @@ public class Armory : Bench, IInteractable
 
     public override void StartInteractionSecondary() // sending on mission
     {
-        if (!isAvailableForMission)
-        {
-            return;
-        }
+        if (!isAvailableForMission) return;
+        if (storedWeapon == null) return; // cannot send on mission without weapon
 
         MissionController.Instance.ConfirmMissionGear(storedWeapon, storedBackpack, storedArmor, inventory, this);
         isAvailableForMission = false;   

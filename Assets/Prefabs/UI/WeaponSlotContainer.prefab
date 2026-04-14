@@ -65,10 +65,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Place weapon to Armory.
+  m_text: 'Place weapon here to equip survivor.
 
 
-    Survivor may die on mission without a weapon.'
+    Survivor will not go to a mission
+    without a weapon.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6cf58e1c0760fb5498d8b9fbdc006a31, type: 2}
   m_sharedMaterial: {fileID: 6546664967563981354, guid: 6cf58e1c0760fb5498d8b9fbdc006a31, type: 2}
@@ -77,8 +78,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4287269578
-  m_fontColor: {r: 0.7924528, g: 0.5420078, b: 0.5420078, a: 1}
+    rgba: 4294046193
+  m_fontColor: {r: 0.9433962, g: 0.9433962, b: 0.9433962, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -107,9 +108,9 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: -40
+  m_lineSpacing: -30
   m_lineSpacingMax: 0
-  m_paragraphSpacing: 0
+  m_paragraphSpacing: -27
   m_charWidthMaxAdj: 0
   m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
@@ -280,7 +281,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Bare hands
+  m_text: NO WEAPON
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6cf58e1c0760fb5498d8b9fbdc006a31, type: 2}
   m_sharedMaterial: {fileID: 6546664967563981354, guid: 6cf58e1c0760fb5498d8b9fbdc006a31, type: 2}
@@ -527,7 +528,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1819345983802820636
 RectTransform:
   m_ObjectHideFlags: 0
@@ -575,7 +576,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 1638011292, guid: df3e0cff34ee78f48a63ecaddfc06a1e, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

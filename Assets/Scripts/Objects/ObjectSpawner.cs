@@ -41,7 +41,6 @@ public class ObjectSpawner : MonoBehaviour
 
     private void SpawnTutorialSpareParts(Inventory sourceInventory)
     {
-        Debug.Log("Spawn spare parts");
         if (sourceInventory == inventory)
         {
             Object loot = new Scrap { scrapType = Scrap.ScrapType.SparePartsBox };
@@ -52,7 +51,6 @@ public class ObjectSpawner : MonoBehaviour
 
     private void SpawnTutorialWeapon(Inventory sourceInventory)
     {
-        Debug.Log("Spawn weapon");
         if (sourceInventory == inventory)
         {
             Object loot = new Weapon { weaponType = Weapon.WeaponType.Baton };
@@ -70,8 +68,8 @@ public class ObjectSpawner : MonoBehaviour
 
         Object loot = spawnConfig.objectType switch
         {
-            GeneratableObjectType.Weapon => new Weapon { weaponType = Weapon.WeaponType.BaseballBat },
-            GeneratableObjectType.Armor => new Armor { armorType = Armor.ArmorType.BalisticVest },
+            GeneratableObjectType.Weapon => new Weapon { weaponType = Weapon.WeaponType.Baton },
+            GeneratableObjectType.Armor => new Armor { armorType = Armor.ArmorType.LeatherJacker },
             GeneratableObjectType.Backpack => new Backpack { backpackType = Backpack.BackpackType.SmallBackpack },
             GeneratableObjectType.Scrap => new Scrap { scrapType = Scrap.ScrapType.SparePartsBox },
             GeneratableObjectType.Antibiotics => new Antibiotics { antibioType = Antibiotics.AntibioticsType.BSAntibiotics },

@@ -68,16 +68,6 @@ public static class MissionCalculator
         };
     }
 
-    private static int EstimateGearWear(int missionDuration)
-    {
-        float weaponWear = missionDuration * 0.25f * ValueModifiers.Instance.gearWearModifier;
-        float backpackWear = missionDuration * 0.25f * ValueModifiers.Instance.gearWearModifier;
-        float armorWear = missionDuration * 0.25f * ValueModifiers.Instance.gearWearModifier;
-
-        int gearWear = (int)((weaponWear + backpackWear + armorWear)/3f);
-        return gearWear;
-    }
-
     private static int CalculateWeaponWear(int missionDuration, MissionType missionType)
     {
         if (negateWeaponWear)
@@ -89,7 +79,7 @@ public static class MissionCalculator
         float missionTypeMultiplier = missionType switch
         {
             Mission.MissionType.Extermination => 0.65f,
-            _ => 0.1f,
+            _ => 0.05f,
         };
 
         float raw = missionDuration * missionTypeMultiplier * ValueModifiers.Instance.gearWearModifier;
@@ -108,7 +98,7 @@ public static class MissionCalculator
         float missionTypeMultiplier = missionType switch
         {
             Mission.MissionType.Extermination => 0.5f,
-            _ => 0.1f,
+            _ => 0.05f,
         };
 
         float raw = missionDuration * missionTypeMultiplier * ValueModifiers.Instance.gearWearModifier;
@@ -127,7 +117,7 @@ public static class MissionCalculator
         float missionTypeMultiplier = missionType switch
         {
             Mission.MissionType.Extermination => 0.3f,
-            _ => 0.1f,
+            _ => 0.05f,
         };
 
         float raw = missionDuration * missionTypeMultiplier * ValueModifiers.Instance.gearWearModifier;
@@ -138,11 +128,6 @@ public static class MissionCalculator
     private static int CalculateLootAmount(Backpack backpackToEquip, Weapon weaponToEquip, MissionType missionType)
     {
         int lootAmount = 1;
-
-        if (weaponToEquip == null)
-        {
-            lootAmount = Random.Range(0,2);
-        }
 
         if (weaponToEquip != null && backpackToEquip == null)
         {
@@ -225,16 +210,16 @@ public static class MissionCalculator
         {
             float missionTypeDamageMultiplier = selectedMissionType switch
             {
-                Mission.MissionType.Extermination => 1f,
-                Mission.MissionType.Scavenge => 0.1f,
-                Mission.MissionType.Antibiotics => 0.1f,
+                Mission.MissionType.Extermination => 0.95f,
+                Mission.MissionType.Scavenge => 0.15f,
+                Mission.MissionType.Antibiotics => 0.15f,
                 _ => 1f
             };
 
             int weaponDamage;
             if (equippedWeapon == null)
             {
-                weaponDamage = 1;
+                weaponDamage = 0;
             }
             else
             {

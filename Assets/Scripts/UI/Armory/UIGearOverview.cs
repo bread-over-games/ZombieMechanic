@@ -157,7 +157,15 @@ public class UIGearOverview : MonoBehaviour
         }
 
         armorySelectGearControls.SetActive(uiArmory.armory.isAvailableForMission);
-        armorySendMissionControls.SetActive(uiArmory.armory.isAvailableForMission);
+
+        if (uiArmory.armory.isAvailableForMission && uiArmory.armory.storedWeapon != null)
+        {
+            armorySendMissionControls.SetActive(true);
+        }
+        else
+        {
+            armorySendMissionControls.SetActive(false);
+        }        
     }
 
     private void RefreshInventoryValues()
@@ -204,7 +212,8 @@ public class UIGearOverview : MonoBehaviour
         {
             backpackDurabilityText.text = backpack.currentDurability.ToString() + "/" + backpack.maxDurability.ToString();
             backpackNameText.text = backpack.objectName.ToString();
-            backpackDurabilityImage.fillAmount = (float)backpack.currentDurability / backpack.maxDurability;
+            backpackItemAmountText.text = backpack.backpackSize.ToString();
+            backpackDurabilityImage.fillAmount = (float)backpack.currentDurability / backpack.maxDurability;            
 
             if (backpack.canBeDestroyed)
             {

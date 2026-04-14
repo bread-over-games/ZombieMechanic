@@ -81,7 +81,7 @@ MonoBehaviour:
   benchType: 6
   inventory: {fileID: 0}
   interactableName: Storage Rack
-  storageSpace: 25
+  storageSpace: 20
 --- !u!65 &4745895682906962721
 BoxCollider:
   m_ObjectHideFlags: 0

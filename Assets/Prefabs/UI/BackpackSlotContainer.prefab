@@ -240,11 +240,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Place backpack to Armory.
+  m_text: 'Place backpack here to equip survivor.
 
 
-    Backpack increases amount of loot that
-    survivors bring from mission.'
+    Backpack increases amount
+    of loot survivor brings from missions.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6cf58e1c0760fb5498d8b9fbdc006a31, type: 2}
   m_sharedMaterial: {fileID: 6546664967563981354, guid: 6cf58e1c0760fb5498d8b9fbdc006a31, type: 2}
@@ -253,8 +253,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4287269578
-  m_fontColor: {r: 0.7924528, g: 0.5420078, b: 0.5420078, a: 1}
+    rgba: 4294046193
+  m_fontColor: {r: 0.9433962, g: 0.9433962, b: 0.9433962, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -283,9 +283,9 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: -40
+  m_lineSpacing: -30
   m_lineSpacingMax: 0
-  m_paragraphSpacing: 0
+  m_paragraphSpacing: -27
   m_charWidthMaxAdj: 0
   m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
@@ -524,19 +524,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 797851174931906909, guid: c0850869b8566f843940184de33a5392, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 797851174931906909, guid: c0850869b8566f843940184de33a5392, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 797851174931906909, guid: c0850869b8566f843940184de33a5392, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 75
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 797851174931906909, guid: c0850869b8566f843940184de33a5392, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -10
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 895246527678283298, guid: c0850869b8566f843940184de33a5392, type: 3}
       propertyPath: m_Name
@@ -572,19 +572,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4570351515333757693, guid: c0850869b8566f843940184de33a5392, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4570351515333757693, guid: c0850869b8566f843940184de33a5392, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4570351515333757693, guid: c0850869b8566f843940184de33a5392, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 75
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4570351515333757693, guid: c0850869b8566f843940184de33a5392, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -55
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4583792063913246722, guid: c0850869b8566f843940184de33a5392, type: 3}
       propertyPath: m_SizeDelta.x
@@ -612,7 +612,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6997592831233122794, guid: c0850869b8566f843940184de33a5392, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6997592831233122794, guid: c0850869b8566f843940184de33a5392, type: 3}
       propertyPath: m_AnchorMin.x
@@ -620,7 +620,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6997592831233122794, guid: c0850869b8566f843940184de33a5392, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6997592831233122794, guid: c0850869b8566f843940184de33a5392, type: 3}
       propertyPath: m_SizeDelta.x
@@ -660,11 +660,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6997592831233122794, guid: c0850869b8566f843940184de33a5392, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 780
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6997592831233122794, guid: c0850869b8566f843940184de33a5392, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -100
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6997592831233122794, guid: c0850869b8566f843940184de33a5392, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

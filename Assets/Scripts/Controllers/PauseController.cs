@@ -14,6 +14,7 @@ public class PauseController : MonoBehaviour
         PlayerInteraction.OnMessageConfirmed += ResumeGame;
         Armory.OnMissionGearSelected += PauseGame;        
         PlayerInteraction.OnMisisonTypeSelected += ResumeGame;
+        Infection.OnInfectionReachedMaxLevel += PauseGame;
     }
 
     private void OnDisable()
@@ -25,6 +26,7 @@ public class PauseController : MonoBehaviour
         PlayerInteraction.OnMessageConfirmed -= ResumeGame;
         Armory.OnMissionGearSelected -= PauseGame;
         PlayerInteraction.OnMisisonTypeSelected -= ResumeGame;
+        Infection.OnInfectionReachedMaxLevel -= PauseGame;
     }
 
     private void Awake()

@@ -57,9 +57,8 @@ public class Infection : MonoBehaviour
             OnInfectionLevelChange?.Invoke(currentInfectionLevel);            
 
             if (currentInfectionLevel >= maxInfectionLevel)
-            {
-                Debug.Log("Dead from infection");
-                OnInfectionReachedMaxLevel?.Invoke();
+            {                
+                OnInfectionReachedMaxLevel?.Invoke();                
                 break;
             }
         }
