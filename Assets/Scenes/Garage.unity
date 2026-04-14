@@ -19959,7 +19959,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "Stores Spare Parts. \n\nSingle Storage Rack increases Spare Parts limit
-    by 50."
+    by 20."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6cf58e1c0760fb5498d8b9fbdc006a31, type: 2}
   m_sharedMaterial: {fileID: 6546664967563981354, guid: 6cf58e1c0760fb5498d8b9fbdc006a31, type: 2}
@@ -20380,7 +20380,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Increases Spare Parts storage limit by 50.
+  m_text: Increases Spare Parts storage limit by 20.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6cf58e1c0760fb5498d8b9fbdc006a31, type: 2}
   m_sharedMaterial: {fileID: 6546664967563981354, guid: 6cf58e1c0760fb5498d8b9fbdc006a31, type: 2}
@@ -46685,23 +46685,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3703141751989522167, guid: 86c4f44140b22ce4cb7168e41349b104, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.99860525
+      value: 0.90238667
       objectReference: {fileID: 0}
     - target: {fileID: 3703141751989522167, guid: 86c4f44140b22ce4cb7168e41349b104, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.000000009030268
+      value: -0.000000012450727
       objectReference: {fileID: 0}
     - target: {fileID: 3703141751989522167, guid: 86c4f44140b22ce4cb7168e41349b104, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.052797277
+      value: 0.4309274
       objectReference: {fileID: 0}
     - target: {fileID: 3703141751989522167, guid: 86c4f44140b22ce4cb7168e41349b104, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.000000006748234
+      value: 0.000000026072623
       objectReference: {fileID: 0}
     - target: {fileID: 3703141751989522167, guid: 86c4f44140b22ce4cb7168e41349b104, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 6.053
+      value: 51.053
       objectReference: {fileID: 0}
     - target: {fileID: 5218923026431875798, guid: 86c4f44140b22ce4cb7168e41349b104, type: 3}
       propertyPath: m_LocalPosition.x
