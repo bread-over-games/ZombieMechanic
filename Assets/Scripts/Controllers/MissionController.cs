@@ -39,7 +39,6 @@ public class MissionController : MonoBehaviour
         UIMissionSelect.OnCurrentMissionTypeSlotSelected -= ConfirmMissionType;
     }
 
-
     void Awake()
     {
         Instance = this;

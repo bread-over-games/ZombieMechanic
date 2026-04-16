@@ -12,8 +12,8 @@ public class PlayerInteraction : MonoBehaviour
 
     public static Action<IInteractable> OnInteractableApproached;
     public static Action<IInteractable> OnInteractableLeft;
-    public static Action OnIntroSkip;
     public static Action OnSecondaryInteractionInterceptor;
+    public static Action OnPrimaryInteractionInterceptor;
 
     [SerializeField] private Inventory playerInventory;
 
@@ -23,7 +23,6 @@ public class PlayerInteraction : MonoBehaviour
     [SerializeField] private LayerMask interactableLayer;    
 
     private bool isInputBlocked = false; // true means the input is blocked
-    private bool introSkipped = false;
 
     private void OnEnable()
     {
@@ -97,22 +96,13 @@ public class PlayerInteraction : MonoBehaviour
         if (!context.started) return;
         if (isInputBlocked) return;
 
-        if (!introSkipped) // skips intro
+        if (OnPrimaryInteractionInterceptor != null)
         {
-            introSkipped = true;
-            OnIntroSkip?.Invoke();
-            return;
+            OnPrimaryInteractionInterceptor?.Invoke();
         }
 
-        if (currentInteractable == null)
-        {
-            return;
-        }
-
-        if (!currentInteractable.IsInteractionPossible())
-        {            
-            return;
-        }
+        if (currentInteractable == null) return;
+        if (!currentInteractable.IsInteractionPossible()) return;
 
         if (context.started)
         {
@@ -193,6 +183,7 @@ public class PlayerInteraction : MonoBehaviour
         if (currentInteractable == null) return;
         if (!currentInteractable.IsInteractionPossible()) return;
 
+
         if (context.started)
         {
             SecondaryInteractStarted();
@@ -221,10 +212,7 @@ public class PlayerInteraction : MonoBehaviour
 
     private void InsertAntibiotics(Object obj, Inventory myInventory) // when antibiotics are found on mission they are automatically added to medical cabinet
     {
-        if (myInventory != playerInventory)
-        {
-            return;
-        }
+        if (myInventory != playerInventory) return;
 
         if (obj is Antibiotics antibiotics)
         {

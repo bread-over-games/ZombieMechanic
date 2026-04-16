@@ -11,19 +11,14 @@ public class UIIntro : MonoBehaviour
 
     [SerializeField] private GameObject continueHint;
 
-    private void OnEnable()
-    {
-        PlayerInteraction.OnIntroSkip += SkipIntro;
-    }
+    public static Action OnIntroStarted;
+    public static Action OnIntroSkipped;
 
-    private void OnDisable()
+    private void Start()
     {
-        PlayerInteraction.OnIntroSkip -= SkipIntro;
-    }
-
-    private void Awake()
-    {
+        PlayerInteraction.OnPrimaryInteractionInterceptor = SkipIntro;
         introUI.SetActive(true);
+        OnIntroStarted?.Invoke();
         Invoke("DisplayJournalEntry1", 0.1f);
         Invoke("DisplayJournalEntry2", 8f);
         Invoke("DisplayJournalEntry3", 15f);
@@ -52,6 +47,7 @@ public class UIIntro : MonoBehaviour
 
     private void SkipIntro()
     {
+        OnIntroSkipped?.Invoke();
         introUI.SetActive(false);        
     }
 }

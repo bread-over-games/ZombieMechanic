@@ -16,11 +16,35 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 moveInput;
     private Vector3 surfaceNormal = Vector3.up;
     private bool isColliding = false;
+    private bool isMovementBlocked = false;
+
+    private void OnEnable()
+    {
+        UIIntro.OnIntroStarted += BlockMovement;
+        UIIntro.OnIntroSkipped += UnblockMovement;
+    }
+
+    private void OnDisable()
+    {
+        UIIntro.OnIntroStarted -= BlockMovement;
+        UIIntro.OnIntroSkipped -= UnblockMovement;
+    }
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
     }
+
+    private void BlockMovement()
+    {
+        isMovementBlocked = true;
+    }
+
+    private void UnblockMovement()
+    {
+        isMovementBlocked = false;
+    }
+
     public void OnMove(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>();
@@ -55,6 +79,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Move()
     {
+        if (isMovementBlocked) return;
         Vector3 moveDirection = new Vector3(moveInput.x, 0f, moveInput.y);
 
         if (moveInput.sqrMagnitude < 0.01f)
@@ -78,10 +103,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void Rotate()
     {
-        if (moveInput.sqrMagnitude < 0.01f) // prevents rotation when player not moving
-        {
-            return;
-        }            
+        if (isMovementBlocked) return;
+        if (moveInput.sqrMagnitude < 0.01f) return; // prevents rotation when player not moving          
 
         Vector3 direction = new Vector3(moveInput.x, 0f, moveInput.y);
         Quaternion targetRotation = Quaternion.LookRotation(direction, Vector3.up);
