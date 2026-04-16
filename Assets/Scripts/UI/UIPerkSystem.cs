@@ -6,6 +6,12 @@ using UnityEngine.UI;
 
 public class UIPerkSystem : MonoBehaviour
 {
+    public enum PerkSlot
+    {
+        FirstPerkSlot,
+        SecondPerkSlot
+    }
+
     [SerializeField] private GameObject perkSystemWindow;
 
     [Header("First perk info")]
@@ -18,9 +24,9 @@ public class UIPerkSystem : MonoBehaviour
     [SerializeField] private TMP_Text secondPerkDescription;
     [SerializeField] private Image secondPerkImage;
 
-    [HideInInspector] public ButtonSelectorPerks.PerkSlot currentSlotSelected;
+    [HideInInspector] public PerkSlot currentSlotSelected;
     public static Action OnUIPerkWindowActive;
-    public static Action<ButtonSelectorPerks.PerkSlot> OnCurrentPerkSlotSelected;
+    public static Action<PerkSlot> OnCurrentPerkSlotSelected;
 
     private void OnEnable()
     {
@@ -67,13 +73,13 @@ public class UIPerkSystem : MonoBehaviour
         HidePerkWindow();
     }
 
-    public void OnButtonSelected(ButtonSelectorPerks.PerkSlot perkSlot)
+    public void FirstPerkSelected()
     {
-        currentSlotSelected = perkSlot;
+        currentSlotSelected = PerkSlot.FirstPerkSlot;
     }
 
-    public void OnButtonDeselected(ButtonSelectorPerks.PerkSlot perkSlot)
+    public void SecondPerkSelected()
     {
-
+        currentSlotSelected = PerkSlot.SecondPerkSlot;
     }
 }

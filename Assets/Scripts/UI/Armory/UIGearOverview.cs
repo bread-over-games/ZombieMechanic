@@ -6,11 +6,18 @@ using UnityEngine.EventSystems;
 
 public class UIGearOverview : MonoBehaviour
 {
+    public enum ArmorySlot
+    {
+        Weapon,
+        Armor,
+        Backpack
+    }
+
     [SerializeField] private UIArmory uiArmory;
 
     [SerializeField] private GameObject gearOverviewWindow;
-    public ButtonSelector.ArmorySlot currentSlotSelected;
-    public static Action<ButtonSelector.ArmorySlot> OnCurrentArmorySlotSelected;
+    public ArmorySlot currentSlotSelected;
+    public static Action<ArmorySlot> OnCurrentArmorySlotSelected;
 
     [Header("Weapon")]
     [SerializeField] private GameObject currentWeaponInfo;
@@ -226,14 +233,20 @@ public class UIGearOverview : MonoBehaviour
         }
     }
 
-    public void OnButtonSelected(ButtonSelector.ArmorySlot armorySlot)
+    public void WeaponSlotSelected()
     {
-        currentSlotSelected = armorySlot;
+        currentSlotSelected = ArmorySlot.Weapon;
         OnCurrentArmorySlotSelected?.Invoke(currentSlotSelected);
     }
 
-    public void OnButtonDeselected(ButtonSelector.ArmorySlot armorySlot)
+    public void ArmorSlotSelected()
     {
-
+        currentSlotSelected = ArmorySlot.Armor;
+        OnCurrentArmorySlotSelected?.Invoke(currentSlotSelected);
+    }
+    public void BackpackSlotSelected()
+    {
+        currentSlotSelected = ArmorySlot.Backpack;
+        OnCurrentArmorySlotSelected?.Invoke(currentSlotSelected);
     }
 }

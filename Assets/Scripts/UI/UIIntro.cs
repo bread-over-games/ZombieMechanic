@@ -48,6 +48,7 @@ public class UIIntro : MonoBehaviour
     private void SkipIntro()
     {
         OnIntroSkipped?.Invoke();
-        introUI.SetActive(false);        
+        introUI.SetActive(false);
+        PlayerInteraction.OnPrimaryInteractionInterceptor = null;
     }
 }

@@ -10,7 +10,6 @@ public class UIMissionSelect : MonoBehaviour
     [SerializeField] private UIArmory uiArmory;
     [SerializeField] private GameObject missionSelectWindow;
 
-    public ButtonSelectorMissionTypes.MissionTypeSlot currentSlotSelected;
     private MissionType currentMissionType;
 
     public static Action<MissionType> OnCurrentMissionTypeSlotSelected;
@@ -65,36 +64,27 @@ public class UIMissionSelect : MonoBehaviour
         CloseWindow();
     }
 
-    public void OnButtonSelected(ButtonSelectorMissionTypes.MissionTypeSlot missionTypeSlot)
+    public void ExterminationMissionSelected()
     {
-        switch (missionTypeSlot)
-        {
-            case ButtonSelectorMissionTypes.MissionTypeSlot.Scavenge:
-                currentMissionType = Mission.MissionType.Scavenge;
-                break;
-            case ButtonSelectorMissionTypes.MissionTypeSlot.Extermination:
-                currentMissionType = Mission.MissionType.Extermination;
-                break;
-            case ButtonSelectorMissionTypes.MissionTypeSlot.Antibiotics:
-                currentMissionType = Mission.MissionType.Antibiotics;
-                break;
-        }
-
-        currentSlotSelected = missionTypeSlot;
+        currentMissionType = MissionType.Extermination;
         RefreshEstimatesUI();
     }
 
-    public void OnButtonDeselected(ButtonSelectorMissionTypes.MissionTypeSlot missionTypeSlot)
+    public void ScavengeMissionSelected()
     {
+        currentMissionType = MissionType.Scavenge;
+        RefreshEstimatesUI();
+    }
 
+    public void AntibioticsMissionSelected()
+    {
+        currentMissionType = MissionType.Antibiotics;
+        RefreshEstimatesUI();
     }
 
     private void RefreshEstimatesUI()
     {        
-        if (uiArmory.inventory == null)
-        {
-            return;
-        }
+        if (uiArmory.inventory == null) return;
 
         MissionEstimate missionEstimates = MissionCalculator.EstimateMission(uiArmory.armory.storedWeapon, uiArmory.armory.storedBackpack, uiArmory.armory.storedArmor, currentMissionType);
 

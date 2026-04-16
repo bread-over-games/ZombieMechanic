@@ -42,9 +42,9 @@ public class PerkController : MonoBehaviour
         OnRandomPerksGenerated?.Invoke();
     }
 
-    private void PlayerChosePerk(ButtonSelectorPerks.PerkSlot perkSlot)
+    private void PlayerChosePerk(UIPerkSystem.PerkSlot perkSlot)
     {
-        if (perkSlot == ButtonSelectorPerks.PerkSlot.FirstPerkSlot)
+        if (perkSlot == UIPerkSystem.PerkSlot.FirstPerkSlot)
         {
             firstPerkPick.perkEffect.ActivatePerk();
             activePerks.Add(firstPerkPick);

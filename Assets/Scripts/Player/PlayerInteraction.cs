@@ -12,8 +12,8 @@ public class PlayerInteraction : MonoBehaviour
 
     public static Action<IInteractable> OnInteractableApproached;
     public static Action<IInteractable> OnInteractableLeft;
-    public static Action OnSecondaryInteractionInterceptor;
-    public static Action OnPrimaryInteractionInterceptor;
+    public static Action OnSecondaryInteractionInterceptor = null;
+    public static Action OnPrimaryInteractionInterceptor = null;
 
     [SerializeField] private Inventory playerInventory;
 
@@ -92,14 +92,15 @@ public class PlayerInteraction : MonoBehaviour
     }
 
     public void OnInteractPrimary(InputAction.CallbackContext context)
-    {
+    {        
         if (!context.started) return;
         if (isInputBlocked) return;
-
+        
         if (OnPrimaryInteractionInterceptor != null)
-        {
+        {            
             OnPrimaryInteractionInterceptor?.Invoke();
-        }
+            return;
+        }        
 
         if (currentInteractable == null) return;
         if (!currentInteractable.IsInteractionPossible()) return;
@@ -178,6 +179,7 @@ public class PlayerInteraction : MonoBehaviour
         if (OnSecondaryInteractionInterceptor != null)
         {
             OnSecondaryInteractionInterceptor?.Invoke();
+            return;
         }
 
         if (currentInteractable == null) return;
