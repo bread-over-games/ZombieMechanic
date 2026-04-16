@@ -14,13 +14,13 @@ public class GameManager : MonoBehaviour
     private void OnEnable()
     {
         Infection.OnInfectionReachedMaxLevel += DeclareGameOver;
-        PlayerInteraction.OnRestartGameRequest += RestartGame;
+        EndStatesUI.OnRestartConfirmed += RestartGame;
     }
 
     private void OnDisable()
     {
         Infection.OnInfectionReachedMaxLevel -= DeclareGameOver;
-        PlayerInteraction.OnRestartGameRequest -= RestartGame;
+        EndStatesUI.OnRestartConfirmed -= RestartGame;
     }
 
     private void Awake()

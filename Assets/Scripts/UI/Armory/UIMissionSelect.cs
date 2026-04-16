@@ -28,18 +28,9 @@ public class UIMissionSelect : MonoBehaviour
     [SerializeField] private TMP_Text gearWearText;
     [SerializeField] private TMP_Text zombieKillsText;
 
-    private void OnEnable()
-    {
-        PlayerInteraction.OnMisisonTypeSelected += SelectCurrentMissionType;
-    }
-
-    private void OnDisable()
-    {
-        PlayerInteraction.OnMisisonTypeSelected -= SelectCurrentMissionType;        
-    }
-
     public void OpenWindow()
     {
+        PlayerInteraction.OnSecondaryInteractionInterceptor = SelectCurrentMissionType;
         missionSelectWindow.SetActive(true);
 
         if (SectorController.Instance.antibioticsDepleted)
@@ -64,7 +55,8 @@ public class UIMissionSelect : MonoBehaviour
     public void CloseWindow()
     {
         EventSystem.current.SetSelectedGameObject(null);
-        missionSelectWindow.SetActive(false);        
+        missionSelectWindow.SetActive(false);
+        PlayerInteraction.OnSecondaryInteractionInterceptor = null;
     }
 
     private void SelectCurrentMissionType()

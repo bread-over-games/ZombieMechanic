@@ -3959,7 +3959,6 @@ MonoBehaviour:
   missionLengthArmorWeight: 70
   missionLengthBackpackWeight: 50
   minimalLootQuality: 20
-  isSelectingMissionType: 0
   references:
     version: 2
     RefIds: []
@@ -22507,7 +22506,6 @@ MonoBehaviour:
   zombiesLeft: 0
   antibioticsLeft: 11
   antibioticsDepleted: 0
-  isReadingMessage: 0
 --- !u!1001 &979573746
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22866,7 +22864,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: bc26287685225b043b8db2ab32ca3883, type: 2}
   firstPerkPick: {fileID: 0}
   secondPerkPick: {fileID: 0}
-  isSelectingPerk: 0
 --- !u!114 &984499603
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42008,7 +42005,7 @@ MonoBehaviour:
   storageRackConstructible: {fileID: 1214555821}
   armoryFirst: {fileID: 155053022065181570}
   salvageTable: {fileID: 1571740917}
-  skipTutorial: 0
+  skipTutorial: 1
   sparePartsPicked: 0
   sparePartsPlacedSalvage: 0
   sparePartsSalvaged: 0

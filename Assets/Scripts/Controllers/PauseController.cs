@@ -11,10 +11,10 @@ public class PauseController : MonoBehaviour
         PerkController.OnPerkSelected += ResumeGame;
         SectorController.OnAntibioticsDepleted += PauseGame;
         SectorController.OnAntibioticsRunningLow += PauseGame;
-        PlayerInteraction.OnMessageConfirmed += ResumeGame;
         Armory.OnMissionGearSelected += PauseGame;        
-        PlayerInteraction.OnMisisonTypeSelected += ResumeGame;
+        UIMissionSelect.OnCurrentMissionTypeSlotSelected += _ => ResumeGame();
         Infection.OnInfectionReachedMaxLevel += PauseGame;
+        UISectorInfo.OnMessageConfirmed += ResumeGame;
     }
 
     private void OnDisable()
@@ -23,10 +23,10 @@ public class PauseController : MonoBehaviour
         PerkController.OnPerkSelected -= ResumeGame;
         SectorController.OnAntibioticsDepleted -= PauseGame;
         SectorController.OnAntibioticsRunningLow -= PauseGame;
-        PlayerInteraction.OnMessageConfirmed -= ResumeGame;
         Armory.OnMissionGearSelected -= PauseGame;
-        PlayerInteraction.OnMisisonTypeSelected -= ResumeGame;
+        UIMissionSelect.OnCurrentMissionTypeSlotSelected -= _ => ResumeGame();
         Infection.OnInfectionReachedMaxLevel -= PauseGame;
+        UISectorInfo.OnMessageConfirmed -= ResumeGame;
     }
 
     private void Awake()

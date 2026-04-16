@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 
 public class EndStatesUI : MonoBehaviour
 {
@@ -7,21 +8,30 @@ public class EndStatesUI : MonoBehaviour
 
     private bool victoryStateShown = false;
 
+    public static Action OnRestartConfirmed;
+
     private void OnEnable()
     {
-        Infection.OnInfectionReachedMaxLevel += ZombieEndState;
+        Infection.OnInfectionReachedMaxLevel += ZombieEndStateShow;
         ZombiesController.OnAllZombiesKilled += ExterminationEdnStateShow;
     }
 
     private void OnDisable()
     {
-        Infection.OnInfectionReachedMaxLevel -= ZombieEndState;
+        Infection.OnInfectionReachedMaxLevel -= ZombieEndStateShow;
         ZombiesController.OnAllZombiesKilled -= ExterminationEdnStateShow;
     }
 
-    private void ZombieEndState()
+    private void ZombieEndStateShow()
     {
         zombieEndState.SetActive(true);
+        PlayerInteraction.OnSecondaryInteractionInterceptor = ZombieEndStateHide;
+    }
+
+    private void ZombieEndStateHide()
+    {
+        PlayerInteraction.OnSecondaryInteractionInterceptor = null;
+        OnRestartConfirmed?.Invoke();
     }
 
     private void ExterminationEdnStateShow()

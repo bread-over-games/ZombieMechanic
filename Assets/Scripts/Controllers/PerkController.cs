@@ -11,8 +11,6 @@ public class PerkController : MonoBehaviour
     [HideInInspector] public PerkData firstPerkPick;
     [HideInInspector] public PerkData secondPerkPick;
 
-    [HideInInspector] public bool isSelectingPerk = false;
-
     public static PerkController Instance { get; private set; }
     public static Action OnRandomPerksGenerated;
     public static Action OnPerkSelected;
@@ -36,8 +34,6 @@ public class PerkController : MonoBehaviour
 
     private void GenerateRandomPerks()
     {
-        isSelectingPerk = true;
-
         List<PerkData> availablePerksWOFirstPick = new List<PerkData>(availablePerks); // temporary storage for generating secondPerkPick
         firstPerkPick = availablePerksWOFirstPick[UnityEngine.Random.Range(0, availablePerks.Count)];
         availablePerksWOFirstPick.Remove(firstPerkPick);
@@ -62,8 +58,7 @@ public class PerkController : MonoBehaviour
         }
 
         firstPerkPick = null;
-        secondPerkPick = null;
-        isSelectingPerk = false;   
+        secondPerkPick = null;   
         OnPerkSelected?.Invoke();   
     }
 }

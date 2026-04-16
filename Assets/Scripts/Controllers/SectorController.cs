@@ -14,18 +14,15 @@ public class SectorController : MonoBehaviour
 
     public bool antibioticsDepleted = false;
     private bool antibioticsLowWarned = false;
-    public bool isReadingMessage = false;
 
     private void OnEnable()
     {
         ObjectGenerator.OnAntibioticsGenerated += ChangeAntibioticsValue;
-        PlayerInteraction.OnMessageConfirmed += MessageConfirmed;
     }
 
     private void OnDisable()
     {
         ObjectGenerator.OnAntibioticsGenerated -= ChangeAntibioticsValue;
-        PlayerInteraction.OnMessageConfirmed -= MessageConfirmed;
     }
 
     private void Awake()
@@ -44,23 +41,16 @@ public class SectorController : MonoBehaviour
     {
         antibioticsLeft -= amount;
 
-        if (antibioticsLeft <= 4 && !antibioticsLowWarned)
+        if (antibioticsLeft <= 4 && !antibioticsLowWarned && antibioticsLeft > 0)
         {
             OnAntibioticsRunningLow?.Invoke();
-            isReadingMessage = true;
             antibioticsLowWarned = true;
         }
 
         if (antibioticsLeft <= 0)
         {
             antibioticsDepleted = true;
-            isReadingMessage = true;
             OnAntibioticsDepleted?.Invoke();
         }        
-    }
-
-    private void MessageConfirmed()
-    {
-        isReadingMessage = false;
     }
 }

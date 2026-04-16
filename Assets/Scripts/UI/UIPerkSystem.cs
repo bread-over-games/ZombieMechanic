@@ -25,17 +25,16 @@ public class UIPerkSystem : MonoBehaviour
     private void OnEnable()
     {
         PerkController.OnRandomPerksGenerated += ShowPerkWindow;
-        PlayerInteraction.OnPerkActivated += ActivatePerk;
     }
 
     private void OnDisable()
     {
         PerkController.OnRandomPerksGenerated -= ShowPerkWindow;
-        PlayerInteraction.OnPerkActivated -= ActivatePerk;
     }
 
     private void ShowPerkWindow()
     {
+        PlayerInteraction.OnSecondaryInteractionInterceptor = ActivatePerk;
         UIFocusStack.Push(perkSystemWindow);     
         DisplayPerks();
         OnUIPerkWindowActive?.Invoke();
@@ -45,6 +44,7 @@ public class UIPerkSystem : MonoBehaviour
     {
         EventSystem.current.SetSelectedGameObject(null);
         UIFocusStack.Pop();
+        PlayerInteraction.OnSecondaryInteractionInterceptor = null;
     }
 
     public void DisplayPerks()

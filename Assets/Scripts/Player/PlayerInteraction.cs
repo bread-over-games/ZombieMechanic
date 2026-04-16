@@ -13,10 +13,7 @@ public class PlayerInteraction : MonoBehaviour
     public static Action<IInteractable> OnInteractableApproached;
     public static Action<IInteractable> OnInteractableLeft;
     public static Action OnIntroSkip;
-    public static Action OnPerkActivated;
-    public static Action OnMessageConfirmed;
-    public static Action OnMisisonTypeSelected;
-    public static Action OnRestartGameRequest;
+    public static Action OnSecondaryInteractionInterceptor;
 
     [SerializeField] private Inventory playerInventory;
 
@@ -97,6 +94,7 @@ public class PlayerInteraction : MonoBehaviour
 
     public void OnInteractPrimary(InputAction.CallbackContext context)
     {
+        if (!context.started) return;
         if (isInputBlocked) return;
 
         if (!introSkipped) // skips intro
@@ -184,41 +182,16 @@ public class PlayerInteraction : MonoBehaviour
 
     public void OnInteractSecondary(InputAction.CallbackContext context)
     {
+        if (!context.started) return;        
         if (isInputBlocked) return;
 
-        if (SectorController.Instance.isReadingMessage)
+        if (OnSecondaryInteractionInterceptor != null)
         {
-            if (context.started) OnMessageConfirmed?.Invoke();
-            return;
+            OnSecondaryInteractionInterceptor?.Invoke();
         }
 
-        if (PerkController.Instance.isSelectingPerk)
-        {
-            if (context.started) OnPerkActivated?.Invoke();
-            return;
-        }
-
-        if (MissionController.Instance.isSelectingMissionType)
-        {
-            if (context.started) OnMisisonTypeSelected?.Invoke();
-            return;
-        }
-        
-        if (GameManager.Instance.isGameOver)
-        {
-            if (context.started) OnRestartGameRequest?.Invoke();
-            return;
-        }
-
-        if (currentInteractable == null)
-        {
-            return;
-        }
-
-        if (!currentInteractable.IsInteractionPossible())
-        {
-            return;
-        }
+        if (currentInteractable == null) return;
+        if (!currentInteractable.IsInteractionPossible()) return;
 
         if (context.started)
         {
