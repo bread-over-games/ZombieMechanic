@@ -33945,6 +33945,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isGamePaused: 0
+  isPauseBlocked: 0
 --- !u!1 &1451664715
 GameObject:
   m_ObjectHideFlags: 0
@@ -44473,7 +44474,7 @@ MonoBehaviour:
   storageRackConstructible: {fileID: 1214555821}
   armoryFirst: {fileID: 155053022065181570}
   salvageTable: {fileID: 1571740917}
-  skipTutorial: 1
+  skipTutorial: 0
   sparePartsPicked: 0
   sparePartsPlacedSalvage: 0
   sparePartsSalvaged: 0

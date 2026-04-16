@@ -51,15 +51,14 @@ public class PauseController : MonoBehaviour
         Infection.OnInfectionReachedMaxLevel -= PauseGame;
         Infection.OnInfectionReachedMaxLevel -= BlockPause;
         UISectorInfo.OnMessageConfirmed -= ResumeGame;
-        UISectorInfo.OnMessageConfirmed -== UnblockPause;
+        UISectorInfo.OnMessageConfirmed -= UnblockPause;
         UIPauseMenu.OnResumeGameButtonSelected -= ResumeGame;
         UIPauseMenu.OnResumeGameButtonSelected -= UnblockPause;
     }
 
     public void OnPause(InputAction.CallbackContext context)
     {
-        if (!context.started) return;
-        Debug.Log("Pause pressdedf");
+        if (!context.started) return;        
         if (!isGamePaused && !isPauseBlocked)
         {
             PauseGame();
