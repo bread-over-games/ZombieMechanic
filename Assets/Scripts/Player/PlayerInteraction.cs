@@ -12,11 +12,8 @@ public class PlayerInteraction : MonoBehaviour
 
     public static Action<IInteractable> OnInteractableApproached;
     public static Action<IInteractable> OnInteractableLeft;
-    public static Action OnIntroSkip;
-    public static Action OnPerkActivated;
-    public static Action OnMessageConfirmed;
-    public static Action OnMisisonTypeSelected;
-    public static Action OnRestartGameRequest;
+    public static Action OnSecondaryInteractionInterceptor = null;
+    public static Action OnPrimaryInteractionInterceptor = null;
 
     [SerializeField] private Inventory playerInventory;
 
@@ -26,7 +23,6 @@ public class PlayerInteraction : MonoBehaviour
     [SerializeField] private LayerMask interactableLayer;    
 
     private bool isInputBlocked = false; // true means the input is blocked
-    private bool introSkipped = false;
 
     private void OnEnable()
     {
@@ -96,25 +92,18 @@ public class PlayerInteraction : MonoBehaviour
     }
 
     public void OnInteractPrimary(InputAction.CallbackContext context)
-    {
+    {        
+        if (!context.started) return;
         if (isInputBlocked) return;
-
-        if (!introSkipped) // skips intro
-        {
-            introSkipped = true;
-            OnIntroSkip?.Invoke();
-            return;
-        }
-
-        if (currentInteractable == null)
-        {
-            return;
-        }
-
-        if (!currentInteractable.IsInteractionPossible())
+        
+        if (OnPrimaryInteractionInterceptor != null)
         {            
+            OnPrimaryInteractionInterceptor?.Invoke();
             return;
-        }
+        }        
+
+        if (currentInteractable == null) return;
+        if (!currentInteractable.IsInteractionPossible()) return;
 
         if (context.started)
         {
@@ -184,41 +173,18 @@ public class PlayerInteraction : MonoBehaviour
 
     public void OnInteractSecondary(InputAction.CallbackContext context)
     {
+        if (!context.started) return;        
         if (isInputBlocked) return;
 
-        if (SectorController.Instance.isReadingMessage)
+        if (OnSecondaryInteractionInterceptor != null)
         {
-            if (context.started) OnMessageConfirmed?.Invoke();
+            OnSecondaryInteractionInterceptor?.Invoke();
             return;
         }
 
-        if (PerkController.Instance.isSelectingPerk)
-        {
-            if (context.started) OnPerkActivated?.Invoke();
-            return;
-        }
+        if (currentInteractable == null) return;
+        if (!currentInteractable.IsInteractionPossible()) return;
 
-        if (MissionController.Instance.isSelectingMissionType)
-        {
-            if (context.started) OnMisisonTypeSelected?.Invoke();
-            return;
-        }
-        
-        if (GameManager.Instance.isGameOver)
-        {
-            if (context.started) OnRestartGameRequest?.Invoke();
-            return;
-        }
-
-        if (currentInteractable == null)
-        {
-            return;
-        }
-
-        if (!currentInteractable.IsInteractionPossible())
-        {
-            return;
-        }
 
         if (context.started)
         {
@@ -248,10 +214,7 @@ public class PlayerInteraction : MonoBehaviour
 
     private void InsertAntibiotics(Object obj, Inventory myInventory) // when antibiotics are found on mission they are automatically added to medical cabinet
     {
-        if (myInventory != playerInventory)
-        {
-            return;
-        }
+        if (myInventory != playerInventory) return;
 
         if (obj is Antibiotics antibiotics)
         {

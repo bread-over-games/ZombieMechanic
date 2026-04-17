@@ -11,7 +11,7 @@ public class Armory : Bench, IInteractable
     [SerializeReference] public Backpack storedBackpack = null;
     [SerializeReference] public Weapon storedWeapon = null;
 
-    private ButtonSelector.ArmorySlot currentSlotSelection;
+    private UIGearOverview.ArmorySlot currentSlotSelection;
 
     public static Action OnBaseballBatPlaced;
     public static Action OnSentOnMission; // for tutorial purpose only
@@ -45,17 +45,14 @@ public class Armory : Bench, IInteractable
         isAvailableForMission = true; 
     }
 
-    private void AssignCurrentSlotSelection(ButtonSelector.ArmorySlot selectedSlot)
+    private void AssignCurrentSlotSelection(UIGearOverview.ArmorySlot selectedSlot)
     {
         currentSlotSelection = selectedSlot;
     }
 
     public override bool IsInteractionPossible()
     {
-        if (!isEnabled)
-        {  
-            return false; 
-        }
+        if (!isEnabled) return false;
 
         return isAvailableForMission;
     }
@@ -78,15 +75,15 @@ public class Armory : Bench, IInteractable
             {
                 switch (currentSlotSelection)
                 {
-                    case ButtonSelector.ArmorySlot.Weapon: 
+                    case UIGearOverview.ArmorySlot.Weapon: 
                         if (storedWeapon != null)
                             inventory.SendObject(playerInventory, storedWeapon);                        
                         break;
-                    case ButtonSelector.ArmorySlot.Armor:
+                    case UIGearOverview.ArmorySlot.Armor:
                         if (storedArmor != null)
                             inventory.SendObject(playerInventory, storedArmor);
                         break;
-                    case ButtonSelector.ArmorySlot.Backpack:
+                    case UIGearOverview.ArmorySlot.Backpack:
                         if (storedBackpack != null)
                             inventory.SendObject(playerInventory, storedBackpack);                        
                         break;
@@ -143,10 +140,7 @@ public class Armory : Bench, IInteractable
 
     private void AssignCurrentObject(Object obj, Inventory myInventory) // when putting Object into Armory
     {        
-        if (myInventory != inventory)
-        {
-            return;
-        }
+        if (myInventory != inventory) return;
 
         if (obj is Weapon weapon)
         {
@@ -166,10 +160,8 @@ public class Armory : Bench, IInteractable
 
     private void RemoveCurrentObject(Object obj, Inventory myInventory) // when taking Object out of Armory
     {
-        if (inventory != myInventory)
-        {
-            return;
-        }
+        if (inventory != myInventory) return;
+
 
         if (obj is Weapon weapon)
         {

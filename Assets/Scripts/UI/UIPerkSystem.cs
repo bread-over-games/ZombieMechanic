@@ -6,6 +6,12 @@ using UnityEngine.UI;
 
 public class UIPerkSystem : MonoBehaviour
 {
+    public enum PerkSlot
+    {
+        FirstPerkSlot,
+        SecondPerkSlot
+    }
+
     [SerializeField] private GameObject perkSystemWindow;
 
     [Header("First perk info")]
@@ -18,24 +24,23 @@ public class UIPerkSystem : MonoBehaviour
     [SerializeField] private TMP_Text secondPerkDescription;
     [SerializeField] private Image secondPerkImage;
 
-    [HideInInspector] public ButtonSelectorPerks.PerkSlot currentSlotSelected;
+    [HideInInspector] public PerkSlot currentSlotSelected;
     public static Action OnUIPerkWindowActive;
-    public static Action<ButtonSelectorPerks.PerkSlot> OnCurrentPerkSlotSelected;
+    public static Action<PerkSlot> OnCurrentPerkSlotSelected;
 
     private void OnEnable()
     {
         PerkController.OnRandomPerksGenerated += ShowPerkWindow;
-        PlayerInteraction.OnPerkActivated += ActivatePerk;
     }
 
     private void OnDisable()
     {
         PerkController.OnRandomPerksGenerated -= ShowPerkWindow;
-        PlayerInteraction.OnPerkActivated -= ActivatePerk;
     }
 
     private void ShowPerkWindow()
     {
+        PlayerInteraction.OnSecondaryInteractionInterceptor = ActivatePerk;
         UIFocusStack.Push(perkSystemWindow);     
         DisplayPerks();
         OnUIPerkWindowActive?.Invoke();
@@ -45,6 +50,7 @@ public class UIPerkSystem : MonoBehaviour
     {
         EventSystem.current.SetSelectedGameObject(null);
         UIFocusStack.Pop();
+        PlayerInteraction.OnSecondaryInteractionInterceptor = null;
     }
 
     public void DisplayPerks()
@@ -67,13 +73,13 @@ public class UIPerkSystem : MonoBehaviour
         HidePerkWindow();
     }
 
-    public void OnButtonSelected(ButtonSelectorPerks.PerkSlot perkSlot)
+    public void FirstPerkSelected()
     {
-        currentSlotSelected = perkSlot;
+        currentSlotSelected = PerkSlot.FirstPerkSlot;
     }
 
-    public void OnButtonDeselected(ButtonSelectorPerks.PerkSlot perkSlot)
+    public void SecondPerkSelected()
     {
-
+        currentSlotSelected = PerkSlot.SecondPerkSlot;
     }
 }

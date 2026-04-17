@@ -29,20 +29,15 @@ public class MissionController : MonoBehaviour
     private Armory preparingMissionArmory;
     private Mission.MissionType preparingMissionType;
 
-    [HideInInspector] public bool isSelectingMissionType = false;
-
     private void OnEnable()
     {
-        Armory.OnMissionGearSelected += SelectingMissionType;
         UIMissionSelect.OnCurrentMissionTypeSlotSelected += ConfirmMissionType;
     }
 
     private void OnDisable()
     {
-        Armory.OnMissionGearSelected -= SelectingMissionType;
         UIMissionSelect.OnCurrentMissionTypeSlotSelected -= ConfirmMissionType;
     }
-
 
     void Awake()
     {
@@ -63,11 +58,6 @@ public class MissionController : MonoBehaviour
         }
     }
 
-    private void SelectingMissionType()
-    {
-        isSelectingMissionType = true;
-    }
-
     private void ResolveMission(Mission mission, int index)
     {
         OnMissionCompleted?.Invoke(mission);
@@ -86,7 +76,7 @@ public class MissionController : MonoBehaviour
     public void ConfirmMissionType(Mission.MissionType missionType)
     {
         preparingMissionType = missionType;
-        SendMission();
+        SendMission();        
     }
 
     public void SendMission()
@@ -103,6 +93,5 @@ public class MissionController : MonoBehaviour
         preparingMissionInventory = null;
         preparingMissionArmory = null;
         preparingMissionType = default;
-        isSelectingMissionType = false;
     }        
 }

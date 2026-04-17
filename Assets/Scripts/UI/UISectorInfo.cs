@@ -9,22 +9,23 @@ public class UISectorInfo : MonoBehaviour
     [SerializeField] private GameObject atbLowWindow;
     [SerializeField] private TMP_Text[] zombiesLeft;
 
+    public static Action OnMessageConfirmed;
+
     private void OnEnable()
     {
         SectorController.OnAntibioticsDepleted += ShowAtbDepletedWindow;
         SectorController.OnAntibioticsRunningLow += ShowAtbLowWindow;
-        PlayerInteraction.OnMessageConfirmed += HideWindows;
     }
 
     private void OnDisable()
     {
         SectorController.OnAntibioticsDepleted -= ShowAtbDepletedWindow;
         SectorController.OnAntibioticsRunningLow -= ShowAtbLowWindow;
-        PlayerInteraction.OnMessageConfirmed -= HideWindows;
     }
 
     private void ShowAtbDepletedWindow()
     {
+        PlayerInteraction.OnSecondaryInteractionInterceptor = HideWindows;
         UIFocusStack.Push(sectorInfoWindow);
         UpdateZombiesLeft();
         atbLowWindow.SetActive(false);
@@ -33,6 +34,7 @@ public class UISectorInfo : MonoBehaviour
 
     private void ShowAtbLowWindow()
     {
+        PlayerInteraction.OnSecondaryInteractionInterceptor = HideWindows;
         UIFocusStack.Push(sectorInfoWindow);
         UpdateZombiesLeft();
         atbLowWindow.SetActive(true);
@@ -41,9 +43,11 @@ public class UISectorInfo : MonoBehaviour
 
     private void HideWindows()
     {
+        OnMessageConfirmed?.Invoke();
         atbLowWindow.SetActive(false);
         atbDepletedWindow.SetActive(false);
         UIFocusStack.Pop();
+        PlayerInteraction.OnSecondaryInteractionInterceptor = null;        
     }
 
     private void UpdateZombiesLeft()

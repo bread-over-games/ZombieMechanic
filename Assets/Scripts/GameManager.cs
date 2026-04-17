@@ -14,13 +14,17 @@ public class GameManager : MonoBehaviour
     private void OnEnable()
     {
         Infection.OnInfectionReachedMaxLevel += DeclareGameOver;
-        PlayerInteraction.OnRestartGameRequest += RestartGame;
+        EndStatesUI.OnRestartConfirmed += RestartGame;
+        UIPauseMenu.OnRestartGameButtonSelected += RestartGame;
+        UIPauseMenu.OnExitGameButtonSelected += ExitGame;   
     }
 
     private void OnDisable()
     {
         Infection.OnInfectionReachedMaxLevel -= DeclareGameOver;
-        PlayerInteraction.OnRestartGameRequest -= RestartGame;
+        EndStatesUI.OnRestartConfirmed -= RestartGame;
+        UIPauseMenu.OnRestartGameButtonSelected -= RestartGame;
+        UIPauseMenu.OnExitGameButtonSelected -= ExitGame;
     }
 
     private void Awake()
@@ -45,5 +49,14 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1f;
         SceneManager.LoadScene("Garage");
+    }
+
+    private void ExitGame()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+    Application.Quit();
+#endif
     }
 }
