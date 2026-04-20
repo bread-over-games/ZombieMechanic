@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 65356427185fb974cbc013da1e8e7bf9
+guid: 2162f2fd9b270de459c7256d540a5ba1
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -7,8 +7,23 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Drill
+    second: {fileID: 2100000, guid: 7d228c4f003824241b9bc1ee5aedda75, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: EmissiveLight
+    second: {fileID: 2100000, guid: ddd5e8bf12924424694f1df63eaf9734, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Toolbox
+    second: {fileID: 2100000, guid: c15f6504c6e47f145b1f50fdb9da2735, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Workbench
-    second: {fileID: 2100000, guid: c8b518b0a99d08347a5e4293436d83f2, type: 2}
+    second: {fileID: 2100000, guid: c15f6504c6e47f145b1f50fdb9da2735, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -35,7 +50,7 @@ ModelImporter:
     extraExposedTransformPaths: []
     extraUserProperties: []
     clipAnimations: []
-    isReadable: 1
+    isReadable: 0
   meshes:
     lODScreenPercentages: []
     globalScale: 1
