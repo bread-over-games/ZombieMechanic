@@ -17,8 +17,33 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Metal
+    second: {fileID: 2100000, guid: f0c6ede828f9fa14fb207411082f32e7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PaintedMetal1
+    second: {fileID: 2100000, guid: a765c448512c0904e99868d592b7fba2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PaintedMetal2
+    second: {fileID: 2100000, guid: d51df29621b5b1047b9cd20b1ad1becf, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Plastic
+    second: {fileID: 2100000, guid: dc7111840b238e845bfb38d195195ee9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Toolbox
     second: {fileID: 2100000, guid: c15f6504c6e47f145b1f50fdb9da2735, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wood
+    second: {fileID: 2100000, guid: d2365ea44c05b93469ffb0cf8438496f, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
