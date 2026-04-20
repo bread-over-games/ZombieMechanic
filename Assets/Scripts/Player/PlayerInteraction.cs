@@ -92,28 +92,26 @@ public class PlayerInteraction : MonoBehaviour
     }
 
     public void OnInteractPrimary(InputAction.CallbackContext context)
-    {        
+    {
+        if (context.canceled)
+        {
+            if (interactionStarted) PrimaryInteractEnded();
+            return;
+        }
+
         if (!context.started) return;
         if (isInputBlocked) return;
-        
+
         if (OnPrimaryInteractionInterceptor != null)
-        {            
+        {
             OnPrimaryInteractionInterceptor?.Invoke();
             return;
-        }        
+        }
 
         if (currentInteractable == null) return;
         if (!currentInteractable.IsInteractionPossible()) return;
 
-        if (context.started)
-        {
-            PrimaryInteractStarted();
-        }
-
-        if (context.canceled && interactionStarted)
-        {
-            PrimaryInteractEnded();
-        }
+        PrimaryInteractStarted();
     }
 
     private void InteractableApproached()
@@ -173,6 +171,12 @@ public class PlayerInteraction : MonoBehaviour
 
     public void OnInteractSecondary(InputAction.CallbackContext context)
     {
+        if (context.canceled)
+        {
+            SecondaryInteractedEnded();
+            return;
+        }
+
         if (!context.started) return;        
         if (isInputBlocked) return;
 
@@ -184,17 +188,8 @@ public class PlayerInteraction : MonoBehaviour
 
         if (currentInteractable == null) return;
         if (!currentInteractable.IsInteractionPossible()) return;
-
-
-        if (context.started)
-        {
-            SecondaryInteractStarted();
-        }
-
-        if (context.canceled)
-        {
-            SecondaryInteractedEnded();
-        }
+        
+        SecondaryInteractStarted();
     }
 
     private void SecondaryInteractStarted()
@@ -208,6 +203,7 @@ public class PlayerInteraction : MonoBehaviour
 
     private void SecondaryInteractedEnded()
     {
+        if (currentInteractable == null) return;
         interactionStarted = false;
         currentInteractable.EndInteractionSecondary();
     }

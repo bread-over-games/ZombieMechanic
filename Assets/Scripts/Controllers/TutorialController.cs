@@ -14,6 +14,7 @@ public class TutorialController : MonoBehaviour
 
     public Armory armoryFirst;
     public SalvageTable salvageTable;
+    public LootTable lootTable;
 
     public bool skipTutorial = false;
     [HideInInspector] public bool sparePartsPicked = false;
@@ -147,6 +148,7 @@ public class TutorialController : MonoBehaviour
     {
         lootTableFlasher.StopFlash();
         sparePartsPicked = true;
+        lootTable.isEnabled = false;
     }
    
     private void StartSalvageTableFlash()
@@ -166,6 +168,7 @@ public class TutorialController : MonoBehaviour
         sparePartsSalvaged = true;
         lootTableFlasher.StartFlash();
         salvageTable.DisableSalvageTable();
+        lootTable.isEnabled = true;
     }
 
     private void BaseballBatPicked()
@@ -173,6 +176,7 @@ public class TutorialController : MonoBehaviour
         lootTableFlasher.StopFlash();
         workbenchFlasher.StartFlash();
         baseballBatPicked = true;
+        lootTable.isEnabled = false;
     }
 
     private void BaseballBatPlacedWorkbench()
@@ -216,5 +220,6 @@ public class TutorialController : MonoBehaviour
     private void TutorialFinished()
     {
         OnTutorialEnd?.Invoke();
+        lootTable.isEnabled = true;
     }
 }
