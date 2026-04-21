@@ -3,7 +3,8 @@ using DG.Tweening;
 
 public class WorkbenchVisual : MonoBehaviour
 {
-    public ParticleSystem angleGrinderSparks;
+    public ParticleSystem weldSparks;
+    public ParticleSystem grinderSparks;
 
     [Header("Light intensity Range")]
     public float minIntensity = 0.5f;
@@ -15,30 +16,48 @@ public class WorkbenchVisual : MonoBehaviour
 
     public Light weldLight;
 
+    [Header("Animation")]
+    [SerializeField] private Animator animator;
+    [SerializeField] private Bench workbench;
+    private IInteractable interactableTable;
+
     private void OnEnable()
     {
-        Workbench.OnRepairStart += StartWeldSparks;
-        Workbench.OnRepairStop += StopWeldSparks;
+        Workbench.OnRepairStart += StartWorkingEffect;
+        Workbench.OnRepairStop += StopWorkingEffect;
+        PlayerInteraction.OnInteractableApproached += OpenWorkbench;
+        PlayerInteraction.OnInteractableLeft += CloseWorkbench;
     }
 
     private void OnDisable()
     {
-        Workbench.OnRepairStart -= StartWeldSparks;
-        Workbench.OnRepairStop -= StopWeldSparks;
+        Workbench.OnRepairStart -= StartWorkingEffect;
+        Workbench.OnRepairStop -= StopWorkingEffect;
+        PlayerInteraction.OnInteractableApproached -= OpenWorkbench;
+        PlayerInteraction.OnInteractableLeft -= CloseWorkbench;
     }
 
-    private void StartWeldSparks()
+    private void Awake()
     {
-        angleGrinderSparks.Play();
+        interactableTable = workbench as IInteractable;
+    }
+
+    private void StartWorkingEffect()
+    {
+        weldSparks.Play();
+        grinderSparks.Play();
         weldLight.enabled = true;
         FlickerNext();
+        animator.SetBool("isWorking", true);
     }
 
-    private void StopWeldSparks()
+    private void StopWorkingEffect()
     {
-        angleGrinderSparks.Stop();
+        weldSparks.Stop();
+        grinderSparks.Stop();
         weldLight.enabled = false;
         StopFlicker();
+        animator.SetBool("isWorking", false);
     }
 
     private void FlickerNext()
@@ -57,5 +76,21 @@ public class WorkbenchVisual : MonoBehaviour
     void OnDestroy()
     {
         weldLight.DOKill();
+    }
+
+    private void OpenWorkbench(IInteractable approachedWorkbench)
+    {
+        if (approachedWorkbench == interactableTable)
+        {
+            animator.SetTrigger("Open");
+        }
+    }
+
+    private void CloseWorkbench(IInteractable leftWorkbench)
+    {
+        if (leftWorkbench == interactableTable)
+        {
+            animator.SetTrigger("Close");
+        }
     }
 }
