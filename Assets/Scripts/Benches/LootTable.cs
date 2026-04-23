@@ -12,6 +12,12 @@ public class LootTable : Bench, IBench
 {
     public static Action OnTutorialSparePartsPicked;
     public static Action OnTutorialBaseballBatPicked;
+    public bool isEnabled = true;
+
+    public override bool IsInteractionPossible()
+    {
+        return isEnabled;
+    }
 
     public override void StartInteractionPrimary()
     {

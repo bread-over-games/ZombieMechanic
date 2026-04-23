@@ -116,6 +116,7 @@ MonoBehaviour:
   benchType: 1
   inventory: {fileID: -3263844004975946700}
   interactableName: Loot Table
+  isEnabled: 1
 --- !u!114 &-3263844004975946700
 MonoBehaviour:
   m_ObjectHideFlags: 0

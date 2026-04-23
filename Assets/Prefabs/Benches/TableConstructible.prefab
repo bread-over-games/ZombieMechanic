@@ -148,15 +148,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: e157c68bf2ee3df4680814f8e252f6c6, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.1237
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e157c68bf2ee3df4680814f8e252f6c6, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.1237
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e157c68bf2ee3df4680814f8e252f6c6, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.518231
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e157c68bf2ee3df4680814f8e252f6c6, type: 3}
       propertyPath: m_LocalPosition.x
@@ -201,6 +201,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: e157c68bf2ee3df4680814f8e252f6c6, type: 3}
       propertyPath: m_Name
       value: Toolbox_Constructible
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e157c68bf2ee3df4680814f8e252f6c6, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 7788276667622485648, guid: e157c68bf2ee3df4680814f8e252f6c6, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
