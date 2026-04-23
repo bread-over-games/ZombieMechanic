@@ -70,6 +70,7 @@ Transform:
   - {fileID: 1569533145499603248}
   - {fileID: 1523023177450310677}
   - {fileID: 1976446627374945539}
+  - {fileID: 2288177778987098984}
   - {fileID: 7457039939981577352}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -96,6 +97,9 @@ MonoBehaviour:
     rid: -2
   storedWeapon:
     rid: -2
+  survivorPrefab: {fileID: 8082911178110486429, guid: 83bcb263e15e4bc49b76c5f27d1eb3cd, type: 3}
+  survivorSpawnSpot: {fileID: 2288177778987098984}
+  survivorParent: {fileID: 0}
   references:
     version: 2
     RefIds:
@@ -436,6 +440,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 7777680613126035557}
   m_LocalEulerAnglesHint: {x: 0, y: 146.827, z: 0}
+--- !u!1 &5684538769811847791
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2288177778987098984}
+  m_Layer: 6
+  m_Name: SurvivorSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2288177778987098984
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5684538769811847791}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0.9454521, z: -0, w: 0.32576126}
+  m_LocalPosition: {x: 1.075, y: 0, z: -1.007}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7777680613126035557}
+  m_LocalEulerAnglesHint: {x: 0, y: -141.977, z: 0}
 --- !u!1 &5765910736738286793
 GameObject:
   m_ObjectHideFlags: 0
@@ -705,6 +740,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7518105650838359109, guid: 8730571fdf759a4419f81a3e08934caf, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7478020407611024155}
+    - targetCorrespondingSourceObject: {fileID: 598327318505532220, guid: 8730571fdf759a4419f81a3e08934caf, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2246983982761804660}
+    - targetCorrespondingSourceObject: {fileID: 2648310471847409781, guid: 8730571fdf759a4419f81a3e08934caf, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4602908984960436214}
   m_SourcePrefab: {fileID: 100100000, guid: 8730571fdf759a4419f81a3e08934caf, type: 3}
 --- !u!4 &3007793502077326023 stripped
 Transform:
@@ -742,3 +783,45 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 8730571fdf759a4419f81a3e08934caf, type: 3}
   m_PrefabInstance: {fileID: 5178523421158074377}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &5733187998980621109 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 598327318505532220, guid: 8730571fdf759a4419f81a3e08934caf, type: 3}
+  m_PrefabInstance: {fileID: 5178523421158074377}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2246983982761804660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5733187998980621109}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fd829b86c546794ebd3e9e59961c4e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EmissionColor: {r: 0.9384973, g: 1, b: 0, a: 1}
+  m_PeakIntensity: 15
+  m_BaseIntensity: 0
+  m_FlashDuration: 1
+--- !u!1 &7142005092093497468 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2648310471847409781, guid: 8730571fdf759a4419f81a3e08934caf, type: 3}
+  m_PrefabInstance: {fileID: 5178523421158074377}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4602908984960436214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7142005092093497468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fd829b86c546794ebd3e9e59961c4e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EmissionColor: {r: 0.9384973, g: 1, b: 0, a: 1}
+  m_PeakIntensity: 15
+  m_BaseIntensity: 0
+  m_FlashDuration: 1

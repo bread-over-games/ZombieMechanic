@@ -325,7 +325,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f9be0420e5d076479eef6bfd2ce6136, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerAnims: {fileID: 0}
+  playerAnims: {fileID: 7937786030528188812}
   playerInventory: {fileID: 5303107533594216243}
   rayOrigin: {fileID: 323232856266620898}
   maxDistance: 0.7

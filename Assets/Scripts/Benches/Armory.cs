@@ -17,11 +17,14 @@ public class Armory : Bench, IInteractable
     public static Action OnSentOnMission; // for tutorial purpose only
     public static Action OnMissionGearSelected;
 
+    public GameObject survivorPrefab; // used for spawning when Armory is complete
+    public Transform survivorSpawnSpot;
+
     public void Awake()
     {
         acceptedTypes.Add(typeof(Weapon));
         acceptedTypes.Add(typeof(Armor));
-        acceptedTypes.Add(typeof(Backpack));        
+        acceptedTypes.Add(typeof(Backpack));
     }
 
     private void OnEnable()
@@ -38,6 +41,18 @@ public class Armory : Bench, IInteractable
         Inventory.OnObjectSend -= RemoveCurrentObject;
         UIGearOverview.OnCurrentArmorySlotSelected -= AssignCurrentSlotSelection;
         MissionController.OnMissionStarting += SendGearOnMission;
+    }
+
+    public void SetSurvivorSpawnLocation(Transform pos)
+    {
+        survivorSpawnSpot = pos;
+        SpawnSurvivor();
+    }
+
+    private void SpawnSurvivor()
+    {
+        GameObject spawnedSurvivor = Instantiate(survivorPrefab, survivorSpawnSpot.position, survivorSpawnSpot.rotation, GameObject.Find("Survivors").transform);
+        spawnedSurvivor.GetComponent<SurvivorVisualController>().assignedArmory = this;
     }
 
     public void MakeArmoryAvailableForMission()

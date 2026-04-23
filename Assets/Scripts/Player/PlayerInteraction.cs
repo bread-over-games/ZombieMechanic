@@ -161,6 +161,8 @@ public class PlayerInteraction : MonoBehaviour
     private void PrimaryInteractEnded()
     {
         interactionStarted = false;
+
+        if (currentInteractable == null) return;
         currentInteractable.EndInteractionPrimary();
 
         if (playerInventory.GetObjectList().Count == 0)
