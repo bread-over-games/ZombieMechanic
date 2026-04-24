@@ -279,7 +279,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76bcc994bf1e5484f9e75880487df54e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  infectionInterval: 1.3
+  infectionInterval: 1.5
   maxInfectionLevel: 100
 --- !u!1 &5763209099063731316
 GameObject:
