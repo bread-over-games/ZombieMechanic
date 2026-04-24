@@ -61,29 +61,34 @@ public class ObjectDisplay : MonoBehaviour
         }
     }
 
-    private void ObjectSpawnEffect(GameObject spawnedObject, Vector3 spawnPosition)
+    private IEnumerator ObjectSpawnEffect(GameObject spawnedObject, Transform spawnTransform)
     {
-        if (spawnedObject == null)
+        if (spawnedObject == null) yield break;
+        if (inventory.GetInventoryOfType() == Inventory.InventoryOfType.Player) yield break;
+
+        float duration = 0.2f;
+        float elapsed = 0f;
+
+        Vector3 startPos = spawnTransform.position + Vector3.up * 0.35f;
+        spawnedObject.transform.position = startPos;
+
+        // Drop phase — target follows the animated transform each frame
+        while (elapsed < duration)
         {
-            return; 
+            if (spawnedObject == null) yield break;
+
+            elapsed += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsed / duration);
+            spawnedObject.transform.position = Vector3.Lerp(startPos, spawnTransform.position, t);
+            yield return null;
         }
 
-        if (inventory.GetInventoryOfType() == Inventory.InventoryOfType.Player)
-        {
-            return;
-        }
+        if (spawnedObject == null) yield break;
 
-        // Start slightly above the target position
-        Vector3 dropFrom = spawnPosition + Vector3.up * 0.35f;
-        spawnedObject.transform.position = dropFrom;
-
-        Sequence spawnSequence = DOTween.Sequence();
-
-        // Drop down to the final position
-        spawnSequence.Append(spawnedObject.transform.DOMove(spawnPosition, 0.2f).SetLink(spawnedObject));
-
-        // Shake in place after landing
-        spawnSequence.Append(spawnedObject.transform.DOShakePosition(0.1f, strength: 0.02f, vibrato: 15, randomness: 45).SetLink(spawnedObject));
+        // Land shake — DOTween is fine here since position is now settled
+        spawnedObject.transform
+            .DOShakePosition(0.1f, strength: 0.02f, vibrato: 15, randomness: 45)
+            .SetLink(spawnedObject);
     }
 
     private void DoMultipleObjectsDisplay()
@@ -91,7 +96,7 @@ public class ObjectDisplay : MonoBehaviour
         ClearCurrentObjects();
 
         GameObject spawnedObject = null;
-        Vector3 spawnPosition = Vector3.zero;
+        Transform spawnPosition = null;
 
         for (int i = 0; i < inventory.GetObjectList().Count; i++)
         {
@@ -99,32 +104,32 @@ public class ObjectDisplay : MonoBehaviour
             {
                 case Weapon weapon:
                     spawnedObject = WeaponWorld.SpawnWeaponWorld(weaponSpawnPivot.position, weapon, weaponSpawnPivot);
-                    spawnPosition = weaponSpawnPivot.position;
+                    spawnPosition = weaponSpawnPivot;
                     currentObjects.Add(spawnedObject);
                     break;
                 case Backpack backpack:
                     spawnedObject = BackpackWorld.SpawnBackpackWorld(backpackSpawnPivot.position, backpack, backpackSpawnPivot);
-                    spawnPosition = backpackSpawnPivot.position;
+                    spawnPosition = backpackSpawnPivot;
                     currentObjects.Add(spawnedObject);
                     break;
                 case Armor armor:
                     spawnedObject = ArmorWorld.SpawnArmorWorld(armorSpawnPivot.position, armor, armorSpawnPivot);
-                    spawnPosition = armorSpawnPivot.position;
+                    spawnPosition = armorSpawnPivot;
                     currentObjects.Add(spawnedObject);
                     break;
                 case Scrap scrap:
                     spawnedObject = ScrapWorld.SpawnScrapWorld(weaponSpawnPivot.position, scrap, weaponSpawnPivot);
-                    spawnPosition = weaponSpawnPivot.position;
+                    spawnPosition = weaponSpawnPivot;
                     currentObjects.Add(spawnedObject);
                     break;
                 case Antibiotics antibiotics:
                     spawnedObject = AntibioticsWorld.SpawnAntibioticsWorld(weaponSpawnPivot.position, antibiotics, weaponSpawnPivot);
-                    spawnPosition = weaponSpawnPivot.position;
+                    spawnPosition = weaponSpawnPivot;
                     currentObjects.Add(spawnedObject);
                     break;
             }
 
-            ObjectSpawnEffect(spawnedObject, spawnPosition);
+            StartCoroutine(ObjectSpawnEffect(spawnedObject, spawnPosition));
         }
 
 
@@ -133,7 +138,7 @@ public class ObjectDisplay : MonoBehaviour
     private void DoObjectDisplay()
     {
         GameObject spawnedObject = null;
-        Vector3 spawnPosition = weaponSpawnPivot.position;
+        Transform spawnPosition = weaponSpawnPivot;
 
         switch (inventory.GetObjectList()[0])
         {
@@ -159,7 +164,7 @@ public class ObjectDisplay : MonoBehaviour
                 break;
         }
 
-        ObjectSpawnEffect(spawnedObject, spawnPosition);
+        StartCoroutine(ObjectSpawnEffect(spawnedObject, spawnPosition));
     }
 
     private void ClearCurrentObjects()

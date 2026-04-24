@@ -90,6 +90,10 @@ PrefabInstance:
       propertyPath: constructibleDescription
       value: Increases Spare parts storage limit by 20.
       objectReference: {fileID: 0}
+    - target: {fileID: 1836018064761417943, guid: bfd2c8931aa0047408c7b861674cb5f0, type: 3}
+      propertyPath: sparePartsConstructionCost
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3792068929232935449, guid: bfd2c8931aa0047408c7b861674cb5f0, type: 3}
       propertyPath: m_Name
       value: StorageRackConstructible

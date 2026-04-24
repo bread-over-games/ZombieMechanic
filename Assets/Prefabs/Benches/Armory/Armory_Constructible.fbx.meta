@@ -7,6 +7,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: ArmoryCabinet
+    second: {fileID: 2100000, guid: 80c9984437afa7c42b8c335533c3124b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: pintura
     second: {fileID: 2100000, guid: 3981a85c56296c744885577f56f47d30, type: 2}
   materials:

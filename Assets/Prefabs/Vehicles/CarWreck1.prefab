@@ -193,7 +193,7 @@ MonoBehaviour:
   deconstructibleDescription: Salvage this car wreck for Spare parts.
   deconstructibleName: 'Salvage: Car Wreck'
   sparePartsReward: 1
-  totalDurability: 100
+  totalDurability: 150
   deconstructionInterval: 0.5
 --- !u!114 &4736964325522598231
 MonoBehaviour:
