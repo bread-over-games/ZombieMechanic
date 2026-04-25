@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 3739824b4cdbbfd45a8e6b0d8e239143
+guid: fc01c5ab28e77c94cb58362587bbd55e
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -72,7 +72,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 2
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -110,7 +110,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: InstantSalvage_0
+      name: Antibiotics_0
       rect:
         serializedVersion: 2
         x: 0
@@ -125,8 +125,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 984a9ab5acfd7064895584b8e9230d49
-      internalID: 218236337
+      spriteID: 77988d71cde316c4ea286c6438bf05dd
+      internalID: 998811010
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: ea735adfcb3fc4948af4eb46a2740071
+    spriteID: 462a26e8997d99e439ad276d802d0744
     internalID: 0
     vertices: []
     indices: 
@@ -145,7 +145,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      InstantSalvage_0: 218236337
+      Antibiotics_0: 998811010
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

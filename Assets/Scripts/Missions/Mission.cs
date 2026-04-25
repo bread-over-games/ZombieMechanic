@@ -28,11 +28,13 @@ public class Mission
     public float missionDuration;
     private float lootQualityMinimal;
     private float lootQualityMaximal;
-    private int zombiesKilled;
+    public int zombiesKilled;
     public int weaponWear;
     public int armorWear;
     public int backpackWear;
     public int lootAmount;
+
+    public static Action<Mission, int> OnMissionResolved;
 
     public Mission(/*Survivor missionSurvivor, */Weapon weaponToEquip, Backpack backpackToEquip, Armor armorToEquip, Inventory inventoryOfMission, Armory missionOwner, MissionType currentMissionType)
     {
@@ -59,8 +61,7 @@ public class Mission
 
     public void ResolveMission()
     {
-        ZombiesController.Instance.AddKilledZombies(zombiesKilled);
-        XPCounter.Instance.AddZombieKillXP(zombiesKilled);
+        OnMissionResolved?.Invoke(this, zombiesKilled);                
         ApplyWearToLoadout();
         ReturnSurvivorLoadout();
 
