@@ -23528,6 +23528,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8001672004535461667, guid: 83bcb263e15e4bc49b76c5f27d1eb3cd, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8082911178110486429, guid: 83bcb263e15e4bc49b76c5f27d1eb3cd, type: 3}
       propertyPath: m_Name
       value: MaleSurvivor
