@@ -16,6 +16,10 @@ public class UIMissionInfoPanel : MonoBehaviour
     [HideInInspector] public Mission currentMission;
     private Coroutine currentCoroutine;
 
+    public UIFlyoutVisual flyoutVisualPrefab;
+    public RectTransform xpFlyoutPosition;
+    public RectTransform zombieFlyoutPosition;
+
     private void OnEnable()
     {
         MissionController.OnMissionCompleted += ShowMissionComplete;
@@ -44,7 +48,23 @@ public class UIMissionInfoPanel : MonoBehaviour
             missionCompleteWindow.SetActive(true);  
             scalePulse.Pulse();
             Invoke("Delete", 6f);
+            SpawnXPFlyout();
+            SpawnZombiesFlyout();
         }        
+    }
+
+    private void SpawnXPFlyout()
+    {
+        UIFlyoutVisual xpFlyout = Instantiate(flyoutVisualPrefab, xpFlyoutPosition.position, xpFlyoutPosition.rotation, xpFlyoutPosition);
+
+        xpFlyout.Initialize(UIFlyoutVisual.FlyoutTypes.XP, currentMission);
+    }
+
+    private void SpawnZombiesFlyout()
+    {
+        UIFlyoutVisual zombiesFlyout = Instantiate(flyoutVisualPrefab, zombieFlyoutPosition.position, zombieFlyoutPosition.rotation, zombieFlyoutPosition);
+
+        zombiesFlyout.Initialize(UIFlyoutVisual.FlyoutTypes.Zombies, currentMission);
     }
 
     private IEnumerator ChangeTimer()

@@ -15,13 +15,24 @@ public class ZombiesController : MonoBehaviour
     public int zombiesKilledTotal;
     public int zombiesKillVictoryGoal; // set by designer
 
+    public void OnEnable()
+    {
+        UIFlyoutVisual.OnFlyoutReachedDestination += AddKilledZombies;
+    }
+
+    public void OnDisable()
+    {
+        UIFlyoutVisual.OnFlyoutReachedDestination -= AddKilledZombies;
+    }
+
     void Awake()
     {
         Instance = this;
     }
 
-    public void AddKilledZombies(int amount)
+    private void AddKilledZombies(int amount, UIFlyoutVisual.FlyoutTypes flyoutType)
     {
+        if (flyoutType != UIFlyoutVisual.FlyoutTypes.Zombies) return;
         zombiesKilledTotal += amount;
         OnZombiesKilledChanged?.Invoke();
 

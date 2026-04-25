@@ -58,7 +58,7 @@ public class UIInfoHeader : MonoBehaviour
 
     private void UpdateZombiesAmount()
     {
-        zombiesKilledAmount.text = ZombiesController.Instance.zombiesKilledTotal.ToString() + "/" + ZombiesController.Instance.zombiesKillVictoryGoal.ToString();
+        zombiesKilledAmount.text = ZombiesController.Instance.zombiesKilledTotal.ToString();
         zombiesKilledPulse.Pulse();
     }
 }
