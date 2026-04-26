@@ -32,7 +32,6 @@ public class SalvageTableVisual : MonoBehaviour
 
     private void SalvageTickEffect()
     {
-        if (salvageTableObjDisplay.currentObjects[0] == null) return;
         salvageTableObjDisplay.currentObjects[0].GetComponent<ObjectEffects>().Shake();
     }
 

@@ -45,7 +45,7 @@ public class WorkbenchVisual : MonoBehaviour
     }
     private void RepairTickEffect()
     {
-        //if (workbenchObjDisplay.currentObjects[0] == null) return;
+        if (workbenchObjDisplay.currentObjects[0] == null) return;
         workbenchObjDisplay.currentObjects[0].GetComponent<ObjectEffects>().Shake();
     }
 
