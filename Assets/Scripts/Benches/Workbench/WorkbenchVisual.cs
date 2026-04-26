@@ -3,6 +3,7 @@ using DG.Tweening;
 
 public class WorkbenchVisual : MonoBehaviour
 {
+    public ObjectDisplay workbenchObjDisplay;
     public ParticleSystem weldSparks;
     public ParticleSystem grinderSparks;
 
@@ -27,6 +28,7 @@ public class WorkbenchVisual : MonoBehaviour
         Workbench.OnRepairStop += StopWorkingEffect;
         PlayerInteraction.OnInteractableApproached += OpenWorkbench;
         PlayerInteraction.OnInteractableLeft += CloseWorkbench;
+        Workbench.OnRepairTick += RepairTickEffect;
     }
 
     private void OnDisable()
@@ -34,12 +36,17 @@ public class WorkbenchVisual : MonoBehaviour
         Workbench.OnRepairStart -= StartWorkingEffect;
         Workbench.OnRepairStop -= StopWorkingEffect;
         PlayerInteraction.OnInteractableApproached -= OpenWorkbench;
-        PlayerInteraction.OnInteractableLeft -= CloseWorkbench;
+        Workbench.OnRepairTick -= RepairTickEffect;
     }
 
     private void Awake()
     {
         interactableTable = workbench as IInteractable;
+    }
+    private void RepairTickEffect()
+    {
+        //if (workbenchObjDisplay.currentObjects[0] == null) return;
+        workbenchObjDisplay.currentObjects[0].GetComponent<ObjectEffects>().Shake();
     }
 
     private void StartWorkingEffect()
@@ -58,6 +65,7 @@ public class WorkbenchVisual : MonoBehaviour
         weldLight.enabled = false;
         StopFlicker();
         animator.SetBool("isWorking", false);
+        workbenchObjDisplay.currentObjects[0].GetComponent<ObjectEffects>().Pulse();
     }
 
     private void FlickerNext()

@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class SalvageTableVisual : MonoBehaviour
 {
+    public ObjectDisplay salvageTableObjDisplay;
     public ParticleSystem angleGrinderSparks;
 
     [Header("Light intensity Range")]
@@ -19,12 +20,20 @@ public class SalvageTableVisual : MonoBehaviour
     {
         SalvageTable.OnSalvageStart += StartAngleGrinderSparks;
         SalvageTable.OnSalvageStop += StopAngleGrinderSparks;
+        SalvageTable.OnSalvageTick += SalvageTickEffect;
     }
 
     private void OnDisable()
     {
         SalvageTable.OnSalvageStart -= StartAngleGrinderSparks;
         SalvageTable.OnSalvageStop -= StopAngleGrinderSparks;
+        SalvageTable.OnSalvageTick -= SalvageTickEffect;
+    }
+
+    private void SalvageTickEffect()
+    {
+        if (salvageTableObjDisplay.currentObjects[0] == null) return;
+        salvageTableObjDisplay.currentObjects[0].GetComponent<ObjectEffects>().Shake();
     }
 
     private void StartAngleGrinderSparks()

@@ -191,6 +191,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48f81d63f5aa2c9409ea7ce16bfab4d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  workbenchObjDisplay: {fileID: 2784355277398447042}
   weldSparks: {fileID: 674620232450339623}
   grinderSparks: {fileID: 9038404435919839747}
   minIntensity: 5

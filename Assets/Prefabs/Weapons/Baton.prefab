@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6594322315596632787}
+  - component: {fileID: -6558553766328034220}
   m_Layer: 0
   m_Name: Baton
   m_TagString: Untagged
@@ -32,6 +33,20 @@ Transform:
   - {fileID: 7797201508085086506}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-6558553766328034220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 306655980355839109}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 165c3623d2db9e044aa88a2fb0a2eccf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 0.2
+  scaleIncrease: 1.25
 --- !u!1 &4355235658644148998
 GameObject:
   m_ObjectHideFlags: 0

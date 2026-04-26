@@ -41,6 +41,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4268987218033632042}
+  - component: {fileID: 6678026104714847186}
   m_Layer: 0
   m_Name: RiotGear
   m_TagString: Untagged
@@ -64,6 +65,20 @@ Transform:
   - {fileID: 2394947807465225705}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6678026104714847186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5155881556197574539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 165c3623d2db9e044aa88a2fb0a2eccf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 0.2
+  scaleIncrease: 1.25
 --- !u!1001 &1232590976786049313
 PrefabInstance:
   m_ObjectHideFlags: 0

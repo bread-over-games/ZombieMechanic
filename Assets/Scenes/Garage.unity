@@ -26882,6 +26882,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SalvageTable
       objectReference: {fileID: 0}
+    - target: {fileID: 4859316654885748114, guid: 571fb6ef229f36945aaea09673af4b4c, type: 3}
+      propertyPath: salvageTableObjDisplay
+      value: 
+      objectReference: {fileID: 1571740920}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -36442,6 +36446,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 762845e6cafd6e34396e6aaa8d657b11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1571740920 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2784355277398447042, guid: 571fb6ef229f36945aaea09673af4b4c, type: 3}
+  m_PrefabInstance: {fileID: 1088256046}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e63a5bab908a0440b4a8d8e0a136352, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1572359888 stripped
