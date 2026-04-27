@@ -36,6 +36,7 @@ public class WorkbenchVisual : MonoBehaviour
         Workbench.OnRepairStart -= StartWorkingEffect;
         Workbench.OnRepairStop -= StopWorkingEffect;
         PlayerInteraction.OnInteractableApproached -= OpenWorkbench;
+        PlayerInteraction.OnInteractableLeft -= CloseWorkbench;
         Workbench.OnRepairTick -= RepairTickEffect;
     }
 
@@ -43,6 +44,7 @@ public class WorkbenchVisual : MonoBehaviour
     {
         interactableTable = workbench as IInteractable;
     }
+
     private void RepairTickEffect()
     {
         if (workbenchObjDisplay.currentObjects[0] == null) return;
