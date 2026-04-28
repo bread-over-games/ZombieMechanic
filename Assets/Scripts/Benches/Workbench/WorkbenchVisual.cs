@@ -25,11 +25,12 @@ public class WorkbenchVisual : MonoBehaviour
     [Header("Flyout")]
     [SerializeField] private UIFlyoutVisual flyoutPrefab;
     [SerializeField] private Transform xpFlyoutAnchor;
-    [SerializeField] private RectTransform sparePartsFlyinAnchor;
+    [SerializeField] private Transform sparePartsFlyinAnchor;
     private Transform flyoutsParent;
     private Canvas canvas;
     private RectTransform canvasRect;
     private RectTransform currentLevelTarget;
+    private RectTransform sparePartsSpawnPosition;
 
     private void OnEnable()
     {
@@ -55,7 +56,8 @@ public class WorkbenchVisual : MonoBehaviour
         canvas = GameObject.Find("HUDCanvas").GetComponent<Canvas>();   
         canvasRect = canvas.GetComponent<RectTransform>();
         flyoutsParent = GameObject.Find("FlyoutsParent").GetComponent<Transform>(); 
-        currentLevelTarget = GameObject.Find("CurrentLevel").GetComponent<RectTransform>(); 
+        currentLevelTarget = GameObject.Find("CurrentLevel").GetComponent<RectTransform>();
+        sparePartsSpawnPosition = GameObject.Find("SparePartsIcon").GetComponent<RectTransform>();
     }
 
     private void RepairTickEffect(Bench sourceBench)
@@ -69,16 +71,15 @@ public class WorkbenchVisual : MonoBehaviour
         UIFlyoutVisual xpFlyout = Instantiate(flyoutPrefab, flyoutsParent);
 
         xpFlyout.GetComponent<RectTransform>().anchoredPosition = xpFlyoutPosition;
-        xpFlyout.Initialize(UIFlyoutVisual.FlyoutTypes.XP, workbench.GetComponent<Workbench>().repairValue * XPCounter.Instance.repairXP, 0.1f, currentLevelTarget);        
+        xpFlyout.Initialize(UIFlyoutVisual.FlyoutTypes.XP, workbench.GetComponent<Workbench>().repairValue * XPCounter.Instance.repairXP, 0.05f, 0.5f, currentLevelTarget.position);        
 
         // spare parts initialization
                 
         UIFlyoutVisual sparePartsFlyout = Instantiate(flyoutPrefab, flyoutsParent);
-        sparePartsFlyout.GetComponent<RectTransform>().position = GameObject.Find("SparePartsIcon").GetComponent<RectTransform>().position;
+        sparePartsFlyout.GetComponent<RectTransform>().position = sparePartsSpawnPosition.position;
 
-        //Vector2 sparePartsFlyoutPosition = ConvertWorldToScreenPos(sparePartsFlyoutAnchor);
-        sparePartsFlyout.Initialize(UIFlyoutVisual.FlyoutTypes.SpareParts, 1, 0.1f, sparePartsFlyinAnchor);
-        Debug.Log(sparePartsFlyinAnchor.position);
+        Vector3 targetScreenPos = Camera.main.WorldToScreenPoint(sparePartsFlyinAnchor.position);
+        sparePartsFlyout.Initialize(UIFlyoutVisual.FlyoutTypes.SpareParts, 1, 0.01f, 0.25f, targetScreenPos);
     } 
     
     private Vector2 ConvertWorldToScreenPos(Transform anchor)

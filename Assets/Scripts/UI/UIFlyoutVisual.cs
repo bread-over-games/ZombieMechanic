@@ -16,9 +16,10 @@ public class UIFlyoutVisual : MonoBehaviour
     }
 
     private FlyoutTypes flyoutType;
-    private RectTransform targetPosition;
+    private Vector2 targetPosition;
     private int amount; // doesn't matter if it's xp, zombies, atb, etc.
     private float lingerDuration;
+    private float flyDuration;
     public TMP_Text displayAmount;
     public Image displayIcon;
 
@@ -30,12 +31,13 @@ public class UIFlyoutVisual : MonoBehaviour
 
     public static Action<int, FlyoutTypes> OnFlyoutReachedDestination;
 
-    public void Initialize(FlyoutTypes myType, int passedAmount, float givenLingerDuration, RectTransform target)
+    public void Initialize(FlyoutTypes myType, int passedAmount, float givenLingerDuration, float givenFlyDuration, Vector2 target)
     {
         flyoutType = myType;
         amount = passedAmount;
         lingerDuration = givenLingerDuration;
         targetPosition = target;
+        flyDuration = givenFlyDuration; 
 
         switch (myType)
         {
@@ -57,15 +59,15 @@ public class UIFlyoutVisual : MonoBehaviour
         StartCoroutine(FlyToTarget(targetPosition));        
     }
 
-    IEnumerator FlyToTarget(RectTransform target)
+    IEnumerator FlyToTarget(Vector2 target)
     {
         yield return new WaitForSeconds(lingerDuration);
 
-        Vector3 mid = Vector3.Lerp(transform.position, target.position, 0.5f) + new Vector3(0f, -50f, 0f);
+        Vector3 mid = Vector3.Lerp(transform.position, target, 0.5f) + new Vector3(0f, -50f, 0f);
 
-        Vector3[] path = { mid, target.position };
+        Vector3[] path = { mid, target };
 
-        transform.DOPath(path, 1f, PathType.CatmullRom)
+        transform.DOPath(path, flyDuration, PathType.CatmullRom)
             .SetEase(Ease.InQuad)
             .SetLink(gameObject)
             .OnComplete(() =>
