@@ -12,13 +12,14 @@ public class BenchConstruction : MonoBehaviour, IConstructible
     [SerializeField] public string constructibleName;
     [TextArea(3,6)]
     [SerializeField] public string constructibleDescription;
+    
 
     private int currentConstructionLevel;
 
     private Coroutine constructionCoroutine;
 
     public static Action<GameObject> OnConstructionStart;
-    public static Action OnConstructionTick;
+    public static Action<GameObject> OnConstructionTick;
     public static Action<GameObject> OnConstructionStop;
     public static Action<GameObject> OnConstructionFinished;
 
@@ -97,7 +98,7 @@ public class BenchConstruction : MonoBehaviour, IConstructible
     {
         ResourceController.Instance.ChangeSparePartsAmount(-sparePartsConstructionCost);
         currentConstructionLevel += 1;
-        OnConstructionTick?.Invoke();
+        OnConstructionTick?.Invoke(gameObject);
     }
 
     public void StartInteractionPrimary(){}

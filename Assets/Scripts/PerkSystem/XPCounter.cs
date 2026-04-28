@@ -31,7 +31,6 @@ public class XPCounter : MonoBehaviour
     {
         SalvageTable.OnSalvageTick += AddSalvageXP;
         ObjectDeconstruction.OnDeconstructionTick += AddSalvageXP;
-        BenchConstruction.OnConstructionTick += AddRepairXP;
         UIFlyoutVisual.OnFlyoutReachedDestination += AddXP;
     }
 
@@ -39,15 +38,7 @@ public class XPCounter : MonoBehaviour
     {
         SalvageTable.OnSalvageTick -= AddSalvageXP;
         ObjectDeconstruction.OnDeconstructionTick -= AddSalvageXP;
-        BenchConstruction.OnConstructionTick -= AddRepairXP;
         UIFlyoutVisual.OnFlyoutReachedDestination -= AddXP;
-    }
-
-    private void AddRepairXP()
-    {
-        if (maxLevelReached) return;
-        currentXP += repairXP;
-        CheckLevel();
     }
 
     public void AddXP(int amount, UIFlyoutVisual.FlyoutTypes flyoutType)

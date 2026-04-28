@@ -67,19 +67,14 @@ public class WorkbenchVisual : MonoBehaviour
         workbenchObjDisplay.currentObjects[0].GetComponent<ObjectEffects>().Shake();
 
         // xp flyout initialization        
-        Vector2 xpFlyoutPosition = ConvertWorldToScreenPos(xpFlyoutAnchor);
         UIFlyoutVisual xpFlyout = Instantiate(flyoutPrefab, flyoutsParent);
-
-        xpFlyout.GetComponent<RectTransform>().anchoredPosition = xpFlyoutPosition;
+        xpFlyout.GetComponent<RectTransform>().anchoredPosition = ConvertWorldToScreenPos(xpFlyoutAnchor);
         xpFlyout.Initialize(UIFlyoutVisual.FlyoutTypes.XP, workbench.GetComponent<Workbench>().repairValue * XPCounter.Instance.repairXP, 0.05f, 0.5f, currentLevelTarget.position);        
 
-        // spare parts initialization
-                
+        // spare parts initialization                
         UIFlyoutVisual sparePartsFlyout = Instantiate(flyoutPrefab, flyoutsParent);
         sparePartsFlyout.GetComponent<RectTransform>().position = sparePartsSpawnPosition.position;
-
-        Vector3 targetScreenPos = Camera.main.WorldToScreenPoint(sparePartsFlyinAnchor.position);
-        sparePartsFlyout.Initialize(UIFlyoutVisual.FlyoutTypes.SpareParts, 1, 0.01f, 0.25f, targetScreenPos);
+        sparePartsFlyout.Initialize(UIFlyoutVisual.FlyoutTypes.SpareParts, 1, 0.01f, 0.25f, Camera.main.WorldToScreenPoint(sparePartsFlyinAnchor.position));
     } 
     
     private Vector2 ConvertWorldToScreenPos(Transform anchor)

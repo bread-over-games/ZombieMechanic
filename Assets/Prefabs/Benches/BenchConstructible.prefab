@@ -273,6 +273,37 @@ MonoBehaviour:
   m_ObsoleteUseShadowQualitySettings: 0
   m_ObsoleteCustomShadowResolution: 512
   m_ObsoleteContactShadows: 0
+--- !u!1 &2534650027253312381
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6444708795667330704}
+  m_Layer: 6
+  m_Name: SparePartsFlyinAnchor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6444708795667330704
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2534650027253312381}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8663275840839844687}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3792068929232935449
 GameObject:
   m_ObjectHideFlags: 0
@@ -308,6 +339,8 @@ Transform:
   m_Children:
   - {fileID: 4508179385451351352}
   - {fileID: 459230887015518451}
+  - {fileID: 6444708795667330704}
+  - {fileID: 3123526139721903924}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1836018064761417943
@@ -341,6 +374,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   benchToSpawn: {fileID: 3701780570870824773, guid: 43a5dedc5f584454dac8f7008ef1c337, type: 3}
   spawnParent: {fileID: 0}
+  objectSpawnLocation: {fileID: 0}
 --- !u!114 &1577615739164106319
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -359,6 +393,9 @@ MonoBehaviour:
   minInterval: 0.03
   maxInterval: 0.12
   weldLight: {fileID: 4521325136409092221}
+  flyoutPrefab: {fileID: 8172365358061436613, guid: bc6b5ea1d1940604ba1078f2fd2e664a, type: 3}
+  xpFlyoutAnchor: {fileID: 3123526139721903924}
+  sparePartsFlyinAnchor: {fileID: 6444708795667330704}
 --- !u!65 &6323397939658624292
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5225,6 +5262,37 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!1 &5361754491854264510
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3123526139721903924}
+  m_Layer: 6
+  m_Name: XPFlyoutAnchor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3123526139721903924
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5361754491854264510}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8663275840839844687}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5882899454214264905
 GameObject:
   m_ObjectHideFlags: 0
