@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3365525320827770345
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6996711344850596970}
+  m_Layer: 6
+  m_Name: XPFlyoutAnchor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6996711344850596970
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3365525320827770345}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.912, y: 0.898, z: 0.761}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3764904178772910494}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4008528911235933532
 GameObject:
   m_ObjectHideFlags: 0
@@ -176,6 +207,8 @@ Transform:
   m_Children:
   - {fileID: 5470837671269769554}
   - {fileID: 8471811618908510392}
+  - {fileID: 6996711344850596970}
+  - {fileID: 4855565311337603662}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4603972013691283845
@@ -213,6 +246,9 @@ MonoBehaviour:
   minInterval: 0.03
   maxInterval: 0.12
   grinderLight: {fileID: 1626007839385331096}
+  flyoutPrefab: {fileID: 8172365358061436613, guid: bc6b5ea1d1940604ba1078f2fd2e664a, type: 3}
+  xpFlyoutAnchor: {fileID: 6996711344850596970}
+  sparePartsFlyoutAnchor: {fileID: 4855565311337603662}
 --- !u!65 &1999280115488232590
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -234,6 +270,37 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.9524622, y: 1.4959102, z: 5.084634}
   m_Center: {x: 0.019678831, y: 0.70450735, z: -0.2168293}
+--- !u!1 &7640224894767035003
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4855565311337603662}
+  m_Layer: 6
+  m_Name: SparePartsFlyoutAnchor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4855565311337603662
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7640224894767035003}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.912, y: 0.898, z: 0.761}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3764904178772910494}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7930460462494699665
 GameObject:
   m_ObjectHideFlags: 0

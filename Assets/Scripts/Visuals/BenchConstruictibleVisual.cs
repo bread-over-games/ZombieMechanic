@@ -71,12 +71,12 @@ public class BenchConstruictibleVisual : MonoBehaviour
         // xp flyout initialization        
         UIFlyoutVisual xpFlyout = Instantiate(flyoutPrefab, flyoutsParent);
         xpFlyout.GetComponent<RectTransform>().anchoredPosition = ConvertWorldToScreenPos(xpFlyoutAnchor);
-        xpFlyout.Initialize(UIFlyoutVisual.FlyoutTypes.XP, 1, 0.05f, 0.5f, currentLevelTarget.position);
+        xpFlyout.Initialize(UIFlyoutVisual.FlyoutTypes.XP, 1 * XPCounter.Instance.repairXP, 0.05f, 0.5f, currentLevelTarget.position);
 
         // spare parts initialization                
         UIFlyoutVisual sparePartsFlyout = Instantiate(flyoutPrefab, flyoutsParent);
         sparePartsFlyout.GetComponent<RectTransform>().position = sparePartsSpawnPosition.position;
-        sparePartsFlyout.Initialize(UIFlyoutVisual.FlyoutTypes.SpareParts, 1, 0.01f, 0.25f, Camera.main.WorldToScreenPoint(sparePartsFlyinAnchor.position));
+        sparePartsFlyout.Initialize(UIFlyoutVisual.FlyoutTypes.SpareParts, -1, 0.01f, 0.25f, Camera.main.WorldToScreenPoint(sparePartsFlyinAnchor.position));
     }
 
     private Vector2 ConvertWorldToScreenPos(Transform anchor)

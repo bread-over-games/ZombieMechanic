@@ -18,47 +18,45 @@ public class UIInfoHeader : MonoBehaviour
 
     private void OnEnable()
     {
-        ResourceController.OnAntibioticsAmountChange += UpdateAntibioticsAmount;
-        ResourceController.OnSparePartsAmountChange += UpdateSparePartsAmounts;
         ResourceController.OnSparePartsLimitReached += FlashSparePartsRed;
-        ZombiesController.OnZombiesKilledChanged += UpdateZombiesAmount;
+        UIFlyoutVisual.OnFlyoutReachedDestination += UpdateAmounts;
     }
 
     private void OnDisable()
     {
-        ResourceController.OnAntibioticsAmountChange -= UpdateAntibioticsAmount;
-        ResourceController.OnSparePartsAmountChange -= UpdateSparePartsAmounts;
+
         ResourceController.OnSparePartsLimitReached -= FlashSparePartsRed;
-        ZombiesController.OnZombiesKilledChanged -= UpdateZombiesAmount;
+        UIFlyoutVisual.OnFlyoutReachedDestination -= UpdateAmounts;
     }
 
     private void Start()
     {
-        UpdateSparePartsAmounts();
-        UpdateAntibioticsAmount();
-        UpdateZombiesAmount();
+        antibioticsAmount.text = ResourceController.Instance.GetAntibioticsAmount().ToString();
+        zombiesKilledAmount.text = ZombiesController.Instance.zombiesKilledTotal.ToString();
+        sparePartsAmount.text = ResourceController.Instance.GetSparePartsAmount().ToString() + "/" + ResourceController.Instance.GetSparePartsLimit().ToString();
+    }
+
+    private void UpdateAmounts(UIFlyoutVisual.FlyoutTypes type)
+    {
+        switch (type)
+        {
+            case UIFlyoutVisual.FlyoutTypes.Zombies:
+                zombiesKilledAmount.text = ZombiesController.Instance.zombiesKilledTotal.ToString();
+                zombiesKilledPulse.Pulse();
+                break;
+            case UIFlyoutVisual.FlyoutTypes.SpareParts:
+                sparePartsAmount.text = ResourceController.Instance.GetSparePartsAmount().ToString() + "/" + ResourceController.Instance.GetSparePartsLimit().ToString();
+                sparePartsPulse.Pulse();
+                break;
+            case UIFlyoutVisual.FlyoutTypes.Antibiotics:
+                antibioticsAmount.text = ResourceController.Instance.GetAntibioticsAmount().ToString();
+                antibioticsPulse.Pulse();
+                break;
+        }
     }
 
     private void FlashSparePartsRed()
     {
         sparePartsTextFlasher.Flash();
-    }
-
-    private void UpdateAntibioticsAmount()
-    {
-        antibioticsAmount.text = ResourceController.Instance.GetAntibioticsAmount().ToString();
-        antibioticsPulse.Pulse();
-    }
-
-    private void UpdateSparePartsAmounts()
-    {
-        sparePartsAmount.text = ResourceController.Instance.GetSparePartsAmount().ToString() + "/" + ResourceController.Instance.GetSparePartsLimit().ToString();
-        sparePartsPulse.Pulse();
-    }
-
-    private void UpdateZombiesAmount()
-    {
-        zombiesKilledAmount.text = ZombiesController.Instance.zombiesKilledTotal.ToString();
-        zombiesKilledPulse.Pulse();
     }
 }

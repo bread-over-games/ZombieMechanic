@@ -30,24 +30,27 @@ public class XPCounter : MonoBehaviour
     private void OnEnable()
     {
         SalvageTable.OnSalvageTick += AddSalvageXP;
-        ObjectDeconstruction.OnDeconstructionTick += AddSalvageXP;
-        UIFlyoutVisual.OnFlyoutReachedDestination += AddXP;
+        ObjectDeconstruction.OnDeconstructionTick += _ => AddSalvageXP();
+        Workbench.OnRepairTick += _ => AddRepairXP();
+        BenchConstruction.OnConstructionTick += _ => AddRepairXP();
+        Mission.OnMissionResolved += AddZombiesKilledXP;
     }
 
     private void OnDisable()
     {
         SalvageTable.OnSalvageTick -= AddSalvageXP;
-        ObjectDeconstruction.OnDeconstructionTick -= AddSalvageXP;
-        UIFlyoutVisual.OnFlyoutReachedDestination -= AddXP;
-    }
+        ObjectDeconstruction.OnDeconstructionTick -= _ => AddSalvageXP();
+        Workbench.OnRepairTick -= _ => AddRepairXP();
+        BenchConstruction.OnConstructionTick -= _ => AddRepairXP();
+        Mission.OnMissionResolved -= AddZombiesKilledXP;
+    }   
 
-    public void AddXP(int amount, UIFlyoutVisual.FlyoutTypes flyoutType)
+    private void AddRepairXP()
     {
         if (maxLevelReached) return;
-        if (flyoutType != UIFlyoutVisual.FlyoutTypes.XP) return;
-        currentXP += amount;
+        currentXP += repairXP;
         CheckLevel();
-    }    
+    }
 
     private void AddSalvageXP()
     {
@@ -60,6 +63,13 @@ public class XPCounter : MonoBehaviour
     {
         if (maxLevelReached) return;
         currentXP += upgradeXP;
+        CheckLevel();
+    }
+
+    private void AddZombiesKilledXP(Mission mission, int amount)
+    {
+        if (maxLevelReached) return;
+        currentXP += amount * zombieKillXP;
         CheckLevel();
     }
 

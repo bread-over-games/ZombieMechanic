@@ -29,7 +29,7 @@ public class UIFlyoutVisual : MonoBehaviour
     public Sprite sparePartsIcon;
     public Sprite xpIcon;
 
-    public static Action<int, FlyoutTypes> OnFlyoutReachedDestination;
+    public static Action<FlyoutTypes> OnFlyoutReachedDestination;
 
     public void Initialize(FlyoutTypes myType, int passedAmount, float givenLingerDuration, float givenFlyDuration, Vector2 target)
     {
@@ -72,7 +72,7 @@ public class UIFlyoutVisual : MonoBehaviour
             .SetLink(gameObject)
             .OnComplete(() =>
             {
-                OnFlyoutReachedDestination(amount, flyoutType);
+                OnFlyoutReachedDestination?.Invoke(flyoutType);
                 Destroy(gameObject);
             });
     }

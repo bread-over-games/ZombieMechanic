@@ -8,7 +8,7 @@ public class SalvageTable : Bench, IBench
 {
     [SerializeField] private float salvagingInterval; // tick of looting, how often can player get salvage from loot
     private float defaultSalvagingInterval;
-    [SerializeField] private int salvagingValue; // how much salvage is looted per tick
+    public int salvagingValue; // how much salvage is looted per tick
 
     private Coroutine salvagingCoroutine;
 

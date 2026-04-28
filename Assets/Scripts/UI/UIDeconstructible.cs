@@ -14,14 +14,14 @@ public class UIDeconstructible : MonoBehaviour
 
     private void OnEnable()
     {
-        ObjectDeconstruction.OnDeconstructionTick += UpdateDeconstructibleInfo;
+        ObjectDeconstruction.OnDeconstructionTick += _ => UpdateDeconstructibleInfo();
         PlayerInteraction.OnInteractableApproached += ShowDeconstructibleWindow;
         PlayerInteraction.OnInteractableLeft += HideDeconstructibleWindow;
     }
 
     private void OnDisable()
     {
-        ObjectDeconstruction.OnDeconstructionTick -= UpdateDeconstructibleInfo;
+        ObjectDeconstruction.OnDeconstructionTick -= _ => UpdateDeconstructibleInfo();
         PlayerInteraction.OnInteractableApproached -= ShowDeconstructibleWindow;
         PlayerInteraction.OnInteractableLeft -= HideDeconstructibleWindow;
     }

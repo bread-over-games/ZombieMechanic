@@ -17,12 +17,12 @@ public class ZombiesController : MonoBehaviour
 
     public void OnEnable()
     {
-        UIFlyoutVisual.OnFlyoutReachedDestination += AddKilledZombies;
+        Mission.OnMissionResolved += AddKilledZombies;
     }
 
     public void OnDisable()
     {
-        UIFlyoutVisual.OnFlyoutReachedDestination -= AddKilledZombies;
+        Mission.OnMissionResolved -= AddKilledZombies;
     }
 
     void Awake()
@@ -30,10 +30,9 @@ public class ZombiesController : MonoBehaviour
         Instance = this;
     }
 
-    private void AddKilledZombies(int amount, UIFlyoutVisual.FlyoutTypes flyoutType)
+    private void AddKilledZombies(Mission mission, int zombKilled)
     {
-        if (flyoutType != UIFlyoutVisual.FlyoutTypes.Zombies) return;
-        zombiesKilledTotal += amount;
+        zombiesKilledTotal += zombKilled;
         OnZombiesKilledChanged?.Invoke();
 
         CheckZombiesKilledVictoryGoal();

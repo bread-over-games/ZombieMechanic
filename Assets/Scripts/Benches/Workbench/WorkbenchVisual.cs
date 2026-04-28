@@ -74,7 +74,7 @@ public class WorkbenchVisual : MonoBehaviour
         // spare parts initialization                
         UIFlyoutVisual sparePartsFlyout = Instantiate(flyoutPrefab, flyoutsParent);
         sparePartsFlyout.GetComponent<RectTransform>().position = sparePartsSpawnPosition.position;
-        sparePartsFlyout.Initialize(UIFlyoutVisual.FlyoutTypes.SpareParts, 1, 0.01f, 0.25f, Camera.main.WorldToScreenPoint(sparePartsFlyinAnchor.position));
+        sparePartsFlyout.Initialize(UIFlyoutVisual.FlyoutTypes.SpareParts, -workbench.GetComponent<Workbench>().repairValue, 0.01f, 0.25f, Camera.main.WorldToScreenPoint(sparePartsFlyinAnchor.position));
     } 
     
     private Vector2 ConvertWorldToScreenPos(Transform anchor)
