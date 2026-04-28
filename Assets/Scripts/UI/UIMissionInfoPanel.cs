@@ -47,7 +47,7 @@ public class UIMissionInfoPanel : MonoBehaviour
             currentMissionWindow.SetActive(false);
             missionCompleteWindow.SetActive(true);  
             scalePulse.Pulse();
-            Invoke("Delete", 6f);
+            Invoke("Delete", 2.5f);
             SpawnXPFlyout();
             SpawnZombiesFlyout();
         }        
