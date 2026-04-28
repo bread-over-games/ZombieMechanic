@@ -17,8 +17,8 @@ public class UIFlyoutVisual : MonoBehaviour
 
     private FlyoutTypes flyoutType;
     private RectTransform targetPosition;
-    private Mission currentMission;
     private int amount; // doesn't matter if it's xp, zombies, atb, etc.
+    private float lingerDuration;
     public TMP_Text displayAmount;
     public Image displayIcon;
 
@@ -30,17 +30,17 @@ public class UIFlyoutVisual : MonoBehaviour
 
     public static Action<int, FlyoutTypes> OnFlyoutReachedDestination;
 
-    public void Initialize(FlyoutTypes myType, Mission mission)
+    public void Initialize(FlyoutTypes myType, int passedAmount, float givenLingerDuration, RectTransform target)
     {
-        currentMission = mission;
         flyoutType = myType;
+        amount = passedAmount;
+        lingerDuration = givenLingerDuration;
+        targetPosition = target;
 
         switch (myType)
         {
             case FlyoutTypes.Zombies:
                 displayIcon.sprite = zombieIcon;
-                amount = mission.zombiesKilled;
-                targetPosition = GameObject.Find("ZombiesKilledIcon").GetComponent<RectTransform>();                
                 break;
             case FlyoutTypes.Antibiotics:
                 displayIcon.sprite = antibioticsIcon;
@@ -50,8 +50,6 @@ public class UIFlyoutVisual : MonoBehaviour
                 break;
             case FlyoutTypes.XP:
                 displayIcon.sprite = xpIcon;
-                amount = mission.zombiesKilled * XPCounter.Instance.zombieKillXP;
-                targetPosition = GameObject.Find("CurrentLevel").GetComponent<RectTransform>();
                 break;
         }
 
@@ -61,14 +59,14 @@ public class UIFlyoutVisual : MonoBehaviour
 
     IEnumerator FlyToTarget(RectTransform target)
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(lingerDuration);
 
         Vector3 mid = Vector3.Lerp(transform.position, target.position, 0.5f) + new Vector3(0f, -50f, 0f);
 
         Vector3[] path = { mid, target.position };
 
-        transform.DOPath(path, 2f, PathType.CatmullRom)
-            .SetEase(Ease.InBack)
+        transform.DOPath(path, 1f, PathType.CatmullRom)
+            .SetEase(Ease.InQuad)
             .SetLink(gameObject)
             .OnComplete(() =>
             {

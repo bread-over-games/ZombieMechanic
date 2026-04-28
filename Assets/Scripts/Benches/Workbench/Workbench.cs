@@ -5,12 +5,12 @@ public class Workbench : Bench, IBench
 {
     [SerializeField] private float repairInterval;
     [SerializeField] private int repairSparePartsCost;
-    [SerializeField] private int repairValue;    
+    public  int repairValue;    
 
     private Coroutine repairCoroutine;
 
     public static Action OnRepairStart;
-    public static Action OnRepairTick;
+    public static Action<Bench> OnRepairTick;
     public static Action OnRepairStop;
 
     public static Action OnTutorialBaseballBatPlaced;
@@ -66,7 +66,7 @@ public class Workbench : Bench, IBench
             yield return new WaitForSeconds(repairInterval);
             ResourceController.Instance.ChangeSparePartsAmount(-repairSparePartsCost);
             currentObject.RepairObject(repairValue);
-            OnRepairTick?.Invoke();
+            OnRepairTick?.Invoke(this);
 
             if (currentObject.currentDurability == currentObject.maxDurability || ResourceController.Instance.GetSparePartsAmount() < repairSparePartsCost)
             {

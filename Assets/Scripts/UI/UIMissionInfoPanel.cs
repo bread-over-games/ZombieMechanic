@@ -56,15 +56,13 @@ public class UIMissionInfoPanel : MonoBehaviour
     private void SpawnXPFlyout()
     {
         UIFlyoutVisual xpFlyout = Instantiate(flyoutVisualPrefab, xpFlyoutPosition.position, xpFlyoutPosition.rotation, xpFlyoutPosition);
-
-        xpFlyout.Initialize(UIFlyoutVisual.FlyoutTypes.XP, currentMission);
+        xpFlyout.Initialize(UIFlyoutVisual.FlyoutTypes.XP, currentMission.zombiesKilled * XPCounter.Instance.zombieKillXP, 2f, GameObject.Find("CurrentLevel").GetComponent<RectTransform>());
     }
 
     private void SpawnZombiesFlyout()
     {
         UIFlyoutVisual zombiesFlyout = Instantiate(flyoutVisualPrefab, zombieFlyoutPosition.position, zombieFlyoutPosition.rotation, zombieFlyoutPosition);
-
-        zombiesFlyout.Initialize(UIFlyoutVisual.FlyoutTypes.Zombies, currentMission);
+        zombiesFlyout.Initialize(UIFlyoutVisual.FlyoutTypes.Zombies, currentMission.zombiesKilled, 2f, GameObject.Find("ZombiesKilledIcon").GetComponent<RectTransform>());
     }
 
     private IEnumerator ChangeTimer()

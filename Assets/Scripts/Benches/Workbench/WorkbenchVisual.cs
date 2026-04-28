@@ -22,6 +22,15 @@ public class WorkbenchVisual : MonoBehaviour
     [SerializeField] private Bench workbench;
     private IInteractable interactableTable;
 
+    [Header("Flyout")]
+    [SerializeField] private UIFlyoutVisual flyoutPrefab;
+    [SerializeField] private Transform xpFlyoutAnchor;
+    [SerializeField] private RectTransform sparePartsFlyinAnchor;
+    private Transform flyoutsParent;
+    private Canvas canvas;
+    private RectTransform canvasRect;
+    private RectTransform currentLevelTarget;
+
     private void OnEnable()
     {
         Workbench.OnRepairStart += StartWorkingEffect;
@@ -43,12 +52,42 @@ public class WorkbenchVisual : MonoBehaviour
     private void Awake()
     {
         interactableTable = workbench as IInteractable;
+        canvas = GameObject.Find("HUDCanvas").GetComponent<Canvas>();   
+        canvasRect = canvas.GetComponent<RectTransform>();
+        flyoutsParent = GameObject.Find("FlyoutsParent").GetComponent<Transform>(); 
+        currentLevelTarget = GameObject.Find("CurrentLevel").GetComponent<RectTransform>(); 
     }
 
-    private void RepairTickEffect()
+    private void RepairTickEffect(Bench sourceBench)
     {
+        if (workbench != sourceBench) return;
         if (workbenchObjDisplay.currentObjects[0] == null) return;
         workbenchObjDisplay.currentObjects[0].GetComponent<ObjectEffects>().Shake();
+
+        // xp flyout initialization        
+        Vector2 xpFlyoutPosition = ConvertWorldToScreenPos(xpFlyoutAnchor);
+        UIFlyoutVisual xpFlyout = Instantiate(flyoutPrefab, flyoutsParent);
+
+        xpFlyout.GetComponent<RectTransform>().anchoredPosition = xpFlyoutPosition;
+        xpFlyout.Initialize(UIFlyoutVisual.FlyoutTypes.XP, workbench.GetComponent<Workbench>().repairValue * XPCounter.Instance.repairXP, 0.1f, currentLevelTarget);        
+
+        // spare parts initialization
+                
+        UIFlyoutVisual sparePartsFlyout = Instantiate(flyoutPrefab, flyoutsParent);
+        sparePartsFlyout.GetComponent<RectTransform>().position = GameObject.Find("SparePartsIcon").GetComponent<RectTransform>().position;
+
+        //Vector2 sparePartsFlyoutPosition = ConvertWorldToScreenPos(sparePartsFlyoutAnchor);
+        sparePartsFlyout.Initialize(UIFlyoutVisual.FlyoutTypes.SpareParts, 1, 0.1f, sparePartsFlyinAnchor);
+        Debug.Log(sparePartsFlyinAnchor.position);
+    } 
+    
+    private Vector2 ConvertWorldToScreenPos(Transform anchor)
+    {
+        Vector3 worldPos = anchor.position;
+        Vector3 screenPos = Camera.main.WorldToScreenPoint(worldPos);
+
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(canvasRect, screenPos, canvas.worldCamera, out Vector2 localPoint);
+        return localPoint;
     }
 
     private void StartWorkingEffect()
@@ -79,11 +118,6 @@ public class WorkbenchVisual : MonoBehaviour
     }
 
     private void StopFlicker()
-    {
-        weldLight.DOKill();
-    }
-
-    void OnDestroy()
     {
         weldLight.DOKill();
     }
