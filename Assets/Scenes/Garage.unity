@@ -45671,7 +45671,7 @@ MonoBehaviour:
   armoryFirst: {fileID: 155053022065181570}
   salvageTable: {fileID: 1571740917}
   lootTable: {fileID: 859630730}
-  skipTutorial: 1
+  skipTutorial: 0
   sparePartsPicked: 0
   sparePartsPlacedSalvage: 0
   sparePartsSalvaged: 0
