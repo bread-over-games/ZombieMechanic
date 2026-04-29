@@ -1,12 +1,12 @@
 fileFormatVersion: 2
-guid: c6b44410f9a68364f85c05220e98dc2b
+guid: c0dd2327a1545044cacf6edad1c94ba2
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 0
+    enableMipMap: 1
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -110,13 +110,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: SparePartsBox_0
+      name: FireAxe_0
       rect:
         serializedVersion: 2
-        x: 26
+        x: 0
         y: 0
-        width: 998
-        height: 474
+        width: 512
+        height: 512
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -125,8 +125,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3a16e36118fe2314cadccdbcf954aed3
-      internalID: 870873637
+      spriteID: 79eb18e7f1d348044a62eeee5dfb79bb
+      internalID: -1803186987
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 9ae063440d32608438e68906a677eb49
+    spriteID: 44d7d56d0564dee41ba14d01ff14a288
     internalID: 0
     vertices: []
     indices: 
@@ -145,7 +145,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      SparePartsBox_0: 870873637
+      FireAxe_0: -1803186987
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

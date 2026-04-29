@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0317a7041dbcca44ab2211815cd1839, type: 3}
   m_Name: RiotGear
   m_EditorClassIdentifier: 
-  armorVisual: {fileID: -1250874396, guid: 225b21e282673f64fb0482657486d05f, type: 3}
+  armorVisual: {fileID: 1345365509, guid: c1fd1ad9c00b3b54d9c7518bf28d6094, type: 3}
   armorVisualPrefab: {fileID: 5155881556197574539, guid: b622bbf0f7bbed84889cd5c2ebaf61b9, type: 3}
   armorName: Riot Gear
   maxDurability: 40

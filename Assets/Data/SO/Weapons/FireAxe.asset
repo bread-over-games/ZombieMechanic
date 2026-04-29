@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc850fe134d4c0f40a8103ac3fb9e2bc, type: 3}
   m_Name: FireAxe
   m_EditorClassIdentifier: 
-  weaponVisual: {fileID: 1498307123, guid: b0a5cad4c26bab8448aad661d723c0e0, type: 3}
+  weaponVisual: {fileID: -1803186987, guid: c0dd2327a1545044cacf6edad1c94ba2, type: 3}
   weaponVisualPrefab: {fileID: 6491438594319727547, guid: 5068b1bd926f45b42be641810dbf0b43, type: 3}
   weaponName: Fire Axe
   minimalBaseDamage: 14

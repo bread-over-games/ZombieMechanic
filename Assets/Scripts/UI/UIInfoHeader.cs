@@ -16,17 +16,20 @@ public class UIInfoHeader : MonoBehaviour
 
     [SerializeField] private TextFlasher sparePartsTextFlasher;
 
+    [SerializeField] private Image zombieKilledBar;
+
     private void OnEnable()
     {
         ResourceController.OnSparePartsLimitReached += FlashSparePartsRed;
         UIFlyoutVisual.OnFlyoutReachedDestination += UpdateAmounts;
+        ResourceController.OnAntibioticsAmountChange += UpdateAntibioticsAmount;
     }
 
     private void OnDisable()
     {
-
         ResourceController.OnSparePartsLimitReached -= FlashSparePartsRed;
         UIFlyoutVisual.OnFlyoutReachedDestination -= UpdateAmounts;
+        ResourceController.OnAntibioticsAmountChange -= UpdateAntibioticsAmount;
     }
 
     private void Start()
@@ -42,6 +45,7 @@ public class UIInfoHeader : MonoBehaviour
         {
             case UIFlyoutVisual.FlyoutTypes.Zombies:
                 zombiesKilledAmount.text = ZombiesController.Instance.zombiesKilledTotal.ToString();
+                zombieKilledBar.fillAmount = (float)ZombiesController.Instance.zombiesKilledTotal / ZombiesController.Instance.zombiesKillVictoryGoal;
                 zombiesKilledPulse.Pulse();
                 break;
             case UIFlyoutVisual.FlyoutTypes.SpareParts:
@@ -58,5 +62,11 @@ public class UIInfoHeader : MonoBehaviour
     private void FlashSparePartsRed()
     {
         sparePartsTextFlasher.Flash();
+    }
+
+    private void UpdateAntibioticsAmount()
+    {
+        antibioticsAmount.text = ResourceController.Instance.GetAntibioticsAmount().ToString();
+        antibioticsPulse.Pulse();
     }
 }

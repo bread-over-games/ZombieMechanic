@@ -1,12 +1,12 @@
 fileFormatVersion: 2
-guid: 225b21e282673f64fb0482657486d05f
+guid: c1fd1ad9c00b3b54d9c7518bf28d6094
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 0
+    enableMipMap: 1
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -115,7 +115,7 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1024
+        width: 512
         height: 512
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -125,8 +125,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0d625d1e28c26f94d8858b56f5955f8f
-      internalID: -1250874396
+      spriteID: 73f71df8e41fe4b429e7c9b22bc40499
+      internalID: 1345365509
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 98a6626587951f74caccf124d0c10be7
+    spriteID: f996e2511c8634b4dbce5e409523024e
     internalID: 0
     vertices: []
     indices: 
@@ -145,7 +145,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      RiotGear_0: -1250874396
+      RiotGear_0: 1345365509
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

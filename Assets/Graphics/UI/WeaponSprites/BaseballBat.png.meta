@@ -1,12 +1,12 @@
 fileFormatVersion: 2
-guid: 9034e94d241460b4eb83c8f14c0b7bed
+guid: 6804e11db3358f146af19da10226ef1d
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 0
+    enableMipMap: 1
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -110,12 +110,12 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: CrowbarIcon_0
+      name: BaseballBat_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1024
+        width: 512
         height: 512
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -125,8 +125,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: abe2e00b3d22da043b9be80c5fbd0acb
-      internalID: -850380429
+      spriteID: 1e6bca14d4902aa43a160ce70d29886f
+      internalID: 1533449207
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 8663e79ae650dca49884ab586ee53217
+    spriteID: 6f52c9d6a0f8dc74d94402bdb1c7e75f
     internalID: 0
     vertices: []
     indices: 
@@ -145,7 +145,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      CrowbarIcon_0: -850380429
+      BaseballBat_0: 1533449207
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

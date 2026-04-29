@@ -1,12 +1,12 @@
 fileFormatVersion: 2
-guid: df3e0cff34ee78f48a63ecaddfc06a1e
+guid: 85813b24543fe294e9821abcaf067558
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 0
+    enableMipMap: 1
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -110,12 +110,12 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: BareHandsIcon_0
+      name: Crowbar_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1024
+        width: 512
         height: 512
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -125,8 +125,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dfb4f66627d23fd439fd11d209d186d6
-      internalID: 1638011292
+      spriteID: a1586642ee91b40439ad7b370acb64a7
+      internalID: -356345421
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 3139101d03855bf47ba7abe3a55925c2
+    spriteID: cbd1662c42df52642bb18934e12c5ed4
     internalID: 0
     vertices: []
     indices: 
@@ -145,7 +145,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      BareHandsIcon_0: 1638011292
+      Crowbar_0: -356345421
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

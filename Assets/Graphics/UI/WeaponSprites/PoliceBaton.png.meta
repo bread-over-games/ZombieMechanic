@@ -1,12 +1,12 @@
 fileFormatVersion: 2
-guid: 1dc62fca54a272142a26c9494ee680d1
+guid: 8cac5efd8fc442f4384396099858fff2
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 0
+    enableMipMap: 1
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -110,12 +110,12 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: AntibioticsBroadSpectrum_0
+      name: PoliceBaton_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1024
+        width: 512
         height: 512
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -125,8 +125,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f6e85394285042c49b9938cf59ce1e36
-      internalID: -1910602607
+      spriteID: 67fa13268170b41488efef6f722ca470
+      internalID: 1129118921
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: b967a4f0d729d56458202e50baa1c270
+    spriteID: 9ac9d3c7b2ba6b0409692d069524ce04
     internalID: 0
     vertices: []
     indices: 
@@ -145,7 +145,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      AntibioticsBroadSpectrum_0: -1910602607
+      PoliceBaton_0: 1129118921
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

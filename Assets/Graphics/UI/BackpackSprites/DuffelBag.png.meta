@@ -6,7 +6,7 @@ TextureImporter:
   serializedVersion: 13
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 0
+    enableMipMap: 1
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -115,7 +115,7 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1024
+        width: 512
         height: 512
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -125,8 +125,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dd3b996fb374a0f4993c3764ede9d283
-      internalID: 1271861881
+      spriteID: 60003414f315c084184d270c5e54be3d
+      internalID: 1016119145
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 9b48f6a678feaf949b51e8b4e2c8b8a0
+    spriteID: 8f3ce740bcf62884482b652e0f0f06ee
     internalID: 0
     vertices: []
     indices: 
@@ -145,7 +145,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      DuffelBag_0: 1271861881
+      DuffelBag_0: 1016119145
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

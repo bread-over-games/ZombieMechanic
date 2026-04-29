@@ -15,4 +15,4 @@ MonoBehaviour:
   scrapName: Box of spare parts
   maxDurability: 30
   scrapVisualPrefab: {fileID: 3917449410938878803, guid: e501ad829ee755949ad68e9610b0145e, type: 3}
-  scrapVisual: {fileID: 870873637, guid: c6b44410f9a68364f85c05220e98dc2b, type: 3}
+  scrapVisual: {fileID: 1357546045, guid: 5b509c65f35c6a84c832ca055782ade1, type: 3}

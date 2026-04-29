@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92dd8056b76f58b429e15a71bcb42a3a, type: 3}
   m_Name: SmallBackpack
   m_EditorClassIdentifier: 
-  backpackVisual: {fileID: 1256411281, guid: cd7885a9a289e194c99eb0d5959d6b04, type: 3}
+  backpackVisual: {fileID: 608159547, guid: f504c847fc95c56479221763f9402b23, type: 3}
   backpackVisualPrefab: {fileID: 8733942901714294039, guid: ddd500db9ccdcfd46863525b190f9529, type: 3}
   backpackSize: 2
   backpackName: Small backpack

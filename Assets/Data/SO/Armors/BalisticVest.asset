@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0317a7041dbcca44ab2211815cd1839, type: 3}
   m_Name: BalisticVest
   m_EditorClassIdentifier: 
-  armorVisual: {fileID: -1858961652, guid: d077688e1b97b2c47852d0e77dbd2933, type: 3}
+  armorVisual: {fileID: -774587539, guid: 33c2388e55e54334ea3212e233646343, type: 3}
   armorVisualPrefab: {fileID: 1024016258484320585, guid: 7eea41288f2f8b24097de54b7d7ddcc6, type: 3}
   armorName: Balistic Vest
   maxDurability: 30
