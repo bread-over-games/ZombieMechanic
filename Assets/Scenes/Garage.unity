@@ -3548,7 +3548,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 15119
   m_UseColorTemperature: 1
-  m_BoundingSphereOverride: {x: 4.6297464e+27, y: 240555550, z: 2.6792542e+20, w: 2.0682986e-10}
+  m_BoundingSphereOverride: {x: 6.979555e-39, y: 8.908192e-39, z: 8.908208e-39, w: 9.9183e-39}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ForceVisible: 0
@@ -7440,7 +7440,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 2712
   m_UseColorTemperature: 1
-  m_BoundingSphereOverride: {x: 2.7133608e-20, y: 1.193967e-39, z: 3.3257e-41, w: 0}
+  m_BoundingSphereOverride: {x: 7.2715916e+31, y: 1.7595098e+22, z: 2.379586e+20, w: 2.4835436e+27}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ForceVisible: 0
@@ -7626,6 +7626,10 @@ PrefabInstance:
     - target: {fileID: -7505339426352275900, guid: a3972e6243191f948b913f3f66a1b27b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: -7374957085292672532, guid: a3972e6243191f948b913f3f66a1b27b, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: -7150229810299452560, guid: a3972e6243191f948b913f3f66a1b27b, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -7815,6 +7819,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 274d77acd2651964eac312de4d7a6e3e, type: 2}
+    - target: {fileID: 252029049733410401, guid: a3972e6243191f948b913f3f66a1b27b, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 302672527143166591, guid: a3972e6243191f948b913f3f66a1b27b, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
@@ -8108,6 +8116,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7124984181584051673, guid: a3972e6243191f948b913f3f66a1b27b, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 7132102841315646195, guid: a3972e6243191f948b913f3f66a1b27b, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
@@ -11436,7 +11448,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 2712
   m_UseColorTemperature: 1
-  m_BoundingSphereOverride: {x: 2.718176e-20, y: 6.42954e-40, z: 2.532e-42, w: 2.2959e-41}
+  m_BoundingSphereOverride: {x: 1.504633e-36, y: 1.110223e-16, z: 2.3509887e-38, w: 0}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ForceVisible: 0
@@ -19997,7 +20009,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 4193
   m_UseColorTemperature: 1
-  m_BoundingSphereOverride: {x: 2.7121808e-20, y: 7.34789e-40, z: 5.06e-43, w: 6.7139183e-10}
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 1.19422e-39}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ForceVisible: 0
@@ -30944,7 +30956,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 2712
   m_UseColorTemperature: 1
-  m_BoundingSphereOverride: {x: 1.2298e-41, y: 2.524355e-29, z: 0, w: 2.938802e+29}
+  m_BoundingSphereOverride: {x: 1.0561242e-19, y: 3.857196e-39, z: 2.9307e-41, w: -1.000803e+16}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ForceVisible: 0
@@ -44735,7 +44747,7 @@ LightProbeGroup:
   - {x: -8.545226, y: 1, z: -2.08679}
   - {x: -8.545226, y: -1.3352036, z: -2.08679}
   - {x: -1.6562326, y: 1, z: 4.4269753}
-  - {x: 12.34033, y: 1, z: 1.6844782}
+  - {x: 16.336151, y: 1, z: 3.2940834}
   - {x: -1.6562326, y: -1.3352036, z: 4.4269753}
   - {x: 3.2886608, y: -1.3352036, z: -2.8582962}
   - {x: 0.1131227, y: 1, z: -12.688411}
@@ -44750,21 +44762,21 @@ LightProbeGroup:
   - {x: -3.4434075, y: -1.3352036, z: -2.8582962}
   - {x: -3.4434075, y: 1, z: -1.5627389}
   - {x: -3.4434075, y: -1.3352036, z: -1.5627389}
-  - {x: 10.56017, y: 1, z: 1.6844782}
-  - {x: 10.56017, y: -1.3352036, z: 1.6844782}
+  - {x: 14.555995, y: 1, z: 3.2940834}
+  - {x: 14.555995, y: -1.3352036, z: 3.2940834}
   - {x: 17.271645, y: 0.13952732, z: 0.14377418}
   - {x: -1.3404346, y: 1, z: 1.6844782}
   - {x: -1.3404346, y: -1.3352036, z: 1.6844782}
   - {x: -3.4434075, y: 1, z: 1.6844782}
   - {x: -3.4434075, y: -1.3352036, z: 1.6844782}
-  - {x: 1.317795, y: 1, z: 3.4269702}
+  - {x: 1.317795, y: 1, z: 3.2181125}
   - {x: 5.2837605, y: 0.19501376, z: -0.60835254}
   - {x: 6.647372, y: 0.485111, z: -0.3468089}
-  - {x: -1.3404346, y: 1, z: 3.4269702}
-  - {x: -1.3404346, y: -1.3352036, z: 3.4269702}
+  - {x: -1.3404346, y: 1, z: 3.2181125}
+  - {x: -1.3404346, y: -1.3352036, z: 3.2181125}
   - {x: -3.4434075, y: 1, z: 2.9812133}
   - {x: -3.4434075, y: -1.3352036, z: 2.9812133}
-  - {x: 1.317795, y: -1.3352036, z: 3.4269702}
+  - {x: 1.317795, y: -1.3352036, z: 3.2181125}
   - {x: 4.667369, y: 0.19501376, z: -0.60573685}
   - {x: 4.6778316, y: 0.19501376, z: 0.2285085}
   - {x: 5.2837605, y: 0.19501376, z: 0.2285085}
@@ -44990,7 +45002,7 @@ LightProbeGroup:
   - {x: 9.678671, y: -0.38134956, z: 0.9450018}
   - {x: 9.588229, y: -0.38134956, z: 0.24785614}
   - {x: 10.504061, y: -0.38134956, z: 0.11800364}
-  - {x: 12.613316, y: -1.3352036, z: 1.6844782}
+  - {x: 16.609146, y: -1.3352036, z: 3.2940834}
   - {x: 16.663534, y: 0.13952732, z: 0.11419079}
   - {x: 17.358982, y: 0.13952732, z: -0.7328706}
   - {x: 16.76604, y: 0.13952732, z: -0.8134686}
@@ -45036,6 +45048,14 @@ LightProbeGroup:
   - {x: -8.689392, y: -1.3352036, z: 2.3057432}
   - {x: -10.901615, y: 1, z: 4.113372}
   - {x: -10.901615, y: -1.3352036, z: 4.113372}
+  - {x: 12.34033, y: 1, z: 1.6844782}
+  - {x: 10.56017, y: 1, z: 1.6844782}
+  - {x: 10.56017, y: -1.3352036, z: 1.6844782}
+  - {x: 12.613316, y: -1.3352036, z: 1.6844782}
+  - {x: 12.330503, y: 1, z: 3.2940834}
+  - {x: 10.5503435, y: 1, z: 3.2940834}
+  - {x: 10.5503435, y: -1.3352036, z: 3.2940834}
+  - {x: 12.603489, y: -1.3352036, z: 3.2940834}
   m_Dering: 1
 --- !u!114 &1895199751 stripped
 MonoBehaviour:
@@ -46545,7 +46565,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 4193
   m_UseColorTemperature: 1
-  m_BoundingSphereOverride: {x: 7.266e-42, y: 2.524355e-29, z: 0, w: 4.5948038e+24}
+  m_BoundingSphereOverride: {x: 5.7983183e+22, y: 1.1285597e+27, z: 7.3604004e+22, w: 1.5580468e+28}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ForceVisible: 0
@@ -47916,7 +47936,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1699459280, guid: 43544f53b6f7296419a8a1912e3cdc4e, type: 3}
+  m_Sprite: {fileID: -1500575685, guid: b2c6ac2927ecca747a57383a7842e238, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
