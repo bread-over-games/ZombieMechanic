@@ -16,9 +16,10 @@ public class UIFlyoutVisual : MonoBehaviour
     }
 
     private FlyoutTypes flyoutType;
-    private RectTransform targetPosition;
-    private Mission currentMission;
+    private Vector2 targetPosition;
     private int amount; // doesn't matter if it's xp, zombies, atb, etc.
+    private float lingerDuration;
+    private float flyDuration;
     public TMP_Text displayAmount;
     public Image displayIcon;
 
@@ -28,19 +29,20 @@ public class UIFlyoutVisual : MonoBehaviour
     public Sprite sparePartsIcon;
     public Sprite xpIcon;
 
-    public static Action<int, FlyoutTypes> OnFlyoutReachedDestination;
+    public static Action<FlyoutTypes> OnFlyoutReachedDestination;
 
-    public void Initialize(FlyoutTypes myType, Mission mission)
+    public void Initialize(FlyoutTypes myType, int passedAmount, float givenLingerDuration, float givenFlyDuration, Vector2 target)
     {
-        currentMission = mission;
         flyoutType = myType;
+        amount = passedAmount;
+        lingerDuration = givenLingerDuration;
+        targetPosition = target;
+        flyDuration = givenFlyDuration; 
 
         switch (myType)
         {
             case FlyoutTypes.Zombies:
                 displayIcon.sprite = zombieIcon;
-                amount = mission.zombiesKilled;
-                targetPosition = GameObject.Find("ZombiesKilledIcon").GetComponent<RectTransform>();                
                 break;
             case FlyoutTypes.Antibiotics:
                 displayIcon.sprite = antibioticsIcon;
@@ -50,8 +52,6 @@ public class UIFlyoutVisual : MonoBehaviour
                 break;
             case FlyoutTypes.XP:
                 displayIcon.sprite = xpIcon;
-                amount = mission.zombiesKilled * XPCounter.Instance.zombieKillXP;
-                targetPosition = GameObject.Find("CurrentLevel").GetComponent<RectTransform>();
                 break;
         }
 
@@ -59,20 +59,20 @@ public class UIFlyoutVisual : MonoBehaviour
         StartCoroutine(FlyToTarget(targetPosition));        
     }
 
-    IEnumerator FlyToTarget(RectTransform target)
+    IEnumerator FlyToTarget(Vector2 target)
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(lingerDuration);
 
-        Vector3 mid = Vector3.Lerp(transform.position, target.position, 0.5f) + new Vector3(0f, -50f, 0f);
+        Vector3 mid = Vector3.Lerp(transform.position, target, 0.5f) + new Vector3(0f, -50f, 0f);
 
-        Vector3[] path = { mid, target.position };
+        Vector3[] path = { mid, target };
 
-        transform.DOPath(path, 2f, PathType.CatmullRom)
-            .SetEase(Ease.InBack)
+        transform.DOPath(path, flyDuration, PathType.CatmullRom)
+            .SetEase(Ease.InQuad)
             .SetLink(gameObject)
             .OnComplete(() =>
             {
-                OnFlyoutReachedDestination(amount, flyoutType);
+                OnFlyoutReachedDestination?.Invoke(flyoutType);
                 Destroy(gameObject);
             });
     }

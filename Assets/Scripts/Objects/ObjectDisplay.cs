@@ -1,22 +1,19 @@
 /// Displays or destroys given object in the world
 
 using UnityEngine;
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using static Inventory;
 using DG.Tweening;
-using UnityEngine.UIElements;
-
 
 public class ObjectDisplay : MonoBehaviour
 {
     [SerializeField] private int displaySlots = 1;
-    [SerializeReference] private List<GameObject> currentObjects = new List<GameObject>();
+    [SerializeReference] public List<GameObject> currentObjects = new List<GameObject>();
     [SerializeField] private Inventory inventory;
     [SerializeField] private Transform weaponSpawnPivot;
     [SerializeField] private Transform backpackSpawnPivot;
     [SerializeField] private Transform armorSpawnPivot;
+
 
     private void OnEnable()
     {

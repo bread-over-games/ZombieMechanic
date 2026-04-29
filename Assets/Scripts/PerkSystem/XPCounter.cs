@@ -29,21 +29,21 @@ public class XPCounter : MonoBehaviour
 
     private void OnEnable()
     {
-        Workbench.OnRepairTick += AddRepairXP;
         SalvageTable.OnSalvageTick += AddSalvageXP;
-        ObjectDeconstruction.OnDeconstructionTick += AddSalvageXP;
-        BenchConstruction.OnConstructionTick += AddRepairXP;
-        UIFlyoutVisual.OnFlyoutReachedDestination += AddZombieKillXP;
+        ObjectDeconstruction.OnDeconstructionTick += _ => AddSalvageXP();
+        Workbench.OnRepairTick += _ => AddRepairXP();
+        BenchConstruction.OnConstructionTick += _ => AddRepairXP();
+        Mission.OnMissionResolved += AddZombiesKilledXP;
     }
 
     private void OnDisable()
     {
-        Workbench.OnRepairTick -= AddRepairXP;
         SalvageTable.OnSalvageTick -= AddSalvageXP;
-        ObjectDeconstruction.OnDeconstructionTick -= AddSalvageXP;
-        BenchConstruction.OnConstructionTick -= AddRepairXP;
-        UIFlyoutVisual.OnFlyoutReachedDestination -= AddZombieKillXP;
-    }
+        ObjectDeconstruction.OnDeconstructionTick -= _ => AddSalvageXP();
+        Workbench.OnRepairTick -= _ => AddRepairXP();
+        BenchConstruction.OnConstructionTick -= _ => AddRepairXP();
+        Mission.OnMissionResolved -= AddZombiesKilledXP;
+    }   
 
     private void AddRepairXP()
     {
@@ -52,13 +52,6 @@ public class XPCounter : MonoBehaviour
         CheckLevel();
     }
 
-    public void AddZombieKillXP(int amount, UIFlyoutVisual.FlyoutTypes flyoutType)
-    {
-        if (maxLevelReached) return;
-        if (flyoutType != UIFlyoutVisual.FlyoutTypes.XP) return;
-        currentXP += amount;
-        CheckLevel();
-    }    
     private void AddSalvageXP()
     {
         if (maxLevelReached) return;
@@ -70,6 +63,13 @@ public class XPCounter : MonoBehaviour
     {
         if (maxLevelReached) return;
         currentXP += upgradeXP;
+        CheckLevel();
+    }
+
+    private void AddZombiesKilledXP(Mission mission, int amount)
+    {
+        if (maxLevelReached) return;
+        currentXP += amount * zombieKillXP;
         CheckLevel();
     }
 

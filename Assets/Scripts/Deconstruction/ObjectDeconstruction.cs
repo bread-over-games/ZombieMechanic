@@ -15,7 +15,7 @@ public class ObjectDeconstruction : MonoBehaviour, IDeconstructible
     private Coroutine deconstructionCoroutine;
 
     public static Action<GameObject> OnDeconstructionStart;
-    public static Action OnDeconstructionTick;
+    public static Action<GameObject> OnDeconstructionTick;
     public static Action<GameObject> OnDeconstructionStop;
     public static Action<GameObject> OnDeconstructionFinished;
 
@@ -76,8 +76,10 @@ public class ObjectDeconstruction : MonoBehaviour, IDeconstructible
                 
                 if (currentDurability <= 0)
                 {
+                    Debug.Log("Why");
                     EndInteractionSecondary();
                     OnDeconstructionFinished?.Invoke(gameObject);
+                    break;
                 }
             }
         }    
@@ -87,7 +89,7 @@ public class ObjectDeconstruction : MonoBehaviour, IDeconstructible
     {
         ResourceController.Instance.ChangeSparePartsAmount(sparePartsReward); // reward
         currentDurability -= 1;
-        OnDeconstructionTick?.Invoke();
+        OnDeconstructionTick?.Invoke(gameObject);
     }
 
     public void StartInteractionSecondary()

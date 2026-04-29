@@ -18,6 +18,7 @@ public class ResourceController : MonoBehaviour
     private void OnEnable()
     {
         StorageRack.OnStorageRackBuilt += IncreaseSparePartsLimit;
+
     }
 
     private void OnDisable()
@@ -73,6 +74,7 @@ public class ResourceController : MonoBehaviour
         if (sparePartsHolder > sparePartsLimit)
         {
             OnSparePartsLimitReached?.Invoke();
+            sparePartsAmount = sparePartsLimit;
             return false; // no space left in storage racks
         } else
         {

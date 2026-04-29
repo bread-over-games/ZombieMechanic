@@ -47,7 +47,7 @@ public class UIMissionInfoPanel : MonoBehaviour
             currentMissionWindow.SetActive(false);
             missionCompleteWindow.SetActive(true);  
             scalePulse.Pulse();
-            Invoke("Delete", 6f);
+            Invoke("Delete", 4.5f);
             SpawnXPFlyout();
             SpawnZombiesFlyout();
         }        
@@ -56,15 +56,13 @@ public class UIMissionInfoPanel : MonoBehaviour
     private void SpawnXPFlyout()
     {
         UIFlyoutVisual xpFlyout = Instantiate(flyoutVisualPrefab, xpFlyoutPosition.position, xpFlyoutPosition.rotation, xpFlyoutPosition);
-
-        xpFlyout.Initialize(UIFlyoutVisual.FlyoutTypes.XP, currentMission);
+        xpFlyout.Initialize(UIFlyoutVisual.FlyoutTypes.XP, currentMission.zombiesKilled * XPCounter.Instance.zombieKillXP, 2f, 1f, GameObject.Find("CurrentLevel").GetComponent<RectTransform>().position);
     }
 
     private void SpawnZombiesFlyout()
     {
         UIFlyoutVisual zombiesFlyout = Instantiate(flyoutVisualPrefab, zombieFlyoutPosition.position, zombieFlyoutPosition.rotation, zombieFlyoutPosition);
-
-        zombiesFlyout.Initialize(UIFlyoutVisual.FlyoutTypes.Zombies, currentMission);
+        zombiesFlyout.Initialize(UIFlyoutVisual.FlyoutTypes.Zombies, currentMission.zombiesKilled, 2f, 1f, GameObject.Find("ZombiesKilledIcon").GetComponent<RectTransform>().position);
     }
 
     private IEnumerator ChangeTimer()

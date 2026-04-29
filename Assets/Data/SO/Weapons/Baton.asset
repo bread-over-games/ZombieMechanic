@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc850fe134d4c0f40a8103ac3fb9e2bc, type: 3}
   m_Name: Baton
   m_EditorClassIdentifier: 
-  weaponVisual: {fileID: -568458836, guid: ec4e7c32ae50aef4184df1df9e9956ac, type: 3}
+  weaponVisual: {fileID: 1129118921, guid: 8cac5efd8fc442f4384396099858fff2, type: 3}
   weaponVisualPrefab: {fileID: 306655980355839109, guid: c12c2ede1224ed64a8f14a8c9eceeb14, type: 3}
   weaponName: Baton
   minimalBaseDamage: 4

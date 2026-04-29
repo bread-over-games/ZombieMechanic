@@ -44,12 +44,12 @@ public class UIHealthBar : MonoBehaviour
     {
         infectionLevel.fillAmount = currentInfectionLevel / 100;
 
-        if (currentInfectionLevel >= 70 && !isShaking)
+        if (currentInfectionLevel >= 80 && !isShaking)
         {
             StartShaking();
         }
 
-        if (currentInfectionLevel < 70 && isShaking)
+        if (currentInfectionLevel < 80 && isShaking)
         {
             StopShaking();
         }

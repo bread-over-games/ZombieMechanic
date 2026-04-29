@@ -123,6 +123,8 @@ Transform:
   - {fileID: 3231943736549649275}
   - {fileID: 1535808650122939686}
   - {fileID: 1594533800313293158}
+  - {fileID: 7876414919455333820}
+  - {fileID: 2520225947543390459}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7826269399740871647
@@ -140,7 +142,7 @@ MonoBehaviour:
   benchType: 4
   inventory: {fileID: 5261058445298813840}
   interactableName: Workbench
-  repairInterval: 0.2
+  repairInterval: 0.25
   repairSparePartsCost: 1
   repairValue: 1
 --- !u!114 &5261058445298813840
@@ -191,6 +193,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48f81d63f5aa2c9409ea7ce16bfab4d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  workbenchObjDisplay: {fileID: 2784355277398447042}
   weldSparks: {fileID: 674620232450339623}
   grinderSparks: {fileID: 9038404435919839747}
   minIntensity: 5
@@ -200,6 +203,9 @@ MonoBehaviour:
   weldLight: {fileID: 3046330549501262236}
   animator: {fileID: 7847808564002764812}
   workbench: {fileID: 7826269399740871647}
+  flyoutPrefab: {fileID: 8172365358061436613, guid: bc6b5ea1d1940604ba1078f2fd2e664a, type: 3}
+  xpFlyoutAnchor: {fileID: 7876414919455333820}
+  sparePartsFlyinAnchor: {fileID: 2520225947543390459}
 --- !u!65 &410255975851228246
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -494,6 +500,37 @@ MonoBehaviour:
   m_ObsoleteUseShadowQualitySettings: 0
   m_ObsoleteCustomShadowResolution: 512
   m_ObsoleteContactShadows: 0
+--- !u!1 &3583251096744918379
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2520225947543390459}
+  m_Layer: 6
+  m_Name: SparePartsFlyinAnchor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2520225947543390459
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3583251096744918379}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.178, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 814154517742206159}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4407336850626542742
 GameObject:
   m_ObjectHideFlags: 0
@@ -5370,6 +5407,37 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!1 &5247538166346988324
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7876414919455333820}
+  m_Layer: 6
+  m_Name: XPFlyoutAnchor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7876414919455333820
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5247538166346988324}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.269, y: 1.178, z: -0.256}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 814154517742206159}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5726747195052779767
 GameObject:
   m_ObjectHideFlags: 0

@@ -15,16 +15,37 @@ public class BenchConstruictibleVisual : MonoBehaviour
 
     public Light weldLight;
 
+    [Header("Flyout")]
+    [SerializeField] private UIFlyoutVisual flyoutPrefab;
+    [SerializeField] private Transform xpFlyoutAnchor;
+    [SerializeField] private Transform sparePartsFlyinAnchor;
+    private Transform flyoutsParent;
+    private Canvas canvas;
+    private RectTransform canvasRect;
+    private RectTransform currentLevelTarget;
+    private RectTransform sparePartsSpawnPosition;
+
     private void OnEnable()
     {
         BenchConstruction.OnConstructionStart += StartWeldSparks;
         BenchConstruction.OnConstructionStop += StopWeldSparks;
+        BenchConstruction.OnConstructionTick += ConstructTickEffect;
     }
 
     private void OnDisable()
     {
         BenchConstruction.OnConstructionStart -= StartWeldSparks;
         BenchConstruction.OnConstructionStop -= StopWeldSparks;
+        BenchConstruction.OnConstructionTick -= ConstructTickEffect;
+    }
+
+    private void Awake()
+    {        
+        canvas = GameObject.Find("HUDCanvas").GetComponent<Canvas>();
+        canvasRect = canvas.GetComponent<RectTransform>();
+        flyoutsParent = GameObject.Find("FlyoutsParent").GetComponent<Transform>();
+        currentLevelTarget = GameObject.Find("CurrentLevel").GetComponent<RectTransform>();
+        sparePartsSpawnPosition = GameObject.Find("SparePartsIcon").GetComponent<RectTransform>();
     }
 
     private void StartWeldSparks(GameObject obj)
@@ -41,6 +62,30 @@ public class BenchConstruictibleVisual : MonoBehaviour
         angleGrinderSparks.Stop();
         weldLight.enabled = false;
         StopFlicker();
+    }
+
+    private void ConstructTickEffect(GameObject obj)
+    {
+        if (obj != gameObject) return;
+
+        // xp flyout initialization        
+        UIFlyoutVisual xpFlyout = Instantiate(flyoutPrefab, flyoutsParent);
+        xpFlyout.GetComponent<RectTransform>().anchoredPosition = ConvertWorldToScreenPos(xpFlyoutAnchor);
+        xpFlyout.Initialize(UIFlyoutVisual.FlyoutTypes.XP, 1 * XPCounter.Instance.repairXP, 0.05f, 0.5f, currentLevelTarget.position);
+
+        // spare parts initialization                
+        UIFlyoutVisual sparePartsFlyout = Instantiate(flyoutPrefab, flyoutsParent);
+        sparePartsFlyout.GetComponent<RectTransform>().position = sparePartsSpawnPosition.position;
+        sparePartsFlyout.Initialize(UIFlyoutVisual.FlyoutTypes.SpareParts, -1, 0.01f, 0.25f, Camera.main.WorldToScreenPoint(sparePartsFlyinAnchor.position));
+    }
+
+    private Vector2 ConvertWorldToScreenPos(Transform anchor)
+    {
+        Vector3 worldPos = anchor.position;
+        Vector3 screenPos = Camera.main.WorldToScreenPoint(worldPos);
+
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(canvasRect, screenPos, canvas.worldCamera, out Vector2 localPoint);
+        return localPoint;
     }
 
     private void FlickerNext()

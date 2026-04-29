@@ -17,6 +17,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: BricksRed
+    second: {fileID: 2100000, guid: c930ae09221300d4b8b8131e421e85cc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: ChainlinkFence
     second: {fileID: 2100000, guid: 84012799555597042aadec2d062ba89d, type: 2}
   - first:
@@ -24,6 +29,11 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: ConcreteFloor
     second: {fileID: 2100000, guid: a32f02d253b8090448a75d3d9ae6cec1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ConcreteWall
+    second: {fileID: 2100000, guid: 274d77acd2651964eac312de4d7a6e3e, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule

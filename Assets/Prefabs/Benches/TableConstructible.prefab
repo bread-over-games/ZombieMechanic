@@ -24,6 +24,18 @@ PrefabInstance:
       propertyPath: sparePartsConstructionCost
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3123526139721903924, guid: bfd2c8931aa0047408c7b861674cb5f0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.036399998
+      objectReference: {fileID: 0}
+    - target: {fileID: 3123526139721903924, guid: bfd2c8931aa0047408c7b861674cb5f0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.9855
+      objectReference: {fileID: 0}
+    - target: {fileID: 3123526139721903924, guid: bfd2c8931aa0047408c7b861674cb5f0, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.3793
+      objectReference: {fileID: 0}
     - target: {fileID: 3792068929232935449, guid: bfd2c8931aa0047408c7b861674cb5f0, type: 3}
       propertyPath: m_Name
       value: TableConstructible
@@ -83,6 +95,18 @@ PrefabInstance:
     - target: {fileID: 4460926737659335972, guid: bfd2c8931aa0047408c7b861674cb5f0, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0.3962
+      objectReference: {fileID: 0}
+    - target: {fileID: 6444708795667330704, guid: bfd2c8931aa0047408c7b861674cb5f0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.0364
+      objectReference: {fileID: 0}
+    - target: {fileID: 6444708795667330704, guid: bfd2c8931aa0047408c7b861674cb5f0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.9855
+      objectReference: {fileID: 0}
+    - target: {fileID: 6444708795667330704, guid: bfd2c8931aa0047408c7b861674cb5f0, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.3793
       objectReference: {fileID: 0}
     - target: {fileID: 7981850474893848027, guid: bfd2c8931aa0047408c7b861674cb5f0, type: 3}
       propertyPath: benchToSpawn

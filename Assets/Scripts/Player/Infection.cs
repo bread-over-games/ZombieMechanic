@@ -53,7 +53,7 @@ public class Infection : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(infectionInterval);
-            currentInfectionLevel++;
+            currentInfectionLevel += 0.1f;
             OnInfectionLevelChange?.Invoke(currentInfectionLevel);            
 
             if (currentInfectionLevel >= maxInfectionLevel)

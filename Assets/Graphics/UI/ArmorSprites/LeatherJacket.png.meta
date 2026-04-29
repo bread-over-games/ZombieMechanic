@@ -1,12 +1,12 @@
 fileFormatVersion: 2
-guid: c048e123f467bc64eb6c87923cc5f0f3
+guid: 5d5ea49d4020bf94b96b096a11f52e50
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 0
+    enableMipMap: 1
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -115,7 +115,7 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1024
+        width: 512
         height: 512
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -125,8 +125,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 67508496e58cbc54eaaa2e82cac76958
-      internalID: -1579379302
+      spriteID: 583cdfe024897ce4e8592632c9ea2dbd
+      internalID: 336238857
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 4205e205392f48a4789aba05e0b71c68
+    spriteID: 68932624da6851643a769818633aa2e6
     internalID: 0
     vertices: []
     indices: 
@@ -145,7 +145,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      LeatherJacket_0: -1579379302
+      LeatherJacket_0: 336238857
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

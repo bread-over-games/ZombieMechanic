@@ -11,13 +11,13 @@ public class UIXPCounter : MonoBehaviour
 
     private void OnEnable()
     {
-        XPCounter.OnXPChange += ChangeXPBar;
+        UIFlyoutVisual.OnFlyoutReachedDestination += ChangeXPBar;
         XPCounter.OnLevelUp += ChangeCurrentLevel;
     }
 
     private void OnDisable()
     {
-        XPCounter.OnXPChange -= ChangeXPBar;
+        UIFlyoutVisual.OnFlyoutReachedDestination -= ChangeXPBar;
         XPCounter.OnLevelUp -= ChangeCurrentLevel;
     }
 
@@ -25,17 +25,19 @@ public class UIXPCounter : MonoBehaviour
     {
         xpCounter = XPCounter.Instance;
         ChangeCurrentLevel();
-        ChangeXPBar();
+        ChangeXPBar(UIFlyoutVisual.FlyoutTypes.XP);
     }
 
-    private void ChangeXPBar()
+    private void ChangeXPBar(UIFlyoutVisual.FlyoutTypes type)
     {
+        if (type != UIFlyoutVisual.FlyoutTypes.XP) return;
+
         xpBar.fillAmount = (float)xpCounter.currentXP / xpCounter.xpRequiredForNextLevel[xpCounter.currentLvl];
     }
 
     private void ChangeCurrentLevel()
     {
         currentLevel.text = xpCounter.currentLvl.ToString();
-        ChangeXPBar();
+        ChangeXPBar(UIFlyoutVisual.FlyoutTypes.XP);
     }
 }

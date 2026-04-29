@@ -522,22 +522,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: LootAmount
       objectReference: {fileID: 0}
-    - target: {fileID: 797851174931906909, guid: c0850869b8566f843940184de33a5392, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 797851174931906909, guid: c0850869b8566f843940184de33a5392, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 797851174931906909, guid: c0850869b8566f843940184de33a5392, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 797851174931906909, guid: c0850869b8566f843940184de33a5392, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 895246527678283298, guid: c0850869b8566f843940184de33a5392, type: 3}
       propertyPath: m_Name
       value: ScrapSlotContainer
@@ -556,7 +540,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2322303081546035356, guid: c0850869b8566f843940184de33a5392, type: 3}
       propertyPath: m_Name
-      value: ScrapImageBackground
+      value: ScrapImage
       objectReference: {fileID: 0}
     - target: {fileID: 2579938460232141845, guid: c0850869b8566f843940184de33a5392, type: 3}
       propertyPath: m_IsActive
@@ -589,14 +573,6 @@ PrefabInstance:
     - target: {fileID: 4570351515333757693, guid: c0850869b8566f843940184de33a5392, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4583792063913246722, guid: c0850869b8566f843940184de33a5392, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 280
-      objectReference: {fileID: 0}
-    - target: {fileID: 4583792063913246722, guid: c0850869b8566f843940184de33a5392, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 5226073220493007267, guid: c0850869b8566f843940184de33a5392, type: 3}
       propertyPath: m_text

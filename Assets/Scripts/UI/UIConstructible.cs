@@ -17,7 +17,7 @@ public class UIConstructible : MonoBehaviour
     {
         PlayerInteraction.OnInteractableApproached += ShowConstructibleWindow;
         PlayerInteraction.OnInteractableLeft += HideConstructibleWindow;
-        BenchConstruction.OnConstructionTick += UpdateConstructibleInfo;
+        BenchConstruction.OnConstructionTick += _ => UpdateConstructibleInfo();
         ResourceController.OnSparePartsAmountChange += ToggleControlTip;
     }
 
@@ -25,7 +25,7 @@ public class UIConstructible : MonoBehaviour
     {
         PlayerInteraction.OnInteractableApproached -= ShowConstructibleWindow;
         PlayerInteraction.OnInteractableLeft -= HideConstructibleWindow;
-        BenchConstruction.OnConstructionTick -= UpdateConstructibleInfo;
+        BenchConstruction.OnConstructionTick -= _ => UpdateConstructibleInfo();
         ResourceController.OnSparePartsAmountChange -= ToggleControlTip;
     }
 
