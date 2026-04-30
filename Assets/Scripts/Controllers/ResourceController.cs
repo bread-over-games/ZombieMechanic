@@ -32,6 +32,9 @@ public class ResourceController : MonoBehaviour
         {
             Instance = this;
         }
+
+        sparePartsLimit = 200;
+        sparePartsAmount = 200;
     }
 
     private void IncreaseSparePartsLimit(int amount)

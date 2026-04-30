@@ -17,4 +17,4 @@ MonoBehaviour:
   armorName: Leather Jacket
   maxDurability: 15
   lootQualityBonus: 5
-  spawnChance: 60
+  spawnChance: 50

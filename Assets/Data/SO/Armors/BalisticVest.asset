@@ -17,4 +17,4 @@ MonoBehaviour:
   armorName: Balistic Vest
   maxDurability: 30
   lootQualityBonus: 10
-  spawnChance: 30
+  spawnChance: 50

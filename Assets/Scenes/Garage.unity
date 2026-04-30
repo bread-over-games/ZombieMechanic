@@ -4345,7 +4345,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activeMissions: []
   missionMaximumLength: 120
-  missionLengthMultiplier: 1.85
+  missionLengthMultiplier: 1.1
   missionLengthWeaponWeight: 40
   missionLengthArmorWeight: 70
   missionLengthBackpackWeight: 50
@@ -29830,9 +29830,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c5d2e3a0b2fb754294052597da1d467, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zombieKillXP: 2
-  repairXP: 2
-  salvageXP: 1
+  zombieKillXP: 0
+  repairXP: 0
+  salvageXP: 0
   upgradeXP: 50
   currentXP: 0
   currentLvl: 0
@@ -35195,7 +35195,7 @@ Canvas:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1495901780}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_RenderMode: 0
   m_Camera: {fileID: 0}
@@ -39586,7 +39586,7 @@ Canvas:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1701826966}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_RenderMode: 0
   m_Camera: {fileID: 0}
@@ -39926,10 +39926,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 921298055db781347ae7f16541e06a60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  generateWeaponChance: 20
+  generateWeaponChance: 50
   generateScrapChance: 50
-  generateBackpackChance: 20
-  generateArmorChance: 10
+  generateBackpackChance: 50
+  generateArmorChance: 50
   generateAntibioticsChance: 0
 --- !u!1 &1713238845
 GameObject:
@@ -41961,6 +41961,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1765213892}
   m_CullTransparentMesh: 1
+--- !u!1 &1765467370 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5623980322715376032, guid: fd74f44b8e600f34bb3acfcdf8ddca0b, type: 3}
+  m_PrefabInstance: {fileID: 1633665818390165928}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1765467371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1765467370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15eb07d64f49b5f44b7da7b6713c3cd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetX: 1
+  panAngle: -20
+  duration: 60
+  ease: 4
 --- !u!1 &1767176278
 GameObject:
   m_ObjectHideFlags: 0
@@ -46288,7 +46309,7 @@ MonoBehaviour:
   armoryFirst: {fileID: 155053022065181570}
   salvageTable: {fileID: 1571740917}
   lootTable: {fileID: 859630730}
-  skipTutorial: 0
+  skipTutorial: 1
   sparePartsPicked: 0
   sparePartsPlacedSalvage: 0
   sparePartsSalvaged: 0
@@ -50579,11 +50600,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2795924603785619797, guid: fd74f44b8e600f34bb3acfcdf8ddca0b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 2795924603785619797, guid: fd74f44b8e600f34bb3acfcdf8ddca0b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6
+      value: 6.5
       objectReference: {fileID: 0}
     - target: {fileID: 2795924603785619797, guid: fd74f44b8e600f34bb3acfcdf8ddca0b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -50591,7 +50612,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2795924603785619797, guid: fd74f44b8e600f34bb3acfcdf8ddca0b, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.9961947
       objectReference: {fileID: 0}
     - target: {fileID: 2795924603785619797, guid: fd74f44b8e600f34bb3acfcdf8ddca0b, type: 3}
       propertyPath: m_LocalRotation.x
@@ -50599,7 +50620,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2795924603785619797, guid: fd74f44b8e600f34bb3acfcdf8ddca0b, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 0.08715578
       objectReference: {fileID: 0}
     - target: {fileID: 2795924603785619797, guid: fd74f44b8e600f34bb3acfcdf8ddca0b, type: 3}
       propertyPath: m_LocalRotation.z
@@ -50611,7 +50632,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2795924603785619797, guid: fd74f44b8e600f34bb3acfcdf8ddca0b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2795924603785619797, guid: fd74f44b8e600f34bb3acfcdf8ddca0b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -50620,7 +50641,11 @@ PrefabInstance:
     - target: {fileID: 3920823704356126358, guid: fd74f44b8e600f34bb3acfcdf8ddca0b, type: 3}
       propertyPath: target
       value: 
-      objectReference: {fileID: 1784800722}
+      objectReference: {fileID: 0}
+    - target: {fileID: 3920823704356126358, guid: fd74f44b8e600f34bb3acfcdf8ddca0b, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5623980322715376032, guid: fd74f44b8e600f34bb3acfcdf8ddca0b, type: 3}
       propertyPath: m_Name
       value: Camera
@@ -50628,7 +50653,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5623980322715376032, guid: fd74f44b8e600f34bb3acfcdf8ddca0b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1765467371}
   m_SourcePrefab: {fileID: 100100000, guid: fd74f44b8e600f34bb3acfcdf8ddca0b, type: 3}
 --- !u!224 &1846072286160730304
 RectTransform:
@@ -51869,6 +51897,10 @@ PrefabInstance:
     - target: {fileID: 6225197511014994388, guid: d46f831bb44379b43a0bb699e25c347f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9079239643893585083, guid: d46f831bb44379b43a0bb699e25c347f, type: 3}
+      propertyPath: infectionInterval
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
