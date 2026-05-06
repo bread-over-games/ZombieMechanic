@@ -75,6 +75,17 @@ public class MissionController : MonoBehaviour
 
     public void ConfirmMissionType(Mission.MissionType missionType)
     {
+        if (missionType == Mission.MissionType.CancelMission)
+        {
+            Debug.Log("Mission canceled boys");
+            preparingMissionWeapon = null;
+            preparingMissionBackpack = null;
+            preparingMissionArmor = null;
+            preparingMissionInventory = null;
+            preparingMissionArmory = null;
+            return;
+        }
+
         preparingMissionType = missionType;
         SendMission();        
     }

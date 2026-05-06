@@ -10,7 +10,8 @@ public class Mission
     {
         Scavenge,
         Extermination,
-        Antibiotics
+        Antibiotics,
+        CancelMission
     }
 
     public Survivor survivor; // current survivor on the mission    

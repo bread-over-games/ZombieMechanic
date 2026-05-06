@@ -32,6 +32,8 @@ public class PauseController : MonoBehaviour
         UISectorInfo.OnMessageConfirmed += UnblockPause;
         UIPauseMenu.OnResumeGameButtonSelected += ResumeGame;
         UIPauseMenu.OnResumeGameButtonSelected += UnblockPause;
+        UIIntro.OnIntroStarted += BlockPause;
+        UIIntro.OnIntroSkipped += UnblockPause;
     }
 
     private void OnDisable()
@@ -54,6 +56,8 @@ public class PauseController : MonoBehaviour
         UISectorInfo.OnMessageConfirmed -= UnblockPause;
         UIPauseMenu.OnResumeGameButtonSelected -= ResumeGame;
         UIPauseMenu.OnResumeGameButtonSelected -= UnblockPause;
+        UIIntro.OnIntroStarted -= BlockPause;
+        UIIntro.OnIntroSkipped -= UnblockPause;
     }
 
     public void OnPause(InputAction.CallbackContext context)

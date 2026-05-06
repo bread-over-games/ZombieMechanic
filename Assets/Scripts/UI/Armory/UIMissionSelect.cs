@@ -14,8 +14,9 @@ public class UIMissionSelect : MonoBehaviour
 
     public static Action<MissionType> OnCurrentMissionTypeSlotSelected;
 
-    public Button scavengeMissionButton;
     public Button exterminationMissionButton;
+    public Button scavengeMissionButton;
+    public Button cancelMissionButton;
     public GameObject antibioticsMissionContainer;
     public GameObject antibioticsDepletedContainer;
 
@@ -37,13 +38,13 @@ public class UIMissionSelect : MonoBehaviour
             antibioticsMissionContainer.SetActive(false);
             antibioticsDepletedContainer.SetActive(true);
 
-            Navigation scavengeMissionNav = scavengeMissionButton.navigation;
-            scavengeMissionNav.selectOnUp = exterminationMissionButton;
-            scavengeMissionNav.selectOnDown = exterminationMissionButton;
-            scavengeMissionButton.navigation = scavengeMissionNav;
+            Navigation cancelMissionNav = cancelMissionButton.navigation;
+            cancelMissionNav.selectOnUp = exterminationMissionButton;
+            cancelMissionNav.selectOnDown = scavengeMissionButton;
+            cancelMissionButton.navigation = cancelMissionNav;
 
             Navigation exterminationMissionNav = exterminationMissionButton.navigation;
-            exterminationMissionNav.selectOnDown = scavengeMissionButton;
+            exterminationMissionNav.selectOnDown = cancelMissionButton;
             exterminationMissionNav.selectOnUp = scavengeMissionButton;
             exterminationMissionButton.navigation = exterminationMissionNav;    
         }
@@ -61,6 +62,12 @@ public class UIMissionSelect : MonoBehaviour
     private void SelectCurrentMissionType()
     {
         OnCurrentMissionTypeSlotSelected?.Invoke(currentMissionType);
+        
+        if (currentMissionType == MissionType.CancelMission)
+        {
+            uiArmory.armory.MakeArmoryAvailableForMission();
+        }       
+
         CloseWindow();
     }
 
@@ -80,6 +87,11 @@ public class UIMissionSelect : MonoBehaviour
     {
         currentMissionType = MissionType.Antibiotics;
         RefreshEstimatesUI();
+    }
+
+    public void CancelMissionSelected()
+    {
+        currentMissionType = MissionType.CancelMission;        
     }
 
     private void RefreshEstimatesUI()
