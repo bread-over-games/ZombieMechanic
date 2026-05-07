@@ -10,19 +10,12 @@ public class MusicController : MonoBehaviour
 
     private void OnEnable()
     {
-        GameManager.OnGameStart += FirstSong;
+        GameManager.OnGameStart += StartMusicLoop;
     }
 
     private void OnDisable()
     {
-        GameManager.OnGameStart -= FirstSong;
-    }
-
-    private void FirstSong() // plays first song at the start of the game, then it goes on loop
-    {
-        audioSource.clip = musicTracks[0];
-        audioSource.Play();
-        Invoke("StartMusicLoop", musicTracks[0].length + 20);
+        GameManager.OnGameStart -= StartMusicLoop;
     }
 
     private void StartMusicLoop()
@@ -32,7 +25,7 @@ public class MusicController : MonoBehaviour
 
     private IEnumerator MusicLoop()
     {
-        int lastTrackIndex = 0;
+        int lastTrackIndex = -1;
 
         while (true)
         {
