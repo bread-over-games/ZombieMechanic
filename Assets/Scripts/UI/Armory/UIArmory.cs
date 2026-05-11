@@ -20,6 +20,7 @@ public class UIArmory : MonoBehaviour
         MissionController.OnMissionStarted += ArmoryWindowMissionStateChange;
         MissionController.OnMissionCompleted += ArmoryWindowMissionStateChange;
         Armory.OnMissionGearSelected += OpenMissionTypeSelectWindow;
+        UIMissionSelect.OnCurrentMissionTypeSlotSelected += ReopenArmoryWindow;
     }
 
     private void OnDisable()
@@ -29,6 +30,15 @@ public class UIArmory : MonoBehaviour
         MissionController.OnMissionStarted -= ArmoryWindowMissionStateChange;
         MissionController.OnMissionCompleted -= ArmoryWindowMissionStateChange;
         Armory.OnMissionGearSelected -= OpenMissionTypeSelectWindow;
+        UIMissionSelect.OnCurrentMissionTypeSlotSelected -= ReopenArmoryWindow;
+    }
+
+    private void ReopenArmoryWindow(Mission.MissionType missionType)
+    {
+        if (missionType != Mission.MissionType.CancelMission) return;
+        if (armory == null) return;
+
+        gearOverviewUI.OpenWindow();
     }
 
     private void ShowArmoryWindow(IInteractable interactableType)

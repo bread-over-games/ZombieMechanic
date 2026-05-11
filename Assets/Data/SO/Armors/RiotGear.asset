@@ -17,4 +17,4 @@ MonoBehaviour:
   armorName: Riot Gear
   maxDurability: 40
   lootQualityBonus: 15
-  spawnChance: 10
+  spawnChance: 15

@@ -5,7 +5,7 @@ using System;
 public class Armory : Bench, IInteractable
 {
     [HideInInspector] public bool isEnabled = true;
-    [HideInInspector] public bool isAvailableForMission = true;
+    public bool isAvailableForMission = true;
 
     [SerializeReference] public Armor storedArmor = null;
     [SerializeReference] public Backpack storedBackpack = null;
