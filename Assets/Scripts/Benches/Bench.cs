@@ -39,14 +39,21 @@ public class Bench : MonoBehaviour, IBench
             if (inventory.GetObjectList().Count == 0) return; // bench emty, nothing to do
             
                 inventory.SendObject(playerInventory, inventory.GetObjectList()[0]);
-                OnObjectPicked?.Invoke(); // player picked item on bench - subscribe animation SetCarrying(true)
+                OnObjectPicked?.Invoke(); // player picked item on bench
         }
-        else // player has item in hands - try to depisot
+        else // player has item in hands - deposit
         {
-            if (inventory.GetObjectList().Count >= inventory.GetCapacity()) return; // bench full
             if (!CanAcceptObject(playerInventory.GetObjectList()[0])) return;
-            playerInventory.SendObject(inventory, playerInventory.GetObjectList()[0]);
-            OnObjectDeposited?.Invoke(); // player deposited item on bench - subscribe SetCarrying(false) animation
+
+            OnObjectDeposited?.Invoke(); // player deposited item on bench
+
+            if (inventory.GetObjectList().Count >= inventory.GetCapacity()) // bench full - do swap
+            {                
+                inventory.SendObject(playerInventory, inventory.GetObjectList()[0]);
+                OnObjectPicked?.Invoke();
+            }            
+            
+            playerInventory.SendObject(inventory, playerInventory.GetObjectList()[0]);            
         }
     }
 
