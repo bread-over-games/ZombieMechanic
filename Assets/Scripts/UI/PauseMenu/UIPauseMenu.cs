@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using System.Runtime.InteropServices;
 
 public class UIPauseMenu : MonoBehaviour
 {
@@ -7,8 +8,15 @@ public class UIPauseMenu : MonoBehaviour
         {
             ResumeGame,
             RestartGame,
-            ExitGame
+            ExitGame,
+            WishlistGame
         }
+
+    [DllImport("user32.dll")]
+    private static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
+
+    [DllImport("user32.dll")]
+    private static extern IntPtr GetActiveWindow();
 
     public GameObject pauseMenuWindow;
     private PauseMenuButton pauseMenuButtonSelected;
@@ -56,6 +64,11 @@ public class UIPauseMenu : MonoBehaviour
         pauseMenuButtonSelected = PauseMenuButton.ExitGame;
     }
 
+    public void SelectWishlist()
+    {
+        pauseMenuButtonSelected = PauseMenuButton.WishlistGame;
+    }
+
     private void ConfirmButtonSelection()
     {
         switch (pauseMenuButtonSelected)
@@ -70,6 +83,11 @@ public class UIPauseMenu : MonoBehaviour
                 break;
             case PauseMenuButton.ExitGame:
                 OnExitGameButtonSelected?.Invoke();
+                break;
+            case PauseMenuButton.WishlistGame:
+                Debug.Log("Wishlist game");
+                Application.OpenURL("https://store.steampowered.com/app/4692870/ZArmory/");
+                ShowWindow(GetActiveWindow(), 2); // 2 = SW_MINIMIZE
                 break;
         }
     }
