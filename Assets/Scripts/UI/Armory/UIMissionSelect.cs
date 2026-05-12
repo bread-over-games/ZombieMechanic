@@ -28,6 +28,16 @@ public class UIMissionSelect : MonoBehaviour
     [SerializeField] private TMP_Text gearWearText;
     [SerializeField] private TMP_Text zombieKillsText;
 
+    private void OnEnable()
+    {
+        InputDeviceTracker.OnSwitchedToGamepad += SelectDefaultButton;
+    }
+
+    private void OnDisable()
+    {
+        InputDeviceTracker.OnSwitchedToGamepad -= SelectDefaultButton;
+    }
+
     public void OpenWindow()
     {
         PlayerInteraction.OnSecondaryInteractionInterceptor = SelectCurrentMissionType;
@@ -59,7 +69,7 @@ public class UIMissionSelect : MonoBehaviour
         PlayerInteraction.OnSecondaryInteractionInterceptor = null;
     }
 
-    private void SelectCurrentMissionType()
+    public void SelectCurrentMissionType()
     {
         OnCurrentMissionTypeSlotSelected?.Invoke(currentMissionType);
         
@@ -105,5 +115,11 @@ public class UIMissionSelect : MonoBehaviour
         lootAmountText.text = missionEstimates.estimatedLootAmount.ToString() + "-" + (missionEstimates.estimatedLootAmount + 1).ToString();
         zombieKillsText.text = missionEstimates.estimatedZombiesKills.ToString() + "+-";
         gearWearText.text = missionEstimates.estimatedGearWear.ToString() + "+- per item";
+    }
+
+    private void SelectDefaultButton()
+    {
+        if (missionSelectWindow.activeSelf)
+            scavengeMissionButton.Select();
     }
 }

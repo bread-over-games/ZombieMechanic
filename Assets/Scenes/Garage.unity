@@ -1557,7 +1557,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 0}
-    m_HighlightedColor: {r: 0.62352943, g: 0, b: 0, a: 1}
+    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -1578,7 +1578,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1918273240}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1865101222}
+        m_TargetAssemblyTypeName: UIPerkSystem, Assembly-CSharp
+        m_MethodName: FirstPerkSelected
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!224 &77450760
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3989,7 +4001,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 0}
-    m_HighlightedColor: {r: 0.62352943, g: 0, b: 0, a: 1}
+    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -4481,6 +4493,7 @@ MonoBehaviour:
   uiArmory: {fileID: 1454226950}
   gearOverviewWindow: {fileID: 1351695024}
   currentSlotSelected: 0
+  defaultSelectedButton: {fileID: 7152850036000322343}
   currentWeaponInfo: {fileID: 7152850036000322337}
   weaponImage: {fileID: 662707025}
   weaponDurabilityImage: {fileID: 1583738288}
@@ -9279,7 +9292,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 0}
-    m_HighlightedColor: {r: 0.62352943, g: 0, b: 0, a: 1}
+    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -9300,7 +9313,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 606546126}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 515875856}
+        m_TargetAssemblyTypeName: UIMissionSelect, Assembly-CSharp
+        m_MethodName: AntibioticsMissionSelected
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 515875856}
+        m_TargetAssemblyTypeName: UIMissionSelect, Assembly-CSharp
+        m_MethodName: SelectCurrentMissionType
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &341785995
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14216,19 +14253,7 @@ MonoBehaviour:
         m_CallState: 2
   onDeselected:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &535091828
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14251,7 +14276,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 0}
-    m_HighlightedColor: {r: 0.62352943, g: 0, b: 0, a: 1}
+    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -14272,7 +14297,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1720209829}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1887469676}
+        m_TargetAssemblyTypeName: UIPauseMenu, Assembly-CSharp
+        m_MethodName: SelectWishlist
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &536625486
 GameObject:
   m_ObjectHideFlags: 0
@@ -15023,7 +15060,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 0}
-    m_HighlightedColor: {r: 0.62352943, g: 0, b: 0, a: 1}
+    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -15044,7 +15081,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1607662261}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1865101222}
+        m_TargetAssemblyTypeName: UIPerkSystem, Assembly-CSharp
+        m_MethodName: SecondPerkSelected
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &584656442
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22874,7 +22923,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 0}
-    m_HighlightedColor: {r: 0.62352943, g: 0, b: 0, a: 1}
+    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -22895,7 +22944,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1592890143}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 515875856}
+        m_TargetAssemblyTypeName: UIMissionSelect, Assembly-CSharp
+        m_MethodName: CancelMissionSelected
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 515875856}
+        m_TargetAssemblyTypeName: UIMissionSelect, Assembly-CSharp
+        m_MethodName: SelectCurrentMissionType
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &901397632
 GameObject:
   m_ObjectHideFlags: 0
@@ -35089,7 +35162,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 0}
-    m_HighlightedColor: {r: 0.62352943, g: 0, b: 0, a: 1}
+    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -35110,7 +35183,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 475104667}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 515875856}
+        m_TargetAssemblyTypeName: UIMissionSelect, Assembly-CSharp
+        m_MethodName: ExterminationMissionSelected
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 515875856}
+        m_TargetAssemblyTypeName: UIMissionSelect, Assembly-CSharp
+        m_MethodName: SelectCurrentMissionType
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!224 &1432297882
 RectTransform:
   m_ObjectHideFlags: 0
@@ -37890,7 +37987,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 0}
-    m_HighlightedColor: {r: 0.62352943, g: 0, b: 0, a: 1}
+    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -37911,7 +38008,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1798641504}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1887469676}
+        m_TargetAssemblyTypeName: UIPauseMenu, Assembly-CSharp
+        m_MethodName: SelectRestartGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!224 &1586862271
 RectTransform:
   m_ObjectHideFlags: 0
@@ -37962,19 +38071,7 @@ MonoBehaviour:
         m_CallState: 2
   onDeselected:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &1591086571
 GameObject:
   m_ObjectHideFlags: 0
@@ -43850,7 +43947,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 0}
-    m_HighlightedColor: {r: 0.62352943, g: 0, b: 0, a: 1}
+    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -43871,7 +43968,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 180187383}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1887469676}
+        m_TargetAssemblyTypeName: UIPauseMenu, Assembly-CSharp
+        m_MethodName: SelectResumeGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!224 &1793008941
 RectTransform:
   m_ObjectHideFlags: 0
@@ -43922,19 +44031,7 @@ MonoBehaviour:
         m_CallState: 2
   onDeselected:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &1795442807
 GameObject:
   m_ObjectHideFlags: 0
@@ -45140,6 +45237,7 @@ MonoBehaviour:
   secondPerkDescription: {fileID: 1569085807}
   secondPerkImage: {fileID: 1526248687}
   currentSlotSelected: 0
+  defaultSelectedButton: {fileID: 77450759}
 --- !u!1 &1869056219
 GameObject:
   m_ObjectHideFlags: 0
@@ -45593,6 +45691,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenuWindow: {fileID: 1898238830}
+  defaultSelectedButton: {fileID: 1793008939}
 --- !u!1 &1889004623
 GameObject:
   m_ObjectHideFlags: 0
@@ -47474,7 +47573,7 @@ MonoBehaviour:
   armoryFirst: {fileID: 155053022065181570}
   salvageTable: {fileID: 1571740917}
   lootTable: {fileID: 859630730}
-  skipTutorial: 0
+  skipTutorial: 1
   sparePartsPicked: 0
   sparePartsPlacedSalvage: 0
   sparePartsSalvaged: 0
@@ -50299,7 +50398,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 0}
-    m_HighlightedColor: {r: 0.62352943, g: 0, b: 0, a: 1}
+    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -50320,7 +50419,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1162380412}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1887469676}
+        m_TargetAssemblyTypeName: UIPauseMenu, Assembly-CSharp
+        m_MethodName: SelectExitGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2099844998
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -50350,19 +50461,7 @@ MonoBehaviour:
         m_CallState: 2
   onDeselected:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &2110645283
 GameObject:
   m_ObjectHideFlags: 0
@@ -52200,6 +52299,58 @@ PrefabInstance:
       propertyPath: m_Navigation.m_SelectOnRight
       value: 
       objectReference: {fileID: 1203537375}
+    - target: {fileID: 1520358995793052199, guid: 3a2449ed1c4b14d40908213ec0a8b29f, type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1520358995793052199, guid: 3a2449ed1c4b14d40908213ec0a8b29f, type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1520358995793052199, guid: 3a2449ed1c4b14d40908213ec0a8b29f, type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1520358995793052199, guid: 3a2449ed1c4b14d40908213ec0a8b29f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1520358995793052199, guid: 3a2449ed1c4b14d40908213ec0a8b29f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1520358995793052199, guid: 3a2449ed1c4b14d40908213ec0a8b29f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1520358995793052199, guid: 3a2449ed1c4b14d40908213ec0a8b29f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 183412058}
+    - target: {fileID: 1520358995793052199, guid: 3a2449ed1c4b14d40908213ec0a8b29f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 183412056}
+    - target: {fileID: 1520358995793052199, guid: 3a2449ed1c4b14d40908213ec0a8b29f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1520358995793052199, guid: 3a2449ed1c4b14d40908213ec0a8b29f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1520358995793052199, guid: 3a2449ed1c4b14d40908213ec0a8b29f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ArmorSlotSelected
+      objectReference: {fileID: 0}
+    - target: {fileID: 1520358995793052199, guid: 3a2449ed1c4b14d40908213ec0a8b29f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UIGearOverview, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1520358995793052199, guid: 3a2449ed1c4b14d40908213ec0a8b29f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 1916516662492679293, guid: 3a2449ed1c4b14d40908213ec0a8b29f, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -52215,6 +52366,10 @@ PrefabInstance:
     - target: {fileID: 1916516662492679293, guid: 3a2449ed1c4b14d40908213ec0a8b29f, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1990765581714771106, guid: 3a2449ed1c4b14d40908213ec0a8b29f, type: 3}
+      propertyPath: m_Name
+      value: EmptyArmorSlot
       objectReference: {fileID: 0}
     - target: {fileID: 2154639629446673154, guid: 3a2449ed1c4b14d40908213ec0a8b29f, type: 3}
       propertyPath: m_Name
@@ -52538,6 +52693,62 @@ PrefabInstance:
       propertyPath: m_Navigation.m_SelectOnRight
       value: 
       objectReference: {fileID: 7152850036000322343}
+    - target: {fileID: 8409481670171027835, guid: 6f969653dea876a41b194993850553f3, type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8409481670171027835, guid: 6f969653dea876a41b194993850553f3, type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8409481670171027835, guid: 6f969653dea876a41b194993850553f3, type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8409481670171027835, guid: 6f969653dea876a41b194993850553f3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8409481670171027835, guid: 6f969653dea876a41b194993850553f3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8409481670171027835, guid: 6f969653dea876a41b194993850553f3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8409481670171027835, guid: 6f969653dea876a41b194993850553f3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 183412058}
+    - target: {fileID: 8409481670171027835, guid: 6f969653dea876a41b194993850553f3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 183412056}
+    - target: {fileID: 8409481670171027835, guid: 6f969653dea876a41b194993850553f3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8409481670171027835, guid: 6f969653dea876a41b194993850553f3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8409481670171027835, guid: 6f969653dea876a41b194993850553f3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: BackpackSlotSelected
+      objectReference: {fileID: 0}
+    - target: {fileID: 8409481670171027835, guid: 6f969653dea876a41b194993850553f3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UIGearOverview, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8409481670171027835, guid: 6f969653dea876a41b194993850553f3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 8794830552504838142, guid: 6f969653dea876a41b194993850553f3, type: 3}
+      propertyPath: m_Name
+      value: EmptyBackpackSlot
+      objectReference: {fileID: 0}
     - target: {fileID: 8878222922378716961, guid: 6f969653dea876a41b194993850553f3, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -53216,6 +53427,58 @@ PrefabInstance:
       propertyPath: m_Navigation.m_SelectOnRight
       value: 
       objectReference: {fileID: 53851694}
+    - target: {fileID: 8447639395993574802, guid: 63bba12b8ef2bdf4e8db02842b1e51ca, type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8447639395993574802, guid: 63bba12b8ef2bdf4e8db02842b1e51ca, type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8447639395993574802, guid: 63bba12b8ef2bdf4e8db02842b1e51ca, type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8447639395993574802, guid: 63bba12b8ef2bdf4e8db02842b1e51ca, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8447639395993574802, guid: 63bba12b8ef2bdf4e8db02842b1e51ca, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8447639395993574802, guid: 63bba12b8ef2bdf4e8db02842b1e51ca, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8447639395993574802, guid: 63bba12b8ef2bdf4e8db02842b1e51ca, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 183412058}
+    - target: {fileID: 8447639395993574802, guid: 63bba12b8ef2bdf4e8db02842b1e51ca, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 183412056}
+    - target: {fileID: 8447639395993574802, guid: 63bba12b8ef2bdf4e8db02842b1e51ca, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8447639395993574802, guid: 63bba12b8ef2bdf4e8db02842b1e51ca, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8447639395993574802, guid: 63bba12b8ef2bdf4e8db02842b1e51ca, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: WeaponSlotSelected
+      objectReference: {fileID: 0}
+    - target: {fileID: 8447639395993574802, guid: 63bba12b8ef2bdf4e8db02842b1e51ca, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UIGearOverview, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8447639395993574802, guid: 63bba12b8ef2bdf4e8db02842b1e51ca, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 8844428611644822472, guid: 63bba12b8ef2bdf4e8db02842b1e51ca, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -53231,6 +53494,10 @@ PrefabInstance:
     - target: {fileID: 8844428611644822472, guid: 63bba12b8ef2bdf4e8db02842b1e51ca, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8900788011503227671, guid: 63bba12b8ef2bdf4e8db02842b1e51ca, type: 3}
+      propertyPath: m_Name
+      value: EmptyWeaponSlot
       objectReference: {fileID: 0}
     - target: {fileID: 9062294020327189687, guid: 63bba12b8ef2bdf4e8db02842b1e51ca, type: 3}
       propertyPath: m_Name
@@ -53608,7 +53875,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 0}
-    m_HighlightedColor: {r: 0.62352943, g: 0, b: 0, a: 1}
+    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -53629,7 +53896,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6440091932036119160}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 515875856}
+        m_TargetAssemblyTypeName: UIMissionSelect, Assembly-CSharp
+        m_MethodName: ScavengeMissionSelected
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 515875856}
+        m_TargetAssemblyTypeName: UIMissionSelect, Assembly-CSharp
+        m_MethodName: SelectCurrentMissionType
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &8313492302788390804
 PrefabInstance:
   m_ObjectHideFlags: 0

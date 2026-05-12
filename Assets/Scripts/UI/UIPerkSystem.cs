@@ -27,20 +27,23 @@ public class UIPerkSystem : MonoBehaviour
     [HideInInspector] public PerkSlot currentSlotSelected;
     public static Action OnUIPerkWindowActive;
     public static Action<PerkSlot> OnCurrentPerkSlotSelected;
+    [SerializeField] private Button defaultSelectedButton;
 
     private void OnEnable()
     {
         PerkController.OnRandomPerksGenerated += ShowPerkWindow;
+        InputDeviceTracker.OnSwitchedToGamepad += SelectDefaultButton;
     }
 
     private void OnDisable()
     {
         PerkController.OnRandomPerksGenerated -= ShowPerkWindow;
+        InputDeviceTracker.OnSwitchedToGamepad -= SelectDefaultButton;
     }
 
     private void ShowPerkWindow()
     {
-        PlayerInteraction.OnSecondaryInteractionInterceptor = ActivatePerk;
+        PlayerInteraction.OnPrimaryInteractionInterceptor = ActivatePerk;
         UIFocusStack.Push(perkSystemWindow);     
         DisplayPerks();
         OnUIPerkWindowActive?.Invoke();
@@ -50,7 +53,7 @@ public class UIPerkSystem : MonoBehaviour
     {
         EventSystem.current.SetSelectedGameObject(null);
         UIFocusStack.Pop();
-        PlayerInteraction.OnSecondaryInteractionInterceptor = null;
+        PlayerInteraction.OnPrimaryInteractionInterceptor = null;
     }
 
     public void DisplayPerks()
@@ -81,5 +84,11 @@ public class UIPerkSystem : MonoBehaviour
     public void SecondPerkSelected()
     {
         currentSlotSelected = PerkSlot.SecondPerkSlot;
+    }
+
+    private void SelectDefaultButton()
+    {
+        if (perkSystemWindow.activeSelf)
+            defaultSelectedButton.Select();
     }
 }

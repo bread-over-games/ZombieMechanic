@@ -18,6 +18,7 @@ public class UIGearOverview : MonoBehaviour
     [SerializeField] private GameObject gearOverviewWindow;
     public ArmorySlot currentSlotSelected;
     public static Action<ArmorySlot> OnCurrentArmorySlotSelected;
+    [SerializeField] private Button defaultSelectedButton;
 
     [Header("Weapon")]
     [SerializeField] private GameObject currentWeaponInfo;
@@ -66,12 +67,14 @@ public class UIGearOverview : MonoBehaviour
     {
         Inventory.OnInventoryChange += RefreshInventoryUI;
         Inventory.OnInventoryChange += RefreshEstimatesUI;
+        InputDeviceTracker.OnSwitchedToGamepad += SelectDefaultButton;
     }
 
     private void OnDisable()
     {
         Inventory.OnInventoryChange -= RefreshInventoryUI;
         Inventory.OnInventoryChange -= RefreshEstimatesUI;
+        InputDeviceTracker.OnSwitchedToGamepad -= SelectDefaultButton;
     }
 
     public void OpenWindow()
@@ -248,5 +251,11 @@ public class UIGearOverview : MonoBehaviour
     {
         currentSlotSelected = ArmorySlot.Backpack;
         OnCurrentArmorySlotSelected?.Invoke(currentSlotSelected);
+    }
+
+    private void SelectDefaultButton()
+    {
+        if (gearOverviewWindow.activeSelf)
+            defaultSelectedButton.Select();
     }
 }

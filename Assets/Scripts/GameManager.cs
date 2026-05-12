@@ -30,13 +30,16 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
     }
 
     private void Start()
     {
         OnGameStart?.Invoke();
+    }
+
+    private void Update()
+    {
+        InputDeviceTracker.Update();
     }
 
     private void DeclareGameOver()
