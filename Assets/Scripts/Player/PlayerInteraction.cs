@@ -76,8 +76,7 @@ public class PlayerInteraction : MonoBehaviour
             {
                 PrimaryInteractEnded();
                 SecondaryInteractedEnded();
-            }
-                
+            }                
 
             OnInteractableLeft?.Invoke(currentInteractable);
             currentInteractable = null;

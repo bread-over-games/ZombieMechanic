@@ -181,7 +181,7 @@ public class UIInventory : MonoBehaviour
             case Inventory.InventoryOfType.Workbench:
                 if (inventory.GetObjectList().Count > 0 || InventoriesController.Instance.playerInventory.GetObjectList().Count > 0)
                 {
-                    if (inventory.GetObjectList().Count > 0)
+                    if (ResourceController.Instance.GetSparePartsAmount() > 0)
                     {                        
                         workbenchRepairControls.SetActive(true);
                     }

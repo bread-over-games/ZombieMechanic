@@ -1,6 +1,7 @@
 using UnityEngine;
 using System;
 using System.Runtime.InteropServices;
+using UnityEngine.UI;
 
 public class UIPauseMenu : MonoBehaviour
 {
@@ -24,17 +25,20 @@ public class UIPauseMenu : MonoBehaviour
     public static Action OnExitGameButtonSelected;
     public static Action OnResumeGameButtonSelected;
     public static Action OnRestartGameButtonSelected;
+    [SerializeField] private Button defaultSelectedButton;
 
     private void OnEnable()
     {
         PauseController.OnGamePaused += OpenPauseMenu;
         PauseController.OnGameResumed += ClosePauseMenu;
+        InputDeviceTracker.OnSwitchedToGamepad += SelectDefaultButton;
     }
 
     private void OnDisable()
     {
         PauseController.OnGamePaused -= OpenPauseMenu;
         PauseController.OnGameResumed -= ClosePauseMenu;
+        InputDeviceTracker.OnSwitchedToGamepad -= SelectDefaultButton;
     }
 
     private void OpenPauseMenu()
@@ -90,5 +94,11 @@ public class UIPauseMenu : MonoBehaviour
                 ShowWindow(GetActiveWindow(), 2); // 2 = SW_MINIMIZE
                 break;
         }
+    }
+
+    private void SelectDefaultButton()
+    {
+        if (pauseMenuWindow.activeSelf)
+            defaultSelectedButton.Select();
     }
 }

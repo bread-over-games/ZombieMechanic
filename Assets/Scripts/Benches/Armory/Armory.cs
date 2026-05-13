@@ -106,18 +106,30 @@ public class Armory : Bench, IInteractable
                 OnObjectPicked?.Invoke(); // player picked item on bench - subscribe animation SetCarrying(true)
             }
         }
-        else
+        else // player has item in hads - deposit
         {
-            if (inventory.GetObjectList().Count >= inventory.GetCapacity()) return; // bench full
             if (!CanAcceptObject(playerInventory.GetObjectList()[0])) return;
 
-            Object obj = playerInventory.GetObjectList()[0];
-            if (obj is Weapon && storedWeapon != null) return;
-            if (obj is Armor && storedArmor != null) return;
-            if (obj is Backpack && storedBackpack != null) return;
+            OnObjectDeposited?.Invoke();
 
-            playerInventory.SendObject(inventory, playerInventory.GetObjectList()[0]);
-            OnObjectDeposited?.Invoke(); 
+            Object obj = playerInventory.GetObjectList()[0];
+            if (obj is Weapon && storedWeapon != null) // player has weapon in hands and weapon is stored in armory - swap weapons
+            {
+                inventory.SendObject(playerInventory, storedWeapon);
+                OnObjectPicked?.Invoke();
+            }
+            if (obj is Armor && storedArmor != null)
+            {
+                inventory.SendObject(playerInventory, storedArmor);
+                OnObjectPicked?.Invoke();
+            }
+            if (obj is Backpack && storedBackpack != null)
+            {
+                inventory.SendObject(playerInventory, storedBackpack);
+                OnObjectPicked?.Invoke();
+            }
+
+            playerInventory.SendObject(inventory, playerInventory.GetObjectList()[0]);            
         }
     }
 

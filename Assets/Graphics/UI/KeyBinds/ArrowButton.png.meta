@@ -1,12 +1,12 @@
 fileFormatVersion: 2
-guid: 3192d029ef280c44aa951291eea2c6d0
+guid: 488e723e1a471a9469c9134af566ebd5
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 0
+    enableMipMap: 1
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -34,7 +34,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 2
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -110,7 +110,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ArrowKey_0
+      name: ArrowButton_0
       rect:
         serializedVersion: 2
         x: 0
@@ -125,8 +125,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8ff940a58a50409459fb10ef5ae9f7a3
-      internalID: -1987948412
+      spriteID: 23c007484305fb544913d7667a3d17bf
+      internalID: 109046829
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 7d2b66352e1f2eb4cbb867e268f43e55
+    spriteID: 132f2baeae9b9c24192c6eabd536397d
     internalID: 0
     vertices: []
     indices: 
@@ -145,7 +145,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      ArrowKey_0: -1987948412
+      ArrowButton_0: 109046829
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
