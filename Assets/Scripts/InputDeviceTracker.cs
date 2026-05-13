@@ -17,7 +17,7 @@ public static class InputDeviceTracker
             OnSwitchedToGamepad?.Invoke();
         }        
 
-        if (Mouse.current != null && Mouse.current.delta.ReadValue().magnitude > 5f)
+        if ((Mouse.current != null && Mouse.current.delta.ReadValue().magnitude > 5f) || (Keyboard.current != null && Keyboard.current.anyKey.wasPressedThisFrame))
         {
             Cursor.visible = true;  
             UsingGamepad = false;
