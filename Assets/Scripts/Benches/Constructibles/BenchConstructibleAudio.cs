@@ -55,8 +55,6 @@ public class BenchConstructibleAudio : MonoBehaviour
     private void ConstructionFinishedAudio(GameObject obj)
     {
         if (obj != gameObject) return;
-        /*tickAudio.clip = constructionFinishedClip;
-        tickAudio.Play();*/
         AudioSource.PlayClipAtPoint(constructionFinishedClip, transform.position, 0.5f);
     }
 }
