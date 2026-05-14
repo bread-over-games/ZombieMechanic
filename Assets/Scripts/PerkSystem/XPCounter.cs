@@ -32,7 +32,7 @@ public class XPCounter : MonoBehaviour
         SalvageTable.OnSalvageTick += _ => AddSalvageXP();
         ObjectDeconstruction.OnDeconstructionTick += _ => AddSalvageXP();
         Workbench.OnRepairTick += _ => AddRepairXP();
-        BenchConstruction.OnConstructionTick += _ => AddRepairXP();
+        BenchConstructible.OnConstructionTick += _ => AddRepairXP();
         Mission.OnMissionResolved += AddZombiesKilledXP;
     }
 
@@ -41,7 +41,7 @@ public class XPCounter : MonoBehaviour
         SalvageTable.OnSalvageTick -= _ => AddSalvageXP();
         ObjectDeconstruction.OnDeconstructionTick -= _ => AddSalvageXP();
         Workbench.OnRepairTick -= _ => AddRepairXP();
-        BenchConstruction.OnConstructionTick -= _ => AddRepairXP();
+        BenchConstructible.OnConstructionTick -= _ => AddRepairXP();
         Mission.OnMissionResolved -= AddZombiesKilledXP;
     }   
 

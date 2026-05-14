@@ -1,7 +1,7 @@
 using DG.Tweening;
 using UnityEngine;
 
-public class BenchConstruictibleVisual : MonoBehaviour
+public class BenchConstructibleVisual : MonoBehaviour
 {
     public ParticleSystem angleGrinderSparks;
 
@@ -27,16 +27,16 @@ public class BenchConstruictibleVisual : MonoBehaviour
 
     private void OnEnable()
     {
-        BenchConstruction.OnConstructionStart += StartWeldSparks;
-        BenchConstruction.OnConstructionStop += StopWeldSparks;
-        BenchConstruction.OnConstructionTick += ConstructTickEffect;
+        BenchConstructible.OnConstructionStart += StartWeldSparks;
+        BenchConstructible.OnConstructionStop += StopWeldSparks;
+        BenchConstructible.OnConstructionTick += ConstructTickEffect;
     }
 
     private void OnDisable()
     {
-        BenchConstruction.OnConstructionStart -= StartWeldSparks;
-        BenchConstruction.OnConstructionStop -= StopWeldSparks;
-        BenchConstruction.OnConstructionTick -= ConstructTickEffect;
+        BenchConstructible.OnConstructionStart -= StartWeldSparks;
+        BenchConstructible.OnConstructionStop -= StopWeldSparks;
+        BenchConstructible.OnConstructionTick -= ConstructTickEffect;
     }
 
     private void Awake()

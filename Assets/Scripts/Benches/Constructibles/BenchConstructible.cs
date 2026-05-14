@@ -2,7 +2,7 @@ using UnityEngine;
 using System;
 using System.Collections;
 
-public class BenchConstruction : MonoBehaviour, IConstructible
+public class BenchConstructible : MonoBehaviour, IConstructible
 {
     private bool isEnabled = false;
 
