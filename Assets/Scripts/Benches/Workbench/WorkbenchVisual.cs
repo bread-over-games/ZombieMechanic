@@ -34,8 +34,8 @@ public class WorkbenchVisual : MonoBehaviour
 
     private void OnEnable()
     {
-        Workbench.OnRepairStart += StartWorkingEffect;
-        Workbench.OnRepairStop += StopWorkingEffect;
+        Workbench.OnRepairStart += _ => StartWorkingEffect();
+        Workbench.OnRepairStop += _ => StopWorkingEffect();
         PlayerInteraction.OnInteractableApproached += OpenWorkbench;
         PlayerInteraction.OnInteractableLeft += CloseWorkbench;
         Workbench.OnRepairTick += RepairTickEffect;
@@ -43,8 +43,8 @@ public class WorkbenchVisual : MonoBehaviour
 
     private void OnDisable()
     {
-        Workbench.OnRepairStart -= StartWorkingEffect;
-        Workbench.OnRepairStop -= StopWorkingEffect;
+        Workbench.OnRepairStart -= _ => StartWorkingEffect();
+        Workbench.OnRepairStop -= _ => StopWorkingEffect();
         PlayerInteraction.OnInteractableApproached -= OpenWorkbench;
         PlayerInteraction.OnInteractableLeft -= CloseWorkbench;
         Workbench.OnRepairTick -= RepairTickEffect;

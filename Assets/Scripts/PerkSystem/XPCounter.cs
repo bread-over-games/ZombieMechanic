@@ -29,7 +29,7 @@ public class XPCounter : MonoBehaviour
 
     private void OnEnable()
     {
-        SalvageTable.OnSalvageTick += AddSalvageXP;
+        SalvageTable.OnSalvageTick += _ => AddSalvageXP();
         ObjectDeconstruction.OnDeconstructionTick += _ => AddSalvageXP();
         Workbench.OnRepairTick += _ => AddRepairXP();
         BenchConstruction.OnConstructionTick += _ => AddRepairXP();
@@ -38,7 +38,7 @@ public class XPCounter : MonoBehaviour
 
     private void OnDisable()
     {
-        SalvageTable.OnSalvageTick -= AddSalvageXP;
+        SalvageTable.OnSalvageTick -= _ => AddSalvageXP();
         ObjectDeconstruction.OnDeconstructionTick -= _ => AddSalvageXP();
         Workbench.OnRepairTick -= _ => AddRepairXP();
         BenchConstruction.OnConstructionTick -= _ => AddRepairXP();

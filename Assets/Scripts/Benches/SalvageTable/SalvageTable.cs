@@ -17,9 +17,9 @@ public class SalvageTable : Bench, IBench
     public static Action OnTutorialSparePartsPlaced;
     public static Action OnTutorialSparePartsSalvaged;
 
-    public static Action OnSalvageStart;
-    public static Action OnSalvageTick;
-    public static Action OnSalvageStop;
+    public static Action<Bench> OnSalvageStart;
+    public static Action<Bench> OnSalvageTick;
+    public static Action<Bench> OnSalvageStop;
 
     private void OnEnable()
     {
@@ -85,7 +85,7 @@ public class SalvageTable : Bench, IBench
             if (ResourceController.Instance.CheckSparePartsLimit(salvagingValue))
             {
                 ResourceController.Instance.ChangeSparePartsAmount(salvagingValue); // reward
-                OnSalvageTick?.Invoke();
+                OnSalvageTick?.Invoke(this);
 
                 if (currentObject.DamageObject(2)) // damage, check if destroyed
                 {
@@ -126,7 +126,7 @@ public class SalvageTable : Bench, IBench
         }
 
         salvagingInterval = defaultSalvagingInterval;
-        OnSalvageStart?.Invoke();
+        OnSalvageStart?.Invoke(this);
 
         salvagingCoroutine = StartCoroutine(DoSalvage());
     }
@@ -136,7 +136,7 @@ public class SalvageTable : Bench, IBench
         if (salvagingCoroutine != null)
         {
             StopCoroutine(salvagingCoroutine);
-            OnSalvageStop?.Invoke();
+            OnSalvageStop?.Invoke(this);
             salvagingCoroutine = null;
         }
     }

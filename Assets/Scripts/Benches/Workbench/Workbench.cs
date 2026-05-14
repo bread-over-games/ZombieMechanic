@@ -9,9 +9,9 @@ public class Workbench : Bench, IBench
 
     private Coroutine repairCoroutine;
 
-    public static Action OnRepairStart;
+    public static Action<Bench> OnRepairStart;
     public static Action<Bench> OnRepairTick;
-    public static Action OnRepairStop;
+    public static Action<Bench> OnRepairStop;
 
     public static Action OnTutorialBaseballBatPlaced;
     public static Action OnTutorialBaseballBatRepaired;
@@ -54,7 +54,7 @@ public class Workbench : Bench, IBench
             if (currentObject.currentDurability < currentObject.maxDurability)
             {
                 repairCoroutine = StartCoroutine(DoRepair());
-                OnRepairStart?.Invoke();
+                OnRepairStart?.Invoke(this);
             }            
         }
     }
@@ -121,7 +121,7 @@ public class Workbench : Bench, IBench
         if (repairCoroutine != null)
         {
             StopCoroutine(repairCoroutine);
-            OnRepairStop?.Invoke(); 
+            OnRepairStop?.Invoke(this); 
             repairCoroutine = null;
         }
     }

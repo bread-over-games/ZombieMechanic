@@ -33,16 +33,16 @@ public class SalvageTableVisual : MonoBehaviour
 
     private void OnEnable()
     {
-        SalvageTable.OnSalvageStart += StartAngleGrinderSparks;
-        SalvageTable.OnSalvageStop += StopAngleGrinderSparks;
-        SalvageTable.OnSalvageTick += SalvageTickEffect;
+        SalvageTable.OnSalvageStart += _ => StartAngleGrinderSparks();
+        SalvageTable.OnSalvageStop += _ => StopAngleGrinderSparks();
+        SalvageTable.OnSalvageTick += _ => SalvageTickEffect();
     }
 
     private void OnDisable()
     {
-        SalvageTable.OnSalvageStart -= StartAngleGrinderSparks;
-        SalvageTable.OnSalvageStop -= StopAngleGrinderSparks;
-        SalvageTable.OnSalvageTick -= SalvageTickEffect;
+        SalvageTable.OnSalvageStart -= _ => StartAngleGrinderSparks();
+        SalvageTable.OnSalvageStop -= _ => StopAngleGrinderSparks();
+        SalvageTable.OnSalvageTick -= _ => SalvageTickEffect();
     }
 
     private void Awake()
