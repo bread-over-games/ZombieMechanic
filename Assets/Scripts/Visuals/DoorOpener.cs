@@ -1,7 +1,8 @@
 using UnityEngine;
 using DG.Tweening;
+using System;
 
-public class DoorOpening : MonoBehaviour
+public class DoorOpener : MonoBehaviour
 {
     public enum DoorTrigger
     {
@@ -16,12 +17,17 @@ public class DoorOpening : MonoBehaviour
     [SerializeField] private float duration = 0.5f;
     [SerializeField] private float openHoldDuration = 0.1f;
 
+    public static Action<GameObject> OnDoorOpen;
+    public static Action<GameObject> OnDoorClose;
+    public static Action<GameObject> OnDoorOpenClose;
+
     private void OnEnable()
     {
         switch (trigger)
         {
             case DoorTrigger.MissionStarted:
-                MissionController.OnMissionStarted += MissionTrigger;
+                MissionController.OnMissionStarted += _ => OpenCloseDoor();
+                MissionController.OnMissionCompleted += _ => OpenCloseDoor();
                 break;
             case DoorTrigger.TutorialEnd:
                 TutorialController.OnTutorialEnd += OpenDoor;
@@ -34,7 +40,8 @@ public class DoorOpening : MonoBehaviour
         switch (trigger)
         {
             case DoorTrigger.MissionStarted:
-                MissionController.OnMissionStarted -= MissionTrigger;
+                MissionController.OnMissionStarted -= _ => OpenCloseDoor();
+                MissionController.OnMissionCompleted -= _ => OpenCloseDoor();
                 break;
             case DoorTrigger.TutorialEnd:
                 TutorialController.OnTutorialEnd -= OpenDoor;
@@ -42,26 +49,24 @@ public class DoorOpening : MonoBehaviour
         }
     }
 
-    private void MissionTrigger(Mission mission)
-    {
-        OpenCloseDoor();
-    }
-
     public void OpenCloseDoor()
     {
         door.DOKill();
         door.DOLocalRotate(doorOpenRotation, duration).OnComplete(() => door.DOLocalRotate(doorClosedRotation, duration).SetEase(Ease.OutBounce).SetDelay(openHoldDuration));
+        OnDoorOpenClose?.Invoke(gameObject);
     }
 
     public void OpenDoor()
     {
         door.DOKill();
-        door.DOLocalRotate(doorOpenRotation, duration).SetEase(Ease.OutBounce);        
+        door.DOLocalRotate(doorOpenRotation, duration).SetEase(Ease.OutBounce);      
+        OnDoorOpen?.Invoke(gameObject);
     }
 
     public void CloseDoor()
     {
         door.DOKill();
         door.DOLocalRotate(doorClosedRotation, duration).SetEase(Ease.OutBounce);
+        OnDoorClose?.Invoke(gameObject);
     }
 }

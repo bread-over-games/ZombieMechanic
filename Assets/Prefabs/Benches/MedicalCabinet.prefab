@@ -211,7 +211,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de965b0ab315a8e43939468f7505aaf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  atbUseAudio: {fileID: 7329679225342008927}
+  medicalCab: {fileID: 8466018655303985515}
+  medicalCabinetAudio: {fileID: 7329679225342008927}
+  atbUseClip: {fileID: 8300000, guid: cce2927df37ab9f4ea5f1e230500f7a6, type: 3}
+  medicalCabinetOpenClip: {fileID: 8300000, guid: 4c4ce86a684156c46b261579d8d874c5, type: 3}
+  medicalCabinetCloseClip: {fileID: 8300000, guid: 1f217dba566ece24993779badc9ef4b2, type: 3}
 --- !u!65 &5124182726727076555
 BoxCollider:
   m_ObjectHideFlags: 0
