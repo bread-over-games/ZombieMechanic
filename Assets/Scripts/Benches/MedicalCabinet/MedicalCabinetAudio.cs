@@ -14,7 +14,7 @@ public class MedicalCabinetAudio : MonoBehaviour
     private void OnEnable()
     {
         MedicalCabinet.OnAntibioticsUsed += AtbUsedAudio;
-        PlayerInteraction.OnInteractableApproached +=  MedicalCabinetOpenAudio;
+        PlayerInteraction.OnInteractableApproached += MedicalCabinetOpenAudio;
         PlayerInteraction.OnInteractableLeft += MedicalCabinetCloseAudio;
     }
 
