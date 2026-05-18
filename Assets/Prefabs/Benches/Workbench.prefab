@@ -5522,7 +5522,7 @@ MonoBehaviour:
   workbench: {fileID: 7826269399740871647}
   loopAudio: {fileID: 297421101884958775}
   tickAudio: {fileID: 6705804769119785155}
-  repairTickClip: {fileID: 8300000, guid: 50cbc8a017fbfc2448156e99ae8ab751, type: 3}
+  repairTickClip: {fileID: 8300000, guid: 5779760356689b042bfa518a14694a3f, type: 3}
   repairFinishedClip: {fileID: 8300000, guid: 6010d7a162380d643a77550c3050d8d8, type: 3}
 --- !u!82 &297421101884958775
 AudioSource:

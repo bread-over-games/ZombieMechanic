@@ -412,7 +412,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loopAudio: {fileID: 2748927743903247795}
   tickAudio: {fileID: 7376304372583551408}
-  constructionTickClip: {fileID: 8300000, guid: 50cbc8a017fbfc2448156e99ae8ab751, type: 3}
+  constructionTickClip: {fileID: 8300000, guid: 5779760356689b042bfa518a14694a3f, type: 3}
   constructionFinishedClip: {fileID: 8300000, guid: 6010d7a162380d643a77550c3050d8d8, type: 3}
 --- !u!65 &6323397939658624292
 BoxCollider:
