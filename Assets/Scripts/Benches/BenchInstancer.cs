@@ -8,12 +8,12 @@ public class BenchInstancer : MonoBehaviour
 
     private void OnEnable()
     {
-        BenchConstruction.OnConstructionFinished += SpawnBench;
+        BenchConstructible.OnConstructionFinished += SpawnBench;
     }
 
     private void OnDisable()
     {
-        BenchConstruction.OnConstructionFinished -= SpawnBench;
+        BenchConstructible.OnConstructionFinished -= SpawnBench;
     }
 
     private void SpawnBench(GameObject finishedBench)

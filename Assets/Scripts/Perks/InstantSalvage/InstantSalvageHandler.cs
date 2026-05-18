@@ -11,13 +11,13 @@ public class InstantSalvageHandler : MonoBehaviour
     private void OnEnable()
     {
         InstantSalvage.OnInstantSalvageActivated += ActivateInstantSalvage;
-        SalvageTable.OnSalvageStart += InstantSalvageRoll;
+        SalvageTable.OnSalvageStart += _ => InstantSalvageRoll();
     }
 
     private void OnDisable()
     {
         InstantSalvage.OnInstantSalvageActivated -= ActivateInstantSalvage;
-        SalvageTable.OnSalvageStart -= InstantSalvageRoll;
+        SalvageTable.OnSalvageStart -= _ => InstantSalvageRoll();
     }
 
     private void ActivateInstantSalvage()

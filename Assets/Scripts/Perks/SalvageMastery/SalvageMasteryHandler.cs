@@ -11,13 +11,13 @@ public class SalvageMasteryHandler : MonoBehaviour
     private void OnEnable()
     {
         SalvageMastery.OnSalvageMasteryActivated += ActivateSalvageMastery;
-        SalvageTable.OnSalvageTick += ExtraSalvageChance;
+        SalvageTable.OnSalvageTick += _ => ExtraSalvageChance();
     }
 
     private void OnDisable()
     {
         SalvageMastery.OnSalvageMasteryActivated -= ActivateSalvageMastery;
-        SalvageTable.OnSalvageTick -= ExtraSalvageChance;
+        SalvageTable.OnSalvageTick -= _ => ExtraSalvageChance();
     }
 
     private void ActivateSalvageMastery()
